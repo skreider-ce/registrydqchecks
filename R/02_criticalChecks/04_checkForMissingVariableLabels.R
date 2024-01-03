@@ -14,11 +14,11 @@ checkForMissingVariableLabels <- function(.dsToCheck){
     labelled::var_label(.dsToCheck)
   
   .variablesWithMissingLabels <- 
-    purrr::map_lgl(.variableLabels, is.null) || purrr::map_lgl(.variableLabels, is.na)
+    purrr::map_lgl(.variableLabels, is.null)
   
   returnOutput <- list(
-    nMissingVariableLabels = n(.variablesWithMissingLabels),
-    listOfVarsWithMissingLabels = .variablesWithMissingLabels
+    nMissingVariableLabels = sum(.variablesWithMissingLabels),
+    listOfVarsWithMissingLabels = .variablesWithMissingLabels[.variablesWithMissingLabels]
   )
   
   return(returnOutput)

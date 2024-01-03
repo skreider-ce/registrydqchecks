@@ -18,6 +18,7 @@ library(tidycoRe)                          # Internal package for CorEvitas help
 library(lubridate)                         # Recommended package for manipulating dates
 library(glue)                              # Recommended package for concatenating strings
 
+
 #------------------
 # Session Info Log
 #------------------
@@ -68,12 +69,30 @@ dir.exists(dsFolderUrl)
 # Use the source() function to run external programs
 # Recommended naming convention: use a numeric prefix to indicate the order it should be executed
 
+
 source("./R/01_pullData/00_pullData.R")
 dsToCheck <- pullData(dsFolderUrl,"2023","2023-12-04","exvisit")
+
+
+testDups = bind_rows(dsToCheck,dsToCheck)
 
 source("./R/02_criticalChecks/00_criticalChecks.R")
 criticalCheckOutput <- criticalChecks(dsToCheck)
 
+
+
+# Output values
+testDups_criticalCheckOutput <- criticalChecks(testDups)
+print(testDups_criticalCheckOutput$criticalCheck1)
+print(testDups_criticalCheckOutput$criticalCheck4)
+
+print(criticalCheckOutput$criticalCheck1)
+print(criticalCheckOutput$criticalCheck1$nDuplicateRows)
+print(criticalCheckOutput$criticalCheck1$listOfDuplicateRows)
+
+print(criticalCheckOutput$criticalCheck4)
+print(criticalCheckOutput$criticalCheck4$nMissingVariableLabels)
+print(criticalCheckOutput$criticalCheck4$listOfVarsWithMissingLabels)
 
 #-------------------------
 # Export Analysis Results
