@@ -15,12 +15,11 @@ checkForDuplicateUniqueIds <- function(.dsToCheck){
     .dsToCheck |>
       count(id, visitdate) |>
       filter(n > 1)
-  head(.duplicateUniqueIds)
-  
-  returnOutput <- list(
+
+  .returnOutput <- list(
     nDuplicateRows = nrow(.duplicateUniqueIds),
     listOfDuplicateRows = .duplicateUniqueIds
   )
   
-  return(returnOutput)
+  return(.returnOutput)
 }

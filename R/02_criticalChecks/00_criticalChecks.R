@@ -13,12 +13,12 @@ source("./R/02_criticalChecks/04_checkForMissingVariableLabels.R")
 
 criticalChecks <- function(.dsToCheck){
   
-  critCheckResults1 <- checkForDuplicateUniqueIds(.dsToCheck)
-  critCheckResults4 <- checkForMissingVariableLabels(.dsToCheck)
+  .critCheckResults1 <- checkForDuplicateUniqueIds(.dsToCheck)
+  .critCheckResults4 <- checkForMissingVariableLabels(.dsToCheck)
   
   return(list(
-    criticalCheck1 = critCheckResults1,
-    criticalCheck4 = critCheckResults4
+    criticalCheck1 = .critCheckResults1,
+    criticalCheck4 = .critCheckResults4
     ))
 }
 
