@@ -19,7 +19,6 @@
 
 # RStudio files
 .Rproj.user/
-*.Rproj
 
 # produced vignettes
 vignettes/*.html
@@ -51,3 +50,7 @@ po/*~
 ### R.Bookdown Stack ###
 # R package: bookdown caching files
 /*_files/
+
+# Image and data files
+/data
+/figs
