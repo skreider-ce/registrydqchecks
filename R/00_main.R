@@ -74,7 +74,6 @@ dsToCheck <- pullData(dsFolderUrl,"2023","2023-12-04","exvisit")
 source("./R/02_criticalChecks/00_criticalChecks.R")
 criticalCheckOutput <- criticalChecks(dsToCheck)
 
-pillar::pillar_title(dsToCheck)
 
 #-------------------------
 # Export Analysis Results

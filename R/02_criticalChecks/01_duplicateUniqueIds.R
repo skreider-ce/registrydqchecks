@@ -13,8 +13,8 @@ checkForDuplicateUniqueIds <- function(.dsToCheck){
 
   .duplicateUniqueIds <-
     .dsToCheck |>
-    count(id, visitdate) |>
-    filter(n > 1)
+      count(id, visitdate) |>
+      filter(n > 1)
   head(.duplicateUniqueIds)
   
   returnOutput <- list(
