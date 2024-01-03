@@ -16,10 +16,7 @@ library(tidyverse, warn.conflicts = FALSE) # Recommended packages for data manip
 library(arsenal)                           # Recommended package for creating tables
 library(tidycoRe)                          # Internal package for CorEvitas helper functions, styles, templates
 library(lubridate)                         # Recommended package for manipulating dates
-library(broom)                             # Recommended package for tidying regression model tables
 library(glue)                              # Recommended package for concatenating strings
-#library(haven)                            # Recommended package for importing datasets from SAS, STATA, others
-#library(tidymodels)                       # Recommended packages for machine learning models in a tidy framework
 
 #------------------
 # Session Info Log
@@ -42,14 +39,14 @@ frz_yr <- lubridate::as_date(frz_dt) %>% lubridate::year(.)
 #-----------------
 # Use relative paths to point to relevant directories
 
-
 # "~" refers to your HOME directory
 # ".." goes up one level in the directory structure
 # "." refers to your current working directory
 # The current working directory should be the location of your .RProj file for this GitHub repository
 
 # Registry data should be imported directly from its source: either Sharepoint (currently as of 2021) or AWS (future)
-sharepoint_dir <- "~/../Corrona LLC/Biostat Data Files - Registry Data"
+sharepoint_dir <- "~/../../Corrona LLC/Biostat Data Files - AD"
+dsFolderUrl <- glue("{sharepoint_dir}/monthly")
 
 
 # Example:
@@ -62,6 +59,7 @@ sharepoint_dir <- "~/../Corrona LLC/Biostat Data Files - Registry Data"
 
 # Check if the directory above exists
 dir.exists(sharepoint_dir)
+dir.exists(dsFolderUrl)
 
 #----------------------
 # Source Analysis Code
@@ -70,22 +68,26 @@ dir.exists(sharepoint_dir)
 # Use the source() function to run external programs
 # Recommended naming convention: use a numeric prefix to indicate the order it should be executed
 
-source("./R/01_create_dataset.R")
+source("./R/01_pullData/00_pullData.R")
+dsToCheck <- pullData(dsFolderUrl,"2023","2023-12-04","exvisit")
 
-source("./R/02_table1.R")
+source("./R/02_criticalChecks/00_criticalChecks.R")
+criticalCheckOutput <- criticalChecks(dsToCheck)
+
+pillar::pillar_title(dsToCheck)
 
 #-------------------------
 # Export Analysis Results
 #-------------------------
 
 # Send to Markdown - Local output
-rmarkdown::render(
-  input         = "{}.Rmd",        # Your analysis markdown file
-  output_dir    = "./reports",     # Your output directory for markdown file
-  output_file   = "",              # Your output file name
-  output_format = "word_document", # Output format, word, powerpoint, html, pdf, etc
-  envir         = new.env()        # new.env() creates a new environment within the RMarkdown file to improve reproducibility
-)
+# rmarkdown::render(
+#   input         = "{}.Rmd",        # Your analysis markdown file
+#   output_dir    = "./reports",     # Your output directory for markdown file
+#   output_file   = "",              # Your output file name
+#   output_format = "word_document", # Output format, word, powerpoint, html, pdf, etc
+#   envir         = new.env()        # new.env() creates a new environment within the RMarkdown file to improve reproducibility
+# )
 
 #----------------------------
 # Send Results to Sharepoint
@@ -95,8 +97,8 @@ rmarkdown::render(
 # You can copy files from your project ./reports folder to Sharepoint
 
 # Copy Local output to Sharepoint
-file.copy(
-  from      = "./reports", # Directory or filename to copy
-  to        = "",           # Destination directory or filename
-  overwrite = TRUE          # Overwrite files with existing names on Sharepoint? If TRUE and a file exists, it will increment the version number
-)
+# file.copy(
+#   from      = "./reports", # Directory or filename to copy
+#   to        = "",           # Destination directory or filename
+#   overwrite = TRUE          # Overwrite files with existing names on Sharepoint? If TRUE and a file exists, it will increment the version number
+# )
