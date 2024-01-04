@@ -9,8 +9,16 @@
 #   TO UPDATE: parameterize the unique key for the given dataset
 #
 
-checkForDuplicateUniqueIds <- function(.dsToCheck){
+checkForDuplicateUniqueIds <- function(.dsToCheck,.uniqueKey = "id visitdate"){
 
+  # turn .uniqueKey into a list of varnames that I can reference in the count function below
+  .uniqueKeyVarNames <- uniqueKeyStringToVars(.uniqueKey)
+  
+  # assign the uniqueKey varnames to the varnames in the dataset
+  for(.name in .uniqueKeyVarNames){
+    assign(.name, get(.name, .dsToCheck))
+  }
+  
   .duplicateUniqueIds <-
     .dsToCheck |>
       count(id, visitdate) |>
@@ -22,4 +30,9 @@ checkForDuplicateUniqueIds <- function(.dsToCheck){
   )
   
   return(.returnOutput)
+}
+
+
+uniqueKeyStringToVars <- function(.uniqueKey){
+  .varNames = strsplit(tolower(.uniqueKey), " ")[[1]]
 }
