@@ -9,6 +9,7 @@
 #   Input: The [dataframe] to Check
 #           A list (...) of variables to be used as the unique key
 #   Returns: A [list] with
+#           $pass = [boolean] with whether or not the number of duplicates is > 0
 #           $nDuplicateRows = [number] of rows of the dataset which indicates the number of duplicate rows
 #           $listOfDuplicateRows = [dataframe] of the duplicated IDs
 #
@@ -21,8 +22,9 @@ checkForDuplicateUniqueIds <- function(.dsToCheck,...){
       filter(n > 1)
 
   .returnOutput <- list(
-    nDuplicateRows = nrow(.duplicateUniqueIds),
-    listOfDuplicateRows = .duplicateUniqueIds
+    pass = ifelse(nrow(.duplicateUniqueIds) == 0,TRUE,FALSE)
+    ,nDuplicateRows = nrow(.duplicateUniqueIds)
+    ,listOfDuplicateRows = .duplicateUniqueIds
   )
   
   return(.returnOutput)

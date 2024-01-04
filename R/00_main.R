@@ -23,39 +23,15 @@ library(glue)                              # Recommended package for concatenati
 #------------------
 writeLines(capture.output(sessionInfo()), "sessionInfo.txt")
 
-#-------------
-# Freeze Date
-#-------------
-
-# Set the date of your data extract for future use
-# Recommended to use ISO 8601 format: YYYY-MM-DD or YYYYMMDD
-frz_dt <- "2021-11-01"
-
-# Use lubridate to extract  year
-frz_yr <- lubridate::as_date(frz_dt) %>% lubridate::year(.)
 
 #-----------------
 # Set Directories
 #-----------------
 # Use relative paths to point to relevant directories
 
-# "~" refers to your HOME directory
-# ".." goes up one level in the directory structure
-# "." refers to your current working directory
-# The current working directory should be the location of your .RProj file for this GitHub repository
-
 # Registry data should be imported directly from its source: either Sharepoint (currently as of 2021) or AWS (future)
 sharepoint_dir <- "~/../../Corrona LLC/Biostat Data Files - AD"
 dsFolderUrl <- glue("{sharepoint_dir}/monthly")
-
-
-# Example:
-# Set up directory for downloading the IBD Registry data from 2021-11-01
-# sharepoint_ibd <- "~/../Corrona LLC/Biostat Data Files - Registry Data/IBD/monthly/2021/2021-11-01/Analytic Data"
-# or using paste0 function
-# sharepoint_ibd <- paste0(sharepoint_dir, "/IBD/monthly/", frz_yr, "/", frz_dt, "/Analytic Data")
-# or using glue function from glue package
-# sharepoint_ibd <- glue::glue("{sharepoint_dir}/IBD/monthly/{frz_yr}/{frz_dt}/Analytic Data")
 
 # Check if the directory above exists
 dir.exists(sharepoint_dir)
@@ -64,78 +40,48 @@ dir.exists(dsFolderUrl)
 #----------------------
 # Source Analysis Code
 #----------------------
-# Programs should be organized into smaller, separate, modular files
-# Use the source() function to run external programs
-# Recommended naming convention: use a numeric prefix to indicate the order it should be executed
+main <- function(){
+  exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exvisit_2023-12-04.rds")
+  exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exlab_2023-12-04.rds")
+  exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exdrugexp_2023-12-04.rds")
+  
+  
+  comp_exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exvisit_2023-11-03.rds")
+  comp_exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exlab_2023-11-03.rds")
+  comp_exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exdrugexp_2023-11-03.rds")
+  
+  # Step 1: Pull the data - store in [dataframe] dsToCheck
+  source("./R/01_pullData/00_pullData.R")
+  exvisit_dsToCheck <- pullData(exvisit_datasetUrl,TRUE)
+  exlab_dsToCheck <- pullData(exlab_datasetUrl,TRUE)
+  exdrugexp_dsToCheck <- pullData(exdrugexp_datasetUrl,TRUE)
+  
+  comp_exvisit_dsToCheck <- pullData(comp_exvisit_datasetUrl,TRUE)
+  comp_exlab_dsToCheck <- pullData(comp_exlab_datasetUrl,TRUE)
+  comp_exdrugexp_dsToCheck <- pullData(comp_exdrugexp_datasetUrl,TRUE)
+  
+  # Step 2: Run the critical checks - store output in [list] criticalCheckOutput
+  source("./R/02_criticalChecks/00_criticalChecks.R")
+  exvisit_criticalCheckOutput <- criticalChecks(exvisit_dsToCheck,comp_exvisit_dsToCheck,id,visitdate)
+  exlab_criticalCheckOutput <- criticalChecks(exlab_dsToCheck,comp_exlab_dsToCheck,id,labdatet,edcvisitnum)
+  exdrugexp_criticalCheckOutput <- criticalChecks(exdrugexp_dsToCheck,comp_exdrugexp_dsToCheck,id,expid)
+  
+  
+  # Step 2.5: Run the non-critical checks - store output in [list] nonCriticalCheckOutput
+  
+  
+  
+  # Step 3: Create the data check report
+  
+}
 
-
-
-
-exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exvisit_2023-12-04.rds")
-exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exlab_2023-12-04.rds")
-exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exdrugexp_2023-12-04.rds")
-
-
-comp_exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exvisit_2023-11-03.rds")
-comp_exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exlab_2023-11-03.rds")
-comp_exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exdrugexp_2023-11-03.rds")
-
-
-# Step 1: Pull the data - store in [dataframe] dsToCheck
-source("./R/01_pullData/00_pullData.R")
-exvisit_dsToCheck <- pullData(exvisit_datasetUrl,TRUE)
-exlab_dsToCheck <- pullData(exlab_datasetUrl,TRUE)
-exdrugexp_dsToCheck <- pullData(exdrugexp_datasetUrl,TRUE)
-
-comp_exvisit_dsToCheck <- pullData(comp_exvisit_datasetUrl,TRUE)
-comp_exlab_dsToCheck <- pullData(comp_exlab_datasetUrl,TRUE)
-comp_exdrugexp_dsToCheck <- pullData(comp_exdrugexp_datasetUrl,TRUE)
-
-
-
-# Step 2: Run the critical checks - store output in [list] criticalCheckOutput
-source("./R/02_criticalChecks/00_criticalChecks.R")
-exvisit_criticalCheckOutput <- criticalChecks(exvisit_dsToCheck,comp_exvisit_dsToCheck,id,visitdate)
-exlab_criticalCheckOutput <- criticalChecks(exlab_dsToCheck,comp_exlab_dsToCheck,id,labdatet,edcvisitnum)
-exdrugexp_criticalCheckOutput <- criticalChecks(exdrugexp_dsToCheck,comp_exdrugexp_dsToCheck,id,expid)
-
-
-# Step 2.5: Run the non-critical checks - store output in [list] nonCriticalCheckOutput
-
-
-
-# Step 3: Create the data check report
+main()
 
 
 
 
 
 
-
-
-# 
-# 
-# # MS Example
-# 
-# 
-# 
-# ms_sharepoint_dir <- "~/../../Corrona LLC/Biostat Data Files - MS"
-# ms_dsFolderUrl <- glue("{ms_sharepoint_dir}/monthly")
-# dir.exists(ms_sharepoint_dir)
-# dir.exists(ms_dsFolderUrl)
-# 
-# 
-# 
-# 
-# 
-# exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exvisit_2023-12-04.rds")
-# exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exlab_2023-12-04.rds")
-# exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exdrugexp_2023-12-04.rds")
-# 
-# 
-# comp_exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exvisit_2023-11-03.rds")
-# comp_exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exlab_2023-11-03.rds")
-# comp_exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exdrugexp_2023-11-03.rds")
 
 
 

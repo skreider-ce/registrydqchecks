@@ -16,11 +16,15 @@
 #           $propRowIncrease = [proportion] increase in the number of rows from last to now
 #                 NOTE: (nNew - nOld) / (nOld)
 #
+#   TO DO:
+#       1) Decide how to handle parameterizing the "proportion" to compare to
+#
 
 checkForAddedRows <- function(.dsToCheck,.compDsToCheck){
   
   .returnOutput <- list(
-    nAddedRows = nrow(.dsToCheck) - nrow(.compDsToCheck)
+    pass = ifelse((nrow(.dsToCheck) - nrow(.compDsToCheck)) / nrow(.compDsToCheck) < 0.1,TRUE,FALSE)
+    ,nAddedRows = nrow(.dsToCheck) - nrow(.compDsToCheck)
     ,nOldRows = nrow(.compDsToCheck)
     ,propRowIncrease = (nrow(.dsToCheck) - nrow(.compDsToCheck)) / nrow(.compDsToCheck)
   )
