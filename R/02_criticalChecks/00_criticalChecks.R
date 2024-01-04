@@ -11,9 +11,9 @@ source("./R/02_criticalChecks/04_checkForMissingVariableLabels.R")
 #   TO UPDATE: add additional critical checks
 #
 
-criticalChecks <- function(.dsToCheck){
+criticalChecks <- function(.dsToCheck,...){
   
-  .critCheckResults1 <- checkForDuplicateUniqueIds(.dsToCheck)
+  .critCheckResults1 <- checkForDuplicateUniqueIds(.dsToCheck,...)
   .critCheckResults4 <- checkForMissingVariableLabels(.dsToCheck)
   
   return(list(

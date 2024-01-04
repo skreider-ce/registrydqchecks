@@ -1,27 +1,23 @@
+# Given you have a dataframe you want to check
+#   AND Given a list of the variables that are used as a unique key
+#   THEN Run the specified Critical Check on the dataframe
+#     AND Output the results of the Critical Check
+
 # Critical Check 1
 #   Test for 0 duplicates based on given unique key
 #
 #   Input: The dataset to Check
+#           A list of variables to be used as the unique key
 #   Returns: A list with
 #           $nDuplicateRows = [number] of rows of the dataset which indicates the number of duplicate rows
 #           $listOfDuplicateRows = [dataframe] of the duplicated IDs
 #
-#   TO UPDATE: parameterize the unique key for the given dataset
-#
 
-checkForDuplicateUniqueIds <- function(.dsToCheck,.uniqueKey = "id visitdate"){
+checkForDuplicateUniqueIds <- function(.dsToCheck,...){
 
-  # turn .uniqueKey into a list of varnames that I can reference in the count function below
-  .uniqueKeyVarNames <- uniqueKeyStringToVars(.uniqueKey)
-  
-  # assign the uniqueKey varnames to the varnames in the dataset
-  for(.name in .uniqueKeyVarNames){
-    assign(.name, get(.name, .dsToCheck))
-  }
-  
   .duplicateUniqueIds <-
     .dsToCheck |>
-      count(id, visitdate) |>
+      count(...) |>
       filter(n > 1)
 
   .returnOutput <- list(
@@ -30,9 +26,4 @@ checkForDuplicateUniqueIds <- function(.dsToCheck,.uniqueKey = "id visitdate"){
   )
   
   return(.returnOutput)
-}
-
-
-uniqueKeyStringToVars <- function(.uniqueKey){
-  .varNames = strsplit(tolower(.uniqueKey), " ")[[1]]
 }

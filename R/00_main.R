@@ -81,7 +81,7 @@ dsToCheck <- pullData(datasetUrl,TRUE)
 
 # Step 2: Run the critical checks - store output in [list] criticalCheckOutput
 source("./R/02_criticalChecks/00_criticalChecks.R")
-criticalCheckOutput <- criticalChecks(dsToCheck)
+criticalCheckOutput <- criticalChecks(dsToCheck,id,visitdate)
 
 
 # Step 2.5: Run the non-critical checks - store output in [list] nonCriticalCheckOutput
