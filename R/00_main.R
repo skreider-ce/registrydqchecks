@@ -108,9 +108,8 @@ exdrugexp_criticalCheckOutput <- criticalChecks(exdrugexp_dsToCheck,comp_exdruge
 
 
 # Output values
-# testDups_criticalCheckOutput <- criticalChecks(testDups)
-# print(testDups_criticalCheckOutput$criticalCheck1)
-# print(testDups_criticalCheckOutput$criticalCheck4)
+
+
 
 print(criticalCheckOutput$criticalCheck1)
 print(criticalCheckOutput$criticalCheck1$nDuplicateRows)
@@ -119,6 +118,41 @@ print(criticalCheckOutput$criticalCheck1$listOfDuplicateRows)
 print(criticalCheckOutput$criticalCheck4)
 print(criticalCheckOutput$criticalCheck4$nMissingVariableLabels)
 print(criticalCheckOutput$criticalCheck4$listOfVarsWithMissingLabels)
+
+
+
+
+
+
+# 
+# 
+# # MS Example
+# 
+# 
+# 
+# ms_sharepoint_dir <- "~/../../Corrona LLC/Biostat Data Files - MS"
+# ms_dsFolderUrl <- glue("{ms_sharepoint_dir}/monthly")
+# dir.exists(ms_sharepoint_dir)
+# dir.exists(ms_dsFolderUrl)
+# 
+# 
+# 
+# 
+# 
+# exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exvisit_2023-12-04.rds")
+# exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exlab_2023-12-04.rds")
+# exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exdrugexp_2023-12-04.rds")
+# 
+# 
+# comp_exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exvisit_2023-11-03.rds")
+# comp_exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exlab_2023-11-03.rds")
+# comp_exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exdrugexp_2023-11-03.rds")
+
+
+
+
+
+
 
 #------------------------
 # Export Analysis Results
