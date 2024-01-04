@@ -8,18 +8,17 @@
 #
 
 checkForMissingVariableLabels <- function(.dsToCheck){
-  print("Hello world!")
+
+  .variableLabels <-
+    labelled::var_label(.dsToCheck)
   
-  .duplicateUniqueIds <-
-    .dsToCheck |>
-    count(id, visitdate) |>
-    filter(n > 1)
-  head(.duplicateUniqueIds)
+  .variablesWithMissingLabels <- 
+    purrr::map_lgl(.variableLabels, is.null)
   
-  returnOutput <- list(
-    nDuplicateRows = nrow(.duplicateUniqueIds),
-    listOfDuplicateRows = .duplicateUniqueIds
+  .returnOutput <- list(
+    nMissingVariableLabels = sum(.variablesWithMissingLabels),
+    listOfVarsWithMissingLabels = .variableLabels[.variablesWithMissingLabels]
   )
   
-  return(returnOutput)
+  return(.returnOutput)
 }
