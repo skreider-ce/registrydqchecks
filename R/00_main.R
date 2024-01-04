@@ -95,9 +95,9 @@ comp_exdrugexp_dsToCheck <- pullData(comp_exdrugexp_datasetUrl,TRUE)
 
 # Step 2: Run the critical checks - store output in [list] criticalCheckOutput
 source("./R/02_criticalChecks/00_criticalChecks.R")
-exvisit_criticalCheckOutput <- criticalChecks(exvisit_dsToCheck,id,visitdate)
-exlab_criticalCheckOutput <- criticalChecks(exlab_dsToCheck,id,labdatet,edcvisitnum)
-# exdrugexp_criticalCheckOutput <- criticalChecks(dsToCheck,id,visitdate)
+exvisit_criticalCheckOutput <- criticalChecks(exvisit_dsToCheck,comp_exvisit_dsToCheck,id,visitdate)
+exlab_criticalCheckOutput <- criticalChecks(exlab_dsToCheck,comp_exlab_dsToCheck,id,labdatet,edcvisitnum)
+exdrugexp_criticalCheckOutput <- criticalChecks(exdrugexp_dsToCheck,comp_exdrugexp_dsToCheck,id,expid)
 
 
 # Step 2.5: Run the non-critical checks - store output in [list] nonCriticalCheckOutput

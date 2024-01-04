@@ -1,5 +1,6 @@
 source("./R/02_criticalChecks/01_duplicateUniqueIds.R")
 source("./R/02_criticalChecks/04_checkForMissingVariableLabels.R")
+source("./R/02_criticalChecks/05_checkForAddedRows.R")
 
 # criticalCheck main() function that runs the individual critical checks
 #
@@ -11,14 +12,16 @@ source("./R/02_criticalChecks/04_checkForMissingVariableLabels.R")
 #   TO UPDATE: add additional critical checks
 #
 
-criticalChecks <- function(.dsToCheck,...){
+criticalChecks <- function(.dsToCheck,.compDsToCheck,...){
   
   .critCheckResults1 <- checkForDuplicateUniqueIds(.dsToCheck,...)
   .critCheckResults4 <- checkForMissingVariableLabels(.dsToCheck)
+  .critCheckResults5 <- checkForAddedRows(.dsToCheck,.compDsToCheck)
   
   return(list(
-    criticalCheck1 = .critCheckResults1,
-    criticalCheck4 = .critCheckResults4
+    criticalCheck1 = .critCheckResults1
+    ,criticalCheck4 = .critCheckResults4
+    ,criticalCheck5 = .critCheckResults5
     ))
 }
 
