@@ -40,7 +40,7 @@ dir.exists(dsFolderUrl)
 #----------------------
 # Source Analysis Code
 #----------------------
-main <- function(){
+
   exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exvisit_2023-12-04.rds")
   exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exlab_2023-12-04.rds")
   exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exdrugexp_2023-12-04.rds")
@@ -73,10 +73,6 @@ main <- function(){
   
   # Step 3: Create the data check report
   
-}
-
-main()
-
 
 
 
