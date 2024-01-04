@@ -71,17 +71,33 @@ dir.exists(dsFolderUrl)
 
 
 
-datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exvisit_2023-12-04.rds")
+exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exvisit_2023-12-04.rds")
+exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exlab_2023-12-04.rds")
+exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exdrugexp_2023-12-04.rds")
+
+
+comp_exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exvisit_2023-11-03.rds")
+comp_exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exlab_2023-11-03.rds")
+comp_exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exdrugexp_2023-11-03.rds")
 
 
 # Step 1: Pull the data - store in [dataframe] dsToCheck
 source("./R/01_pullData/00_pullData.R")
-dsToCheck <- pullData(datasetUrl,TRUE)
+exvisit_dsToCheck <- pullData(exvisit_datasetUrl,TRUE)
+exlab_dsToCheck <- pullData(exlab_datasetUrl,TRUE)
+exdrugexp_dsToCheck <- pullData(exdrugexp_datasetUrl,TRUE)
+
+comp_exvisit_dsToCheck <- pullData(comp_exvisit_datasetUrl,TRUE)
+comp_exlab_dsToCheck <- pullData(comp_exlab_datasetUrl,TRUE)
+comp_exdrugexp_dsToCheck <- pullData(comp_exdrugexp_datasetUrl,TRUE)
+
 
 
 # Step 2: Run the critical checks - store output in [list] criticalCheckOutput
 source("./R/02_criticalChecks/00_criticalChecks.R")
-criticalCheckOutput <- criticalChecks(dsToCheck,id,visitdate)
+exvisit_criticalCheckOutput <- criticalChecks(exvisit_dsToCheck,id,visitdate)
+exlab_criticalCheckOutput <- criticalChecks(exlab_dsToCheck,id,labdatet,edcvisitnum)
+# exdrugexp_criticalCheckOutput <- criticalChecks(dsToCheck,id,visitdate)
 
 
 # Step 2.5: Run the non-critical checks - store output in [list] nonCriticalCheckOutput
@@ -104,7 +120,7 @@ print(criticalCheckOutput$criticalCheck4)
 print(criticalCheckOutput$criticalCheck4$nMissingVariableLabels)
 print(criticalCheckOutput$criticalCheck4$listOfVarsWithMissingLabels)
 
-#-------------------------
+#------------------------
 # Export Analysis Results
 #-------------------------
 

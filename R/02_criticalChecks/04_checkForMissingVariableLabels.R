@@ -1,8 +1,8 @@
 # Critical Check 4
 #   Test for 0 missing variable labels
 #
-#   Input: The dataset to Check
-#   Returns: A list with
+#   Input: The [dataframe] to Check
+#   Returns: A [list] with
 #           $nMissingVariableLabels = [number] of variables with missing labels
 #           $listOfVarsWithMissingLabels = [vector] of the variables with missing labels
 #

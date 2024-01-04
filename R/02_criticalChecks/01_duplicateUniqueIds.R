@@ -6,9 +6,9 @@
 # Critical Check 1
 #   Test for 0 duplicates based on given unique key
 #
-#   Input: The dataset to Check
-#           A list of variables to be used as the unique key
-#   Returns: A list with
+#   Input: The [dataframe] to Check
+#           A list (...) of variables to be used as the unique key
+#   Returns: A [list] with
 #           $nDuplicateRows = [number] of rows of the dataset which indicates the number of duplicate rows
 #           $listOfDuplicateRows = [dataframe] of the duplicated IDs
 #
