@@ -18,6 +18,8 @@ source("./R/01_pullData/02_pullDTAfromUrl.R")
 #
 
 pullData <- function(.datasetUrl,.isR = TRUE){
+  
+  # Check if .isR is TRUE or FALSE and call the appropriate function accordingly
   if(.isR){
     .pulledDataset <- pullRDSfromUrl(.datasetUrl)
   } else
@@ -25,6 +27,7 @@ pullData <- function(.datasetUrl,.isR = TRUE){
     .pulledDataset <- pullDTAfromUrl(.datasetUrl)
   }
 
+  # Clean the variable names in the dataset for use in upcoming steps
   janitor::clean_names(.pulledDataset)
   
   return(.pulledDataset);
