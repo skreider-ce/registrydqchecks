@@ -1,5 +1,5 @@
 # Checking duplicate unique keys
-source("./R/02_criticalChecks/01_duplicateUniqueIds.R")
+source("./R/02_criticalChecks/01_checkForDuplicateUniqueIds.R")
 
 # No duplicate unique IDs on exvisit
 exvisit_R_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exvisit_2023-12-04.rds")

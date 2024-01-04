@@ -107,17 +107,6 @@ exdrugexp_criticalCheckOutput <- criticalChecks(exdrugexp_dsToCheck,comp_exdruge
 # Step 3: Create the data check report
 
 
-# Output values
-
-
-
-print(criticalCheckOutput$criticalCheck1)
-print(criticalCheckOutput$criticalCheck1$nDuplicateRows)
-print(criticalCheckOutput$criticalCheck1$listOfDuplicateRows)
-
-print(criticalCheckOutput$criticalCheck4)
-print(criticalCheckOutput$criticalCheck4$nMissingVariableLabels)
-print(criticalCheckOutput$criticalCheck4$listOfVarsWithMissingLabels)
 
 
 

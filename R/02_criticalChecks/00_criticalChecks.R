@@ -1,4 +1,4 @@
-source("./R/02_criticalChecks/01_duplicateUniqueIds.R")
+source("./R/02_criticalChecks/01_checkForDuplicateUniqueIds.R")
 source("./R/02_criticalChecks/04_checkForMissingVariableLabels.R")
 source("./R/02_criticalChecks/05_checkForAddedRows.R")
 
