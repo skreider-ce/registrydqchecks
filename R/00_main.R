@@ -41,30 +41,61 @@ dir.exists(dsFolderUrl)
 # Source Analysis Code
 #----------------------
 
+# Step 1: Pull the data - store in [dataframe] dsToCheck
+source("./R/01_pullData/00_pullData.R")
+
+
+  # Currently - requires the user to specifically give the URL to the file since I don't know
+  #     if there is a consistent structure
+
+  # URL directly to current month's data
   exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exvisit_2023-12-04.rds")
   exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exlab_2023-12-04.rds")
   exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exdrugexp_2023-12-04.rds")
   
-  
-  comp_exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exvisit_2023-11-03.rds")
-  comp_exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exlab_2023-11-03.rds")
-  comp_exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exdrugexp_2023-11-03.rds")
-  
-  # Step 1: Pull the data - store in [dataframe] dsToCheck
-  source("./R/01_pullData/00_pullData.R")
+  # Pull current month's data
   exvisit_dsToCheck <- pullData(exvisit_datasetUrl,TRUE)
   exlab_dsToCheck <- pullData(exlab_datasetUrl,TRUE)
   exdrugexp_dsToCheck <- pullData(exdrugexp_datasetUrl,TRUE)
   
+  
+  # URL directly to last month's data
+  comp_exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exvisit_2023-11-03.rds")
+  comp_exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exlab_2023-11-03.rds")
+  comp_exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exdrugexp_2023-11-03.rds")
+  
+  # Pull last month's data
   comp_exvisit_dsToCheck <- pullData(comp_exvisit_datasetUrl,TRUE)
   comp_exlab_dsToCheck <- pullData(comp_exlab_datasetUrl,TRUE)
   comp_exdrugexp_dsToCheck <- pullData(comp_exdrugexp_datasetUrl,TRUE)
   
-  # Step 2: Run the critical checks - store output in [list] criticalCheckOutput
-  source("./R/02_criticalChecks/00_criticalChecks.R")
-  exvisit_criticalCheckOutput <- criticalChecks(exvisit_dsToCheck,comp_exvisit_dsToCheck,id,visitdate)
-  exlab_criticalCheckOutput <- criticalChecks(exlab_dsToCheck,comp_exlab_dsToCheck,id,labdatet,edcvisitnum)
-  exdrugexp_criticalCheckOutput <- criticalChecks(exdrugexp_dsToCheck,comp_exdrugexp_dsToCheck,id,expid)
+  
+  
+
+  
+
+  
+# Step 2: Run the critical checks - store output in [list] criticalCheckOutput
+source("./R/02_criticalChecks/00_criticalChecks.R")
+  
+  
+  # Currently - requires the user to specifically give the variables that define the
+  #     unique keys as they vary from dataset to dataset
+
+  exvisit_criticalCheckOutput <- criticalChecks(
+    exvisit_dsToCheck
+    ,comp_exvisit_dsToCheck
+    ,id,visitdate)
+  
+  exlab_criticalCheckOutput <- criticalChecks(
+    exlab_dsToCheck
+    ,comp_exlab_dsToCheck
+    ,id,labdatet,edcvisitnum)
+  
+  exdrugexp_criticalCheckOutput <- criticalChecks(
+    exdrugexp_dsToCheck
+    ,comp_exdrugexp_dsToCheck
+    ,id,expid)
   
   
   # Step 2.5: Run the non-critical checks - store output in [list] nonCriticalCheckOutput

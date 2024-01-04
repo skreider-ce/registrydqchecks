@@ -16,6 +16,7 @@
 
 checkForDuplicateUniqueIds <- function(.dsToCheck,...){
 
+  # Create a dataset from .dsToCheck with the uniqueIds that appear more than once
   .duplicateUniqueIds <-
     .dsToCheck |>
       count(...) |>

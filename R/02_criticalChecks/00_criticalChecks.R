@@ -20,15 +20,18 @@ source("./R/02_criticalChecks/06_checkForRemovedRows.R")
 
 criticalChecks <- function(.dsToCheck,.compDsToCheck,...){
 
+  # Runs each of the critical checks and stores the results in a variable
   .critCheckResults1 <- checkForDuplicateUniqueIds(.dsToCheck,...)
   .critCheckResults4 <- checkForMissingVariableLabels(.dsToCheck)
   .critCheckResults5 <- checkForAddedRows(.dsToCheck,.compDsToCheck)
   .critCheckResults6 <- checkForRemovedRows(.dsToCheck,.compDsToCheck,...)
   
+  # Returns a list with each element being one of the check results
   return(list(
     criticalCheck1 = .critCheckResults1
     ,criticalCheck4 = .critCheckResults4
     ,criticalCheck5 = .critCheckResults5
     ,criticalCheck6 = .critCheckResults6
-    ))
+    )
+  )
 }
