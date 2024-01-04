@@ -1,3 +1,6 @@
+source("./R/01_pullData/01_pullRDSfromUrl.R")
+source("./R/01_pullData/02_pullDTAfromUrl.R")
+
 # Given a direct link, in URL format, to the dataset you want to pull
 #   AND Given an indication if the dataset is an R dataset or not
 #   PULL the dataset from the given location
@@ -15,7 +18,6 @@
 #
 
 pullData <- function(.datasetUrl,.isR = TRUE){
-  
   if(.isR){
     .pulledDataset <- pullRDSfromUrl(.datasetUrl)
   } else
@@ -26,38 +28,4 @@ pullData <- function(.datasetUrl,.isR = TRUE){
   janitor::clean_names(.pulledDataset)
   
   return(.pulledDataset);
-}
-
-
-
-# FUNCTION: pullRDSfromUrl that pulls the RDS file from the specified direct URL
-#
-#   Input: The URL of the RDS dataset to pull
-#           .datasetUrl = URL directly to the RDS dataset to pull
-#
-#   Returns: a [dataframe] of the dataset being pulled
-#
-pullRDSfromUrl <- function(.datasetUrl){
-
-  print(.datasetUrl)
-  .ds <- readRDS(.datasetUrl)
-
-  return(.ds)
-}
-
-
-
-# FUNCTION: pullDTAfromUrl that pulls the DTA file from the specified direct URL
-#
-#   Input: The URL of the DTA dataset to pull
-#           .datasetUrl = URL directly to the DTA dataset to pull
-#
-#   Returns: a [dataframe] of the dataset being pulled
-#
-pullDTAfromUrl <- function(.datasetUrl){
-  
-  print(.datasetUrl)
-  .ds <- haven::read_dta(.datasetUrl)
-  
-  return(.ds)
 }

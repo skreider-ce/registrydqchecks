@@ -1,7 +1,5 @@
 source("./R/01_pullData/00_pullData.R")
 
-
-
 exvisit_R_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exvisit_2023-12-04.rds")
 exvisit_R_dsToCheck <- pullData(exvisit_R_datasetUrl,TRUE)
 
@@ -27,4 +25,13 @@ exdrugexp_S_dsToCheck <- pullData(exdrugexp_S_datasetUrl,FALSE)
 
 
 
-rm(list = ls())
+rm(list = c(
+  "exvisit_R_datasetUrl","exvisit_R_dsToCheck"
+  ,"exlab_R_datasetUrl","exlab_R_dsToCheck"
+  ,"exdrugexp_R_datasetUrl","exdrugexp_R_dsToCheck"
+  
+  ,"exvisit_S_datasetUrl","exvisit_S_dsToCheck"
+  ,"exlab_S_datasetUrl","exlab_S_dsToCheck"
+  ,"exdrugexp_S_datasetUrl","exdrugexp_S_dsToCheck"
+  )
+)
