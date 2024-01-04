@@ -18,7 +18,6 @@ library(tidycoRe)                          # Internal package for CorEvitas help
 library(lubridate)                         # Recommended package for manipulating dates
 library(glue)                              # Recommended package for concatenating strings
 
-
 #------------------
 # Session Info Log
 #------------------
@@ -71,15 +70,23 @@ dir.exists(dsFolderUrl)
 
 
 
+
+datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exvisit_2023-12-04.rds")
+
+
 # Step 1: Pull the data - store in [dataframe] dsToCheck
 source("./R/01_pullData/00_pullData.R")
-dsToCheck <- pullData(dsFolderUrl,"2023","2023-12-04","exvisit")
+dsToCheck <- pullData(datasetUrl,TRUE)
+
 
 # Step 2: Run the critical checks - store output in [list] criticalCheckOutput
 source("./R/02_criticalChecks/00_criticalChecks.R")
 criticalCheckOutput <- criticalChecks(dsToCheck)
 
+
 # Step 2.5: Run the non-critical checks - store output in [list] nonCriticalCheckOutput
+
+
 
 # Step 3: Create the data check report
 

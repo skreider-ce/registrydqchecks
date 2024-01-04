@@ -1,25 +1,31 @@
-# FUNCTION: Primary pullData() function that pulls the file from the specified URL components
+# Given a direct link, in URL format, to the dataset you want to pull
+#   AND Given an indication if the dataset is an R dataset or not
+#   PULL the dataset from the given location
+#   RETURN a [dataframe] of the dataset being pulled
+
+
+# FUNCTION: Primary pullData() function that pulls the file from the specified URL
 #
-#   Input: The URL information of the dataset to pull
-#           .dsFolderUrl = URL to the Registry parent directory
-#           .year = year to be pulled
-#           .pullDate = date of the data to be pulled
-#           .dsname = name of the dataset to be pulled
+#   Input: The direct URL of the dataset to pull
+#           .datasetUrl = URL to the Registry parent directory
+#           .isR = boolean - TRUE if dataset being pulled is an RDS file (FALSE if a .dta)
+#                   DEFAULT: TRUE
 #
 #   Returns: a [dataframe] of the dataset being pulled
 #
-#   TO UPDATE:
-#         1) Increase flexibility to pull in RDS or DTA
-#         2) Increase flexibility for differently formatted URLs
-#             - Possibly require direct URL given in previous step
-#
-pullData <- function(.dsFolderUrl,.year,.pullDate,.dsname){
+
+pullData <- function(.datasetUrl,.isR = TRUE){
   
-  .datasetUrl <- glue("{.dsFolderUrl}/{.year}/{.pullDate}/",glue("{.dsname}_{.pullDate}.rds"))
+  if(.isR){
+    .pulledDataset <- pullRDSfromUrl(.datasetUrl)
+  } else
+  {
+    .pulledDataset <- pullDTAfromUrl(.datasetUrl)
+  }
+
+  janitor::clean_names(.pulledDataset)
   
-  .pulledRDS <- pullRDSfromUrl(.datasetUrl)
-  
-  return(.pulledRDS);
+  return(.pulledDataset);
 }
 
 
@@ -31,11 +37,27 @@ pullData <- function(.dsFolderUrl,.year,.pullDate,.dsname){
 #
 #   Returns: a [dataframe] of the dataset being pulled
 #
-#
 pullRDSfromUrl <- function(.datasetUrl){
 
   print(.datasetUrl)
   .ds <- readRDS(.datasetUrl)
 
+  return(.ds)
+}
+
+
+
+# FUNCTION: pullDTAfromUrl that pulls the DTA file from the specified direct URL
+#
+#   Input: The URL of the DTA dataset to pull
+#           .datasetUrl = URL directly to the DTA dataset to pull
+#
+#   Returns: a [dataframe] of the dataset being pulled
+#
+pullDTAfromUrl <- function(.datasetUrl){
+  
+  print(.datasetUrl)
+  .ds <- haven::read_dta(.datasetUrl)
+  
   return(.ds)
 }
