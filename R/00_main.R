@@ -24,101 +24,41 @@ library(glue)                              # Recommended package for concatenati
 writeLines(capture.output(sessionInfo()), "sessionInfo.txt")
 
 
-#-----------------
-# Set Directories
-#-----------------
-# Use relative paths to point to relevant directories
-
-# Registry data should be imported directly from its source: either Sharepoint (currently as of 2021) or AWS (future)
-sharepoint_dir <- "~/../../Corrona LLC/Biostat Data Files - AD"
-dsFolderUrl <- glue("{sharepoint_dir}/monthly")
-
-# Check if the directory above exists
-dir.exists(sharepoint_dir)
-dir.exists(dsFolderUrl)
 
 #----------------------
 # Source Analysis Code
 #----------------------
 
-# Step 1: Pull the data - store in [dataframe] dsToCheck
-source("./R/01_pullData/00_pullData.R")
+
+source("./R/00_mainFunctions/00_mainFunctions.R")
+adChecks <- runRegistryChecks(.registry = "ad"
+                            ,.dsYear = "2023"
+                            ,.dsFolderDate = "2023-12-04"
+                            ,.dsPullDate = "2023-12-04"
+                            ,.compDsYear = "2023"
+                            ,.compDsFolderDate = "2023-11-03"
+                            ,.compDsPullDate = "2023-11-03"
+                            ,.isR = TRUE)
 
 
-  # Currently - requires the user to specifically give the URL to the file since I don't know
-  #     if there is a consistent structure
-
-  # URL directly to current month's data
-  exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exvisit_2023-12-04.rds")
-  exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exlab_2023-12-04.rds")
-  exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-12-04/exdrugexp_2023-12-04.rds")
-  
-  # Pull current month's data
-  exvisit_dsToCheck <- pullData(exvisit_datasetUrl,TRUE)
-  exlab_dsToCheck <- pullData(exlab_datasetUrl,TRUE)
-  exdrugexp_dsToCheck <- pullData(exdrugexp_datasetUrl,TRUE)
-  
-  
-  # URL directly to last month's data
-  comp_exvisit_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exvisit_2023-11-03.rds")
-  comp_exlab_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exlab_2023-11-03.rds")
-  comp_exdrugexp_datasetUrl <- glue("{dsFolderUrl}/2023/2023-11-03/exdrugexp_2023-11-03.rds")
-  
-  # Pull last month's data
-  comp_exvisit_dsToCheck <- pullData(comp_exvisit_datasetUrl,TRUE)
-  comp_exlab_dsToCheck <- pullData(comp_exlab_datasetUrl,TRUE)
-  comp_exdrugexp_dsToCheck <- pullData(comp_exdrugexp_datasetUrl,TRUE)
-  
-  
-  
-
-  
-
-  
-# Step 2: Run the critical checks - store output in [list] criticalCheckOutput
-source("./R/02_criticalChecks/00_criticalChecks.R")
-  
-  
-  # Currently - requires the user to specifically give the variables that define the
-  #     unique keys as they vary from dataset to dataset
-
-  exvisit_criticalCheckOutput <- criticalChecks(
-    exvisit_dsToCheck
-    ,comp_exvisit_dsToCheck
-    ,c("id","drink_freq")
-    ,c("id","drink_freq", "abcd", "xyz")
-    ,id,visitdate)
-  
-  exlab_criticalCheckOutput <- criticalChecks(
-    exlab_dsToCheck
-    ,comp_exlab_dsToCheck
-    ,c("id","labdate")
-    ,c("id","labdate", "lmno", "pqrs", "mnyo")
-    ,id,labdatet,edcvisitnum)
-  
-  exdrugexp_criticalCheckOutput <- criticalChecks(
-    exdrugexp_dsToCheck
-    ,comp_exdrugexp_dsToCheck
-    ,c("id","stdosevalue")
-    ,c("id","stdosevalue", "bbcy")
-    ,id,expid)
-  
-  
-  # Step 2.5: Run the non-critical checks - store output in [list] nonCriticalCheckOutput
-  
-  
-  
-  # Step 3: Create the data check report
-  
+msChecks <- runRegistryChecks(.registry = "ms"
+                            ,.dsYear = "2023"
+                            ,.dsFolderDate = "2023-12-05"
+                            ,.dsPullDate = "2023-12-05"
+                            ,.compDsYear = "2023"
+                            ,.compDsFolderDate = "2023-11-05"
+                            ,.compDsPullDate = "2023-11-05"
+                            ,.isR = FALSE)
 
 
-
-
-
-
-
-
-
+psoChecks <- runRegistryChecks(.registry = "pso"
+                              ,.dsYear = "2023"
+                              ,.dsFolderDate = "2023-12-10"
+                              ,.dsPullDate = "2023-12-11"
+                              ,.compDsYear = "2023"
+                              ,.compDsFolderDate = "2023-11-10"
+                              ,.compDsPullDate = "2023-11-13"
+                              ,.isR = FALSE)
 
 
 
