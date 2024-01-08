@@ -29,10 +29,11 @@ source("./R/02_criticalChecks/08_checkForMonthlyMissingness.R")
 #
 
 criticalChecks <- function(
-    .dsToCheck,.compDsToCheck
-    ,.listOfEssentialVars
-    ,.listOfSupposedVars
-    ,...){
+                            .dsToCheck
+                            ,.compDsToCheck
+                            ,.listOfEssentialVars
+                            ,.listOfSupposedVars
+                            ,...){
 
   # Runs each of the critical checks and stores the results in a variable
   .critCheckResults1 <- checkForDuplicateUniqueIds(.dsToCheck,...)
