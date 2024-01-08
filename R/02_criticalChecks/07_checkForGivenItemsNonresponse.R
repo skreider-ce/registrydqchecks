@@ -10,7 +10,6 @@
 
 # Essential item nonresponse is low
 #   FUNCTION: checkForGivenItemsNonresponse(.dsToCheck, .listOfEssentialVars)
-#           [longer description]
 #
 #   Input: [dataframe] .dsToCheck = the dataset to check
 #           [character vector] .listOfEssentialVars = list of variables deemed essential

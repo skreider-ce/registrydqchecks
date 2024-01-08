@@ -86,18 +86,21 @@ source("./R/02_criticalChecks/00_criticalChecks.R")
     exvisit_dsToCheck
     ,comp_exvisit_dsToCheck
     ,c("id","drink_freq")
+    ,c("id","drink_freq", "abcd", "xyz")
     ,id,visitdate)
   
   exlab_criticalCheckOutput <- criticalChecks(
     exlab_dsToCheck
     ,comp_exlab_dsToCheck
     ,c("id","labdate")
+    ,c("id","labdate", "lmno", "pqrs", "mnyo")
     ,id,labdatet,edcvisitnum)
   
   exdrugexp_criticalCheckOutput <- criticalChecks(
     exdrugexp_dsToCheck
     ,comp_exdrugexp_dsToCheck
     ,c("id","stdosevalue")
+    ,c("id","stdosevalue", "bbcy")
     ,id,expid)
   
   
