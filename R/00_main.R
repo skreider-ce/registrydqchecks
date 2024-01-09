@@ -1,17 +1,14 @@
+rm(list = ls())
 #-----------------------------------------------------------
 # Program: 00_main.R
-# Author:  Ryan Harrison
+# Author:  Scott Kreider
 # Date:    2021-10-19
-# Purpose: Main File for {REG-###} Query
+# Purpose: Main File for running registry data checks
 #-----------------------------------------------------------
 
 #----------------
 # Load Libraries
 #----------------
-# Load packages used in the analysis at the very beginning.
-# Be mindful of namespace conflicts, and versions of packages being used
-# Save session information so you can recreate the environment at a later date
-
 library(tidyverse, warn.conflicts = FALSE) # Recommended packages for data manipulation
 library(arsenal)                           # Recommended package for creating tables
 library(tidycoRe)                          # Internal package for CorEvitas helper functions, styles, templates
