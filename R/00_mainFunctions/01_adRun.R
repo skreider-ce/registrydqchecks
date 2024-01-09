@@ -63,24 +63,47 @@ runAd <- function(
   # Currently - requires the user to specifically give the variables that define the
   #     unique keys as they vary from dataset to dataset
   
+  # Pull essential variable names
+  fileLoc = "C:/Users/ScottKreider/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/Phase I/01_AD/Specifications"
+  fileName = "Phase I checks specifications - AD exvisit"
+  sheetName = "CC8&CC9&NC3 essential variables"
+  colId = "Variable name"
+  exvisit_essVars <- pullVariableListFromExcelFile(fileLoc,fileName,sheetName,colId)
+
   .exvisit_criticalCheckOutput <- criticalChecks(
     exvisit_dsToCheck
     ,comp_exvisit_dsToCheck
-    ,c("id","drink_freq")
+    ,exvisit_essVars
     ,c("id","drink_freq", "abcd", "xyz")
     ,id,visitdate)
+  
+  
+  # Pull essential variable names
+  fileLoc = "C:/Users/ScottKreider/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/Phase I/01_AD/Specifications"
+  fileName = "Phase I checks specifications - AD exlab"
+  sheetName = "CC8&CC9&NC3 essential variables"
+  colId = "Variable name"
+  exlab_essVars <- pullVariableListFromExcelFile(fileLoc,fileName,sheetName,colId)
   
   .exlab_criticalCheckOutput <- criticalChecks(
     exlab_dsToCheck
     ,comp_exlab_dsToCheck
-    ,c("id","labdate")
+    ,exlab_essVars
     ,c("id","labdate", "lmno", "pqrs", "mnyo")
     ,id,labdatet,edcvisitnum)
+  
+  
+  # Pull essential variable names
+  fileLoc = "C:/Users/ScottKreider/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/Phase I/01_AD/Specifications"
+  fileName = "Phase I checks specifications - AD exdrugexp"
+  sheetName = "CC8&NC3 essential variables"
+  colId = "Variable name"
+  exdrugexp_essVars <- pullVariableListFromExcelFile(fileLoc,fileName,sheetName,colId)
   
   .exdrugexp_criticalCheckOutput <- criticalChecks(
     exdrugexp_dsToCheck
     ,comp_exdrugexp_dsToCheck
-    ,c("id","stdosevalue")
+    ,exdrugexp_essVars
     ,c("id","stdosevalue", "bbcy")
     ,id,expid)
   

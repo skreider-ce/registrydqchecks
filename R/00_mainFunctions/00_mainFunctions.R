@@ -1,3 +1,5 @@
+source("./R/88_crossProjectFunctions/01_pullVariableListFromExcelFile.R")
+
 source("./R/00_mainFunctions/01_adRun.R")
 source("./R/00_mainFunctions/02_msRun.R")
 source("./R/00_mainFunctions/03_psoRun.R")
