@@ -1,6 +1,6 @@
 source("./R/03_checkDataStore/01_createDataStoreFolder.R")
 
-staticDataStoreUrl <- glue("C:/Users/ScottKreider/Documents/registryCheckStorage")
+staticDataStoreUrl <- glue("C:/Users/ScottKreider/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/registryCheckStorage")
 
 # Prerequisites
 #     A [list] of check results exists
@@ -32,9 +32,11 @@ submitToDataStore <- function(.registry,.dsYear,.dsPullDate,.resultsOfChecks){
   createDataStoreFolder(.pullDateStoreUrl)
 
   # Assign the dataset name to store
-  .resultsCheckName <- "checks"
+  .resultsCheckName <- glue("{.dsYear}_{.dsPullDate}_checks")
   
   # Save the results
-  saveRDS(.resultsOfChecks,glue("{.pullDateStoreUrl}/{.resultsCheckName}.rds"))
+  # saveRDS(.resultsOfChecks,glue("{.pullDateStoreUrl}/{.resultsCheckName}.rds"))
+  
+  saveRDS(.resultsOfChecks,glue("{.registryStoreUrl}/{.resultsCheckName}.rds"))
 
 }
