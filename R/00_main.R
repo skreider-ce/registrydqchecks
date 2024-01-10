@@ -27,35 +27,43 @@ writeLines(capture.output(sessionInfo()), "sessionInfo.txt")
 #----------------------
 
 
-source("./R/00_mainFunctions/00_mainFunctions.R")
-adChecks <- runRegistryChecks(.registry = "ad"
-                            ,.dsYear = "2023"
-                            ,.dsFolderDate = "2023-12-04"
-                            ,.dsPullDate = "2023-12-04"
-                            ,.compDsYear = "2023"
-                            ,.compDsFolderDate = "2023-11-03"
-                            ,.compDsPullDate = "2023-11-03"
-                            ,.isR = TRUE)
+# source("./R/00_mainFunctions/00_mainFunctions.R")
+source("./R/adAll2023Checks.R")
+source("./R/msAll2023Checks.R")
+source("./R/psoAll2023Checks.R")
+
+runAllAd2023()
+runAllMs2023()
+runAllPso2023()
+
+# adChecks <- runRegistryChecks(.registry = "ad"
+#                             ,.dsYear = "2023"
+#                             ,.dsFolderDate = "2023-12-04"
+#                             ,.dsPullDate = "2023-12-04"
+#                             ,.compDsYear = "2023"
+#                             ,.compDsFolderDate = "2023-11-03"
+#                             ,.compDsPullDate = "2023-11-03"
+#                             ,.isR = TRUE)
 
 
-msChecks <- runRegistryChecks(.registry = "ms"
-                            ,.dsYear = "2023"
-                            ,.dsFolderDate = "2023-12-05"
-                            ,.dsPullDate = "2023-12-05"
-                            ,.compDsYear = "2023"
-                            ,.compDsFolderDate = "2023-11-05"
-                            ,.compDsPullDate = "2023-11-05"
-                            ,.isR = FALSE)
-
-
-psoChecks <- runRegistryChecks(.registry = "pso"
-                              ,.dsYear = "2023"
-                              ,.dsFolderDate = "2023-12-10"
-                              ,.dsPullDate = "2023-12-11"
-                              ,.compDsYear = "2023"
-                              ,.compDsFolderDate = "2023-11-10"
-                              ,.compDsPullDate = "2023-11-13"
-                              ,.isR = FALSE)
+# msChecks <- runRegistryChecks(.registry = "ms"
+#                             ,.dsYear = "2023"
+#                             ,.dsFolderDate = "2023-12-05"
+#                             ,.dsPullDate = "2023-12-05"
+#                             ,.compDsYear = "2023"
+#                             ,.compDsFolderDate = "2023-11-05"
+#                             ,.compDsPullDate = "2023-11-05"
+#                             ,.isR = FALSE)
+# 
+# 
+# psoChecks <- runRegistryChecks(.registry = "pso"
+#                               ,.dsYear = "2023"
+#                               ,.dsFolderDate = "2023-12-10"
+#                               ,.dsPullDate = "2023-12-11"
+#                               ,.compDsYear = "2023"
+#                               ,.compDsFolderDate = "2023-11-10"
+#                               ,.compDsPullDate = "2023-11-13"
+#                               ,.isR = FALSE)
 
 
 
