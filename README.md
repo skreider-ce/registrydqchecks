@@ -1,8 +1,6 @@
-Code Architecture:
-  As of: 12Jan2024
+As of: 2024-01-16
 
+![2024-01-16_RegistryDQChecks_architecture drawio](https://github.com/Corrona-IT/RegistryDQChecks/assets/153545676/d57bd4f4-033a-4d8c-8126-0e60eb229603)
 
-
-![2024-01-12_RegistryDQChecks_architecture drawio](https://github.com/Corrona-IT/RegistryDQChecks/assets/153545676/5f186dd2-878c-4594-b723-d5a825e01b44)
 
 
