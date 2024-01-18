@@ -44,8 +44,8 @@ source("./R/psoAll2023Checks.R")
 #                             ,.compDsFolderDate = "2023-11-03"
 #                             ,.compDsPullDate = "2023-11-03"
 #                             ,.isR = TRUE)
-
-# adChecks <- runRegistryChecks(.registry = "ad"
+# 
+# adChecks01 <- runRegistryChecks(.registry = "ad"
 #                             ,.dsYear = "2024"
 #                             ,.dsFolderDate = "2024-01-04"
 #                             ,.dsPullDate = "2024-01-04"
@@ -64,6 +64,16 @@ source("./R/psoAll2023Checks.R")
 #                             ,.compDsPullDate = "2023-11-05"
 #                             ,.isR = FALSE)
 # 
+# msChecks01 <- runRegistryChecks(.registry = "ms"
+#                             ,.dsYear = "2024"
+#                             ,.dsFolderDate = "2024-01-05"
+#                             ,.dsPullDate = "2024-01-05"
+#                             ,.compDsYear = "2023"
+#                             ,.compDsFolderDate = "2023-12-05"
+#                             ,.compDsPullDate = "2023-12-05"
+#                             ,.isR = FALSE)
+
+# 
 # 
 # psoChecks <- runRegistryChecks(.registry = "pso"
 #                               ,.dsYear = "2023"
@@ -72,6 +82,15 @@ source("./R/psoAll2023Checks.R")
 #                               ,.compDsYear = "2023"
 #                               ,.compDsFolderDate = "2023-11-10"
 #                               ,.compDsPullDate = "2023-11-13"
+#                               ,.isR = FALSE)
+# 
+# psoChecks01 <- runRegistryChecks(.registry = "pso"
+#                               ,.dsYear = "2024"
+#                               ,.dsFolderDate = "2024-01-10"
+#                               ,.dsPullDate = "2024-01-10"
+#                               ,.compDsYear = "2023"
+#                               ,.compDsFolderDate = "2023-12-10"
+#                               ,.compDsPullDate = "2023-12-11"
 #                               ,.isR = FALSE)
 
 
