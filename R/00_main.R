@@ -33,18 +33,18 @@ source("./R/msAll2023Checks.R")
 source("./R/psoAll2023Checks.R")
 
 
-# runAllAd2023()
-# runAllMs2023()
-# runAllPso2023()
+runAllAd2023()
+runAllMs2023()
+runAllPso2023()
 
-adChecks <- runRegistryChecks(.registry = "ad"
-                            ,.dsYear = "2023"
-                            ,.dsFolderDate = "2023-12-04"
-                            ,.dsPullDate = "2023-12-04"
-                            ,.compDsYear = "2023"
-                            ,.compDsFolderDate = "2023-11-03"
-                            ,.compDsPullDate = "2023-11-03"
-                            ,.isR = TRUE)
+# adChecks <- runRegistryChecks(.registry = "ad"
+#                             ,.dsYear = "2023"
+#                             ,.dsFolderDate = "2023-12-04"
+#                             ,.dsPullDate = "2023-12-04"
+#                             ,.compDsYear = "2023"
+#                             ,.compDsFolderDate = "2023-11-03"
+#                             ,.compDsPullDate = "2023-11-03"
+#                             ,.isR = TRUE)
 # 
 # adChecks01 <- runRegistryChecks(.registry = "ad"
 #                             ,.dsYear = "2024"
