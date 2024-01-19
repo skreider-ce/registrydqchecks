@@ -14,13 +14,13 @@
 #                             ,.compDsFolderDate = "2023-11-03"
 #                             ,.compDsPullDate = "2023-11-03"
 #                             ,.isR = TRUE)
-.dsYear = "2023"
-.dsFolderDate = "2023-12-04"
-.dsPullDate = "2023-12-04"
-.compDsYear = "2023"
-.compDsFolderDate = "2023-11-03"
-.compDsPullDate = "2023-11-03"
-.isR = TRUE
+# .dsYear = "2023"
+# .dsFolderDate = "2023-12-04"
+# .dsPullDate = "2023-12-04"
+# .compDsYear = "2023"
+# .compDsFolderDate = "2023-11-03"
+# .compDsPullDate = "2023-11-03"
+# .isR = TRUE
 
 
 
@@ -106,6 +106,8 @@ runAd <- function(
     codebook |>
     filter(uniqueKey == 1) |>
     select(varName)
+  
+  
 
   # Pull essential variable names
   fileLoc = "C:/Users/ScottKreider/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/Phase I/01_AD/Specifications"
@@ -118,7 +120,7 @@ runAd <- function(
     exvisit_dsToCheck
     ,comp_exvisit_dsToCheck
     ,c(essVars$varName)
-    ,c(suppVars)
+    ,names(comp_exvisit_dsToCheck)
     ,c(uKey$varName))
 
   
@@ -136,7 +138,7 @@ runAd <- function(
     exlab_dsToCheck
     ,comp_exlab_dsToCheck
     ,exlab_essVars
-    ,c("id","labdate", "lmno", "pqrs", "mnyo")
+    ,names(comp_exlab_dsToCheck)
     ,c("id","labdatet","edcvisitnum"))
   
   
@@ -151,7 +153,7 @@ runAd <- function(
     exdrugexp_dsToCheck
     ,comp_exdrugexp_dsToCheck
     ,exdrugexp_essVars
-    ,c("id","stdosevalue", "bbcy")
+    ,names(comp_exdrugexp_dsToCheck)
     ,c("id","expid"))
   
   # Step 2.5: Run the non-critical checks - store output in [list] nonCriticalCheckOutput
