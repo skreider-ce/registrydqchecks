@@ -32,9 +32,10 @@ source("./R/adAll2023Checks.R")
 source("./R/msAll2023Checks.R")
 source("./R/psoAll2023Checks.R")
 
-# runAllAd2023()
-# runAllMs2023()
-# runAllPso2023()
+
+runAllAd2023()
+runAllMs2023()
+runAllPso2023()
 
 # adChecks <- runRegistryChecks(.registry = "ad"
 #                             ,.dsYear = "2023"

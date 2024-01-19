@@ -14,12 +14,12 @@
 #           $listOfDuplicateRows = [dataframe] of the duplicated IDs
 #
 
-checkForDuplicateUniqueIds <- function(.dsToCheck,...){
+checkForDuplicateUniqueIds <- function(.dsToCheck,.uniqueKey){
 
   # Create a dataset from .dsToCheck with the uniqueIds that appear more than once
   .duplicateUniqueIds <-
     .dsToCheck |>
-      count(...) |>
+      count(!!!syms(.uniqueKey)) |>
       filter(n > 1)
 
   .returnOutput <- list(

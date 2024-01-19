@@ -64,14 +64,14 @@ runPso <- function(
     ,comp_exvisit_dsToCheck
     ,c("id","smoke_current")
     ,c("id","smoke_current", "abcd", "xyz")
-    ,id,visitdate)
+    ,c("id","visitdate"))
   
   .exdrugexp_criticalCheckOutput <- criticalChecks(
     exdrugexp_dsToCheck
     ,comp_exdrugexp_dsToCheck
     ,c("id","nbnaive","visitdate0")
     ,c("id","nbnaive","visitdate0", "abcd", "xyz")
-    ,id,expid)
+    ,c("id","expid"))
 
   
   # Step 2.5: Run the non-critical checks - store output in [list] nonCriticalCheckOutput

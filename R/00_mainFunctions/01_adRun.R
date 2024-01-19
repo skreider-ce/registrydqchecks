@@ -3,6 +3,27 @@
 #   e.g.: AD is looking at exvisit, exlab, and exdrugexp
 
 
+
+
+
+# adChecks <- runRegistryChecks(.registry = "ad"
+#                             ,.dsYear = "2023"
+#                             ,.dsFolderDate = "2023-12-04"
+#                             ,.dsPullDate = "2023-12-04"
+#                             ,.compDsYear = "2023"
+#                             ,.compDsFolderDate = "2023-11-03"
+#                             ,.compDsPullDate = "2023-11-03"
+#                             ,.isR = TRUE)
+.dsYear = "2023"
+.dsFolderDate = "2023-12-04"
+.dsPullDate = "2023-12-04"
+.compDsYear = "2023"
+.compDsFolderDate = "2023-11-03"
+.compDsPullDate = "2023-11-03"
+.isR = TRUE
+
+
+
 runAd <- function(
                   .dsYear
                   ,.dsFolderDate
@@ -63,6 +84,29 @@ runAd <- function(
   # Currently - requires the user to specifically give the variables that define the
   #     unique keys as they vary from dataset to dataset
   
+  
+  
+  ############################
+  
+ 
+  # Pull exvisit codebook
+  url <- "C:/Users/ScottKreider/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/Guidance Documentation"
+  name <- "desired codebook input format"
+  sheet <- "exvisit"    # exinstances exlab
+  
+  codebook <- pullCodebookFromExcelFile(url, name, sheet)
+  essVars <-
+    codebook |>
+      filter(essential == 1) |>
+      select(varName)
+  suppVars <- 
+    codebook |>
+    select(varName)
+  uKey <-
+    codebook |>
+    filter(uniqueKey == 1) |>
+    select(varName)
+
   # Pull essential variable names
   fileLoc = "C:/Users/ScottKreider/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/Phase I/01_AD/Specifications"
   fileName = "Phase I checks specifications - AD exvisit"
@@ -73,9 +117,12 @@ runAd <- function(
   .exvisit_criticalCheckOutput <- criticalChecks(
     exvisit_dsToCheck
     ,comp_exvisit_dsToCheck
-    ,exvisit_essVars
-    ,c("id","drink_freq", "abcd", "xyz")
-    ,id,visitdate)
+    ,c(essVars$varName)
+    ,c(suppVars)
+    ,c(uKey$varName))
+
+  
+  ############################
   
   
   # Pull essential variable names
@@ -90,7 +137,7 @@ runAd <- function(
     ,comp_exlab_dsToCheck
     ,exlab_essVars
     ,c("id","labdate", "lmno", "pqrs", "mnyo")
-    ,id,labdatet,edcvisitnum)
+    ,c("id","labdatet","edcvisitnum"))
   
   
   # Pull essential variable names
@@ -105,7 +152,7 @@ runAd <- function(
     ,comp_exdrugexp_dsToCheck
     ,exdrugexp_essVars
     ,c("id","stdosevalue", "bbcy")
-    ,id,expid)
+    ,c("id","expid"))
   
   # Step 2.5: Run the non-critical checks - store output in [list] nonCriticalCheckOutput
   
