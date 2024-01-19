@@ -13,7 +13,7 @@ source("./R/02_criticalChecks/08_checkForMonthlyMissingness.R")
 #           .compDsToCheck = The [dataframe] to compare to (usually the previous months datapull)
 #           .listOfEssentialVars = A [character vector] with the variable names deemed "essential"
 #           .listOfSupposedVars = A [character vector] with the variable names that "should" be in the dataset
-#           A list (...) of the unique keys for the dataset being checked
+#           .uniqueKey = A [character vector] of the unique keys for the dataset being checked
 #
 #   Returns: a list with
 #     $criticalCheck1 = list with results from checkForDuplicateUniqueIds
@@ -33,15 +33,15 @@ criticalChecks <- function(
                             ,.compDsToCheck
                             ,.listOfEssentialVars
                             ,.listOfSupposedVars
-                            ,...){
+                            ,.uniqueKeys){
 
   # Runs each of the critical checks and stores the results in a variable
-  .critCheckResults1 <- checkForDuplicateUniqueIds(.dsToCheck,...)
+  .critCheckResults1 <- checkForDuplicateUniqueIds(.dsToCheck,.uniqueKeys)
   .critCheckResults2 <- checkForOmittedVariables(.dsToCheck,.listOfSupposedVars)
   .critCheckResults3 <- checkForExtraVariables(.dsToCheck,.listOfSupposedVars)
   .critCheckResults4 <- checkForMissingVariableLabels(.dsToCheck)
   .critCheckResults5 <- checkForAddedRows(.dsToCheck,.compDsToCheck)
-  .critCheckResults6 <- checkForRemovedRows(.dsToCheck,.compDsToCheck,...)
+  .critCheckResults6 <- checkForRemovedRows(.dsToCheck,.compDsToCheck,.uniqueKeys)
   .critCheckResults7 <- checkForGivenItemsNonresponse(.dsToCheck,.listOfEssentialVars)
   .critCheckResults8 <- checkForMonthlyMissingness(.dsToCheck,.compDsToCheck,.listOfEssentialVars)
   

@@ -17,10 +17,10 @@
 #       1) Decide how to handle what to compare to
 #
 
-checkForRemovedRows <- function(.dsToCheck,.compDsToCheck,...){
+checkForRemovedRows <- function(.dsToCheck,.compDsToCheck,.uniqueKey){
   
   # Make (...) parameters into a character vector for use in anti_join
-  .uniqueKeys <- as.character(substitute(list(...)))[-1]
+  .uniqueKeys <- .uniqueKey
 
   # Create dataframe of rows in .compDsToCheck and not in .dsToCheck
   .inOldAndNotInNew <- anti_join(.compDsToCheck,.dsToCheck,.uniqueKeys)

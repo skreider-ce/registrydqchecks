@@ -60,7 +60,7 @@ runMs <- function(
     ,comp_dwsub1_dsToCheck
     ,c("id","lastvisit_dt")
     ,c("id","lastvisit_dt", "abcd", "xyz")
-    ,id,visitdate)
+    ,c("id","visitdate"))
 
   # Step 2.5: Run the non-critical checks - store output in [list] nonCriticalCheckOutput
   

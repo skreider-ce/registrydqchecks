@@ -1,4 +1,5 @@
 source("./R/88_crossProjectFunctions/01_pullVariableListFromExcelFile.R")
+source("./R/88_crossProjectFunctions/02_pullCodeBookFromExcelFile.R")
 
 source("./R/00_mainFunctions/01_adRun.R")
 source("./R/00_mainFunctions/02_msRun.R")
