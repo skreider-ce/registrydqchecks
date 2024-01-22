@@ -27,7 +27,7 @@ writeLines(capture.output(sessionInfo()), "sessionInfo.txt")
 #----------------------
 
 
-require("./R/00_mainFunctions/00_mainFunctions.R")
+source("./R/00_mainFunctions/00_mainFunctions.R")
 # source("./R/adAll2023Checks.R")
 # source("./R/msAll2023Checks.R")
 # source("./R/psoAll2023Checks.R")
@@ -76,14 +76,14 @@ require("./R/00_mainFunctions/00_mainFunctions.R")
 
 # 
 # 
-psoChecks <- runRegistryChecks(.registry = "pso"
-                              ,.dsYear = "2023"
-                              ,.dsFolderDate = "2023-12-10"
-                              ,.dsPullDate = "2023-12-11"
-                              ,.compDsYear = "2023"
-                              ,.compDsFolderDate = "2023-11-10"
-                              ,.compDsPullDate = "2023-11-13"
-                              ,.isR = FALSE)
+# psoChecks <- runRegistryChecks(.registry = "pso"
+#                               ,.dsYear = "2023"
+#                               ,.dsFolderDate = "2023-12-10"
+#                               ,.dsPullDate = "2023-12-11"
+#                               ,.compDsYear = "2023"
+#                               ,.compDsFolderDate = "2023-11-10"
+#                               ,.compDsPullDate = "2023-11-13"
+#                               ,.isR = FALSE)
 # 
 # psoChecks01 <- runRegistryChecks(.registry = "pso"
 #                               ,.dsYear = "2024"
