@@ -27,10 +27,10 @@ writeLines(capture.output(sessionInfo()), "sessionInfo.txt")
 #----------------------
 
 
-source("./R/00_mainFunctions/00_mainFunctions.R")
-source("./R/adAll2023Checks.R")
-source("./R/msAll2023Checks.R")
-source("./R/psoAll2023Checks.R")
+require("./R/00_mainFunctions/00_mainFunctions.R")
+# source("./R/adAll2023Checks.R")
+# source("./R/msAll2023Checks.R")
+# source("./R/psoAll2023Checks.R")
 
 
 # runAllAd2023()
