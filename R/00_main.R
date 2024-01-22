@@ -9,16 +9,16 @@ rm(list = ls())
 #----------------
 # Load Libraries
 #----------------
-library(tidyverse, warn.conflicts = FALSE) # Recommended packages for data manipulation
-library(arsenal)                           # Recommended package for creating tables
-library(tidycoRe)                          # Internal package for CorEvitas helper functions, styles, templates
-library(lubridate)                         # Recommended package for manipulating dates
-library(glue)                              # Recommended package for concatenating strings
+require(tidyverse, warn.conflicts = FALSE) # Recommended packages for data manipulation
+require(arsenal)                           # Recommended package for creating tables
+require(tidycoRe)                          # Internal package for CorEvitas helper functions, styles, templates
+require(lubridate)                         # Recommended package for manipulating dates
+require(glue)                              # Recommended package for concatenating strings
 
 #------------------
 # Session Info Log
 #------------------
-writeLines(capture.output(sessionInfo()), "sessionInfo.txt")
+# writeLines(capture.output(sessionInfo()), "sessionInfo.txt")
 
 
 

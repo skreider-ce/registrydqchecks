@@ -23,12 +23,13 @@ source("./R/03_checkDataStore/00_checkDataStore.R")
 
 
 
+
 #' runRegistryChecks
 #'
-#' @param .registry Abreviation for the specific registry being run (ad, ms, pso)
-#' @inheritParams criticalChecks
+#' @param .registry 
+#' @param ... 
 #'
-#' @return List with results of the checks
+#' @return
 #' @export
 #'
 #' @examples
