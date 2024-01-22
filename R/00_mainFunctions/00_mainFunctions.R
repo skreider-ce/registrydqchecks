@@ -23,8 +23,16 @@ source("./R/03_checkDataStore/00_checkDataStore.R")
 
 
 
+#' runRegistryChecks
+#'
+#' @param .registry Abreviation for the specific registry being run (ad, ms, pso)
+#' @inheritParams criticalChecks
+#'
+#' @return List with results of the checks
+#' @export
+#'
+#' @examples
 runRegistryChecks <- function(.registry,...){
-
   # Create a list of the ... variables to use in data store submission
   .varList <- list(...)
   
