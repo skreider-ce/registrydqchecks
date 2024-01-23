@@ -20,6 +20,7 @@
 #       1) Decide how to handle parameterizing the "proportion" to compare to
 #
 
+#' @export
 checkForAddedRows <- function(.dsToCheck,.compDsToCheck){
   
   # Counts and then returns the number of rows in the new vs old dataset and

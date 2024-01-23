@@ -14,13 +14,16 @@
 #           $listOfDuplicateRows = [dataframe] of the duplicated IDs
 #
 
+#' @export
+#' 
+#' @importFrom dplyr count syms filter n
 checkForDuplicateUniqueIds <- function(.dsToCheck,.uniqueKey){
 
   # Create a dataset from .dsToCheck with the uniqueIds that appear more than once
   .duplicateUniqueIds <-
     .dsToCheck |>
-      count(!!!syms(.uniqueKey)) |>
-      filter(n > 1)
+      dplyr::count(!!!dplyr::syms(.uniqueKey)) |>
+    dplyr::filter(dplyr::n > 1)
 
   .returnOutput <- list(
     pass = ifelse(nrow(.duplicateUniqueIds) == 0,TRUE,FALSE)

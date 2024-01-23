@@ -1,5 +1,5 @@
-source("./R/01_pullData/01_pullRDSfromUrl.R")
-source("./R/01_pullData/02_pullDTAfromUrl.R")
+# source("./R/01_pullRDSfromUrl.R")
+# source("./R/02_pullDTAfromUrl.R")
 
 # Given a direct link, in URL format, to the dataset you want to pull
 #   AND Given an indication if the dataset is an R dataset or not
@@ -17,6 +17,9 @@ source("./R/01_pullData/02_pullDTAfromUrl.R")
 #   Returns: a [dataframe] of the dataset being pulled
 #
 
+#' @export
+#' 
+#' @importFrom janitor clean_names
 pullData <- function(.datasetUrl,.isR = TRUE){
   
   # Check if .isR is TRUE or FALSE and call the appropriate function accordingly
@@ -28,7 +31,7 @@ pullData <- function(.datasetUrl,.isR = TRUE){
   }
 
   # Clean the variable names in the dataset for use in upcoming steps
-  janitor::clean_names(.pulledDataset)
+  .pulledDataset <- janitor::clean_names(.pulledDataset)
   
   return(.pulledDataset);
 }

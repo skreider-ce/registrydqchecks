@@ -1,4 +1,4 @@
-source("./R/00_mainFunctions/00_mainFunctions.R")
+# source("./R/00_mainFunctions.R")
 
 runAllMs2023 <- function(){
   msChecks12 <- runRegistryChecks(.registry = "ms"

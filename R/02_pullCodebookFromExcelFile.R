@@ -18,6 +18,10 @@
 #       1) [what needs done]
 #
 
+#' @export
+#' 
+#' @importFrom glue glue
+#' @importFrom readxl read_xlsx
 pullCodebookFromExcelFile <- function(.fileUrl,.fileName,.sheetName){
   
   .codebookColumns <- c(
@@ -36,7 +40,7 @@ pullCodebookFromExcelFile <- function(.fileUrl,.fileName,.sheetName){
   )
   
   .pulledVars <- readxl::read_xlsx(
-    glue("{.fileUrl}/{.fileName}.xlsx")
+    glue::glue("{.fileUrl}/{.fileName}.xlsx")
     ,sheet = .sheetName
   )
   

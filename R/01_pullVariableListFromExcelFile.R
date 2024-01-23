@@ -19,10 +19,14 @@
 #       1) [what needs done]
 #
 
+#' @export
+#' 
+#' @importFrom glue glue
+#' @importFrom readxl read_xlsx
 pullVariableListFromExcelFile <- function(.fileUrl,.fileName,.sheetName,.colName){
 
   .pulledVars <- readxl::read_xlsx(
-    glue("{.fileUrl}/{.fileName}.xlsx")
+    glue::glue("{.fileUrl}/{.fileName}.xlsx")
     ,sheet = .sheetName
   )
 

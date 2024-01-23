@@ -23,7 +23,10 @@
 # .isR = TRUE
 
 
-
+#' @export
+#' 
+#' @importFrom glue glue
+#' @importFrom dplyr filter select
 runAd <- function(
                   .dsYear
                   ,.dsFolderDate
@@ -37,7 +40,7 @@ runAd <- function(
   # dsFolderUrl should point to the parent monthly folder
   #   NOTE: each registry will need to update their xx_<reg>Run code to properly point to their datasets
   ad_sharepoint_dir <- "~/../../Corrona LLC/Biostat Data Files - AD"
-  dsFolderUrl <- glue("{ad_sharepoint_dir}/monthly")
+  dsFolderUrl <- glue::glue("{ad_sharepoint_dir}/monthly")
   
   # Check if the directory above exists
   dir.exists(ad_sharepoint_dir)
@@ -53,9 +56,9 @@ runAd <- function(
   # URL directly to current month's data
   #   NOTE: This may be different for each registry - update accordingly
   #   NOTE: There will be a separate pull for each dataset being compared
-  exvisit_datasetUrl <- glue("{dsFolderUrl}/{.dsYear}/{.dsFolderDate}/exvisit_{.dsPullDate}.rds")
-  exlab_datasetUrl <- glue("{dsFolderUrl}/{.dsYear}/{.dsFolderDate}/exlab_{.dsPullDate}.rds")
-  exdrugexp_datasetUrl <- glue("{dsFolderUrl}/{.dsYear}/{.dsFolderDate}/exdrugexp_{.dsPullDate}.rds")
+  exvisit_datasetUrl <- glue::glue("{dsFolderUrl}/{.dsYear}/{.dsFolderDate}/exvisit_{.dsPullDate}.rds")
+  exlab_datasetUrl <- glue::glue("{dsFolderUrl}/{.dsYear}/{.dsFolderDate}/exlab_{.dsPullDate}.rds")
+  exdrugexp_datasetUrl <- glue::glue("{dsFolderUrl}/{.dsYear}/{.dsFolderDate}/exdrugexp_{.dsPullDate}.rds")
   
   # Pull current month's data
   exvisit_dsToCheck <- pullData(exvisit_datasetUrl,.isR)
@@ -67,9 +70,9 @@ runAd <- function(
   # URL directly to last month's data
   #   NOTE: This may be different for each registry - update accordingly
   #   NOTE: There will be a separate pull for each dataset being compared
-  comp_exvisit_datasetUrl <- glue("{dsFolderUrl}/{.compDsYear}/{.compDsFolderDate}/exvisit_{.compDsPullDate}.rds")
-  comp_exlab_datasetUrl <- glue("{dsFolderUrl}/{.compDsYear}/{.compDsFolderDate}/exlab_{.compDsPullDate}.rds")
-  comp_exdrugexp_datasetUrl <- glue("{dsFolderUrl}/{.compDsYear}/{.compDsFolderDate}/exdrugexp_{.compDsPullDate}.rds")
+  comp_exvisit_datasetUrl <- glue::glue("{dsFolderUrl}/{.compDsYear}/{.compDsFolderDate}/exvisit_{.compDsPullDate}.rds")
+  comp_exlab_datasetUrl <- glue::glue("{dsFolderUrl}/{.compDsYear}/{.compDsFolderDate}/exlab_{.compDsPullDate}.rds")
+  comp_exdrugexp_datasetUrl <- glue::glue("{dsFolderUrl}/{.compDsYear}/{.compDsFolderDate}/exdrugexp_{.compDsPullDate}.rds")
   
   # Pull last month's data
   comp_exvisit_dsToCheck <- pullData(comp_exvisit_datasetUrl,.isR)
@@ -97,15 +100,15 @@ runAd <- function(
   codebook <- pullCodebookFromExcelFile(url, name, sheet)
   essVars <-
     codebook |>
-      filter(essential == 1) |>
-      select(varName)
+      dplyr::filter(codebook[[codebook$essential]] == 1) |>
+      dplyr::select(codebook[[codebook$varName]])
   suppVars <- 
     codebook |>
-    select(varName)
+    dplyr::select(codebook[[codebook$varName]])
   uKey <-
     codebook |>
-    filter(uniqueKey == 1) |>
-    select(varName)
+    dplyr::filter(codebook[[codebook$uniqueKey]] == 1) |>
+    dplyr::select(codebook[[codebook$varName]])
   
   
 

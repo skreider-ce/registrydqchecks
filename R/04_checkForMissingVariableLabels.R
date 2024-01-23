@@ -8,6 +8,10 @@
 #           $listOfVarsWithMissingLabels = [vector] of the variables with missing labels
 #
 
+#' @export
+#' 
+#' @importFrom labelled var_label
+#' @importFrom purrr map_lgl
 checkForMissingVariableLabels <- function(.dsToCheck){
 
   # Pull variable labels from .dsToCheck

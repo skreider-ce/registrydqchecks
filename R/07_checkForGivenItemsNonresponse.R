@@ -24,6 +24,9 @@
 #       3) Add tests for this
 #
 
+#' @export
+#' 
+#' @importFrom dplyr bind_rows
 checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
   
   # Initialize the dataframe that will be returned
@@ -49,7 +52,7 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
       ,nMissing = .nMissing
       ,propMissing = .propMissing)
     
-    .listOfVarMissingness <- bind_rows(.listOfVarMissingness,.varMissingRow)
+    .listOfVarMissingness <- dplyr::bind_rows(.listOfVarMissingness,.varMissingRow)
   }
 
   .returnOutput <- list(

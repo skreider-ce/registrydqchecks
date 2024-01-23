@@ -5,6 +5,9 @@
 #
 #   Returns: a [dataframe] of the dataset being pulled
 #
+#' @export
+#' 
+#' @importFrom haven read_dta
 pullDTAfromUrl <- function(.datasetUrl){
   
   print(.datasetUrl)

@@ -5,6 +5,8 @@
 #
 #   Returns: a [dataframe] of the dataset being pulled
 #
+
+#' @export
 pullRDSfromUrl <- function(.datasetUrl){
   
   print(.datasetUrl)

@@ -27,6 +27,9 @@
 #       […]
 #
 
+#' @export
+#' 
+#' @importFrom dplyr bind_rows
 checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssentialVars){
   
   # Initialize the dataframe that will be returned
@@ -68,7 +71,7 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
       ,nMissingComp = .nMissingComp
       ,propMissingComp = .propMissingComp)
     
-    .listOfVarMissingness <- bind_rows(.listOfVarMissingness,.varMissingRow)
+    .listOfVarMissingness <- dplyr::bind_rows(.listOfVarMissingness,.varMissingRow)
   }
   
   
