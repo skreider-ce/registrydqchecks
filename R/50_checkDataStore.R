@@ -11,7 +11,7 @@ submitToDataStore <- function(.registry,.dsYear,.dsPullDate,.resultsOfChecks){
   .pullDateStoreUrl <- glue::glue("{.yearStoreUrl}/{.dsPullDate}")
   
   # Create the folder if it does not exist
-  createDataStoreFolder(.pullDateStoreUrl)
+  # createDataStoreFolder(.pullDateStoreUrl)
 
   # Assign the dataset name to store
   .resultsCheckName <- glue::glue("{.dsYear}_{.dsPullDate}_checks")

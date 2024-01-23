@@ -1,5 +1,4 @@
-# source("./R/00_mainFunctions.R")
-
+#' @export
 runAllMs2023 <- function(){
   msChecks12 <- runRegistryChecks(.registry = "ms"
                                 ,.dsYear = "2023"

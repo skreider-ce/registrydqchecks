@@ -1,7 +1,3 @@
-# There will need to be updates to this code for each dataset to be run
-#   NOTE: This will vary between registries
-#   e.g.: AD is looking at exvisit, exlab, and exdrugexp
-
 #' @export
 #' 
 #' @importFrom glue glue

@@ -1,4 +1,4 @@
-rm(list = ls())
+# rm(list = ls())
 #-----------------------------------------------------------
 # Program: 00_main.R
 # Author:  Scott Kreider
@@ -9,11 +9,11 @@ rm(list = ls())
 #----------------
 # Load Libraries
 #----------------
-require(tidyverse, warn.conflicts = FALSE) # Recommended packages for data manipulation
-require(arsenal)                           # Recommended package for creating tables
-require(tidycoRe)                          # Internal package for CorEvitas helper functions, styles, templates
-require(lubridate)                         # Recommended package for manipulating dates
-require(glue)                              # Recommended package for concatenating strings
+# require(tidyverse, warn.conflicts = FALSE) # Recommended packages for data manipulation
+# require(arsenal)                           # Recommended package for creating tables
+# require(tidycoRe)                          # Internal package for CorEvitas helper functions, styles, templates
+# require(lubridate)                         # Recommended package for manipulating dates
+# require(glue)                              # Recommended package for concatenating strings
 
 #------------------
 # Session Info Log
@@ -37,14 +37,14 @@ require(glue)                              # Recommended package for concatenati
 # runAllMs2023()
 # runAllPso2023()
 
-# adChecks <- runRegistryChecks(.registry = "ad"
-#                             ,.dsYear = "2023"
-#                             ,.dsFolderDate = "2023-12-04"
-#                             ,.dsPullDate = "2023-12-04"
-#                             ,.compDsYear = "2023"
-#                             ,.compDsFolderDate = "2023-11-03"
-#                             ,.compDsPullDate = "2023-11-03"
-#                             ,.isR = TRUE)
+adChecks <- runRegistryChecks(.registry = "ad"
+                            ,.dsYear = "2023"
+                            ,.dsFolderDate = "2023-12-04"
+                            ,.dsPullDate = "2023-12-04"
+                            ,.compDsYear = "2023"
+                            ,.compDsFolderDate = "2023-11-03"
+                            ,.compDsPullDate = "2023-11-03"
+                            ,.isR = TRUE)
 
 # adChecks01 <- runRegistryChecks(.registry = "ad"
 #                             ,.dsYear = "2024"

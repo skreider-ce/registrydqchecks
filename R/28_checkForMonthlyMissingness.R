@@ -1,32 +1,3 @@
-# Prerequisites
-#   A dataset exists in [dataframe] format that you want to check
-#   A dataset exists in [dataframe] format that you want to compare to
-#   A list of variables exists in [character vector] format that are deemed essential
-#
-# GIVEN A [dataframe] to check
-#   AND GIVEN a [dataframe] to compare to
-#   AND GIVEN a [character vector] of essential variables
-#   THEN FOR EACH essential variable
-#     CALCULATE percentage of missing values
-#       AND RETURN that value
-
-# Essential item nonresponse is low between comparative datasets
-#   FUNCTION: checkForMonthlyMissingness()
-#
-#   Input: .dsToCheck = a [dataframe] to check
-#           .compDsToCheck = a [dataframe] to compare to
-#           .listOfEssentialVars = a [character vector] of variables deemed essential
-#
-#   Returns: [a description of the return type]
-#           $essentialVariablesMissingness = dataframe that contains a row for each
-#                 essential variable and the number and proportion of missingness
-#
-#   TO DO:
-#       1) [what needs done]
-#       2) [what else needs done]
-#       […]
-#
-
 #' @export
 #' 
 #' @importFrom dplyr bind_rows

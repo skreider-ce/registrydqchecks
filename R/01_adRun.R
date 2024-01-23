@@ -1,28 +1,3 @@
-# There will need to be updates to this code for each dataset to be run
-#   NOTE: This will vary between registries
-#   e.g.: AD is looking at exvisit, exlab, and exdrugexp
-
-
-
-
-
-# adChecks <- runRegistryChecks(.registry = "ad"
-#                             ,.dsYear = "2023"
-#                             ,.dsFolderDate = "2023-12-04"
-#                             ,.dsPullDate = "2023-12-04"
-#                             ,.compDsYear = "2023"
-#                             ,.compDsFolderDate = "2023-11-03"
-#                             ,.compDsPullDate = "2023-11-03"
-#                             ,.isR = TRUE)
-# .dsYear = "2023"
-# .dsFolderDate = "2023-12-04"
-# .dsPullDate = "2023-12-04"
-# .compDsYear = "2023"
-# .compDsFolderDate = "2023-11-03"
-# .compDsPullDate = "2023-11-03"
-# .isR = TRUE
-
-
 #' @export
 #' 
 #' @importFrom glue glue
@@ -100,15 +75,15 @@ runAd <- function(
   codebook <- pullCodebookFromExcelFile(url, name, sheet)
   essVars <-
     codebook |>
-      dplyr::filter(codebook[[codebook$essential]] == 1) |>
-      dplyr::select(codebook[[codebook$varName]])
+      dplyr::filter(essential == 1) |>
+      dplyr::select(varName)
   suppVars <- 
     codebook |>
-    dplyr::select(codebook[[codebook$varName]])
+    dplyr::select(varName)
   uKey <-
     codebook |>
-    dplyr::filter(codebook[[codebook$uniqueKey]] == 1) |>
-    dplyr::select(codebook[[codebook$varName]])
+    dplyr::filter(uniqueKey == 1) |>
+    dplyr::select(varName)
   
   
 
