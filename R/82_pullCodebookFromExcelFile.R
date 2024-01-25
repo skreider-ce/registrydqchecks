@@ -1,17 +1,15 @@
 #' @export
 #' 
-#' @importFrom glue glue
 #' @importFrom readxl read_xlsx
-pullCodebookFromExcelFile <- function(.fileUrl,.fileName,.sheetName){
+#' @importFrom janitor clean_names
+pullCodebookFromExcelFile <- function(.fileUrl,.sheetName){
   
-  .codebookColumns <- c(
+  .colNames <- c(
     "varName"
     ,"varLabel"
-    ,"varType"
     ,"catValues"
     ,"numRangeLower"
     ,"numRangeUpper"
-    ,"charLength"
     ,"uniqueKey"
     ,"essential"
     ,"acceptableMissingness"
@@ -19,11 +17,9 @@ pullCodebookFromExcelFile <- function(.fileUrl,.fileName,.sheetName){
     ,"requiredNonMissing"
   )
   
-  .pulledVars <- readxl::read_xlsx(
-    glue::glue("{.fileUrl}/{.fileName}.xlsx")
-    ,sheet = .sheetName
-  )
-  
-  return(.pulledVars[.codebookColumns])
+  .pulledVars <- readxl::read_xlsx(.fileUrl
+                                   ,sheet = .sheetName)
+
+  return(.pulledVars[.colNames])
 }
 

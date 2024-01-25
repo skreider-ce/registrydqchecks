@@ -336,3 +336,30 @@
 #
 
 
+
+
+
+# function(.registry
+#          ,.prelimDataFolderUrl
+#          ,.prelimDataPullDate
+#          ,.lastMonthDataFolderUrl
+#          ,.lastMonthDataPullDate
+#          ,.codebookUrl
+#          ,.outputFolderUrl
+#          ,.isR)
+
+
+
+
+
+
+# .pulledVars <- .pulledVars |>
+#     dplyr::rename(varName = analytic_file_variable_name) |>
+#     dplyr::rename(varLabel = analytic_variable_label) |>
+#     dplyr::rename(catValues = analytic_variable_code_values) |>
+#     dplyr::rename(numRangeLower = num_range_lower) |>
+#     dplyr::rename(numRangeUpper = num_range_upper) |>
+#     dplyr::rename(uniqueKey = unique_key) |>
+#     dplyr::rename(acceptableMissingness = acceptable_missingness) |>
+#     dplyr::rename(nonExtremeMissingness = non_extreme_missingness) |>
+#     dplyr::rename(requiredNonMissing = required_non_missing)

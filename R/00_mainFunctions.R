@@ -7,6 +7,18 @@ runRegistryChecks <- function(.registry
                               ,.compDsFolderDate
                               ,.compDsPullDate
                               ,.isR){
+  
+  
+  # function(.registry
+  #          ,.prelimDataFolderUrl
+  #          ,.prelimDataPullDate
+  #          ,.lastMonthDataFolderUrl
+  #          ,.lastMonthDataPullDate
+  #          ,.codebookUrl
+  #          ,.dataSetsToCheck
+  #          ,.outputFolderUrl
+  #          ,.isR)
+  
   # Create a list of the ... variables to use in data store submission
   .varList <- list(.registry
                    ,.dsYear

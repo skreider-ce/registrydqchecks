@@ -1,23 +1,22 @@
 #' @export
 #' 
 #' @importFrom glue glue
-submitToDataStore <- function(.registry,.dsYear,.dsPullDate,.resultsOfChecks){
+submitToDataStore <- function(.registry,.dsPullDate,.dataStoreUrl,.resultsOfChecks){
 
-  staticDataStoreUrl <- glue::glue("C:/Users/ScottKreider/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/registryCheckStorage")
-  
-  # Define the urls to the folders
-  .registryStoreUrl <- glue::glue("{staticDataStoreUrl}/{.registry}")
-  .yearStoreUrl <- glue::glue("{.registryStoreUrl}/{.dsYear}")
-  .pullDateStoreUrl <- glue::glue("{.yearStoreUrl}/{.dsPullDate}")
-  
+  staticDataStoreUrl <- .dataStoreUrl
+
   # Create the folder if it does not exist
-  # createDataStoreFolder(.pullDateStoreUrl)
+  if(!dir.exists(glue::glue("{.dataStoreUrl}/checks"))){
+    createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks"))  
+  }
+  
+  timestamp <- format(Sys.time(), "%H-%M-%S")
 
   # Assign the dataset name to store
-  .resultsCheckName <- glue::glue("{.dsYear}_{.dsPullDate}_checks")
+  .resultsCheckName <- glue::glue("{.dsPullDate}_{gsub('[^A-Za-z0-9_]', '_', timestamp)}_checks")
+  # .resultsCheckName <- glue::glue("{.dsPullDate}_checks")
   
   # Save the results
-  # saveRDS(.resultsOfChecks,glue("{.pullDateStoreUrl}/{.resultsCheckName}.rds"))
-  
-  saveRDS(.resultsOfChecks,glue::glue("{.registryStoreUrl}/{.resultsCheckName}.rds"))
+
+  saveRDS(.resultsOfChecks,glue::glue("{.dataStoreUrl}/checks/{.resultsCheckName}.rds"))
 }

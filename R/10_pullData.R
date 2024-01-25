@@ -5,10 +5,10 @@ pullData <- function(.datasetUrl,.isR = TRUE){
   
   # Check if .isR is TRUE or FALSE and call the appropriate function accordingly
   if(.isR){
-    .pulledDataset <- pullRDSfromUrl(.datasetUrl)
+    .pulledDataset <- pullRDSfromUrl(glue::glue("{.datasetUrl}.rds"))
   } else
   {
-    .pulledDataset <- pullDTAfromUrl(.datasetUrl)
+    .pulledDataset <- pullDTAfromUrl(glue::glue("{.datasetUrl}.dta"))
   }
 
   # Clean the variable names in the dataset for use in upcoming steps
