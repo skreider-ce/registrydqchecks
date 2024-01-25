@@ -2,7 +2,7 @@
 #' 
 #' @importFrom glue glue
 #' @importFrom dplyr filter select
-#' @importFrom regdqchecks runApplication
+#' @importFrom registrydqchecksreport runApplication
 runRegistryChecks <- function(.registry
                               ,.prelimDataFolderUrl
                               ,.prelimDataPullDate
@@ -44,7 +44,7 @@ runRegistryChecks <- function(.registry
   
   submitToDataStore(.registry,.prelimDataPullDate,.outputUrl,.critCheckOutput)
   
-  regdqchecks::runApplication(glue::glue("{.outputUrl}/checks"))
+  registrydqchecksreport::runApplication(glue::glue("{.outputUrl}/checks"))
   
   return(.returnOutput)
 }
