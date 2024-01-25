@@ -1,64 +1,51 @@
 #' @export
+#' 
+#' @importFrom glue glue
+#' @importFrom dplyr filter select
+#' @importFrom regdqchecks runApplication
 runRegistryChecks <- function(.registry
-                              ,.dsYear
-                              ,.dsFolderDate
-                              ,.dsPullDate
-                              ,.compDsYear
-                              ,.compDsFolderDate
-                              ,.compDsPullDate
+                              ,.prelimDataFolderUrl
+                              ,.prelimDataPullDate
+                              ,.lastMonthDataFolderUrl
+                              ,.lastMonthDataPullDate
+                              ,.codebookUrl
+                              ,.datasetsToCheck
+                              ,.outputUrl
                               ,.isR){
   
+  ############################
+  .codebooks <- list()
+  .dataToCheck <- list()
+  .dataToCompare <- list()
+  .essentialVariables <- list()
+  .uniqueKeys <- list()
+  .critCheckOutput <- list()
   
-  # function(.registry
-  #          ,.prelimDataFolderUrl
-  #          ,.prelimDataPullDate
-  #          ,.lastMonthDataFolderUrl
-  #          ,.lastMonthDataPullDate
-  #          ,.codebookUrl
-  #          ,.dataSetsToCheck
-  #          ,.outputFolderUrl
-  #          ,.isR)
-  
-  # Create a list of the ... variables to use in data store submission
-  .varList <- list(.registry
-                   ,.dsYear
-                   ,.dsFolderDate
-                   ,.dsPullDate
-                   ,.compDsYear
-                   ,.compDsFolderDate
-                   ,.compDsPullDate
-                   ,.isR)
-  
-  # Check which registry and run the appropriate code
-  if(.registry == "ad"){
-    .registryCheck <- runAd(.dsYear
-                            ,.dsFolderDate
-                            ,.dsPullDate
-                            ,.compDsYear
-                            ,.compDsFolderDate
-                            ,.compDsPullDate
-                            ,.isR)
-  } else if(.registry == "ms"){
-    .registryCheck <- runMs(.dsYear
-                            ,.dsFolderDate
-                            ,.dsPullDate
-                            ,.compDsYear
-                            ,.compDsFolderDate
-                            ,.compDsPullDate
-                            ,.isR)
-  } else if(.registry == "pso"){
-    .registryCheck <- runPso(.dsYear
-                             ,.dsFolderDate
-                             ,.dsPullDate
-                             ,.compDsYear
-                             ,.compDsFolderDate
-                             ,.compDsPullDate
-                             ,.isR)
+  for(.dsName in .datasetsToCheck){
+    .codebooks[[.dsName]] <- pullCodebookFromExcelFile(.codebookUrl, .dsName)
+    .dataToCheck[[.dsName]] <- pullData(glue::glue("{.prelimDataFolderUrl}/{.dsName}_{.prelimDataPullDate}"), .isR)
+    .dataToCompare[[.dsName]] <- pullData(glue::glue("{.lastMonthDataFolderUrl}/{.dsName}_{.lastMonthDataPullDate}"), .isR)
+    
+    .uniqueKeys[[.dsName]] <- .codebooks[[.dsName]] |>
+      dplyr::filter(uniqueKey == 1) |>
+      dplyr::select(varName)
+    
+    .essentialVariables[[.dsName]] <- .codebooks[[.dsName]] |>
+      dplyr::filter(essential == 1) |>
+      dplyr::select(varName, acceptableMissingness, nonExtremeMissingness)
+    
+    .critCheckOutput[[.dsName]] <- criticalChecks(
+      data.frame(.dataToCheck[[.dsName]])
+      ,data.frame(.dataToCompare[[.dsName]])
+      ,.essentialVariables[[.dsName]]$varName
+      ,names(.dataToCompare[[.dsName]])
+      ,.uniqueKeys[[.dsName]]$varName)
   }
   
-  # Submit the results to the appropriate data store
-  submitToDataStore(.registry,.varList$.dsYear,.varList$.dsPullDate,.registryCheck)
+  submitToDataStore(.registry,.prelimDataPullDate,.outputUrl,.critCheckOutput)
   
-  return(.registryCheck)
+  regdqchecks::runApplication(glue::glue("{.outputUrl}/checks"))
+  
+  return(.returnOutput)
 }
 

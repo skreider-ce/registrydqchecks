@@ -1,33 +1,13 @@
-#' @export
-#' 
-#' @importFrom glue glue
-#' @importFrom dplyr filter select
-runAd <- function(
-                  .dsYear
-                  ,.dsFolderDate
-                  ,.dsPullDate
-                  ,.compDsYear
-                  ,.compDsFolderDate
-                  ,.compDsPullDate
-                  ,.isR){
+runRegistryChecks <- function(.prelimDataFolderUrl
+                              ,.prelimDataPullDate
+                              ,.lastMonthDataFolderUrl
+                              ,.lastMonthDataPullDate
+                              ,.codebookUrl
+                              ,.datasetsToCheck
+                              ,.outputUrl
+                              ,.isR){
 
   ############################
-
-  .registry <- "ad"
-  
-  .isR <- TRUE  
-  .prelimDataFolderUrl <- "C:/Users/ScottKreider/Corrona LLC/Biostat Data Files - AD/monthly/2023/2023-12-04"
-  .prelimDataPullDate <- "2023-12-04"
-
-  .lastMonthDataFolderUrl <- "C:/Users/ScottKreider/Corrona LLC/Biostat Data Files - AD/monthly/2023/2023-11-03"
-  .lastMonthDataPullDate <- "2023-11-03"
-  
-  # Pull exvisit codebook
-  .codebookUrl <- "C:/Users/ScottKreider/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/Guidance Documentation/archive/desired codebook input format.xlsx"
-  .datasetsToCheck <- c("exvisit", "exlab", "exdrugexp")
-  .outputUrl <- "C:/Users/ScottKreider/Documents/scrap/store"
-  # sheet <- "exvisit"    # exdrugexp exlab
-  
   .codebooks <- list()
   .dataToCheck <- list()
   .dataToCompare <- list()
@@ -55,9 +35,9 @@ runAd <- function(
                                       ,names(.dataToCompare[[.dsName]])
                                       ,.uniqueKeys[[.dsName]]$varName)
   }
-  
-  library(regdqchecks)
+
   submitToDataStore(.registry,.prelimDataPullDate,.outputUrl,.critCheckOutput)
+  
   regdqchecks::runApplication(glue::glue("{.outputUrl}/checks"))
 
   return(.returnOutput)

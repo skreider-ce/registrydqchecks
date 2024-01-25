@@ -1,4 +1,3 @@
-#' @export
 runAllPso2023 <- function(){
   psoChecks12 <- runRegistryChecks(.registry = "pso"
                                 ,.dsYear = "2023"
