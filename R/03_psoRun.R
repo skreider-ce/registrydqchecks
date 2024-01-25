@@ -1,8 +1,3 @@
-# There will need to be updates to this code for each dataset to be run
-#   NOTE: This will vary between registries
-#   e.g.: AD is looking at exvisit, exlab, and exdrugexp
-
-
 runPso <- function(
                   .dsYear
                   ,.dsFolderDate
@@ -16,7 +11,7 @@ runPso <- function(
   # dsFolderUrl should point to the parent monthly folder
   #   NOTE: each registry will need to update their xx_<reg>Run code to properly point to their datasets
   pso_sharepoint_dir <- "~/../../Corrona LLC/Biostat Data Files - PsO"
-  dsFolderUrl <- glue("{pso_sharepoint_dir}/monthly")
+  dsFolderUrl <- glue::glue("{pso_sharepoint_dir}/monthly")
     
   # Check if the directory above exists
   dir.exists(pso_sharepoint_dir)
@@ -32,8 +27,8 @@ runPso <- function(
   # URL directly to current month's data
   #   NOTE: This may be different for each registry - update accordingly
   #   NOTE: There will be a separate pull for each dataset being compared
-  exvisit_datasetUrl <- glue("{dsFolderUrl}/{.dsYear}/{.dsFolderDate}/exvisit_{.dsPullDate}.dta")
-  exdrugexp_datasetUrl <- glue("{dsFolderUrl}/{.dsYear}/{.dsFolderDate}/exdrugexp_{.dsPullDate}.dta")
+  exvisit_datasetUrl <- glue::glue("{dsFolderUrl}/{.dsYear}/{.dsFolderDate}/exvisit_{.dsPullDate}.dta")
+  exdrugexp_datasetUrl <- glue::glue("{dsFolderUrl}/{.dsYear}/{.dsFolderDate}/exdrugexp_{.dsPullDate}.dta")
 
   # Pull current month's data
   exvisit_dsToCheck <- pullData(exvisit_datasetUrl,.isR)
@@ -63,15 +58,15 @@ runPso <- function(
     exvisit_dsToCheck
     ,comp_exvisit_dsToCheck
     ,c("id","smoke_current")
-    ,c("id","smoke_current", "abcd", "xyz")
-    ,id,visitdate)
+    ,names(comp_exvisit_dsToCheck)
+    ,c("id","visitdate"))
   
   .exdrugexp_criticalCheckOutput <- criticalChecks(
     exdrugexp_dsToCheck
     ,comp_exdrugexp_dsToCheck
     ,c("id","nbnaive","visitdate0")
-    ,c("id","nbnaive","visitdate0", "abcd", "xyz")
-    ,id,expid)
+    ,names(comp_exdrugexp_dsToCheck)
+    ,c("id","expid"))
 
   
   # Step 2.5: Run the non-critical checks - store output in [list] nonCriticalCheckOutput

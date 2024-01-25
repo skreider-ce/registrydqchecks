@@ -1,5 +1,3 @@
-source("./R/00_mainFunctions/00_mainFunctions.R")
-
 runAllPso2023 <- function(){
   psoChecks12 <- runRegistryChecks(.registry = "pso"
                                 ,.dsYear = "2023"

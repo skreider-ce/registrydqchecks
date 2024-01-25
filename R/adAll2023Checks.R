@@ -1,5 +1,3 @@
-source("./R/00_mainFunctions/00_mainFunctions.R")
-
 runAllAd2023 <- function(){
   adChecks12 <- runRegistryChecks(.registry = "ad"
                                 ,.dsYear = "2023"
