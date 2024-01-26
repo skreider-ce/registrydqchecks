@@ -1,3 +1,10 @@
+#' (internal function) A function to pull the R dataset from the given url location
+#'
+#' @param .datasetUrl A url string that points to the location of the dataset
+#' @param .isR A boolean indicating if the dataset is a .RDS or a .DTA (default = TRUE)
+#'
+#' @returns A dataframe of the dataset that was pulled
+#'
 #' @export
 #' 
 #' @importFrom janitor clean_names

@@ -1,3 +1,10 @@
+#' (internal function) Check for duplicate unique IDs in a given dataset
+#'
+#' @param .dsToCheck A dataframe of the dataset to check
+#' @param .uniqueKey A character vector that contains the names of the unique keys
+#'
+#' @returns A list with pass/fail, number of duplicate rows, and a list of ids that are duplicates
+#'
 #' @export
 #' 
 #' @importFrom dplyr count syms filter n

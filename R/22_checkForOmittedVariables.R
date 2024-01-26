@@ -1,3 +1,10 @@
+#' (internal function) Check for variables that have been left out of the comparator list
+#'
+#' @param .dsToCheck A dataframe of the dataset to check
+#' @param .listOfSupposedVars A character vector containing the list of variables that should be in the dataset
+#'
+#' @returns A list with pass/fail, the number of omitted variables, and a list of the omitted variables
+#'
 #' @export
 checkForOmittedVariables <- function(.dsToCheck, .listOfSupposedVars){
   

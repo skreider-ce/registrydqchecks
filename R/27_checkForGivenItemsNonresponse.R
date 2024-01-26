@@ -1,3 +1,10 @@
+#' (internal function) Check the missingness for the given items
+#'
+#' @param .dsToCheck A dataframe to check
+#' @param .listOfEssentialVars A character vector with the variables deemed "essential"
+#'
+#' @returns A list with pass/fail, and a dataframe with the information on the missingness for those variables
+#'
 #' @export
 #' 
 #' @importFrom dplyr bind_rows

@@ -1,3 +1,10 @@
+#' (internal function) Check for how many rows were added to the dataset compared to last month
+#'
+#' @param .dsToCheck A dataframe to check
+#' @param .compDsToCheck A dataframe from last month
+#' 
+#' @returns A list with pass/fail, number of rows added, number of old rows, and the proportion increase in rows
+#'
 #' @export
 checkForAddedRows <- function(.dsToCheck,.compDsToCheck){
   
