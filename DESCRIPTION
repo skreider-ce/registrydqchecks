@@ -8,6 +8,8 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
+Remotes:
+    github::skreider-ce/registrydqchecksreport
 Imports:
     glue
     ,labelled
