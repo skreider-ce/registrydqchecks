@@ -1,3 +1,11 @@
+#' (internal function) Check the month-to-month missingness for the given items
+#'
+#' @param .dsToCheck A dataframe to check
+#' @param .compDsToCheck A dataframe to check from last month
+#' @param .listOfEssentialVars A character vector with the variables deemed "essential"
+#'
+#' @returns A list with pass/fail, and a dataframe with the information on the missingness for those variables between the two datasets
+#'
 #' @export
 #' 
 #' @importFrom dplyr bind_rows

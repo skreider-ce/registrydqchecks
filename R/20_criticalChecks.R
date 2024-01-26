@@ -1,3 +1,13 @@
+#' (internal function) Run the critical checks on the specified files
+#'
+#' @param .dsToCheck A dataframe of the dataset to run the checks on
+#' @param .compDsToCheck A dataframe of the dataset to compare the above dataset to
+#' @param .listOfEssentialVars A character vector of variables deemed "essential"
+#' @param .listOfSupposedVars A character vector of variables that "should" be in the dataset
+#' @param .uniqueKeys A character vector of variables that uniquely identify rows in the dataset
+#'
+#' @returns A list with the results of the critical checks
+#'
 #' @export
 criticalChecks <- function(.dsToCheck
                             ,.compDsToCheck

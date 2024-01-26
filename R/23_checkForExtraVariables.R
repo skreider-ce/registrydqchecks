@@ -1,3 +1,10 @@
+#' (internal function) Check that there are no extra variables compared to the variables that should be there
+#'
+#' @param .dsToCheck A dataframe of the dataset to check
+#' @param .listOfSupposedVars A character vector with the names of the variables that should be in the dataset
+#'
+#' @returns A list with pass/fail, the number of extra variables, and a list of the extra variables
+#'
 #' @export
 checkForExtraVariables <- function(.dsToCheck, .listOfSupposedVars){
   
