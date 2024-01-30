@@ -24,6 +24,5 @@ submitToDataStore <- function(.registry,.dsPullDate,.dataStoreUrl,.resultsOfChec
   # .resultsCheckName <- glue::glue("{.dsPullDate}_checks")
   
   # Save the results
-
   saveRDS(.resultsOfChecks,glue::glue("{.dataStoreUrl}/checks/{.resultsCheckName}.rds"))
 }
