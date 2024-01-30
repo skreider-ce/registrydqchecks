@@ -3,6 +3,9 @@
 # timestamp <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
 # outputListings(storeUrl,timestamp,testChecks)
 
+# testChecks <- readRDS("C:/Users/ScottKreider/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/registryCheckStorage/ad/2024_2024-01-04_checks.rds")
+# storeUrl <- "C:/Users/ScottKreider/Documents/scrap/store/"
+# registrydqchecks::submitToDataStore("ad","2023-12-04",storeUrl,testChecks)
 
 
 # testChecks$exvisit$criticalCheck6$inOldAndNotInNew

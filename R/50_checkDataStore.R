@@ -14,7 +14,7 @@ submitToDataStore <- function(.registry,.dsPullDate,.dataStoreUrl,.resultsOfChec
 
   # Create the folder if it does not exist
   if(!dir.exists(glue::glue("{.dataStoreUrl}/checks"))){
-    createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks"))  
+    createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks"))
   }
   
   timestamp <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
@@ -24,6 +24,6 @@ submitToDataStore <- function(.registry,.dsPullDate,.dataStoreUrl,.resultsOfChec
   # .resultsCheckName <- glue::glue("{.dsPullDate}_checks")
   
   # Save the results
-  outputListings(glue::glue("{.dataStoreUrl}/checks/listing",timestamp,.resultsOfChecks))
+  outputListings(glue::glue("{.dataStoreUrl}/checks/listing"),timestamp,.resultsOfChecks)
   saveRDS(.resultsOfChecks,glue::glue("{.dataStoreUrl}/checks/{.resultsCheckName}.rds"))
 }
