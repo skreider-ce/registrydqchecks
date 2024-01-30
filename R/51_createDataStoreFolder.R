@@ -8,4 +8,10 @@ createDataStoreFolder <- function(.urlToCreate){
   if(!dir.exists(.urlToCreate)){
     dir.create(.urlToCreate,recursive = TRUE) 
   }
+  
+  .listUrl <- glue::glue(.urlToCreate,"/listing")
+  
+  if(!dir.exists(.listUrl)){
+    dir.create(.listUrl,recursive = TRUE) 
+  }
 }
