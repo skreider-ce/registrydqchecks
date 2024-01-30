@@ -17,12 +17,13 @@ submitToDataStore <- function(.registry,.dsPullDate,.dataStoreUrl,.resultsOfChec
     createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks"))  
   }
   
-  timestamp <- format(Sys.time(), "%H-%M-%S")
+  timestamp <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
 
   # Assign the dataset name to store
   .resultsCheckName <- glue::glue("{.dsPullDate}_{gsub('[^A-Za-z0-9_]', '_', timestamp)}_checks")
   # .resultsCheckName <- glue::glue("{.dsPullDate}_checks")
   
   # Save the results
+  outputListings(glue::glue("{.dataStoreUrl}/checks/listing",timestamp,.resultsOfChecks))
   saveRDS(.resultsOfChecks,glue::glue("{.dataStoreUrl}/checks/{.resultsCheckName}.rds"))
 }

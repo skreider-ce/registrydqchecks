@@ -1,3 +1,12 @@
+# storeUrl <- "C:/Users/ScottKreider/Documents/scrap/store/checks/listing"
+# testChecks <- readRDS("C:/Users/ScottKreider/Documents/scrap/store/checks/2023-12-04_12_07_08_checks.rds")
+# timestamp <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
+# outputListings(storeUrl,timestamp,testChecks)
+
+
+
+# testChecks$exvisit$criticalCheck6$inOldAndNotInNew
+
 # library(registrydqchecksreport)
 # library(registrydqchecks)
 # runRegistryChecks(.prelimDataFolderUrl = "C:/Users/ScottKreider/Corrona LLC/Biostat Data Files - AD/monthly/2023/2023-12-04"
