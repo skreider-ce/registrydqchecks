@@ -13,14 +13,10 @@ submitToDataStore <- function(.registry,.dsPullDate,.dataStoreUrl,.resultsOfChec
   staticDataStoreUrl <- .dataStoreUrl
 
   # Create the folder if it does not exist
-  if(!dir.exists(glue::glue("{.dataStoreUrl}/checks"))){
-    createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks"))
-  }
-  
-  if(!dir.exists(glue::glue("{.dataStoreUrl}/checks/summary"))){
-    createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks/summary"))
-  }
-  
+  createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks"))
+  createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks/listing"))
+  createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks/summary"))
+
   .timestamp <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
 
   # Assign the dataset name to store

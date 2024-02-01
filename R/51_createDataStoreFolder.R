@@ -3,17 +3,9 @@
 #' @param .urlToCreate A url string to the folder to be created
 #'
 #' @export
-createDataStoreFolder <- function(.urlToCreate,subDir = TRUE){
+createDataStoreFolder <- function(.urlToCreate){
   # If the folder for this url does not exist, create it
   if(!dir.exists(.urlToCreate)){
     dir.create(.urlToCreate,recursive = TRUE) 
-  }
-  
-  if(subDir == TRUE){
-    .listUrl <- glue::glue("{.urlToCreate}/listing")
-    
-    if(!dir.exists(.listUrl)){
-      dir.create(.listUrl,recursive = TRUE) 
-    }
   }
 }
