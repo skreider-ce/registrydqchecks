@@ -15,7 +15,7 @@
 #' @importFrom glue glue
 #' @importFrom dplyr filter select
 #' @importFrom registrydqchecksreport runApplication
-runRegistryChecks <- function(.registry
+runRegistryChecks <- function(.registry = "defaultRegistry"
                               ,.prelimDataFolderUrl
                               ,.prelimDataPullDate
                               ,.lastMonthDataFolderUrl
