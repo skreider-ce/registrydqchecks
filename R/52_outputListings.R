@@ -9,9 +9,7 @@
 #' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
 outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
   
-  if(!dir.exists(glue::glue("{.listingUrl}/{.timestamp}"))){
-    createDataStoreFolder(glue::glue("{.listingUrl}/{.timestamp}"),subDir = FALSE)
-  }
+  createDataStoreFolder(glue::glue("{.listingUrl}/{.timestamp}"))
   
   .wb <- openxlsx::createWorkbook()
   for(.dsName in names(.checksToOutput)){
