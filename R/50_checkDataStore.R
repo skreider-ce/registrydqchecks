@@ -24,14 +24,14 @@ submitToDataStore <- function(.registry,.dsPullDate,.dataStoreUrl,.resultsOfChec
 
   .runnerSummary <- list(
     "registry" = .registry
-    ,"timestamp" = gsub('[^A-Za-z0-9_]', '_', .timestamp)
+    ,"timestamp" = .timestamp
     ,"user" = Sys.info()[["user"]]
     ,"folderLoc" = .dataStoreUrl
     ,"pullDate" = .dsPullDate
   )
   
   # Save the results
-  saveRDS(.runnerSummary,glue::glue("{.dataStoreUrl}/checks/summary/runnerSummary_{.timestamp}.rds"))
+  saveRDS(.runnerSummary,glue::glue("{.dataStoreUrl}/checks/summary/runnerSummary_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}.rds"))
   outputListings(glue::glue("{.dataStoreUrl}/checks/listing"),.timestamp,.resultsOfChecks)
   saveRDS(.resultsOfChecks,glue::glue("{.dataStoreUrl}/checks/{.resultsCheckName}.rds"))
 }
