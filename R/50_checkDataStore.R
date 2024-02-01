@@ -24,7 +24,7 @@ submitToDataStore <- function(.registry,.dsPullDate,.dataStoreUrl,.resultsOfChec
 
   .runnerSummary <- list(
     "registry" = .registry
-    ,"timestamp" = .timestamp
+    ,"timestamp" = gsub('[^A-Za-z0-9_]', '_', .timestamp)
     ,"user" = Sys.info()[["user"]]
     ,"folderLoc" = .dataStoreUrl
     ,"pullDate" = .dsPullDate
