@@ -4,7 +4,7 @@
 \alias{createDataStoreFolder}
 \title{(internal function) Create a new folder at the specified location if it doesn't already exist}
 \usage{
-createDataStoreFolder(.urlToCreate)
+createDataStoreFolder(.urlToCreate, subDir = TRUE)
 }
 \arguments{
 \item{.urlToCreate}{A url string to the folder to be created}
