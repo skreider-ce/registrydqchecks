@@ -12,25 +12,25 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
   createDataStoreFolder(glue::glue("{.listingUrl}/{.timestamp}"))
   
   .wb <- openxlsx::createWorkbook()
-  for(.dsName in names(.checksToOutput)){
+  for(.dsName in names(.checksToOutput$criticalChecks)){
     openxlsx::addWorksheet(.wb, sheetName = .dsName)
-    openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput[[.dsName]]$criticalCheck6$inOldAndNotInNew)
+    openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$criticalChecks[[.dsName]]$criticalCheck6$inOldAndNotInNew)
   }
   openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/CC6.xlsx"))
   
   
   .wb <- openxlsx::createWorkbook()
-  for(.dsName in names(.checksToOutput)){
+  for(.dsName in names(.checksToOutput$criticalChecks)){
     openxlsx::addWorksheet(.wb, sheetName = .dsName)
-    openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput[[.dsName]]$criticalCheck7$essentialVariablesMissingness)
+    openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$criticalChecks[[.dsName]]$criticalCheck7$essentialVariablesMissingness)
   }
   openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/CC7.xlsx"))
   
   
   .wb <- openxlsx::createWorkbook()
-  for(.dsName in names(.checksToOutput)){
+  for(.dsName in names(.checksToOutput$criticalChecks)){
     openxlsx::addWorksheet(.wb, sheetName = .dsName)
-    openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput[[.dsName]]$criticalCheck8$essentialVariablesMissingness)
+    openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$criticalChecks[[.dsName]]$criticalCheck8$essentialVariablesMissingness)
   }
   openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/CC8.xlsx"))
 }

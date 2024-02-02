@@ -15,7 +15,6 @@ submitToDataStore <- function(.registry,.dsPullDate,.dataStoreUrl,.resultsOfChec
   # Create the folder if it does not exist
   createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks"))
   createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks/listing"))
-  createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks/summary"))
 
   .timestamp <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
 
@@ -30,8 +29,14 @@ submitToDataStore <- function(.registry,.dsPullDate,.dataStoreUrl,.resultsOfChec
     ,"pullDate" = .dsPullDate
   )
   
+  .outputToSave <- list(
+    "runnerSummary" = .runnerSummary
+    ,"criticalChecks" = .resultsOfChecks$criticalCheckOutput
+    ,"nonCriticalChecks" = .resultsOfChecks$nonCriticalCheckOutput
+  )
+  
   # Save the results
-  saveRDS(.runnerSummary,glue::glue("{.dataStoreUrl}/checks/summary/runnerSummary_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}.rds"))
-  outputListings(glue::glue("{.dataStoreUrl}/checks/listing"),.timestamp,.resultsOfChecks)
-  saveRDS(.resultsOfChecks,glue::glue("{.dataStoreUrl}/checks/{.resultsCheckName}.rds"))
+  # saveRDS(.runnerSummary,glue::glue("{.dataStoreUrl}/checks/summary/runnerSummary_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}.rds"))
+  outputListings(glue::glue("{.dataStoreUrl}/checks/listing"),.timestamp,.outputToSave)
+  saveRDS(.outputToSave,glue::glue("{.dataStoreUrl}/checks/{.resultsCheckName}.rds"))
 }
