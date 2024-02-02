@@ -32,6 +32,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   .essentialVariables <- list()
   .uniqueKeys <- list()
   .critCheckOutput <- list()
+  .nonCritCheckOutput <- list()
   
   for(.dsName in .datasetsToCheck){
     .codebooks[[.dsName]] <- pullCodebookFromExcelFile(.codebookUrl, .dsName)
@@ -54,7 +55,12 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
       ,.uniqueKeys[[.dsName]]$varName)
   }
   
-  submitToDataStore(.registry,.prelimDataPullDate,.outputUrl,.critCheckOutput)
+  .checkOutput <- list(
+    "criticalCheckOutput" = .critCheckOutput
+    ,"nonCriticalCheckOutput" = NULL
+  )
+  
+  submitToDataStore(.registry,.prelimDataPullDate,.outputUrl,.checkOutput)
   
   registrydqchecksreport::runApplication(glue::glue("{.outputUrl}/checks"))
   
