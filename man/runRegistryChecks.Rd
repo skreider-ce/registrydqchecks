@@ -5,7 +5,7 @@
 \title{The main function call to run the CorEvitas Registry DQ Checks and the Report}
 \usage{
 runRegistryChecks(
-  .registry,
+  .registry = "defaultRegistry",
   .prelimDataFolderUrl,
   .prelimDataPullDate,
   .lastMonthDataFolderUrl,

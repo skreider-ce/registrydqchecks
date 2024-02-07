@@ -50,7 +50,7 @@
 #   .critCheckOutput[[.dsName]] <- criticalChecks(
 #     data.frame(.dataToCheck[[.dsName]])
 #     ,data.frame(.dataToCompare[[.dsName]])
-#     ,""
+#     ,c()
 #     ,names(.dataToCompare[[.dsName]])
 #     ,.uniqueKeys[[.dsName]])
 # }
@@ -59,4 +59,6 @@
 #   "criticalCheckOutput" = .critCheckOutput
 #   ,"nonCriticalCheckOutput" = NULL
 # )
-
+# 
+# View(.checkOutput)
+# 
