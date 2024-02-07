@@ -21,7 +21,7 @@ checkForMissingVariableLabels <- function(.dsToCheck){
   .returnOutput <- list(
     "pass" = ifelse(sum(.variablesWithMissingLabels) == 0,TRUE,FALSE)
     ,"nMissingVariableLabels" = sum(.variablesWithMissingLabels)
-    ,"listOfVarsWithMissingLabels" = .variableLabels[.variablesWithMissingLabels]
+    ,"listOfVarsWithMissingLabels" = data.frame(.variableLabels[.variablesWithMissingLabels])
   )
   
   return(.returnOutput)
