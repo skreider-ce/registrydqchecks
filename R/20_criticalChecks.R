@@ -22,8 +22,14 @@ criticalChecks <- function(.dsToCheck
   .critCheckResults4 <- checkForMissingVariableLabels(.dsToCheck)
   .critCheckResults5 <- checkForAddedRows(.dsToCheck,.compDsToCheck)
   .critCheckResults6 <- checkForRemovedRows(.dsToCheck,.compDsToCheck,.uniqueKeys)
-  .critCheckResults7 <- checkForGivenItemsNonresponse(.dsToCheck,.listOfEssentialVars)
-  .critCheckResults8 <- checkForMonthlyMissingness(.dsToCheck,.compDsToCheck,.listOfEssentialVars)
+  if(.listOfEssentialVars != ""){
+    .critCheckResults7 <- checkForGivenItemsNonresponse(.dsToCheck,.listOfEssentialVars)
+    .critCheckResults8 <- checkForMonthlyMissingness(.dsToCheck,.compDsToCheck,.listOfEssentialVars)  
+  } else {
+    .critCheckResults7 <- NULL
+    .critCheckResults8 <- NULL
+  }
+  
   
   # Returns a list with each element being one of the check results
   return(list(
