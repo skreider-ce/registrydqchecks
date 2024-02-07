@@ -53,6 +53,8 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
     .listOfVarMissingness <- dplyr::bind_rows(.listOfVarMissingness,.varMissingRow)
   }
   
+  .listOfVarMissingness <- .listOfVarMissingness |>
+    dplyr::arrange(desc(propMissing))
   
   .returnOutput <- list(
     pass = TRUE
