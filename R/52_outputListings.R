@@ -63,11 +63,11 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
   openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/CC8 month to month missingness.xlsx"))
   
   for(.dsName in names(.checksToOutput$nonCriticalChecks)){
-    for(.ncCheckName in names(.checksToOutput$criticalChecks[[.dsName]]$nonCriticalChecks$nPctList)){
+    for(.ncCheckName in names(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList)){
       .wb <- openxlsx::createWorkbook()
       openxlsx::addWorksheet(.wb, sheetName = .dsName)
       openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]])
-      openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/{.dsName} {.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkTitle}.xlsx"))      
+      openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/{.dsName} {.ncCheckName} {.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkTitle}.xlsx"))      
     }
   }
 }
