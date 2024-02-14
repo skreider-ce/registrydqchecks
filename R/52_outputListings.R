@@ -68,7 +68,7 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
         .wb <- openxlsx::createWorkbook()
         openxlsx::addWorksheet(.wb, sheetName = .dsName)
         openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing)
-        openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/{.dsName} {.ncCheckName} {.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkTitle}.xlsx"))              
+        openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/{.dsName} {.ncCheckName} {.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkShortDescription}.xlsx"))              
       }
 
     }
