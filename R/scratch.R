@@ -3,23 +3,28 @@
 # timestamp <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
 # outputListings(storeUrl,timestamp,testChecks)
 
-# testChecks <- readRDS("C:/Users/ScottKreider/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/registryCheckStorage/ad/2024_2024-01-04_checks.rds")
+# testChecks <- readRDS("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/registryCheckStorage/ad/2024_2024-01-04_checks.rds")
 # storeUrl <- "C:/Users/ScottKreider/Documents/scrap/store/"
 # registrydqchecks::submitToDataStore("ad","2023-12-04",storeUrl,testChecks)
 
+
+# remove.packages("registrydqchecksreport")
+# remove.packages("registrydqchecks")
 
 # testChecks$exvisit$criticalCheck6$inOldAndNotInNew
 # 
 # library(registrydqchecksreport)
 # library(registrydqchecks)
-# runRegistryChecks(.prelimDataFolderUrl = "C:/Users/ScottKreider/Corrona LLC/Biostat Data Files - AD/monthly/2023/2023-12-04"
+# runRegistryChecks(.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2023/2023-12-04"
 #                   ,.prelimDataPullDate = "2023-12-04"
-#                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/Corrona LLC/Biostat Data Files - AD/monthly/2023/2023-11-03"
+#                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2023/2023-11-03"
 #                   ,.lastMonthDataPullDate = "2023-11-03"
-#                   ,.codebookUrl = "C:/Users/ScottKreider/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/Guidance Documentation/archive/desired codebook input format.xlsx"
+#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/Guidance Documentation/archive/desired codebook input format.xlsx"
 #                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
-#                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/store/2023-12-04"
+#                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/store/ad/2023-12-04"
 #                   ,.isR = TRUE)
+# 
+# registrydqchecksreport::runApplication("C:/Users/ScottKreider/Documents/scrap/store/ad/2023-12-04/checks")
 # 
 # 
 # .registry = "ad"

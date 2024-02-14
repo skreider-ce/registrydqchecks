@@ -14,9 +14,37 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
   .wb <- openxlsx::createWorkbook()
   for(.dsName in names(.checksToOutput$criticalChecks)){
     openxlsx::addWorksheet(.wb, sheetName = .dsName)
+    openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$criticalChecks[[.dsName]]$criticalCheck1$listOfDuplicateRows)
+  }
+  openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/CC1 duplicate rows.xlsx"))
+  
+  .wb <- openxlsx::createWorkbook()
+  for(.dsName in names(.checksToOutput$criticalChecks)){
+    openxlsx::addWorksheet(.wb, sheetName = .dsName)
+    openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$criticalChecks[[.dsName]]$criticalCheck2$omittedVars)
+  }
+  openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/CC2 removed variables.xlsx"))
+  
+  .wb <- openxlsx::createWorkbook()
+  for(.dsName in names(.checksToOutput$criticalChecks)){
+    openxlsx::addWorksheet(.wb, sheetName = .dsName)
+    openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$criticalChecks[[.dsName]]$criticalCheck3$listOfVarsWithMissingLabels)
+  }
+  openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/CC3 new variables.xlsx"))
+  
+  .wb <- openxlsx::createWorkbook()
+  for(.dsName in names(.checksToOutput$criticalChecks)){
+    openxlsx::addWorksheet(.wb, sheetName = .dsName)
+    openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$criticalChecks[[.dsName]]$criticalCheck4$listOfVarsWithMissingLabels)
+  }
+  openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/CC4 missing variable labels.xlsx"))
+  
+  .wb <- openxlsx::createWorkbook()
+  for(.dsName in names(.checksToOutput$criticalChecks)){
+    openxlsx::addWorksheet(.wb, sheetName = .dsName)
     openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$criticalChecks[[.dsName]]$criticalCheck6$inOldAndNotInNew)
   }
-  openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/CC6.xlsx"))
+  openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/CC6 removed observations.xlsx"))
   
   
   .wb <- openxlsx::createWorkbook()
@@ -24,7 +52,7 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
     openxlsx::addWorksheet(.wb, sheetName = .dsName)
     openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$criticalChecks[[.dsName]]$criticalCheck7$essentialVariablesMissingness)
   }
-  openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/CC7.xlsx"))
+  openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/CC7 monthly missingness.xlsx"))
   
   
   .wb <- openxlsx::createWorkbook()
@@ -32,7 +60,9 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
     openxlsx::addWorksheet(.wb, sheetName = .dsName)
     openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$criticalChecks[[.dsName]]$criticalCheck8$essentialVariablesMissingness)
   }
-  openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/CC8.xlsx"))
+  openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/CC8 month to month missingness.xlsx"))
+  
+  
 }
 
 
