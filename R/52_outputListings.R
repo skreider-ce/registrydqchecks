@@ -28,7 +28,7 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
   .wb <- openxlsx::createWorkbook()
   for(.dsName in names(.checksToOutput$criticalChecks)){
     openxlsx::addWorksheet(.wb, sheetName = .dsName)
-    openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$criticalChecks[[.dsName]]$criticalCheck3$listOfVarsWithMissingLabels)
+    openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$criticalChecks[[.dsName]]$criticalCheck3$extraVars)
   }
   openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/CC3 new variables.xlsx"))
   
