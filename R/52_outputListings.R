@@ -64,10 +64,13 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
   
   for(.dsName in names(.checksToOutput$nonCriticalChecks)){
     for(.ncCheckName in names(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList)){
-      .wb <- openxlsx::createWorkbook()
-      openxlsx::addWorksheet(.wb, sheetName = .dsName)
-      openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]])
-      openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/{.dsName} {.ncCheckName} {.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkTitle}.xlsx"))      
+      if(nrow(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing) > 0){
+        .wb <- openxlsx::createWorkbook()
+        openxlsx::addWorksheet(.wb, sheetName = .dsName)
+        openxlsx::writeData(.wb, sheet = .dsName, .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing)
+        openxlsx::saveWorkbook(.wb, file = glue::glue("{.listingUrl}/{.timestamp}/{.dsName} {.ncCheckName} {.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkTitle}.xlsx"))              
+      }
+
     }
   }
 }
