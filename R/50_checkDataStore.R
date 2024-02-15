@@ -4,6 +4,7 @@
 #' @param .dsPullDate A date string of the data pull date in YYYY-MM-DD format (e.g. "2024-01-10")
 #' @param .dataStoreUrl A text url of the location where the check results will be stored
 #' @param .resultsOfChecks A list with the results of the data checks
+#' @param .timestamp Timestamp that the checks were run
 #'
 #' @export
 #' 

@@ -12,6 +12,7 @@ runRegistryChecks(
   .lastMonthDataPullDate,
   .codebookUrl,
   .datasetsToCheck,
+  .nonCriticalChecks = NULL,
   .outputUrl,
   .isR
 )
@@ -27,9 +28,11 @@ runRegistryChecks(
 
 \item{.lastMonthDataPullDate}{A date string of last month's data pull date in the format YYYY-DD-MM (e.g. "2023-12-05")}
 
-\item{.codebookUrl}{A url string to the registry-specific codebook}
+\item{.codebookUrl}{(optional) A url string to the registry-specific codebook (if left missing - critical checks 7 and 8 will not be run)}
 
 \item{.datasetsToCheck}{A string vector with the names of the datasets to be checked (e.g. c("exvisit", "exlab", "exdrugexp")) - NOTE: These must perfectly match both the tab names in the codebook AND the names of the datasets being checked}
+
+\item{.nonCriticalChecks}{A list of the manually generated non-critical checks in the CE DQ specified format (see additional documentation)}
 
 \item{.outputUrl}{A url string to the location of the output datasets - NOTE: A subfolder will be created here called /checks that will house the results of the checks and will be the location called by the check report}
 
