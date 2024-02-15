@@ -39,8 +39,8 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   
   for(.dsName in .datasetsToCheck){
     .codebooks[[.dsName]] <- pullCodebookFromExcelFile(.codebookUrl, .dsName)
-    .dataToCheck[[.dsName]] <- pullData(glue::glue("{.prelimDataFolderUrl}/{.dsName}_{.prelimDataPullDate}"), .isR)
-    .dataToCompare[[.dsName]] <- pullData(glue::glue("{.lastMonthDataFolderUrl}/{.dsName}_{.lastMonthDataPullDate}"), .isR)
+    .dataToCheck[[.dsName]] <- pullData(glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}"), .isR)
+    .dataToCompare[[.dsName]] <- pullData(glue::glue("{.lastMonthDataFolderUrl}{.dsName}_{.lastMonthDataPullDate}"), .isR)
     
     .uniqueKeys[[.dsName]] <- .codebooks[[.dsName]] |>
       dplyr::filter(uniqueKey == 1) |>
@@ -65,11 +65,12 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   
   .timestamp <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
   
-  submitToDataStore(.registry
-                    ,.prelimDataPullDate
-                    ,.timestamp
-                    ,.outputUrl
-                    ,.checkOutput)
+  submitToDataStore(.registry = .registry
+                    ,.dsPullDate = .prelimDataPullDate
+                    ,.timestamp = .timestamp
+                    ,.dataStoreUrl = .outputUrl
+                    ,.resultsOfChecks = .checkOutput
+                    )
   
   registrydqchecksreportdown::generateReport(
     .inputDatasetUrl = glue::glue("{.outputUrl}checks/{.prelimDataPullDate}_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}_checks.rds")
