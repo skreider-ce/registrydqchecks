@@ -4,19 +4,18 @@
 #' @param .dsPullDate A date string of the data pull date in YYYY-MM-DD format (e.g. "2024-01-10")
 #' @param .dataStoreUrl A text url of the location where the check results will be stored
 #' @param .resultsOfChecks A list with the results of the data checks
+#' @param .timestamp Timestamp that the checks were run
 #'
 #' @export
 #' 
 #' @importFrom glue glue
-submitToDataStore <- function(.registry,.dsPullDate,.dataStoreUrl,.resultsOfChecks){
+submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.resultsOfChecks){
 
   staticDataStoreUrl <- .dataStoreUrl
 
   # Create the folder if it does not exist
-  createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks"))
-  createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks/listing"))
-
-  .timestamp <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
+  createDataStoreFolder(glue::glue("{.dataStoreUrl}checks"))
+  createDataStoreFolder(glue::glue("{.dataStoreUrl}checks/listing"))
 
   # Assign the dataset name to store
   .resultsCheckName <- glue::glue("{.dsPullDate}_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}_checks")
@@ -37,6 +36,6 @@ submitToDataStore <- function(.registry,.dsPullDate,.dataStoreUrl,.resultsOfChec
   
   # Save the results
   # saveRDS(.runnerSummary,glue::glue("{.dataStoreUrl}/checks/summary/runnerSummary_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}.rds"))
-  outputListings(glue::glue("{.dataStoreUrl}/checks/listing"),.timestamp,.outputToSave)
-  saveRDS(.outputToSave,glue::glue("{.dataStoreUrl}/checks/{.resultsCheckName}.rds"))
+  outputListings(glue::glue("{.dataStoreUrl}checks/listing"),.timestamp,.outputToSave)
+  saveRDS(.outputToSave,glue::glue("{.dataStoreUrl}checks/{.resultsCheckName}.rds"))
 }

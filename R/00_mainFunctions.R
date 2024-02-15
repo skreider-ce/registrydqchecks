@@ -5,7 +5,7 @@
 #' @param .prelimDataPullDate A date string of the data pull date in the format YYYY-DD-MM (e.g. "2024-01-10")
 #' @param .lastMonthDataFolderUrl A url string to the folder with the last month's datasets
 #' @param .lastMonthDataPullDate A date string of last month's data pull date in the format YYYY-DD-MM (e.g. "2023-12-05")
-#' @param .codebookUrl A url string to the registry-specific codebook (if left missing - critical checks 7 and 8 will not be run)
+#' @param .codebookUrl (optional) A url string to the registry-specific codebook (if left missing - critical checks 7 and 8 will not be run)
 #' @param .datasetsToCheck A string vector with the names of the datasets to be checked (e.g. c("exvisit", "exlab", "exdrugexp")) - NOTE: These must perfectly match both the tab names in the codebook AND the names of the datasets being checked
 #' @param .nonCriticalChecks A list of the manually generated non-critical checks in the CE DQ specified format (see additional documentation)
 #' @param .outputUrl A url string to the location of the output datasets - NOTE: A subfolder will be created here called /checks that will house the results of the checks and will be the location called by the check report
@@ -16,6 +16,7 @@
 #' @importFrom glue glue
 #' @importFrom dplyr filter select
 #' @importFrom registrydqchecksreport runApplication
+#' @importFrom registrydqchecksreportdown generateReport
 runRegistryChecks <- function(.registry = "defaultRegistry"
                               ,.prelimDataFolderUrl
                               ,.prelimDataPullDate
@@ -62,9 +63,20 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
     ,"nonCriticalCheckOutput" = .nonCriticalChecks
   )
   
-  submitToDataStore(.registry,.prelimDataPullDate,.outputUrl,.checkOutput)
+  .timestamp <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
   
-  registrydqchecksreport::runApplication(glue::glue("{.outputUrl}/checks"))
+  submitToDataStore(.registry
+                    ,.prelimDataPullDate
+                    ,.timestamp
+                    ,.outputUrl
+                    ,.checkOutput)
+  
+  registrydqchecksreportdown::generateReport(
+    .inputDatasetUrl = glue::glue("{.outputUrl}checks/{.prelimDataPullDate}_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}_checks.rds")
+    ,.reportOutputUrl = glue::glue("{.outputUrl}")
+    ,.fileName = glue::glue("{.prelimDataPullDate}_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}_report")
+  )
+  registrydqchecksreport::runApplication(glue::glue("{.outputUrl}checks"))
   
   return(.returnOutput)
 }

@@ -4,12 +4,20 @@
 \alias{submitToDataStore}
 \title{(internal function) Submit the results of the data quality checks to a set location}
 \usage{
-submitToDataStore(.registry, .dsPullDate, .dataStoreUrl, .resultsOfChecks)
+submitToDataStore(
+  .registry,
+  .dsPullDate,
+  .timestamp,
+  .dataStoreUrl,
+  .resultsOfChecks
+)
 }
 \arguments{
 \item{.registry}{A text string with the initials of the registry (e.g. "ad", "pso", "ms")}
 
 \item{.dsPullDate}{A date string of the data pull date in YYYY-MM-DD format (e.g. "2024-01-10")}
+
+\item{.timestamp}{Timestamp that the checks were run}
 
 \item{.dataStoreUrl}{A text url of the location where the check results will be stored}
 
