@@ -14,8 +14,8 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.r
   staticDataStoreUrl <- .dataStoreUrl
 
   # Create the folder if it does not exist
-  createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks"))
-  createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks/listing"))
+  createDataStoreFolder(glue::glue("{.dataStoreUrl}checks"))
+  createDataStoreFolder(glue::glue("{.dataStoreUrl}checks/listing"))
 
   # Assign the dataset name to store
   .resultsCheckName <- glue::glue("{.dsPullDate}_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}_checks")
@@ -36,6 +36,6 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.r
   
   # Save the results
   # saveRDS(.runnerSummary,glue::glue("{.dataStoreUrl}/checks/summary/runnerSummary_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}.rds"))
-  outputListings(glue::glue("{.dataStoreUrl}/checks/listing"),.timestamp,.outputToSave)
-  saveRDS(.outputToSave,glue::glue("{.dataStoreUrl}/checks/{.resultsCheckName}.rds"))
+  outputListings(glue::glue("{.dataStoreUrl}checks/listing"),.timestamp,.outputToSave)
+  saveRDS(.outputToSave,glue::glue("{.dataStoreUrl}checks/{.resultsCheckName}.rds"))
 }

@@ -72,11 +72,11 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                     ,.checkOutput)
   
   registrydqchecksreportdown::generateReport(
-    .inputDatasetUrl = glue::glue("{.outputUrl}/checks/{.prelimDataPullDate}_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}_checks.rds")
+    .inputDatasetUrl = glue::glue("{.outputUrl}checks/{.prelimDataPullDate}_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}_checks.rds")
     ,.reportOutputUrl = glue::glue("{.outputUrl}")
     ,.fileName = glue::glue("{.prelimDataPullDate}_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}_report")
   )
-  registrydqchecksreport::runApplication(glue::glue("{.outputUrl}/checks"))
+  registrydqchecksreport::runApplication(glue::glue("{.outputUrl}checks"))
   
   return(.returnOutput)
 }
