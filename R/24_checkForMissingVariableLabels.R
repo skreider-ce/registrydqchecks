@@ -19,7 +19,11 @@ checkForMissingVariableLabels <- function(.dsToCheck){
     purrr::map_lgl(.variableLabels, is.null)
   
   .returnOutput <- list(
-    "pass" = ifelse(sum(.variablesWithMissingLabels) == 0,TRUE,FALSE)
+    "checkId" = "cc4"
+    ,"checkTitle" = "Zero unlabeled variables"
+    ,"checkDescription" = "For each analytic file, confirm that all variables are labeled."
+    ,"checkShortDescription" = "unlabeled variables"
+    ,"pass" = ifelse(sum(.variablesWithMissingLabels) == 0,TRUE,FALSE)
     ,"nMissingVariableLabels" = sum(.variablesWithMissingLabels)
     ,"listOfVarsWithMissingLabels" = names(.variableLabels)[.variablesWithMissingLabels]
   )

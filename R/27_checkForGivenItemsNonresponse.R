@@ -40,8 +40,12 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
     dplyr::arrange(desc(propMissing))
 
   .returnOutput <- list(
-    pass = TRUE
-    ,essentialVariablesMissingness = .listOfVarMissingness
+    "checkId" = "cc7"
+    ,"checkTitle" = "Item nonresponse for essential variables is not extreme "
+    ,"checkDescription" = "Confirm that item nonresponse for essential variables is below a specified threshold."
+    ,"checkShortDescription" = "item missingness"
+    ,"pass" = TRUE
+    ,"essentialVariablesMissingness" = .listOfVarMissingness
   )
   
   return(.returnOutput)

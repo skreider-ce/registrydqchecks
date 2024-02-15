@@ -18,9 +18,13 @@ checkForRemovedRows <- function(.dsToCheck,.compDsToCheck,.uniqueKey){
   .inOldAndNotInNew <- dplyr::anti_join(.compDsToCheck,.dsToCheck,.uniqueKeys)
 
   .returnOutput <- list(
-    pass = TRUE
-    ,nRemovedRows = nrow(.inOldAndNotInNew)
-    ,inOldAndNotInNew = .inOldAndNotInNew[,.uniqueKeys]
+    "checkId" = "cc6"
+    ,"checkTitle" = "Reasonable volume of disappearing rows"
+    ,"checkDescription" = "For each analytic file, confirm that the volume of disappearing rows is below a prespecified threshold. "
+    ,"checkShortDescription" = "removed rows"
+    ,"pass" = TRUE
+    ,"nRemovedRows" = nrow(.inOldAndNotInNew)
+    ,"inOldAndNotInNew" = .inOldAndNotInNew[,.uniqueKeys]
   )
 
   return(.returnOutput)
