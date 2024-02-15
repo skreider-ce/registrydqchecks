@@ -16,9 +16,13 @@ checkForExtraVariables <- function(.dsToCheck, .listOfSupposedVars){
   
   # Return the results of the check
   .returnOutput <- list(
-    pass = ifelse(length(.extraVars) == 0, TRUE, FALSE)
-    ,nExtraVars = length(.extraVars)
-    ,extraVars = .extraVars
+    "checkId" = "cc3"
+    ,"checkTitle" = "Removed variables"
+    ,"checkDescription" = "For each analytic file, see which variables were removed from last month."
+    ,"checkShortDescription" = "removed variables"
+    ,"pass" = ifelse(length(.extraVars) == 0, TRUE, FALSE)
+    ,"nExtraVars" = length(.extraVars)
+    ,"extraVars" = .extraVars
   )
   
   return(.returnOutput)

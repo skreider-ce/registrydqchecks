@@ -17,10 +17,15 @@ checkForDuplicateUniqueIds <- function(.dsToCheck,.uniqueKey){
     dplyr::filter(n > 1)
 
   .returnOutput <- list(
-    pass = ifelse(nrow(.duplicateUniqueIds) == 0,TRUE,FALSE)
-    ,nDuplicateRows = nrow(.duplicateUniqueIds)
-    ,listOfDuplicateRows = .duplicateUniqueIds
+    "checkId" = "cc1"
+    ,"checkTitle" = "Zero duplicates"
+    ,"checkDescription" = "For each analytic file, confirm that a specified set of variables uniquely identifies a row. "
+    ,"checkShortDescription" = "duplicate unique keys"
+    ,"pass" = ifelse(nrow(.duplicateUniqueIds) == 0,TRUE,FALSE)
+    ,"nDuplicateRows" = nrow(.duplicateUniqueIds)
+    ,"listOfDuplicateRows" = .duplicateUniqueIds
   )
   
   return(.returnOutput)
 }
+

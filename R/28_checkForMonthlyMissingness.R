@@ -57,8 +57,12 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
     dplyr::arrange(desc(propMissing))
   
   .returnOutput <- list(
-    pass = TRUE
-    ,essentialVariablesMissingness = .listOfVarMissingness
+    "checkId" = "cc8"
+    ,"checkTitle" = "MoM (month over month) change in item nonresponse is reasonable for a subset of variables called essential."
+    ,"checkDescription" = "Confirm that jump in item nonresponse from prior month to current month for essential variables is below a specified threshold for reasonable item nonresponse."
+    ,"checkShortDescription" = "month to month missingness"
+    ,"pass" = TRUE
+    ,"essentialVariablesMissingness" = .listOfVarMissingness
   )
   
   return(.returnOutput)

@@ -36,6 +36,9 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.r
   
   # Save the results
   # saveRDS(.runnerSummary,glue::glue("{.dataStoreUrl}/checks/summary/runnerSummary_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}.rds"))
-  outputListings(glue::glue("{.dataStoreUrl}checks/listing"),.timestamp,.outputToSave)
+  outputListings(
+                  .listingUrl = glue::glue("{.dataStoreUrl}checks/listing")
+                  ,.timestamp = .timestamp
+                  ,.checksToOutput = .outputToSave)
   saveRDS(.outputToSave,glue::glue("{.dataStoreUrl}checks/{.resultsCheckName}.rds"))
 }

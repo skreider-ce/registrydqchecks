@@ -16,9 +16,13 @@ checkForOmittedVariables <- function(.dsToCheck, .listOfSupposedVars){
   
   # Return the results of the check
   .returnOutput <- list(
-    pass = ifelse(length(.omittedVars) == 0, TRUE, FALSE)
-    ,nOmittedVars = length(.omittedVars)
-    ,omittedVars = .omittedVars
+    "checkId" = "cc2"
+    ,"checkTitle" = "Added variables"
+    ,"checkDescription" = "For each analytic file, check which variables were added from last month."
+    ,"checkShortDescription" = "newly added variables"
+    ,"pass" = ifelse(length(.omittedVars) == 0, TRUE, FALSE)
+    ,"nOmittedVars" = length(.omittedVars)
+    ,"omittedVars" = .omittedVars
   )
   
   return(.returnOutput)
