@@ -8,15 +8,13 @@
 #' @export
 #' 
 #' @importFrom glue glue
-submitToDataStore <- function(.registry,.dsPullDate,.dataStoreUrl,.resultsOfChecks){
+submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.resultsOfChecks){
 
   staticDataStoreUrl <- .dataStoreUrl
 
   # Create the folder if it does not exist
   createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks"))
   createDataStoreFolder(glue::glue("{.dataStoreUrl}/checks/listing"))
-
-  .timestamp <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
 
   # Assign the dataset name to store
   .resultsCheckName <- glue::glue("{.dsPullDate}_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}_checks")

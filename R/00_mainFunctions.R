@@ -16,6 +16,7 @@
 #' @importFrom glue glue
 #' @importFrom dplyr filter select
 #' @importFrom registrydqchecksreport runApplication
+#' @importFrom registrydqchecksreportdown generateReport
 runRegistryChecks <- function(.registry = "defaultRegistry"
                               ,.prelimDataFolderUrl
                               ,.prelimDataPullDate
@@ -62,8 +63,18 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
     ,"nonCriticalCheckOutput" = .nonCriticalChecks
   )
   
-  submitToDataStore(.registry,.prelimDataPullDate,.outputUrl,.checkOutput)
+  .timestamp <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
   
+  submitToDataStore(.registry
+                    ,.prelimDataPullDate
+                    ,.timestamp
+                    ,.outputUrl
+                    ,.checkOutput)
+  
+  registrydqchecksreportdown::generateReport(
+    .inputDatasetUrl = "{.outputUrl}/checks/{.dsPullDate}_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}_checks.rds"
+    ,.reportOutputUrl = glue::glue("{.outputUrl}")
+  )
   registrydqchecksreport::runApplication(glue::glue("{.outputUrl}/checks"))
   
   return(.returnOutput)
