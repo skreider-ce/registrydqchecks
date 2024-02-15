@@ -41,7 +41,7 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
 
   .returnOutput <- list(
     "checkId" = "cc7"
-    ,"checkTitle" = "Item nonresponse for essential variables is not extreme "
+    ,"checkTitle" = "Item nonresponse for essential variables is not extreme"
     ,"checkDescription" = "Confirm that item nonresponse for essential variables is below a specified threshold."
     ,"checkShortDescription" = "item missingness"
     ,"pass" = TRUE
