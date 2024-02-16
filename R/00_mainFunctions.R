@@ -64,20 +64,21 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   )
   
   .timestamp <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
+  .formattedTimestamp <- gsub('[^A-Za-z0-9_]', '_', .timestamp)
   
   submitToDataStore(.registry = .registry
                     ,.dsPullDate = .prelimDataPullDate
-                    ,.timestamp = .timestamp
+                    ,.timestamp = .formattedTimestamp
                     ,.dataStoreUrl = .outputUrl
                     ,.resultsOfChecks = .checkOutput
                     )
   
   registrydqchecksreportdown::generateReport(
-    .inputDatasetUrl = glue::glue("{.outputUrl}checks/{.prelimDataPullDate}_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}_checks.rds")
-    ,.reportOutputUrl = glue::glue("{.outputUrl}")
-    ,.fileName = glue::glue("{.prelimDataPullDate}_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}_report")
+    .inputDatasetUrl = glue::glue("{.outputUrl}{.formattedTimestamp}/{.prelimDataPullDate}_{.formattedTimestamp}_checks.rds")
+    ,.reportOutputUrl = glue::glue("{.outputUrl}{.formattedTimestamp}")
+    ,.fileName = glue::glue("{.prelimDataPullDate}_{.formattedTimestamp}_report")
   )
-  registrydqchecksreport::runApplication(glue::glue("{.outputUrl}checks"))
+  registrydqchecksreport::runApplication(glue::glue("{.outputUrl}{.formattedTimestamp}/"))
   
   return(.returnOutput)
 }

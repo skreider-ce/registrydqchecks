@@ -28,7 +28,7 @@
 #                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/Guidance Documentation/archive/desired codebook input format.xlsx"
 #                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
 #                   ,.nonCriticalChecks = NULL
-#                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/store/ad/2023-12-04/"
+#                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/store/ad/2023/2023-12-04/"
 #                   ,.isR = TRUE)
 
 
