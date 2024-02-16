@@ -28,8 +28,11 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.r
     ,"pullDate" = .dsPullDate
   )
   
+  .checkSummary <- generateCheckSummary(.resultsOfChecks)
+  
   .outputToSave <- list(
     "runnerSummary" = .runnerSummary
+    ,"checkSummary" = .checkSummary
     ,"criticalChecks" = .resultsOfChecks$criticalCheckOutput
     ,"nonCriticalChecks" = .resultsOfChecks$nonCriticalCheckOutput
   )
