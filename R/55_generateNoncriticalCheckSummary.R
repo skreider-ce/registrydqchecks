@@ -8,7 +8,12 @@
 generateNoncriticalCheckSummary <- function(.nonCriticalChecksToSummarize){
   
   # Initialize the dataframe to store results of the noncritical check summary
-  .nonCriticalCheckSummary <- data.frame()
+  .nonCriticalCheckSummary <- data.frame(
+    "dataset" = character()
+    ,"nFailed" = integer()
+    ,"nTotal" = integer()
+    ,"propFailed" = double()
+  )
   
   # Loop through each of the noncritical checks and store the pass/fail results
   for(dsName in names(.nonCriticalChecksToSummarize)){
@@ -22,12 +27,15 @@ generateNoncriticalCheckSummary <- function(.nonCriticalChecksToSummarize){
     }
     
     .numFailedChecks <- sum(.newSummaryCol)
-    .newSummaryCol <- .numFailedChecks
-    stats::setNames(.newSummaryCol, dsName)
-    
-    .nonCriticalCheckSummary <- cbind(.nonCriticalCheckSummary, .newSummaryCol)
+    .numTotalChecks <- length(.newSummaryCol)
+    .propFailed <- .numFailedChecks / .numTotalChecks
+    .newSummaryCol <- c(dsName, .numFailedChecks, .numTotalChecks, .propFailed)
+
+    .nonCriticalCheckSummary <- rbind(.nonCriticalCheckSummary, .newSummaryCol)
   }
   
+  .nonCriticalCheckSummary <- stats::setNames(.nonCriticalCheckSummary, c("dataset", "nFailed", "nTotal", "propFailed"))
+
   return(.nonCriticalCheckSummary)
 }
 
