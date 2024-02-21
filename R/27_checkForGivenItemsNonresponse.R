@@ -36,9 +36,11 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
     .listOfVarMissingness <- dplyr::bind_rows(.listOfVarMissingness,.varMissingRow)
   }
   
+  # Reorder the listing output to be sorted in descending order by amount of missingness
   .listOfVarMissingness <- .listOfVarMissingness |>
     dplyr::arrange(desc(propMissing))
 
+  # Define output list structure
   .returnOutput <- list(
     "checkId" = "cc7"
     ,"checkTitle" = "Item nonresponse for essential variables is not extreme"

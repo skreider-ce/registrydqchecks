@@ -22,6 +22,8 @@ criticalChecks <- function(.dsToCheck
   .critCheckResults4 <- checkForMissingVariableLabels(.dsToCheck)
   .critCheckResults5 <- checkForAddedRows(.dsToCheck,.compDsToCheck)
   .critCheckResults6 <- checkForRemovedRows(.dsToCheck,.compDsToCheck,.uniqueKeys)
+  
+  # Checks if a codebook exists and if not then does not run CC 7 and 8
   if(length(.listOfEssentialVars) > 0){
     .critCheckResults7 <- checkForGivenItemsNonresponse(.dsToCheck,.listOfEssentialVars)
     .critCheckResults8 <- checkForMonthlyMissingness(.dsToCheck,.compDsToCheck,.listOfEssentialVars)  

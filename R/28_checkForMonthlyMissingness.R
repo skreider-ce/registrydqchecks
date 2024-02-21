@@ -53,9 +53,11 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
     .listOfVarMissingness <- dplyr::bind_rows(.listOfVarMissingness,.varMissingRow)
   }
   
+  # Reorder the listing output to be sorted in descending order by amount of missingness
   .listOfVarMissingness <- .listOfVarMissingness |>
     dplyr::arrange(desc(propMissing))
   
+  # Define output list structure
   .returnOutput <- list(
     "checkId" = "cc8"
     ,"checkTitle" = "MoM (month over month) change in item nonresponse is reasonable for a subset of variables called essential."

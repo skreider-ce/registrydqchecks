@@ -14,7 +14,7 @@ checkForOmittedVariables <- function(.dsToCheck, .listOfSupposedVars){
   # Create a list of the variables in supposed vars and not in the dataset
   .omittedVars <- setdiff(.listOfSupposedVars, .dsVariables)
   
-  # Return the results of the check
+  # Define output list structure
   .returnOutput <- list(
     "checkId" = "cc2"
     ,"checkTitle" = "Added variables"

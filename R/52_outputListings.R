@@ -9,6 +9,9 @@
 #' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
 outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
   
+  # Create new workbook objects and then print information out to them
+  #   For critical checks and non critical checks
+  
   .wb <- openxlsx::createWorkbook()
   for(.dsName in names(.checksToOutput$criticalChecks)){
     openxlsx::addWorksheet(.wb

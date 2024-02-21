@@ -16,6 +16,7 @@ checkForDuplicateUniqueIds <- function(.dsToCheck,.uniqueKey){
       dplyr::count(!!!dplyr::syms(.uniqueKey)) |>
     dplyr::filter(n > 1)
 
+  # Define output list structure
   .returnOutput <- list(
     "checkId" = "cc1"
     ,"checkTitle" = "Zero duplicates"

@@ -13,7 +13,7 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.r
 
   staticDataStoreUrl <- .dataStoreUrl
   
-  # Create the folder if it does not exist
+  # Create the folders if they do not exist
   createDataStoreFolder(glue::glue("{.dataStoreUrl}{.timestamp}"))
   createDataStoreFolder(glue::glue("{.dataStoreUrl}{.timestamp}/checks"))
   createDataStoreFolder(glue::glue("{.dataStoreUrl}{.timestamp}/listing"))
@@ -21,6 +21,7 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.r
   # Assign the dataset name to store
   .resultsCheckName <- glue::glue("{.dsPullDate}_{.timestamp}_checks")
 
+  # Generate runner summary information to output with the checks
   .runnerSummary <- list(
     "registry" = .registry
     ,"timestamp" = .timestamp
@@ -29,8 +30,10 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.r
     ,"pullDate" = .dsPullDate
   )
   
+  # Generate a summary of the check results to output with the check results
   .checkSummary <- generateCheckSummary(.resultsOfChecks)
   
+  # Structure the output to be saved
   .outputToSave <- list(
     "runnerSummary" = .runnerSummary
     ,"checkSummary" = .checkSummary
@@ -38,11 +41,12 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.r
     ,"nonCriticalChecks" = .resultsOfChecks$nonCriticalCheckOutput
   )
   
-  # Save the results
-  # saveRDS(.runnerSummary,glue::glue("{.dataStoreUrl}/checks/summary/runnerSummary_{gsub('[^A-Za-z0-9_]', '_', .timestamp)}.rds"))
-  outputListings(
-                  .listingUrl = glue::glue("{.dataStoreUrl}{.timestamp}/listing")
+  # Save the listings as Excel files
+  outputListings(.listingUrl = glue::glue("{.dataStoreUrl}{.timestamp}/listing")
                   ,.timestamp = .timestamp
-                  ,.checksToOutput = .outputToSave)
+                  ,.checksToOutput = .outputToSave
+                 )
+  
+  # Save the .rds with results of the checks
   saveRDS(.outputToSave,glue::glue("{.dataStoreUrl}{.timestamp}/checks/{.resultsCheckName}.rds"))
 }

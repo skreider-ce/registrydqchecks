@@ -4,7 +4,11 @@
 #'
 #' @return Dataframe with a summary of the critical checks for the datasets
 generateCriticalCheckSummary <- function(.criticalChecksToSummarize){
+  
+  # Initialize the dataframe to store results of the critical check summary
   .criticalCheckSummary <- data.frame()
+  
+  # Loop through each of the critical checks and store the pass/fail results
   for(dsName in names(.criticalChecksToSummarize)){
     .newSummaryRow <- c(dsName)
     

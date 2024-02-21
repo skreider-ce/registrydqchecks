@@ -10,6 +10,7 @@ checkForAddedRows <- function(.dsToCheck,.compDsToCheck){
   
   # Counts and then returns the number of rows in the new vs old dataset and
   #     computes the proportion increase in rows and compares to a given value
+  # Define output list structure
   .returnOutput <- list(
     "checkId" = "cc5"
     ,"checkTitle" = "Reasonable volume of new rows"

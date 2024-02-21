@@ -29,6 +29,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                               ,.isR){
   
   ############################
+  # Initialize variable lists to house information on specific datasets being checked
   .codebooks <- list()
   .dataToCheck <- list()
   .dataToCompare <- list()
@@ -37,35 +38,45 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   .critCheckOutput <- list()
   .nonCritCheckOutput <- list()
   
+  # Loop through each dataset and perform the checks
   for(.dsName in .datasetsToCheck){
+    # Pull dataset specific codebook
     .codebooks[[.dsName]] <- pullCodebookFromExcelFile(.codebookUrl, .dsName)
+    
+    # Pull data to check and data from last month to compare it to
     .dataToCheck[[.dsName]] <- pullData(glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}"), .isR)
     .dataToCompare[[.dsName]] <- pullData(glue::glue("{.lastMonthDataFolderUrl}{.dsName}_{.lastMonthDataPullDate}"), .isR)
     
+    # Pull the unique keys for the specific dataset from the codebook
     .uniqueKeys[[.dsName]] <- .codebooks[[.dsName]] |>
       dplyr::filter(uniqueKey == 1) |>
       dplyr::select(varName)
     
+    # Pull the list of essential variables for the specific dataset from the codebook
     .essentialVariables[[.dsName]] <- .codebooks[[.dsName]] |>
       dplyr::filter(essential == 1) |>
       dplyr::select(varName, acceptableMissingness, nonExtremeMissingness)
     
-    .critCheckOutput[[.dsName]] <- criticalChecks(
-      data.frame(.dataToCheck[[.dsName]])
-      ,data.frame(.dataToCompare[[.dsName]])
-      ,.essentialVariables[[.dsName]]$varName
-      ,names(.dataToCompare[[.dsName]])
-      ,.uniqueKeys[[.dsName]]$varName)
+    # Run the critical checks on the specific dataset with information pulled from the codebook
+    .critCheckOutput[[.dsName]] <- criticalChecks(.dsToCheck = data.frame(.dataToCheck[[.dsName]])
+                                                  ,.compDsToCheck = data.frame(.dataToCompare[[.dsName]])
+                                                  ,.listOfEssentialVars = .essentialVariables[[.dsName]]$varName
+                                                  ,.listOfSupposedVars = names(.dataToCompare[[.dsName]])
+                                                  ,.uniqueKeys = .uniqueKeys[[.dsName]]$varName
+                                                  )
   }
-  
+
+  # Create a list of the critical check and the noncritical check output to be saved to a location  
   .checkOutput <- list(
     "criticalCheckOutput" = .critCheckOutput
     ,"nonCriticalCheckOutput" = .nonCriticalChecks
   )
   
+  # Define timestamp of this specific datapull
   .timestamp <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
   .formattedTimestamp <- gsub('[^A-Za-z0-9_]', '_', .timestamp)
   
+  # Submit check results to datastore - including a .rds and Excel files
   submitToDataStore(.registry = .registry
                     ,.dsPullDate = .prelimDataPullDate
                     ,.timestamp = .formattedTimestamp
@@ -73,11 +84,14 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                     ,.resultsOfChecks = .checkOutput
                     )
   
+  # Generate the html report
   registrydqchecksreportdown::generateReport(
     .inputDatasetUrl = glue::glue("{.outputUrl}{.formattedTimestamp}/checks/{.prelimDataPullDate}_{.formattedTimestamp}_checks.rds")
     ,.reportOutputUrl = glue::glue("{.outputUrl}{.formattedTimestamp}/")
     ,.fileName = glue::glue("{.prelimDataPullDate}_{.formattedTimestamp}_report")
   )
+  
+  # Run the shiny dashboard of the report
   registrydqchecksreport::runApplication(glue::glue("{.outputUrl}{.formattedTimestamp}/checks/"))
   
   return(.returnOutput)

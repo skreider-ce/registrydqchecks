@@ -17,6 +17,7 @@ checkForRemovedRows <- function(.dsToCheck,.compDsToCheck,.uniqueKey){
   # Create dataframe of rows in .compDsToCheck and not in .dsToCheck
   .inOldAndNotInNew <- dplyr::anti_join(.compDsToCheck,.dsToCheck,.uniqueKeys)
 
+  # Define output list structure
   .returnOutput <- list(
     "checkId" = "cc6"
     ,"checkTitle" = "Reasonable volume of disappearing rows"

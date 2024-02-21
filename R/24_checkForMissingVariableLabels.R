@@ -18,6 +18,7 @@ checkForMissingVariableLabels <- function(.dsToCheck){
   .variablesWithMissingLabels <- 
     purrr::map_lgl(.variableLabels, is.null)
   
+  # Define output list structure
   .returnOutput <- list(
     "checkId" = "cc4"
     ,"checkTitle" = "Zero unlabeled variables"
