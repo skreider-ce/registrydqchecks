@@ -26,7 +26,7 @@ generateNoncriticalCheckSummary <- function(.nonCriticalChecksToSummarize){
       .newSummaryCol <- c(.newSummaryCol, .currNoncritCheck$pass)
     }
     
-    .numFailedChecks <- sum(.newSummaryCol)
+    .numFailedChecks <- length(.newSummaryCol) - sum(.newSummaryCol)
     .numTotalChecks <- length(.newSummaryCol)
     .propFailed <- .numFailedChecks / .numTotalChecks
     .newSummaryCol <- c(dsName, .numFailedChecks, .numTotalChecks, .propFailed)
