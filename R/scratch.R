@@ -15,6 +15,11 @@
 # 
 
 
+
+
+
+# ncChecks <- readRDS("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - DQ Reports/ad/2024/2024-02-01/2024_02_21_10_53_03/checks/2024-02-01_2024_02_21_10_53_03_checks.rds")$nonCriticalChecks
+
 # 
 # 
 # library(registrydqchecksreport)
@@ -27,7 +32,7 @@
 #                   ,.lastMonthDataPullDate = "2023-11-03"
 #                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Registry Data QC Checks/Guidance Documentation/archive/desired codebook input format.xlsx"
 #                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
-#                   ,.nonCriticalChecks = NULL
+#                   ,.nonCriticalChecks = ncChecks
 #                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/store/ad/2023/2023-12-04/"
 #                   ,.isR = TRUE)
 
