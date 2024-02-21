@@ -1,6 +1,8 @@
 #' generateCriticalCheckSummary
 #'
 #' @param .criticalChecksToSummarize The critical checks to be summarized in the appropriate CE DQ format
+#' 
+#' @importFrom stats setNames
 #'
 #' @return Dataframe with a summary of the critical checks for the datasets
 generateCriticalCheckSummary <- function(.criticalChecksToSummarize){
@@ -25,7 +27,7 @@ generateCriticalCheckSummary <- function(.criticalChecksToSummarize){
         .newSummaryRow = c(.newSummaryRow, setNames(ifelse(.currCritCheck$pass, "Pass", "Fail"),check))
       }
     }
-    .criticalCheckSummary <- setNames(rbind(.criticalCheckSummary, .newSummaryRow), c("dataset", names(.critCheckList)))
+    .criticalCheckSummary <- stats::setNames(rbind(.criticalCheckSummary, .newSummaryRow), c("dataset", names(.critCheckList)))
   }
   
   return(.criticalCheckSummary)

@@ -38,7 +38,7 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
   
   # Reorder the listing output to be sorted in descending order by amount of missingness
   .listOfVarMissingness <- .listOfVarMissingness |>
-    dplyr::arrange(desc(propMissing))
+    dplyr::arrange(dplyr::desc(propMissing))
 
   # Define output list structure
   .returnOutput <- list(
