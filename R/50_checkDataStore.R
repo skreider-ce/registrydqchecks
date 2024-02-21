@@ -31,7 +31,7 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.r
   )
   
   # Generate a summary of the check results to output with the check results
-  .checkSummary <- generateCheckSummary(.resultsOfChecks)
+  .checkSummary <- generateCheckSummary(.resultsOfChecks = .resultsOfChecks)
   
   # Structure the output to be saved
   .outputToSave <- list(

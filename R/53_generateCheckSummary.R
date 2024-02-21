@@ -6,12 +6,15 @@
 generateCheckSummary <- function(.resultsOfChecks){
 
   # Generate a summary of the critical checks
-  .critCheckSummary <- generateCriticalCheckSummary(.resultsOfChecks$criticalCheckOutput)
+  .critCheckSummary <- generateCriticalCheckSummary(.criticalChecksToSummarize = .resultsOfChecks$criticalCheckOutput)
+  
+  # Generate a summary of the noncritical checks
+  .nonCritCheckSummary <- generateNoncriticalCheckSummary(.nonCriticalChecksToSummarize = .resultsOfChecks$nonCriticalCheckOutput)
   
   # Define the structure of the summary object to be saved with the .rds
   .checkSummary = list(
     "criticalCheckSummary" = .critCheckSummary
-    ,"nonCriticalCheckSummary" = NULL
+    ,"nonCriticalCheckSummary" = .nonCritCheckSummary
   )
   
   return(.checkSummary)  
