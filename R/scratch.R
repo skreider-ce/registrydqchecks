@@ -32,7 +32,7 @@ runRegistryChecks(.registry = "ad"
                   ,.lastMonthDataPullDate = "2023-11-03"
                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-02-01/AD_codebook_2024-02-01.xlsx"
                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
-                  ,.nonCriticalChecks = ncChecks
+                  ,.nonCriticalChecks = NULL
                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/store/"
                   ,.isR = TRUE)
 

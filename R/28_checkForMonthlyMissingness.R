@@ -31,36 +31,51 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
     
     .currEssentialVariable <- .listOfEssentialVars |>
       filter(varName == .var)
-    
-    # Generate the number of rows, the number of missing, and the proportion for the check dataset
-    if(is.na(.currEssentialVariable$skipLogic)){
-      .nRows <- nrow(.dsToCheck)
-      .nMissing <-
-        sum(is.na(.dsToCheck[[.var]]))
-    } else {
-      .subsetDsToCheck <- .dsToCheck |>
-        dplyr::filter(eval(parse(text = .currEssentialVariable$skipLogic)))
-      .nRows <- nrow(.subsetDsToCheck)
-      .nMissing <-
-        sum(is.na(.subsetDsToCheck[[.var]]))
-    }
 
-    .propMissing = .nMissing / .nRows
+    tryCatch({
+      
+      # Generate the number of rows, the number of missing, and the proportion for the check dataset
+      if(is.na(.currEssentialVariable$skipLogic)){
+        .nRows <- nrow(.dsToCheck)
+        .nMissing <-
+          sum(is.na(.dsToCheck[[.var]]))
+      } else {
+        .subsetDsToCheck <- .dsToCheck |>
+          dplyr::filter(eval(parse(text = .currEssentialVariable$skipLogic)))
+        .nRows <- nrow(.subsetDsToCheck)
+        .nMissing <-
+          sum(is.na(.subsetDsToCheck[[.var]]))
+      }
+      
+      .propMissing = .nMissing / .nRows
+      
+      # Generate the number of rows, the number of missing, and the proportion for the comparator dataset
+      if(is.na(.currEssentialVariable$skipLogic)){
+        .nRowsComp <- nrow(.compDsToCheck)
+        .nMissingComp <-
+          sum(is.na(.compDsToCheck[[.var]]))
+      } else {
+        .subsetDsToCheck <- .compDsToCheck |>
+          dplyr::filter(eval(parse(text = .currEssentialVariable$skipLogic)))
+        .nRowsComp <- nrow(.subsetDsToCheck)
+        .nMissingComp <-
+          sum(is.na(.subsetDsToCheck[[.var]]))
+      }
+      
+      .propMissingComp = .nMissingComp / .nRowsComp
+      
+    }, error = function(e){
+      .nRows <- NA
+      .nMissing <- NA
+      .propMissing <- NA
+      
+      .nRowsComp <- NA
+      .nMissingComp <- NA
+      .propMissingComp <- NA
+      print(paste0("Error occurred while evaluating expression: ", .currEssentialVariable$skipLogic))
+      print(e)
+    })
 
-    # Generate the number of rows, the number of missing, and the proportion for the comparator dataset
-    if(is.na(.currEssentialVariable$skipLogic)){
-      .nRowsComp <- nrow(.compDsToCheck)
-      .nMissingComp <-
-        sum(is.na(.compDsToCheck[[.var]]))
-    } else {
-      .subsetDsToCheck <- .compDsToCheck |>
-        dplyr::filter(eval(parse(text = .currEssentialVariable$skipLogic)))
-      .nRowsComp <- nrow(.subsetDsToCheck)
-      .nMissingComp <-
-        sum(is.na(.subsetDsToCheck[[.var]]))
-    }
-
-    .propMissingComp = .nMissingComp / .nRowsComp
     
     
     # Build the row to add to the dataframe
