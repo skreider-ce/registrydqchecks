@@ -33,13 +33,13 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
       filter(varName == .var)
     
     # Generate the number of rows, the number of missing, and the proportion for the check dataset
-    if(.currEssentialVariable$skipLogic == ""){
+    if(is.na(.currEssentialVariable$skipLogic)){
       .nRows <- nrow(.dsToCheck)
       .nMissing <-
         sum(is.na(.dsToCheck[[.var]]))
     } else {
       .subsetDsToCheck <- .dsToCheck |>
-        dplyr::filter(eval(parse(text = skipLogic)))
+        dplyr::filter(eval(parse(text = .currEssentialVariable$skipLogic)))
       .nRows <- nrow(.subsetDsToCheck)
       .nMissing <-
         sum(is.na(.subsetDsToCheck[[.var]]))
@@ -48,13 +48,13 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
     .propMissing = .nMissing / .nRows
 
     # Generate the number of rows, the number of missing, and the proportion for the comparator dataset
-    if(.currEssentialVariable$skipLogic == ""){
+    if(is.na(.currEssentialVariable$skipLogic)){
       .nRowsComp <- nrow(.compDsToCheck)
       .nMissingComp <-
         sum(is.na(.compDsToCheck[[.var]]))
     } else {
       .subsetDsToCheck <- .compDsToCheck |>
-        dplyr::filter(eval(parse(text = skipLogic)))
+        dplyr::filter(eval(parse(text = .currEssentialVariable$skipLogic)))
       .nRowsComp <- nrow(.subsetDsToCheck)
       .nMissingComp <-
         sum(is.na(.subsetDsToCheck[[.var]]))
