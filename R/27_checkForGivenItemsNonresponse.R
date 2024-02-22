@@ -27,9 +27,17 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
     .currEssentialVariable <- .listOfEssentialVars |>
       filter(varName == .var)
     
-    .nRows <- nrow(.dsToCheck)
-    .nMissing <-
-      sum(is.na(.dsToCheck[[.var]]))
+    if(.currEssentialVariable$skipLogic == ""){
+      .nRows <- nrow(.dsToCheck)
+      .nMissing <-
+        sum(is.na(.dsToCheck[[.var]]))
+    } else {
+      .subsetDsToCheck <- .dsToCheck |>
+        dplyr::filter(eval(parse(text = skipLogic)))
+      .nRows <- nrow(.subsetDsToCheck)
+      .nMissing <-
+        sum(is.na(.subsetDsToCheck[[.var]]))
+    }
 
     .propMissing = .nMissing / .nRows
     
