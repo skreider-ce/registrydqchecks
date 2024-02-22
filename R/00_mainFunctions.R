@@ -55,7 +55,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
     # Pull the list of essential variables for the specific dataset from the codebook
     .essentialVariables[[.dsName]] <- .codebooks[[.dsName]] |>
       dplyr::filter(essential == 1) |>
-      dplyr::select(varName, acceptableMissingness, nonExtremeMissingness)
+      dplyr::select(varName, acceptableMissingness, nonExtremeMissingness, missingnessThresholdMultiplier)
     
     # Run the critical checks on the specific dataset with information pulled from the codebook
     .critCheckOutput[[.dsName]] <- criticalChecks(.dsToCheck = data.frame(.dataToCheck[[.dsName]])
