@@ -26,10 +26,10 @@
 # library(registrydqchecksreportdown)
 # library(registrydqchecks)
 runRegistryChecks(.registry = "ad"
-                  ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2023/2023-12-04/"
-                  ,.prelimDataPullDate = "2023-12-04"
-                  ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2023/2023-11-03/"
-                  ,.lastMonthDataPullDate = "2023-11-03"
+                  ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-02-01/"
+                  ,.prelimDataPullDate = "2024-02-01"
+                  ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-01-04/"
+                  ,.lastMonthDataPullDate = "2024-01-04"
                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-02-01/AD_codebook_2024-02-01.xlsx"
                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
                   ,.nonCriticalChecks = NULL

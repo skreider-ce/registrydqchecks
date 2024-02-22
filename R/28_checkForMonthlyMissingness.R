@@ -72,8 +72,8 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
       .nRowsComp <- NA
       .nMissingComp <- NA
       .propMissingComp <- NA
+      print(.var)
       print(paste0("Error occurred while evaluating expression: ", .currEssentialVariable$skipLogic))
-      print(e)
     })
 
     

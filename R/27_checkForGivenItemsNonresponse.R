@@ -48,8 +48,8 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
       .nMissing <- NA
       .propMissing <- NA
       
+      print(.var)
       print(paste0("Error occurred while evaluating expression: ", .currEssentialVariable$skipLogic))
-      print(e)
     })
     
     # Build the row to add to the dataframe
