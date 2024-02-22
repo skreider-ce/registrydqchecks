@@ -20,10 +20,17 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
     ,nRowsComp = integer()
     ,nMissingComp = integer()
     ,propMissingComp = numeric()
+    ,acceptableMissingness = numeric()
+    ,nonExtremeMissingness = numeric()
+    ,missingnessThresholdMultiplier = numeric()
+    ,skipLogic = character()
   )
   
   # Loop through the given variables and add a row to the dataframe
-  for(.var in .listOfEssentialVars){
+  for(.var in .listOfEssentialVars$varName){
+    
+    .currEssentialVariable <- .listOfEssentialVars |>
+      filter(varName == .var)
     
     # Generate the number of rows, the number of missing, and the proportion for the dataset
     .nRows <- nrow(.dsToCheck)
@@ -48,7 +55,12 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
       ,propMissing = .propMissing
       ,nRowsComp = .nRowsComp
       ,nMissingComp = .nMissingComp
-      ,propMissingComp = .propMissingComp)
+      ,propMissingComp = .propMissingComp
+      ,acceptableMissingness = .currEssentialVariable$acceptableMissingness
+      ,nonExtremeMissingness = .currEssentialVariable$nonExtremeMissingness
+      ,missingnessThresholdMultiplier = .currEssentialVariable$missingnessThresholdMultiplier
+      ,skipLogic = .currEssentialVariable$skipLogic
+      )
     
     .listOfVarMissingness <- dplyr::bind_rows(.listOfVarMissingness,.varMissingRow)
   }

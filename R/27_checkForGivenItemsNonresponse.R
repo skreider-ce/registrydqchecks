@@ -16,10 +16,17 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
     ,nRows = integer()
     ,nMissing = integer()
     ,propMissing = numeric()
+    ,acceptableMissingness = numeric()
+    ,nonExtremeMissingness = numeric()
+    ,missingnessThresholdMultiplier = numeric()
+    ,skipLogic = character()
   )
 
   # Loop through the given variables and add a row to the dataframe
-  for(.var in .listOfEssentialVars){
+  for(.var in .listOfEssentialVars$varName){
+    .currEssentialVariable <- .listOfEssentialVars |>
+      filter(varName == .var)
+    
     .nRows <- nrow(.dsToCheck)
     .nMissing <-
       sum(is.na(.dsToCheck[[.var]]))
@@ -31,7 +38,12 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
       varName = .var
       ,nRows = .nRows
       ,nMissing = .nMissing
-      ,propMissing = .propMissing)
+      ,propMissing = .propMissing
+      ,acceptableMissingness = .currEssentialVariable$acceptableMissingness
+      ,nonExtremeMissingness = .currEssentialVariable$nonExtremeMissingness
+      ,missingnessThresholdMultiplier = .currEssentialVariable$missingnessThresholdMultiplier
+      ,skipLogic = .currEssentialVariable$skipLogic
+      )
     
     .listOfVarMissingness <- dplyr::bind_rows(.listOfVarMissingness,.varMissingRow)
   }
