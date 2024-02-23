@@ -20,24 +20,62 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
     ,nRowsComp = integer()
     ,nMissingComp = integer()
     ,propMissingComp = numeric()
+    ,acceptableMissingness = numeric()
+    ,nonExtremeMissingness = numeric()
+    ,missingnessThresholdMultiplier = numeric()
+    ,skipLogic = character()
   )
   
   # Loop through the given variables and add a row to the dataframe
-  for(.var in .listOfEssentialVars){
+  for(.var in .listOfEssentialVars$varName){
     
-    # Generate the number of rows, the number of missing, and the proportion for the dataset
-    .nRows <- nrow(.dsToCheck)
-    .nMissing <-
-      sum(is.na(.dsToCheck[[.var]]))
-    
-    .propMissing = .nMissing / .nRows
-    
-    # Generate the number of rows, the number of missing, and the proportion for the comparator dataset
-    .nRowsComp <- nrow(.compDsToCheck)
-    .nMissingComp <-
-      sum(is.na(.compDsToCheck[[.var]]))
-    
-    .propMissingComp = .nMissingComp / .nRowsComp
+    .currEssentialVariable <- .listOfEssentialVars |>
+      filter(varName == .var)
+
+    tryCatch({
+      
+      # Generate the number of rows, the number of missing, and the proportion for the check dataset
+      if(is.na(.currEssentialVariable$skipLogic)){
+        .nRows <- nrow(.dsToCheck)
+        .nMissing <-
+          sum(is.na(.dsToCheck[[.var]]))
+      } else {
+        .subsetDsToCheck <- .dsToCheck |>
+          dplyr::filter(eval(parse(text = .currEssentialVariable$skipLogic)))
+        .nRows <- nrow(.subsetDsToCheck)
+        .nMissing <-
+          sum(is.na(.subsetDsToCheck[[.var]]))
+      }
+      
+      .propMissing = .nMissing / .nRows
+      
+      # Generate the number of rows, the number of missing, and the proportion for the comparator dataset
+      if(is.na(.currEssentialVariable$skipLogic)){
+        .nRowsComp <- nrow(.compDsToCheck)
+        .nMissingComp <-
+          sum(is.na(.compDsToCheck[[.var]]))
+      } else {
+        .subsetDsToCheck <- .compDsToCheck |>
+          dplyr::filter(eval(parse(text = .currEssentialVariable$skipLogic)))
+        .nRowsComp <- nrow(.subsetDsToCheck)
+        .nMissingComp <-
+          sum(is.na(.subsetDsToCheck[[.var]]))
+      }
+      
+      .propMissingComp = .nMissingComp / .nRowsComp
+      
+    }, error = function(e){
+      .nRows <- NA
+      .nMissing <- NA
+      .propMissing <- NA
+      
+      .nRowsComp <- NA
+      .nMissingComp <- NA
+      .propMissingComp <- NA
+      print(.var)
+      print(paste0("Error occurred while evaluating expression: ", .currEssentialVariable$skipLogic))
+    })
+
     
     
     # Build the row to add to the dataframe
@@ -48,7 +86,12 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
       ,propMissing = .propMissing
       ,nRowsComp = .nRowsComp
       ,nMissingComp = .nMissingComp
-      ,propMissingComp = .propMissingComp)
+      ,propMissingComp = .propMissingComp
+      ,acceptableMissingness = .currEssentialVariable$acceptableMissingness
+      ,nonExtremeMissingness = .currEssentialVariable$nonExtremeMissingness
+      ,missingnessThresholdMultiplier = .currEssentialVariable$missingnessThresholdMultiplier
+      ,skipLogic = .currEssentialVariable$skipLogic
+      )
     
     .listOfVarMissingness <- dplyr::bind_rows(.listOfVarMissingness,.varMissingRow)
   }

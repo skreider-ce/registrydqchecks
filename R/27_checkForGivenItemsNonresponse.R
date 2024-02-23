@@ -16,22 +16,53 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
     ,nRows = integer()
     ,nMissing = integer()
     ,propMissing = numeric()
+    ,acceptableMissingness = numeric()
+    ,nonExtremeMissingness = numeric()
+    ,missingnessThresholdMultiplier = numeric()
+    ,skipLogic = character()
   )
 
   # Loop through the given variables and add a row to the dataframe
-  for(.var in .listOfEssentialVars){
-    .nRows <- nrow(.dsToCheck)
-    .nMissing <-
-      sum(is.na(.dsToCheck[[.var]]))
+  for(.var in .listOfEssentialVars$varName){
+    
+    .currEssentialVariable <- .listOfEssentialVars |>
+      dplyr::filter(varName == .var)
 
-    .propMissing = .nMissing / .nRows
+    tryCatch({
+      if(is.na(.currEssentialVariable$skipLogic)){
+        .nRows <- nrow(.dsToCheck)
+        .nMissing <-
+          sum(is.na(.dsToCheck[[.var]]))
+      } else {
+        .subsetDsToCheck <- .dsToCheck |>
+          dplyr::filter(eval(parse(text = .currEssentialVariable$skipLogic)))
+        .nRows <- nrow(.subsetDsToCheck)
+        .nMissing <-
+          sum(is.na(.subsetDsToCheck[[.var]]))
+      }
+      
+      .propMissing = .nMissing / .nRows
+      
+    }, error = function(e){
+      .nRows <- NA
+      .nMissing <- NA
+      .propMissing <- NA
+      
+      print(.var)
+      print(paste0("Error occurred while evaluating expression: ", .currEssentialVariable$skipLogic))
+    })
     
     # Build the row to add to the dataframe
     .varMissingRow <- data.frame(
       varName = .var
       ,nRows = .nRows
       ,nMissing = .nMissing
-      ,propMissing = .propMissing)
+      ,propMissing = .propMissing
+      ,acceptableMissingness = .currEssentialVariable$acceptableMissingness
+      ,nonExtremeMissingness = .currEssentialVariable$nonExtremeMissingness
+      ,missingnessThresholdMultiplier = .currEssentialVariable$missingnessThresholdMultiplier
+      ,skipLogic = .currEssentialVariable$skipLogic
+      )
     
     .listOfVarMissingness <- dplyr::bind_rows(.listOfVarMissingness,.varMissingRow)
   }

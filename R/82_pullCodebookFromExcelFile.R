@@ -14,19 +14,24 @@ pullCodebookFromExcelFile <- function(.fileUrl,.sheetName){
   .colNames <- c(
     "varName"
     ,"varLabel"
-    ,"catValues"
-    ,"numRangeLower"
-    ,"numRangeUpper"
+    ,"values_to_check"
+    ,"bounds_to_check"
     ,"uniqueKey"
     ,"essential"
     ,"acceptableMissingness"
     ,"nonExtremeMissingness"
-    ,"requiredNonMissing"
+    ,"missingnessThresholdMultiplier"
+    ,"skipLogic"
   )
   
   .pulledVars <- readxl::read_xlsx(.fileUrl
                                    ,sheet = .sheetName)
+  
+  .pulledVars <- .pulledVars |>
+    dplyr::rename(
+      varName = `Analytic File Variable name`
+      ,varLabel = `Analytic Variable label`
+    )
 
   return(.pulledVars[.colNames])
 }
-
