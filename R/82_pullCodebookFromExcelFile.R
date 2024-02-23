@@ -14,8 +14,8 @@ pullCodebookFromExcelFile <- function(.fileUrl,.sheetName){
   .colNames <- c(
     "varName"
     ,"varLabel"
-    ,"values_to_check"
-    ,"bounds_to_check"
+    ,"catValues"
+    ,"numRange"
     ,"uniqueKey"
     ,"essential"
     ,"acceptableMissingness"
