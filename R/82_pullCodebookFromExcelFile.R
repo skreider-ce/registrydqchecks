@@ -29,7 +29,7 @@ pullCodebookFromExcelFile <- function(.fileUrl,.sheetName){
   
   .pulledVars <- .pulledVars |>
     dplyr::rename(
-      varName = `Analytic File Variable name`
+      varName = `Analytic Variable name`
       ,varLabel = `Analytic Variable label`
     )
 
