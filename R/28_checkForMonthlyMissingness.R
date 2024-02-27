@@ -101,10 +101,8 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
     dplyr::arrange(dplyr::desc(propMissing)) |>
     dplyr::mutate(
       passMissing = ifelse(propMissing < acceptableMissingness * missingnessThresholdMultiplier, TRUE, FALSE)
-    )
-  
-  .listOfVarMissingness <- .listOfVarMissingness |>
-    dplyr::select(passMissing == FALSE)
+    ) |>
+    dplyr::filter(passMissing == FALSE)
   
   # Define output list structure
   .returnOutput <- list(

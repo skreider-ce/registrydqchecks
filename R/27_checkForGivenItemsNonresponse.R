@@ -72,11 +72,9 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
     dplyr::arrange(dplyr::desc(propMissing)) |>
     dplyr::mutate(
       passMissing = ifelse(propMissing < nonExtremeMissingness, TRUE, FALSE)
-    )
+    ) |>
+    dplyr::filter(passMissing == FALSE)
   
-  .listOfVarMissingness <- .listOfVarMissingness |>
-    dplyr::select(passMissing == FALSE)
-
   # Define output list structure
   .returnOutput <- list(
     "checkId" = "cc7"
