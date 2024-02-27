@@ -13,17 +13,17 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
   
   # Initialize the dataframe that will be returned
   .listOfVarMissingness <- data.frame(
-    varName = character()
-    ,nRows = integer()
-    ,nMissing = integer()
-    ,propMissing = numeric()
-    ,nRowsComp = integer()
-    ,nMissingComp = integer()
-    ,propMissingComp = numeric()
-    ,acceptableMissingness = numeric()
-    ,nonExtremeMissingness = numeric()
-    ,missingnessThresholdMultiplier = numeric()
-    ,skipLogic = character()
+    "varName" = character()
+    ,"nRows" = integer()
+    ,"nMissing" = integer()
+    ,"propMissing" = numeric()
+    ,"nRowsComp" = integer()
+    ,"nMissingComp" = integer()
+    ,"propMissingComp" = numeric()
+    ,"acceptableMissingness" = numeric()
+    ,"nonExtremeMissingness" = numeric()
+    ,"missingnessThresholdMultiplier" = numeric()
+    ,"skipLogic" = character()
   )
   
   # Loop through the given variables and add a row to the dataframe
@@ -80,17 +80,17 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
     
     # Build the row to add to the dataframe
     .varMissingRow <- data.frame(
-      varName = .var
-      ,nRows = .nRows
-      ,nMissing = .nMissing
-      ,propMissing = .propMissing
-      ,nRowsComp = .nRowsComp
-      ,nMissingComp = .nMissingComp
-      ,propMissingComp = .propMissingComp
-      ,acceptableMissingness = .currEssentialVariable$acceptableMissingness
-      ,nonExtremeMissingness = .currEssentialVariable$nonExtremeMissingness
-      ,missingnessThresholdMultiplier = .currEssentialVariable$missingnessThresholdMultiplier
-      ,skipLogic = .currEssentialVariable$skipLogic
+      "varName" = .var
+      ,"nRows" = .nRows
+      ,"nMissing" = .nMissing
+      ,"propMissing" = .propMissing
+      ,"nRowsComp" = .nRowsComp
+      ,"nMissingComp" = .nMissingComp
+      ,"propMissingComp" = .propMissingComp
+      ,"acceptableMissingness" = .currEssentialVariable$acceptableMissingness
+      ,"nonExtremeMissingness" = .currEssentialVariable$nonExtremeMissingness
+      ,"missingnessThresholdMultiplier" = .currEssentialVariable$missingnessThresholdMultiplier
+      ,"skipLogic" = .currEssentialVariable$skipLogic
       )
     
     .listOfVarMissingness <- dplyr::bind_rows(.listOfVarMissingness,.varMissingRow)
@@ -98,7 +98,11 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
   
   # Reorder the listing output to be sorted in descending order by amount of missingness
   .listOfVarMissingness <- .listOfVarMissingness |>
-    dplyr::arrange(dplyr::desc(propMissing))
+    dplyr::arrange(dplyr::desc(propMissing)) |>
+    dplyr::mutate(
+      passMissing = ifelse(abs(propMissing - propMissingComp) <= (acceptableMissingness * missingnessThresholdMultiplier), TRUE, FALSE)
+    ) |>
+    dplyr::filter(passMissing == FALSE)
   
   # Define output list structure
   .returnOutput <- list(
@@ -106,7 +110,7 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
     ,"checkTitle" = "MoM (month over month) change in item nonresponse is reasonable for a subset of variables called essential."
     ,"checkDescription" = "Confirm that jump in item nonresponse from prior month to current month for essential variables is below a specified threshold for reasonable item nonresponse."
     ,"checkShortDescription" = "month to month missingness"
-    ,"pass" = TRUE
+    ,"pass" = ifelse(nrow(.listOfVarMissingness) > 0, FALSE, TRUE)
     ,"essentialVariablesMissingness" = .listOfVarMissingness
   )
   

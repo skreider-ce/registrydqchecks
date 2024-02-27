@@ -12,14 +12,14 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
   
   # Initialize the dataframe that will be returned
   .listOfVarMissingness <- data.frame(
-    varName = character()
-    ,nRows = integer()
-    ,nMissing = integer()
-    ,propMissing = numeric()
-    ,acceptableMissingness = numeric()
-    ,nonExtremeMissingness = numeric()
-    ,missingnessThresholdMultiplier = numeric()
-    ,skipLogic = character()
+    "varName" = character()
+    ,"nRows" = integer()
+    ,"nMissing" = integer()
+    ,"propMissing" = numeric()
+    ,"acceptableMissingness" = numeric()
+    ,"nonExtremeMissingness" = numeric()
+    ,"missingnessThresholdMultiplier" = numeric()
+    ,"skipLogic" = character()
   )
 
   # Loop through the given variables and add a row to the dataframe
@@ -54,14 +54,14 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
     
     # Build the row to add to the dataframe
     .varMissingRow <- data.frame(
-      varName = .var
-      ,nRows = .nRows
-      ,nMissing = .nMissing
-      ,propMissing = .propMissing
-      ,acceptableMissingness = .currEssentialVariable$acceptableMissingness
-      ,nonExtremeMissingness = .currEssentialVariable$nonExtremeMissingness
-      ,missingnessThresholdMultiplier = .currEssentialVariable$missingnessThresholdMultiplier
-      ,skipLogic = .currEssentialVariable$skipLogic
+      "varName" = .var
+      ,"nRows" = .nRows
+      ,"nMissing" = .nMissing
+      ,"propMissing" = .propMissing
+      ,"acceptableMissingness" = .currEssentialVariable$acceptableMissingness
+      ,"nonExtremeMissingness" = .currEssentialVariable$nonExtremeMissingness
+      ,"missingnessThresholdMultiplier" = .currEssentialVariable$missingnessThresholdMultiplier
+      ,"skipLogic" = .currEssentialVariable$skipLogic
       )
     
     .listOfVarMissingness <- dplyr::bind_rows(.listOfVarMissingness,.varMissingRow)
@@ -69,15 +69,19 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
   
   # Reorder the listing output to be sorted in descending order by amount of missingness
   .listOfVarMissingness <- .listOfVarMissingness |>
-    dplyr::arrange(dplyr::desc(propMissing))
-
+    dplyr::arrange(dplyr::desc(propMissing)) |>
+    dplyr::mutate(
+      passMissing = ifelse(propMissing < nonExtremeMissingness, TRUE, FALSE)
+    ) |>
+    dplyr::filter(passMissing == FALSE)
+  
   # Define output list structure
   .returnOutput <- list(
     "checkId" = "cc7"
     ,"checkTitle" = "Item nonresponse for essential variables is not extreme"
     ,"checkDescription" = "Confirm that item nonresponse for essential variables is below a specified threshold."
     ,"checkShortDescription" = "item missingness"
-    ,"pass" = TRUE
+    ,"pass" = ifelse(nrow(.listOfVarMissingness) > 0, FALSE, TRUE)
     ,"essentialVariablesMissingness" = .listOfVarMissingness
   )
   
