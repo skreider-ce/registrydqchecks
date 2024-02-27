@@ -23,7 +23,7 @@ checkForRemovedRows <- function(.dsToCheck,.compDsToCheck,.uniqueKey){
     ,"checkTitle" = "Reasonable volume of disappearing rows"
     ,"checkDescription" = "For each analytic file, confirm that the volume of disappearing rows is below a prespecified threshold. "
     ,"checkShortDescription" = "removed rows"
-    ,"pass" = TRUE
+    ,"pass" = ifelse(nrow(.inOldAndNotInNew) > 0, FALSE, TRUE)
     ,"nRemovedRows" = nrow(.inOldAndNotInNew)
     ,"inOldAndNotInNew" = .inOldAndNotInNew[,.uniqueKeys]
   )
