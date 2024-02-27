@@ -74,7 +74,7 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
       passMissing = ifelse(propMissing < nonExtremeMissingness, TRUE, FALSE)
     )
   
-  .listOfVarMissingness |>
+  .listOfVarMissingness <- .listOfVarMissingness |>
     dplyr::select(passMissing == FALSE)
 
   # Define output list structure
