@@ -2,5 +2,5 @@
 #'
 #' @return Results of the check
 runNumericRangeChecks <- function(){
-  return(.checkOutput)
+  return(NULL)
 }
