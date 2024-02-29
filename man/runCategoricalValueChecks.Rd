@@ -4,7 +4,7 @@
 \alias{runCategoricalValueChecks}
 \title{runCategoricalValueChecks Run a check to ensure categorical variables have the appropriate values}
 \usage{
-runCategoricalValueChecks()
+runCategoricalValueChecks(.dsName, .dsToCheck, .codebookVariables, .uniqueKeys)
 }
 \value{
 Results of the check

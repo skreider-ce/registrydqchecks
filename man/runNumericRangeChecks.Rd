@@ -4,7 +4,7 @@
 \alias{runNumericRangeChecks}
 \title{runNumericRangeChecks Run a check to ensure numeric variables fall within an appropriate range}
 \usage{
-runNumericRangeChecks()
+runNumericRangeChecks(.dsName, .dsToCheck, .codebookVariables, .uniqueKeys)
 }
 \value{
 Results of the check

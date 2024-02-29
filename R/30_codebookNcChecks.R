@@ -9,9 +9,15 @@
 codebookNcChecks <- function(.dsName
                              ,.dsToCheck
                              ,.compDsToCheck
-                             ,.codebookVariables){
+                             ,.codebookVariables
+                             ,.uniqueKeys){
 
-  .ncCheck1 <- runRangeAndValueChecks()
+  # varName, essential, acceptableMissingness, missingnessThresholdMultiplier, skipLogic, catValues, numRange
+  
+  .ncCheck1 <- runRangeAndValueChecks(.dsName = .dsName
+                                      ,.dsToCheck = .dsToCheck
+                                      ,.codebookVariables = .codebookVariables
+                                      ,.uniqueKeys = .uniqueKeys)
   .ncCheck2 <- runNoMissingsCheck()
   .ncCheck3 <- runReasonableMissingnessCheck()
   .ncCheck4 <- runMonthlyMissingnessCheck()

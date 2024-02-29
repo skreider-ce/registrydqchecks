@@ -1,6 +1,51 @@
 #' runNumericRangeChecks Run a check to ensure numeric variables fall within an appropriate range
 #'
 #' @return Results of the check
-runNumericRangeChecks <- function(){
-  return(NULL)
+runNumericRangeChecks <- function(.dsName
+                                  ,.dsToCheck
+                                  ,.codebookVariables
+                                  ,.uniqueKeys){
+  
+  # Pull off all the numeric variables indicated with a range in the codebook
+  .varsToCheck <- .codebookVariables |>
+    dplyr::filter(!is.na(numRange)) |>
+    dplyr::select(varName, numRange) |>
+    dplyr::mutate(
+      numRangeLower = as.numeric(sub("\\[(.*),.*\\]", "\\1", numRange))
+      ,numRangeUpper = as.numeric(sub("\\[.*,(.*)\\]", "\\1", numRange))
+    )
+  
+  .numericRangeChecks <- data.frame()
+  
+  # Loop through each numeric variable and perform the range checks
+  for(.varName1 in .varsToCheck$varName){
+    .currentCheckVar <- .varsToCheck |>
+      dplyr::filter(varName == {{.varName1}})
+
+    .subsetDsToCheck <- .dsToCheck |>
+      dplyr::select(all_of(.uniqueKeys), {{.varName1}}) |>
+      dplyr::filter(!is.na({{.varName1}})) |>
+      dplyr::filter({{.varName1}} < .currentCheckVar$numRangeLower | {{.varName1}} > .currentCheckVar$numRangeUpper) |>
+      dplyr::mutate(
+        dataset = .dsName
+        ,variableName = .varName1
+        ,expectedUpper = .currentCheckVar$numRangeLower
+        ,expectedLower = .currentCheckVar$numRangeUpper
+      ) |>
+      dplyr::rename(
+        value = !!{{.varName1}}
+      )
+    
+    .numericRangeChecks <- rbind(.numericRangeChecks, .subsetDsToCheck)
+  }
+
+  return(.numericRangeChecks)
 }
+
+
+
+# runNumericRangeChecks(.dsName
+#                       ,.dsToCheck
+#                       ,.codebookVariables
+#                       ,.uniqueKeys)
+# .dsName = "exvisit"

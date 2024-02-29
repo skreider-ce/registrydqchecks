@@ -41,8 +41,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   .nonCritCheckOutput <- list()
   .ncChecks <- list()
   
-  
-  # Loop through each dataset and perform the checks
+    # Loop through each dataset and perform the checks
   for(.dsName in .datasetsToCheck){
     # Pull dataset specific codebook
     .codebooks[[.dsName]] <- pullCodebookFromExcelFile(.codebookUrl, .dsName)
@@ -63,7 +62,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
     
     # Pull the codebook noncritical check variables for the specific dataset from the codebook
     .codebookVariables[[.dsName]] <- .codebooks[[.dsName]] |>
-      dplyr::select(varName, acceptableMissingness, missingnessThresholdMultiplier, skipLogic, catValues, numRange)
+      dplyr::select(varName, essential, acceptableMissingness, missingnessThresholdMultiplier, skipLogic, catValues, numRange)
     
     # Run the critical checks on the specific dataset with information pulled from the codebook
     .critCheckOutput[[.dsName]] <- criticalChecks(.dsToCheck = data.frame(.dataToCheck[[.dsName]])
@@ -77,7 +76,8 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
     .codebookNcOutput[[.dsName]] <- codebookNcChecks(.dsName = .dsName
                                                      ,.dsToCheck = data.frame(.dataToCheck[[.dsName]])
                                                      ,.compDsToCheck = data.frame(.dataToCompare[[.dsName]])
-                                                     ,.codebookVariables[[.dsName]]
+                                                     ,.codebookVariables = .codebookVariables[[.dsName]]
+                                                     ,.uniqueKeys = .uniqueKeys[[.dsName]]$varName
                                                      )
     
     # Add codebook noncritical checks to the noncritical check output

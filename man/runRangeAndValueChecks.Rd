@@ -4,7 +4,7 @@
 \alias{runRangeAndValueChecks}
 \title{runRangeAndValueChecks Run nc1 which checks the numeric and categorical variables against their supposed values}
 \usage{
-runRangeAndValueChecks()
+runRangeAndValueChecks(.dsName, .dsToCheck, .codebookVariables, .uniqueKeys)
 }
 \value{
 The results of the numeric range and categorical value checks

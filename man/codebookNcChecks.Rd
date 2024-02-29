@@ -4,7 +4,13 @@
 \alias{codebookNcChecks}
 \title{codebookNcChecks Run the codebook-specific noncritical checks and return the values}
 \usage{
-codebookNcChecks(.dsName, .dsToCheck, .compDsToCheck, .codebookVariables)
+codebookNcChecks(
+  .dsName,
+  .dsToCheck,
+  .compDsToCheck,
+  .codebookVariables,
+  .uniqueKeys
+)
 }
 \arguments{
 \item{.dsName}{Name of the dataset being checked}
