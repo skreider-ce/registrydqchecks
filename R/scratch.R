@@ -15,43 +15,43 @@
 # 
 
 
-.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
-
-checks <- readRDS("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - DQ Reports/ad/2024/2024-02-01/2024_02_28_10_17_36/checks/2024-02-01_2024_02_28_10_17_36_checks.rds")
-manualNcChecks <- checks$nonCriticalChecks
-
-ncChecks <- list()
+# .datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
+# 
+# checks <- readRDS("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - DQ Reports/ad/2024/2024-02-01/2024_02_28_10_17_36/checks/2024-02-01_2024_02_28_10_17_36_checks.rds")
+# manualNcChecks <- checks$nonCriticalChecks
+# 
+# ncChecks <- list()
 
 # Steps:
 #   1) Pull in Codebook
 #   2) Run codebookNcChecks and assign ncChecks[[dsName]][["codebookChecks"]] to codebook checks
 #   3) (If manual checks) Loop through and add the manual checks to the ncCheck listing
 
-ncChecks <- runCodebookNcChecks(.dsName, .codebooks[[.dsName]])
-
-returns(
-  list(
-    "dsName1" = list(
-      "codebookNcCheck1" = list()
-      ,"codebookNcCheck2" = list()
-    )
-    ,"dsName2" = list(
-      "codebookNcCheck1" = list()
-      ,"codebookNcCheck2" = list()
-    )
-    ,"dsName3" = list(
-      "codebookNcCheck1" = list()
-      ,"codebookNcCheck2" = list()
-    )
-  )
-)
-
-for(dsName in .datasetsToCheck){
-  ncChecks[[dsName]][["codebookChecks"]] <- codebookNcChecks[[dsName]]
-  for(checkName in names(manualNcChecks[[dsName]])){
-    ncChecks[[dsName]][[checkName]] <- manualNcChecks[[dsName]][[checkName]]
-  }
-}
+# ncChecks <- runCodebookNcChecks(.dsName, .codebooks[[.dsName]])
+# 
+# returns(
+#   list(
+#     "dsName1" = list(
+#       "codebookNcCheck1" = list()
+#       ,"codebookNcCheck2" = list()
+#     )
+#     ,"dsName2" = list(
+#       "codebookNcCheck1" = list()
+#       ,"codebookNcCheck2" = list()
+#     )
+#     ,"dsName3" = list(
+#       "codebookNcCheck1" = list()
+#       ,"codebookNcCheck2" = list()
+#     )
+#   )
+# )
+# 
+# for(dsName in .datasetsToCheck){
+#   ncChecks[[dsName]][["codebookChecks"]] <- codebookNcChecks[[dsName]]
+#   for(checkName in names(manualNcChecks[[dsName]])){
+#     ncChecks[[dsName]][[checkName]] <- manualNcChecks[[dsName]][[checkName]]
+#   }
+# }
 
 # ncChecks <- readRDS("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - DQ Reports/ad/2024/2024-02-01/2024_02_21_12_01_28/checks/2024-02-01_2024_02_21_12_01_28_checks.rds")$nonCriticalChecks
 
@@ -65,9 +65,9 @@ for(dsName in .datasetsToCheck){
 #                   ,.prelimDataPullDate = "2024-02-01"
 #                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-01-04/"
 #                   ,.lastMonthDataPullDate = "2024-01-04"
-#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-02-01/AD_codebook_2024-02-01.xlsx"
+#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Data Dictionary Codebook Specifications/AD_codebook_example.xlsx"
 #                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
-#                   ,.nonCriticalChecks = NULL
+#                   ,.nonCriticalChecks = manualNcChecks
 #                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/store/"
 #                   ,.isR = TRUE)
 

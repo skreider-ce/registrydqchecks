@@ -11,17 +11,13 @@ codebookNcChecks <- function(.dsName
                              ,.compDsToCheck
                              ,.codebookVariables){
 
-  .ncCheck1Num <- runNumericRangeChecks()
-  .ncCheck1Cat <- runCategoricalValueChecks()
+  .ncCheck1 <- runRangeAndValueChecks()
   .ncCheck2 <- runNoMissingsCheck()
   .ncCheck3 <- runReasonableMissingnessCheck()
   .ncCheck4 <- runMonthlyMissingnessCheck()
   
   .resultsOfCodebookNcChecks <- list(
-    "nc1" = list(
-      "numericVariables" = .ncCheck1Num
-      ,"categoricalVariables" = .ncCheck1Cat
-    )
+    "nc1" = .ncCheck1
     ,"nc2" = .ncCheck2
     ,"nc3" = .ncCheck3
     ,"nc4" = .ncCheck4
