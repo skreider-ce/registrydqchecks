@@ -11,11 +11,11 @@ runRangeAndValueChecks <- function(){
     ,"checkShortDescription" = "numeric and categorical value checks"
     ,"pass" = NULL
     ,"values" = list(
-      "n" = NULL
-      ,"N" = NULL
-      ,"pct" = NULL
+      "n" = 0
+      ,"N" = 0
+      ,"pct" = 0
     )
-    ,"listing" = NULL
+    ,"listing" = data.frame()
   )
   
   return(.checkOutput)
