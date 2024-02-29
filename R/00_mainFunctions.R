@@ -34,9 +34,13 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   .dataToCheck <- list()
   .dataToCompare <- list()
   .essentialVariables <- list()
+  .codebookVariables <- list()
   .uniqueKeys <- list()
   .critCheckOutput <- list()
+  .codebookNcOutput <- list()
   .nonCritCheckOutput <- list()
+  .ncChecks <- list()
+  
   
   # Loop through each dataset and perform the checks
   for(.dsName in .datasetsToCheck){
@@ -57,6 +61,10 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
       dplyr::filter(essential == 1) |>
       dplyr::select(varName, acceptableMissingness, nonExtremeMissingness, missingnessThresholdMultiplier, skipLogic)
     
+    # Pull the codebook noncritical check variables for the specific dataset from the codebook
+    .codebookNcVariables[[.dsName]] <- .codebooks[[.dsName]] |>
+      dplyr::select(varName, acceptableMissingness, missingnessThresholdMultiplier, skipLogic, catValues, numRange)
+    
     # Run the critical checks on the specific dataset with information pulled from the codebook
     .critCheckOutput[[.dsName]] <- criticalChecks(.dsToCheck = data.frame(.dataToCheck[[.dsName]])
                                                   ,.compDsToCheck = data.frame(.dataToCompare[[.dsName]])
@@ -64,12 +72,33 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                                                   ,.listOfSupposedVars = names(.dataToCompare[[.dsName]])
                                                   ,.uniqueKeys = .uniqueKeys[[.dsName]]$varName
                                                   )
+    
+    # Run the codebook noncritical checks on the specific dataset with information pulled from the codebook
+    .codebookNcOutput[[.dsName]] <- codebookNcChecks(.dsName = .dsName
+                                                     ,.dsToCheck = data.frame(.dataToCheck[[.dsName]])
+                                                     ,.compDsToCheck = data.frame(.dataToCompare[[.dsName]])
+                                                     ,.codebookNcVariables[[.dsName]]
+                                                     )
+    
+    # Add codebook noncritical checks to the noncritical check output
+    # And add manual noncritical checks (if they exist) to the noncritical check output
+    .ncChecks[[.dsName]][["codebookChecks"]] <- .codebookNcOutput[[.dsName]]
+    
+    # If no manual noncritical checks then skip
+    # Else - append the results of the manual noncritical checks to the codebook noncritical checks
+    if(!is.null(.nonCriticalChecks)){
+      for(.checkName in names(.nonCriticalChecks[[.dsName]])){
+        .ncChecks[[.dsName]][[checkName]] <- .nonCriticalChecks[[.dsName]][[.checkName]]
+      }
+    }
+    
   }
 
+  
   # Create a list of the critical check and the noncritical check output to be saved to a location  
   .checkOutput <- list(
     "criticalCheckOutput" = .critCheckOutput
-    ,"nonCriticalCheckOutput" = .nonCriticalChecks
+    ,"nonCriticalCheckOutput" = .ncChecks
   )
   
   # Define timestamp of this specific datapull
