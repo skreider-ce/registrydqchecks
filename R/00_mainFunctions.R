@@ -91,7 +91,6 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
         .ncChecks[[.dsName]][[.checkName]] <- .nonCriticalChecks[[.dsName]][[.checkName]]
       }
     }
-    
   }
 
   

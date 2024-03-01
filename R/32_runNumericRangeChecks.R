@@ -23,9 +23,9 @@ runNumericRangeChecks <- function(.dsName
       dplyr::filter(varName == {{.varName1}})
 
     .subsetDsToCheck <- .dsToCheck |>
-      dplyr::select(all_of(.uniqueKeys), {{.varName1}}) |>
-      dplyr::filter(!is.na({{.varName1}})) |>
-      dplyr::filter({{.varName1}} < .currentCheckVar$numRangeLower | {{.varName1}} > .currentCheckVar$numRangeUpper) |>
+      dplyr::select(all_of(.uniqueKeys), !!.varName1) |>
+      dplyr::filter(!is.na(get(.varName1))) |>
+      dplyr::filter(get(.varName1) < .currentCheckVar$numRangeLower | get(.varName1) > .currentCheckVar$numRangeUpper) |>
       dplyr::mutate(
         dataset = .dsName
         ,variableName = .varName1
@@ -33,7 +33,7 @@ runNumericRangeChecks <- function(.dsName
         ,expectedLower = .currentCheckVar$numRangeUpper
       ) |>
       dplyr::rename(
-        value = !!{{.varName1}}
+        value = {{.varName1}}
       )
     
     .numericRangeChecks <- rbind(.numericRangeChecks, .subsetDsToCheck)
@@ -42,10 +42,3 @@ runNumericRangeChecks <- function(.dsName
   return(.numericRangeChecks)
 }
 
-
-
-# runNumericRangeChecks(.dsName
-#                       ,.dsToCheck
-#                       ,.codebookVariables
-#                       ,.uniqueKeys)
-# .dsName = "exvisit"

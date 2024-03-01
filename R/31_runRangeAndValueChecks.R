@@ -27,7 +27,7 @@ runRangeAndValueChecks <- function(.dsName
       ,"N" = 0
       ,"pct" = 0
     )
-    ,"listing" = data.frame()
+    ,"listing" = .ncCheck1Num
   )
   
   return(.checkOutput)

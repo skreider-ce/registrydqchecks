@@ -33,9 +33,6 @@
 #   }
 # }
 
-# ncChecks <- readRDS("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - DQ Reports/ad/2024/2024-02-01/2024_02_21_12_01_28/checks/2024-02-01_2024_02_21_12_01_28_checks.rds")$nonCriticalChecks
-
-
 # checks <- readRDS("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - DQ Reports/ad/2024/2024-02-01/2024_02_28_10_17_36/checks/2024-02-01_2024_02_28_10_17_36_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
 # 
