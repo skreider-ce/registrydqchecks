@@ -99,6 +99,20 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
                          ,overwrite = TRUE)
   
   for(.dsName in names(.checksToOutput$nonCriticalChecks)){
+    for(.ncCheckName in names(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks)){
+      if(nrow(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing) > 0){
+        .wb <- openxlsx::createWorkbook()
+        openxlsx::addWorksheet(.wb
+                               ,sheetName = .dsName)
+        openxlsx::writeData(.wb
+                            ,sheet = .dsName
+                            ,.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing)
+        openxlsx::saveWorkbook(.wb
+                               ,file = glue::glue("{.listingUrl}/{.dsName} {.ncCheckName} {.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkShortDescription}.xlsx")
+                               ,overwrite = TRUE)
+      }
+    }
+    
     for(.ncCheckName in names(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList)){
       if(nrow(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing) > 0){
         .wb <- openxlsx::createWorkbook()
@@ -111,7 +125,6 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
                                ,file = glue::glue("{.listingUrl}/{.dsName} {.ncCheckName} {.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkShortDescription}.xlsx")
                                ,overwrite = TRUE)
       }
-
     }
   }
 }
