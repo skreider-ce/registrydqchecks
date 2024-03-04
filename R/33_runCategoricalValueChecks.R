@@ -6,7 +6,19 @@ runCategoricalValueChecks <- function(.dsName
                                       ,.codebookVariables
                                       ,.uniqueKeys){
   
-  # varName, catValues
+  .dsToCheck <- .dsToCheck |>
+    haven::as_factor()
   
-  return(NULL)
+  .varsToCheck <- .codebookVariables |>
+    dplyr::filter(!is.na(catValues)) |>
+    dplyr::select(varName, catValues) |>
+    mutate(split = strsplit(catValues, ",")
+           ,nums = regmatches(split, regexpr("\\d+(?=\\s*=)", split, perl = TRUE)))
+  
+  .categoricalValueChecks <- data.frame()
+  
+
+  return(.categoricalValueChecks)
 }
+
+View(.varsToCheck)

@@ -41,7 +41,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   .nonCritCheckOutput <- list()
   .ncChecks <- list()
   
-    # Loop through each dataset and perform the checks
+  # Loop through each dataset and perform the checks
   for(.dsName in .datasetsToCheck){
     # Pull dataset specific codebook
     .codebooks[[.dsName]] <- pullCodebookFromExcelFile(.codebookUrl, .dsName)
