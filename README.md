@@ -1,7 +1,7 @@
-As of: 2024-01-18
+As of: 2024-03-06
 
-![2024-01-18_RegistryDQChecks_architecture drawio](https://github.com/Corrona-IT/RegistryDQChecks/assets/153545676/b6cdea46-01b5-4cef-af69-427ce8e85ab7)
 
+![registrydqchecks_systemmap](https://github.com/skreider-ce/registrydqchecks/assets/153545676/fa1ad3eb-25b0-4cc1-a8ac-402369de2d5e)
 
 
 
