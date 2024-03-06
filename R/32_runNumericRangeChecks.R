@@ -36,10 +36,8 @@ runNumericRangeChecks <- function(.dsName
         numValue = {{.varName1}}
       )
     
-    .numericRangeChecks <- rbind(.numericRangeChecks, .subsetDsToCheck)
+    .numericRangeChecks <- dplyr::bind_rows(.numericRangeChecks, .subsetDsToCheck)
   }
-  
-  summary(.numericRangeChecks)
 
   return(.numericRangeChecks)
 }

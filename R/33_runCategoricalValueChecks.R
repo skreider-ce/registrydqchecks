@@ -44,10 +44,8 @@ runCategoricalValueChecks <- function(.dsName
         catValue = numVal
       )
     
-    .categoricalValueChecks <- rbind(.categoricalValueChecks, .outOfRange)
+    .categoricalValueChecks <- dplyr::bind_rows(.categoricalValueChecks, .outOfRange)
   }
-  
-  summary(.categoricalValueChecks)
 
   return(.categoricalValueChecks)
 }
