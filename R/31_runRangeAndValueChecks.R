@@ -17,8 +17,8 @@ runRangeAndValueChecks <- function(.dsName
                                             ,.codebookVariables = .codebookVariables
                                             ,.uniqueKeys = .uniqueKeys)
   
-  .ncCheck1Output <- rbind(.ncCheck1Num, .ncCheck1Cat) |>
-    dplyr::arrange(variableName, value)
+  .ncCheck1Output <- dplyr::bind_rows(.ncCheck1Num, .ncCheck1Cat) |>
+    dplyr::arrange(variableName)
     
   
   .checkOutput <- list(

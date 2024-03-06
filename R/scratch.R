@@ -48,7 +48,7 @@
 #                   ,.lastMonthDataPullDate = "2024-01-04"
 #                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Data Dictionary Codebook Specifications/AD_codebook_example.xlsx"
 #                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
-#                   ,.nonCriticalChecks = manualNcChecks
+#                   ,.nonCriticalChecks = NULL
 #                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/store/"
 #                   ,.isR = TRUE)
 

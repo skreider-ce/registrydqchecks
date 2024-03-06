@@ -39,18 +39,15 @@ runCategoricalValueChecks <- function(.dsName
         ,variableName = glue::glue("{.varName1}")
         ,expectedValue = list(.expectedLevels)
         ,expectedLabels = list(.expectedLabels)
-        ,expectedUpper = NULL
-        ,expectedLower = NULL
       ) |>
       dplyr::rename(
-        value = numVal
-      ) |>
-      dplyr::select(
-        -!!.varName1
+        catValue = numVal
       )
     
     .categoricalValueChecks <- rbind(.categoricalValueChecks, .outOfRange)
   }
+  
+  summary(.categoricalValueChecks)
 
   return(.categoricalValueChecks)
 }

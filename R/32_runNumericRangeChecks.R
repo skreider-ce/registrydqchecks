@@ -31,15 +31,15 @@ runNumericRangeChecks <- function(.dsName
         ,variableName = .varName1
         ,expectedUpper = .currentCheckVar$numRangeUpper
         ,expectedLower = .currentCheckVar$numRangeLower
-        ,expectedValue = NULL
-        ,expectedLabels = NULL
       ) |>
       dplyr::rename(
-        value = {{.varName1}}
+        numValue = {{.varName1}}
       )
     
     .numericRangeChecks <- rbind(.numericRangeChecks, .subsetDsToCheck)
   }
+  
+  summary(.numericRangeChecks)
 
   return(.numericRangeChecks)
 }
