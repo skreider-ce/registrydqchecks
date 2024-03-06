@@ -34,6 +34,8 @@ runNumericRangeChecks <- function(.dsName
       ) |>
       dplyr::rename(
         numValue = {{.varName1}}
+      ) |> dplyr::select(
+        all_of(.uniqueKeys), dataset, numValue, variableName, expectedLower, expectedUpper
       )
     
     .numericRangeChecks <- dplyr::bind_rows(.numericRangeChecks, .subsetDsToCheck)

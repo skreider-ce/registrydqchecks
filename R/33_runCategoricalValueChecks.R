@@ -42,6 +42,8 @@ runCategoricalValueChecks <- function(.dsName
       ) |>
       dplyr::rename(
         catValue = numVal
+      ) |> dplyr::select(
+        all_of(.uniqueKeys), dataset, catValue, variableName, expectedValue, expectedLabels
       )
     
     .categoricalValueChecks <- dplyr::bind_rows(.categoricalValueChecks, .outOfRange)
