@@ -31,7 +31,7 @@ runRangeAndValueChecks <- function(.dsName
       ,"N" = NA
       ,"pct" = NA
     )
-    ,"listing" = .ncCheck1Num
+    ,"listing" = .ncCheck1Output
   )
   
   return(.checkOutput)
