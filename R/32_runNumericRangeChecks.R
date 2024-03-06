@@ -29,8 +29,10 @@ runNumericRangeChecks <- function(.dsName
       dplyr::mutate(
         dataset = .dsName
         ,variableName = .varName1
-        ,expectedUpper = .currentCheckVar$numRangeLower
-        ,expectedLower = .currentCheckVar$numRangeUpper
+        ,expectedUpper = .currentCheckVar$numRangeUpper
+        ,expectedLower = .currentCheckVar$numRangeLower
+        ,expectedValue = NULL
+        ,expectedLabels = NULL
       ) |>
       dplyr::rename(
         value = {{.varName1}}
