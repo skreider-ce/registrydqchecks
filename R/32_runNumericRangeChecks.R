@@ -31,10 +31,9 @@ runNumericRangeChecks <- function(.dsName
         ,variableName = .varName1
         ,expectedUpper = .currentCheckVar$numRangeUpper
         ,expectedLower = .currentCheckVar$numRangeLower
+        ,numValue = as.numeric(get(.varName1))
       ) |>
-      dplyr::rename(
-        numValue = {{.varName1}}
-      ) |> dplyr::select(
+      dplyr::select(
         all_of(.uniqueKeys), dataset, numValue, variableName, expectedLower, expectedUpper
       )
     
