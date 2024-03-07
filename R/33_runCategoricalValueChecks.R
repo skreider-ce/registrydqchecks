@@ -53,6 +53,10 @@ runCategoricalValueChecks <- function(.dsName
       print(paste("Warning caught:", conditionMessage(w)))
       print(paste("VarName:", .varName1))
     }
+    ,error = function(e){
+      print(paste("Error caught:", conditionMessage(e)))
+      print(paste("VarName:", .varName1))
+    }
     )
   }
 
