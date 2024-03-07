@@ -1,3 +1,33 @@
+# library(registrydqchecksreport)
+# library(registrydqchecksreportdown)
+# library(registrydqchecks)
+# 
+# .registry = "ms"
+# .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-03-05/final/"
+# .prelimDataPullDate = "2024-03-05"
+# .dataPullYear = "2024"
+# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-02-05/final/"
+# .lastMonthDataPullDate = "2024-02-05"
+# .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/documentation/Codebook draft_in progress/ms_codebook.xlsx"
+# .datasetsToCheck = c("ms_dwsub1")
+# .outputUrl = glue::glue("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - DQ Reports/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
+# .isR = FALSE
+# 
+# .dsName = "ms_dwsub1"
+# 
+# runRegistryChecks(.registry = .registry
+#                   ,.prelimDataFolderUrl = .prelimDataFolderUrl
+#                   ,.prelimDataPullDate = .prelimDataPullDate
+#                   ,.lastMonthDataFolderUrl = .lastMonthDataFolderUrl
+#                   ,.lastMonthDataPullDate = .lastMonthDataPullDate
+#                   ,.codebookUrl = .codebookUrl
+#                   ,.datasetsToCheck = .datasetsToCheck
+#                   ,.nonCriticalChecks = NULL
+#                   ,.outputUrl = .outputUrl
+#                   ,.isR = FALSE)
+# 
+# 
+# 
 
 
 # ncChecks <- list()
