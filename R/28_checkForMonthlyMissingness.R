@@ -17,12 +17,12 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
     ,"nRows" = integer()
     ,"nMissing" = integer()
     ,"propMissing" = numeric()
-    # ,"nRowsComp" = integer()
-    # ,"nMissingComp" = integer()
+    ,"nRowsComp" = integer()
+    ,"nMissingComp" = integer()
     ,"propMissingComp" = numeric()
     ,"acceptableMissingness" = numeric()
-    # ,"nonExtremeMissingness" = numeric()
-    # ,"missingnessThresholdMultiplier" = numeric()
+    ,"nonExtremeMissingness" = numeric()
+    ,"missingnessThresholdMultiplier" = numeric()
     ,"skipLogic" = character()
   )
   
@@ -84,12 +84,12 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
       ,"nRows" = .nRows
       ,"nMissing" = .nMissing
       ,"propMissing" = .propMissing
-      # ,"nRowsComp" = .nRowsComp
-      # ,"nMissingComp" = .nMissingComp
+      ,"nRowsComp" = .nRowsComp
+      ,"nMissingComp" = .nMissingComp
       ,"propMissingComp" = .propMissingComp
       ,"acceptableMissingness" = .currEssentialVariable$acceptableMissingness
-      # ,"nonExtremeMissingness" = .currEssentialVariable$nonExtremeMissingness
-      # ,"missingnessThresholdMultiplier" = .currEssentialVariable$missingnessThresholdMultiplier
+      ,"nonExtremeMissingness" = .currEssentialVariable$nonExtremeMissingness
+      ,"missingnessThresholdMultiplier" = .currEssentialVariable$missingnessThresholdMultiplier
       ,"skipLogic" = .currEssentialVariable$skipLogic
       )
     
