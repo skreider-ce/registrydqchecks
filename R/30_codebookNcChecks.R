@@ -19,7 +19,8 @@ codebookNcChecks <- function(.dsName
                                       ,.codebookVariables = .codebookVariables
                                       ,.uniqueKeys = .uniqueKeys)
   .ncCheck2 <- runNoMissingsCheck()
-  .ncCheck3 <- runReasonableMissingnessCheck()
+  .ncCheck3 <- runReasonableMissingnessCheck(.dsToCheck = .dsToCheck
+                                             ,.codebookVariables = .codebookVariables)
   .ncCheck4 <- runMonthlyMissingnessCheck()
   
   .resultsOfCodebookNcChecks <- list(
