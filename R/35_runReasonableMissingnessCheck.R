@@ -72,7 +72,7 @@ runReasonableMissingnessCheck <- function(.dsToCheck, .codebookVariables){
       dplyr::filter(passMissing == FALSE)
     
   .checkOutput <- list(
-    "checkId" = "nc2/3"
+    "checkId" = "nc2-3"
     ,"checkTitle" = "Item nonresponse for nonessential variables is not extreme"
     ,"checkDescription" = "Confirm that item nonresponse for nonessential variables is below a specified threshold."
     ,"checkShortDescription" = "nonessential item missingness"

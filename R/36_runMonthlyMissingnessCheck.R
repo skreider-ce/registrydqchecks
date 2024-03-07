@@ -68,7 +68,7 @@ runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVari
       .nMissingComp <- NA
       .propMissingComp <- NA
       print(.var)
-      print(paste0("Error occurred while evaluating expression: ", .currEssentialVariable$skipLogic))
+      print(paste0("Error occurred while evaluating expression: ", .currNonessentialVariable$skipLogic))
     })
     
     
@@ -83,7 +83,7 @@ runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVari
       ,"nMissingComp" = .nMissingComp
       ,"propMissingComp" = .propMissingComp
       ,"acceptableMissingness" = .currNonessentialVariable$acceptableMissingness
-      ,"skipLogic" = .currEssentialVariable$skipLogic
+      ,"skipLogic" = .currNonessentialVariable$skipLogic
     )
     
     .listOfVarMissingness <- dplyr::bind_rows(.listOfVarMissingness,.varMissingRow)
