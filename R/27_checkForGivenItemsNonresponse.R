@@ -17,8 +17,8 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
     ,"nMissing" = integer()
     ,"propMissing" = numeric()
     ,"acceptableMissingness" = numeric()
-    ,"nonExtremeMissingness" = numeric()
-    ,"missingnessThresholdMultiplier" = numeric()
+    # ,"nonExtremeMissingness" = numeric()
+    # ,"missingnessThresholdMultiplier" = numeric()
     ,"skipLogic" = character()
   )
 
@@ -59,8 +59,8 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
       ,"nMissing" = .nMissing
       ,"propMissing" = .propMissing
       ,"acceptableMissingness" = .currEssentialVariable$acceptableMissingness
-      ,"nonExtremeMissingness" = .currEssentialVariable$nonExtremeMissingness
-      ,"missingnessThresholdMultiplier" = .currEssentialVariable$missingnessThresholdMultiplier
+      # ,"nonExtremeMissingness" = .currEssentialVariable$nonExtremeMissingness
+      # ,"missingnessThresholdMultiplier" = .currEssentialVariable$missingnessThresholdMultiplier
       ,"skipLogic" = .currEssentialVariable$skipLogic
       )
     
