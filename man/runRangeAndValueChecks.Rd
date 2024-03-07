@@ -6,6 +6,15 @@
 \usage{
 runRangeAndValueChecks(.dsName, .dsToCheck, .codebookVariables, .uniqueKeys)
 }
+\arguments{
+\item{.dsName}{The name of the dataset being checked}
+
+\item{.dsToCheck}{The dataset to run the checks on}
+
+\item{.codebookVariables}{The codebook variables for this specific check}
+
+\item{.uniqueKeys}{The unique keys for the dataset being checked}
+}
 \value{
 The results of the numeric range and categorical value checks
 }

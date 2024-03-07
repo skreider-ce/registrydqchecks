@@ -6,6 +6,15 @@
 \usage{
 runNumericRangeChecks(.dsName, .dsToCheck, .codebookVariables, .uniqueKeys)
 }
+\arguments{
+\item{.dsName}{The name of the dataset being checked}
+
+\item{.dsToCheck}{The dataset being checked}
+
+\item{.codebookVariables}{The codebook variabled needed for this specific check}
+
+\item{.uniqueKeys}{The unique keys for the dataset being checked}
+}
 \value{
 Results of the check
 }

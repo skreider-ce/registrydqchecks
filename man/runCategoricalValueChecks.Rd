@@ -6,6 +6,15 @@
 \usage{
 runCategoricalValueChecks(.dsName, .dsToCheck, .codebookVariables, .uniqueKeys)
 }
+\arguments{
+\item{.dsName}{The name of the dataset being checked}
+
+\item{.dsToCheck}{The dataset being checked}
+
+\item{.codebookVariables}{The codebook variables for this specific check}
+
+\item{.uniqueKeys}{The unique keys for the dataset}
+}
 \value{
 Results of the check
 }

@@ -4,7 +4,14 @@
 \alias{runMonthlyMissingnessCheck}
 \title{runMonthlyMissingnessCheck Run a check to look at amount of month-to-month missingness for all variables}
 \usage{
-runMonthlyMissingnessCheck()
+runMonthlyMissingnessCheck(.dsToCheck, .compDsToCheck, .codebookVariables)
+}
+\arguments{
+\item{.dsToCheck}{The dataset to run the checks on}
+
+\item{.compDsToCheck}{The dataset from last month to compare to}
+
+\item{.codebookVariables}{The codebook-specific variables needed for this check}
 }
 \value{
 Results of the check

@@ -4,7 +4,12 @@
 \alias{runReasonableMissingnessCheck}
 \title{runReasonableMissingnessCheck Run a check to look at reasonable amount of missingness for all variables}
 \usage{
-runReasonableMissingnessCheck()
+runReasonableMissingnessCheck(.dsToCheck, .codebookVariables)
+}
+\arguments{
+\item{.dsToCheck}{The dataset to run the checks on}
+
+\item{.codebookVariables}{The codebook variables needed to run this specific check}
 }
 \value{
 Results of the check

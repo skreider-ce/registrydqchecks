@@ -1,5 +1,10 @@
 #' runCategoricalValueChecks Run a check to ensure categorical variables have the appropriate values
 #'
+#' @param .dsName The name of the dataset being checked
+#' @param .dsToCheck The dataset being checked
+#' @param .codebookVariables The codebook variables for this specific check
+#' @param .uniqueKeys The unique keys for the dataset
+#'
 #' @return Results of the check
 runCategoricalValueChecks <- function(.dsName
                                       ,.dsToCheck

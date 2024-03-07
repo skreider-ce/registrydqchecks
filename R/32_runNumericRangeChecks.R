@@ -1,5 +1,10 @@
 #' runNumericRangeChecks Run a check to ensure numeric variables fall within an appropriate range
 #'
+#' @param .dsName The name of the dataset being checked
+#' @param .dsToCheck The dataset being checked
+#' @param .codebookVariables The codebook variabled needed for this specific check
+#' @param .uniqueKeys The unique keys for the dataset being checked
+#'
 #' @return Results of the check
 runNumericRangeChecks <- function(.dsName
                                   ,.dsToCheck

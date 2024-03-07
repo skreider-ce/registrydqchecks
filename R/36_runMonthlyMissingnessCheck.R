@@ -1,5 +1,9 @@
 #' runMonthlyMissingnessCheck Run a check to look at amount of month-to-month missingness for all variables
 #'
+#' @param .dsToCheck The dataset to run the checks on
+#' @param .compDsToCheck The dataset from last month to compare to
+#' @param .codebookVariables The codebook-specific variables needed for this check
+#'
 #' @return Results of the check
 runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVariables){
   
