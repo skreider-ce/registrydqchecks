@@ -11,7 +11,7 @@ outputListings(.listingUrl, .timestamp, .checksToOutput)
 
 \item{.timestamp}{Timestamp of the current run}
 
-\item{.checksToOutput}{Registry DQ checks to output}
+\item{.checksToOutput}{Registry DQ checks to output in list form with criticalChecks and nonCriticalChecks entries}
 }
 \description{
 Output specified listings in xlsx format for further review

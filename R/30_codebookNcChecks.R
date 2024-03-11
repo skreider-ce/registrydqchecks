@@ -4,6 +4,7 @@
 #' @param .dsToCheck The dataset being checked
 #' @param .compDsToCheck The comparator dataset being checked
 #' @param .codebookVariables The variables from the codebook to run the checks
+#' @param .uniqueKeys A character vector of the unique keys for the given dataset
 #'
 #' @return .resultsOfCodebookNcChecks results of the codebookNcChecks
 codebookNcChecks <- function(.dsName

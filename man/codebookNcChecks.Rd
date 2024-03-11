@@ -20,6 +20,8 @@ codebookNcChecks(
 \item{.compDsToCheck}{The comparator dataset being checked}
 
 \item{.codebookVariables}{The variables from the codebook to run the checks}
+
+\item{.uniqueKeys}{A character vector of the unique keys for the given dataset}
 }
 \value{
 .resultsOfCodebookNcChecks results of the codebookNcChecks

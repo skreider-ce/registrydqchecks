@@ -47,7 +47,7 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
           sum(is.na(.subsetDsToCheck[[.var]]))
       }
       
-      .propMissing = round(.nMissing / .nRows, digts = 3)
+      .propMissing = round(.nMissing / .nRows, digits = 3)
       
       # Generate the number of rows, the number of missing, and the proportion for the comparator dataset
       if(is.na(.currEssentialVariable$skipLogic)){

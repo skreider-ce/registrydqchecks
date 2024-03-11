@@ -45,7 +45,7 @@ runCategoricalValueChecks <- function(.dsName
       
       # Create a dataframe of all the rows that have an item not in the expected levels
       .outOfRange <- .dsToCheck |>
-        dplyr::select(all_of(.uniqueKeys), !!.varName1) |>
+        dplyr::select(dplyr::all_of(.uniqueKeys), !!.varName1) |>
         dplyr::filter(!is.na(get(.varName1))) |>
         dplyr::filter(get(.varName1) %in% notIn) |>
         dplyr::mutate(
@@ -58,7 +58,7 @@ runCategoricalValueChecks <- function(.dsName
         dplyr::rename(
           catValue = numVal
         ) |> dplyr::select(
-          all_of(.uniqueKeys), dataset, catValue, variableName, expectedValue, expectedLabels
+          dplyr::all_of(.uniqueKeys), dataset, catValue, variableName, expectedValue, expectedLabels
         )
       
       .categoricalValueChecks <- dplyr::bind_rows(.categoricalValueChecks, .outOfRange)
@@ -81,6 +81,8 @@ runCategoricalValueChecks <- function(.dsName
 #' removeQuotes A function to remove quotes from each element in a character string
 #'
 #' @param vec A vector to remove quotes from
+#' 
+#' @importFrom stringr str_replace_all
 removeQuotes <- function(vec){
   stringr::str_replace_all(vec, '"', '')
 }
@@ -90,6 +92,8 @@ removeQuotes <- function(vec){
 #' @param vec A vector to extract numbers from
 #'
 #' @return A vector of numbers of the levels of the variable
+#' 
+#' @importFrom stringr str_extract
 extractValueNumbers <- function(vec){
   numVector <- stringr::str_extract(vec, "\\b\\d+\\b") |> as.double()
 
@@ -103,6 +107,8 @@ extractValueNumbers <- function(vec){
 #' @param vec A vector to extract labels from
 #'
 #' @return A vector of the labels of the levels of the variable
+#' 
+#' @importFrom stringr str_extract
 extractValueLabels <- function(vec){
   charVector <- stringr::str_extract(vec, "(?<=\\=\\s{0,1000}).*$")
   

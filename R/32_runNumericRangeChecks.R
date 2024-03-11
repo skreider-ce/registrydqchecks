@@ -28,7 +28,7 @@ runNumericRangeChecks <- function(.dsName
       dplyr::filter(varName == {{.varName1}})
 
     .subsetDsToCheck <- .dsToCheck |>
-      dplyr::select(all_of(.uniqueKeys), !!.varName1) |>
+      dplyr::select(dplyr::all_of(.uniqueKeys), !!.varName1) |>
       dplyr::filter(!is.na(get(.varName1))) |>
       dplyr::filter(get(.varName1) < .currentCheckVar$numRangeLower | get(.varName1) > .currentCheckVar$numRangeUpper) |>
       dplyr::mutate(
@@ -39,7 +39,7 @@ runNumericRangeChecks <- function(.dsName
         ,numValue = as.numeric(get(.varName1))
       ) |>
       dplyr::select(
-        all_of(.uniqueKeys), dataset, numValue, variableName, expectedLower, expectedUpper
+        dplyr::all_of(.uniqueKeys), dataset, numValue, variableName, expectedLower, expectedUpper
       )
     
     .numericRangeChecks <- dplyr::bind_rows(.numericRangeChecks, .subsetDsToCheck)

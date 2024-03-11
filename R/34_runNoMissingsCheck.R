@@ -4,8 +4,8 @@
 runNoMissingsCheck <- function(){
   
   .checkOutput <- list(
-    "checkTitle" = "There aren’t any missing values for identified variables."
-    ,"checkDescription" = "Confirm that there aren’t any missing values for these specific variables."
+    "checkTitle" = "There arent any missing values for identified variables."
+    ,"checkDescription" = "Confirm that there arent any missing values for these specific variables."
     ,"checkShortDescription" = "confirmation of zero missings"
     ,"pass" = NULL
     ,"values" = list(
