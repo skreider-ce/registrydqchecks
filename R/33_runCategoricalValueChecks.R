@@ -11,6 +11,9 @@ runCategoricalValueChecks <- function(.dsName
                                       ,.codebookVariables
                                       ,.uniqueKeys){
 
+  # Subset codebook variables to categorical variables
+  # Clean the expected categorical variables
+  ### Remove quotes, split at commas, pick off number before =, text after =
   .varsToCheck <- .codebookVariables |>
     dplyr::filter(!is.na(catValues)) |>
     dplyr::select(varName, catValues) |>
@@ -21,22 +24,28 @@ runCategoricalValueChecks <- function(.dsName
       ,catValues = purrr::map(cleanCol, extractValueLabels)
     )
 
+  # Initialize a df for the results of the checks
   .categoricalValueChecks <- data.frame()
   
+  # Loop through each categorical variable in the dataset
   for(.varName1 in .varsToCheck$varName){
 
     .currentCheckVar <- .varsToCheck |>
       dplyr::filter(varName == {{.varName1}})
     
+    # Catch error if issue with reading in
     tryCatch({
+      # Pull off the expected numeric and associated labels for the specific variable
       .dsToCheckLevels <- as.numeric(names(table(.dsToCheck[[.varName1]])))
       .expectedLevels <- unlist(.varsToCheck[.varsToCheck$varName == glue::glue("{.varName1}"),]$numValues)
       .expectedLabels <- unlist(.varsToCheck[.varsToCheck$varName == glue::glue("{.varName1}"),]$cleanCol)
       
+      # Create a list of items in the dataset and not in the expected levels
       notIn <- .dsToCheckLevels[!.dsToCheckLevels %in% .expectedLevels]
       
+      # Create a dataframe of all the rows that have an item not in the expected levels
       .outOfRange <- .dsToCheck |>
-        dplyr::select(all_of(.uniqueKeys), !!.varName1) |>
+        dplyr::select(dplyr::all_of(.uniqueKeys), !!.varName1) |>
         dplyr::filter(!is.na(get(.varName1))) |>
         dplyr::filter(get(.varName1) %in% notIn) |>
         dplyr::mutate(
@@ -49,7 +58,7 @@ runCategoricalValueChecks <- function(.dsName
         dplyr::rename(
           catValue = numVal
         ) |> dplyr::select(
-          all_of(.uniqueKeys), dataset, catValue, variableName, expectedValue, expectedLabels
+          dplyr::all_of(.uniqueKeys), dataset, catValue, variableName, expectedValue, expectedLabels
         )
       
       .categoricalValueChecks <- dplyr::bind_rows(.categoricalValueChecks, .outOfRange)
@@ -72,6 +81,8 @@ runCategoricalValueChecks <- function(.dsName
 #' removeQuotes A function to remove quotes from each element in a character string
 #'
 #' @param vec A vector to remove quotes from
+#' 
+#' @importFrom stringr str_replace_all
 removeQuotes <- function(vec){
   stringr::str_replace_all(vec, '"', '')
 }
@@ -81,6 +92,8 @@ removeQuotes <- function(vec){
 #' @param vec A vector to extract numbers from
 #'
 #' @return A vector of numbers of the levels of the variable
+#' 
+#' @importFrom stringr str_extract
 extractValueNumbers <- function(vec){
   numVector <- stringr::str_extract(vec, "\\b\\d+\\b") |> as.double()
 
@@ -94,6 +107,8 @@ extractValueNumbers <- function(vec){
 #' @param vec A vector to extract labels from
 #'
 #' @return A vector of the labels of the levels of the variable
+#' 
+#' @importFrom stringr str_extract
 extractValueLabels <- function(vec){
   charVector <- stringr::str_extract(vec, "(?<=\\=\\s{0,1000}).*$")
   

@@ -46,7 +46,7 @@ runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVari
           sum(is.na(.subsetDsToCheck[[.var]]))
       }
       
-      .propMissing = .nMissing / .nRows
+      .propMissing = round(.nMissing / .nRows, digits = 3)
       
       # Generate the number of rows, the number of missing, and the proportion for the comparator dataset
       if(is.na(.currNonessentialVariable$skipLogic)){
@@ -61,7 +61,7 @@ runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVari
           sum(is.na(.subsetDsToCheck[[.var]]))
       }
       
-      .propMissingComp = .nMissingComp / .nRowsComp
+      .propMissingComp = round(.nMissingComp / .nRowsComp, digits = 3)
       
     }, error = function(e){
       .nRows <- NA
@@ -110,8 +110,8 @@ runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVari
     ,"pass" = ifelse(nrow(.listOfVarMissingness) > 0, FALSE, TRUE)
     ,"values" = list(
       "n" = nrow(.listOfVarMissingness)
-      ,"N" = 0
-      ,"pct" = 0
+      ,"N" = NA
+      ,"pct" = NA
     )
     ,"listing" = .listOfVarMissingness
   )
