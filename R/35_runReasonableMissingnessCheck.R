@@ -6,6 +6,7 @@
 #' @return Results of the check
 runReasonableMissingnessCheck <- function(.dsToCheck, .codebookVariables){
   
+  # Subset codebook variables to nonessential variables
   .nonEssentialVariables <- .codebookVariables |>
     dplyr::filter(is.na(essential) | essential != 1) |>
     dplyr::filter() |>
@@ -41,7 +42,7 @@ runReasonableMissingnessCheck <- function(.dsToCheck, .codebookVariables){
             sum(is.na(.subsetDsToCheck[[.var]]))
         }
         
-        .propMissing = .nMissing / .nRows
+        .propMissing = round(.nMissing / .nRows, digits = 3)
         
       }, error = function(e){
         .nRows <- NA
@@ -82,8 +83,8 @@ runReasonableMissingnessCheck <- function(.dsToCheck, .codebookVariables){
     ,"pass" = ifelse(nrow(.listOfVarMissingness) > 0, FALSE, TRUE)
     ,"values" = list(
       "n" = nrow(.listOfVarMissingness)
-      ,"N" = 0
-      ,"pct" = 0
+      ,"N" = NA
+      ,"pct" = NA
     )
     ,"listing" = .listOfVarMissingness
   )

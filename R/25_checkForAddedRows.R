@@ -19,7 +19,7 @@ checkForAddedRows <- function(.dsToCheck,.compDsToCheck){
     ,"pass" = ifelse((nrow(.dsToCheck) - nrow(.compDsToCheck)) / nrow(.compDsToCheck) < 0.1,TRUE,FALSE)
     ,"nAddedRows" = nrow(.dsToCheck) - nrow(.compDsToCheck)
     ,"nOldRows" = nrow(.compDsToCheck)
-    ,"propRowIncrease" = (nrow(.dsToCheck) - nrow(.compDsToCheck)) / nrow(.compDsToCheck)
+    ,"propRowIncrease" = round((nrow(.dsToCheck) - nrow(.compDsToCheck)) / nrow(.compDsToCheck), digits = 3)
   )
   
   return(.returnOutput)

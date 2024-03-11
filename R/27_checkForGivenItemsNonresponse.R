@@ -41,7 +41,7 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
           sum(is.na(.subsetDsToCheck[[.var]]))
       }
       
-      .propMissing = .nMissing / .nRows
+      .propMissing = round(.nMissing / .nRows, digts = 3)
       
     }, error = function(e){
       .nRows <- NA

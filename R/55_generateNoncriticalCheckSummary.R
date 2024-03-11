@@ -37,7 +37,7 @@ generateNoncriticalCheckSummary <- function(.nonCriticalChecksToSummarize){
     # Calculate summary statistics
     .numFailedChecks <- length(.newSummaryCol) - sum(.newSummaryCol)
     .numTotalChecks <- length(.newSummaryCol)
-    .propFailed <- .numFailedChecks / .numTotalChecks
+    .propFailed <- round(.numFailedChecks / .numTotalChecks, digits = 3)
     .newSummaryCol <- c(dsName, .numFailedChecks, .numTotalChecks, .propFailed)
 
     # Stack the summary row for each dataset being checked on top of each other

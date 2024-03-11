@@ -11,6 +11,9 @@ runCategoricalValueChecks <- function(.dsName
                                       ,.codebookVariables
                                       ,.uniqueKeys){
 
+  # Subset codebook variables to categorical variables
+  # Clean the expected categorical variables
+  ### Remove quotes, split at commas, pick off number before =, text after =
   .varsToCheck <- .codebookVariables |>
     dplyr::filter(!is.na(catValues)) |>
     dplyr::select(varName, catValues) |>
@@ -21,20 +24,26 @@ runCategoricalValueChecks <- function(.dsName
       ,catValues = purrr::map(cleanCol, extractValueLabels)
     )
 
+  # Initialize a df for the results of the checks
   .categoricalValueChecks <- data.frame()
   
+  # Loop through each categorical variable in the dataset
   for(.varName1 in .varsToCheck$varName){
 
     .currentCheckVar <- .varsToCheck |>
       dplyr::filter(varName == {{.varName1}})
     
+    # Catch error if issue with reading in
     tryCatch({
+      # Pull off the expected numeric and associated labels for the specific variable
       .dsToCheckLevels <- as.numeric(names(table(.dsToCheck[[.varName1]])))
       .expectedLevels <- unlist(.varsToCheck[.varsToCheck$varName == glue::glue("{.varName1}"),]$numValues)
       .expectedLabels <- unlist(.varsToCheck[.varsToCheck$varName == glue::glue("{.varName1}"),]$cleanCol)
       
+      # Create a list of items in the dataset and not in the expected levels
       notIn <- .dsToCheckLevels[!.dsToCheckLevels %in% .expectedLevels]
       
+      # Create a dataframe of all the rows that have an item not in the expected levels
       .outOfRange <- .dsToCheck |>
         dplyr::select(all_of(.uniqueKeys), !!.varName1) |>
         dplyr::filter(!is.na(get(.varName1))) |>
