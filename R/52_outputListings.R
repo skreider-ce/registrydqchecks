@@ -2,7 +2,7 @@
 #'
 #' @param .listingUrl Url to where the listing output will live
 #' @param .timestamp Timestamp of the current run
-#' @param .checksToOutput Registry DQ checks to output
+#' @param .checksToOutput Registry DQ checks to output in list form with criticalChecks and nonCriticalChecks entries
 #'
 #' @export
 
@@ -12,6 +12,7 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
   # Create new workbook objects and then print information out to them
   #   For critical checks and non critical checks
   
+  # Save the .xlsx listings of critical check 1
   .wb <- openxlsx::createWorkbook()
   for(.dsName in names(.checksToOutput$criticalChecks)){
     openxlsx::addWorksheet(.wb
@@ -24,6 +25,7 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
                          ,file = glue::glue("{.listingUrl}/cc1 duplicate unique keys.xlsx")
                          ,overwrite = TRUE)
   
+  # Save the .xlsx listings of critical check 2
   .wb <- openxlsx::createWorkbook()
   for(.dsName in names(.checksToOutput$criticalChecks)){
     openxlsx::addWorksheet(.wb
@@ -36,6 +38,7 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
                          ,file = glue::glue("{.listingUrl}/cc2 newly added variables.xlsx")
                          ,overwrite = TRUE)
   
+  # Save the .xlsx listings of critical check 3
   .wb <- openxlsx::createWorkbook()
   for(.dsName in names(.checksToOutput$criticalChecks)){
     openxlsx::addWorksheet(.wb
@@ -48,6 +51,7 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
                          ,file = glue::glue("{.listingUrl}/cc3 removed variables.xlsx")
                          ,overwrite = TRUE)
   
+  # Save the .xlsx listings of critical check 4
   .wb <- openxlsx::createWorkbook()
   for(.dsName in names(.checksToOutput$criticalChecks)){
     openxlsx::addWorksheet(.wb
@@ -60,6 +64,7 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
                          ,file = glue::glue("{.listingUrl}/cc4 unlabeled variables.xlsx")
                          ,overwrite = TRUE)
   
+  # Save the .xlsx listings of critical check 6
   .wb <- openxlsx::createWorkbook()
   for(.dsName in names(.checksToOutput$criticalChecks)){
     openxlsx::addWorksheet(.wb
@@ -72,7 +77,7 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
                          ,file = glue::glue("{.listingUrl}/cc6 removed rows.xlsx")
                          ,overwrite = TRUE)
   
-  
+  # Save the .xlsx listings of critical check 7
   .wb <- openxlsx::createWorkbook()
   for(.dsName in names(.checksToOutput$criticalChecks)){
     openxlsx::addWorksheet(.wb
@@ -86,6 +91,7 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
                          ,overwrite = TRUE)
   
   
+  # Save the .xlsx listings of critical check 8
   .wb <- openxlsx::createWorkbook()
   for(.dsName in names(.checksToOutput$criticalChecks)){
     openxlsx::addWorksheet(.wb
@@ -98,21 +104,44 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
                          ,file = glue::glue("{.listingUrl}/cc8 month to month missingness.xlsx")
                          ,overwrite = TRUE)
   
-  for(.dsName in names(.checksToOutput$nonCriticalChecks)){
-    for(.ncCheckName in names(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks)){
-      if(nrow(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing) > 0){
-        .wb <- openxlsx::createWorkbook()
-        openxlsx::addWorksheet(.wb
-                               ,sheetName = .dsName)
-        openxlsx::writeData(.wb
-                            ,sheet = .dsName
-                            ,.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing)
-        openxlsx::saveWorkbook(.wb
-                               ,file = glue::glue("{.listingUrl}/{.dsName} {.ncCheckName} {.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkShortDescription}.xlsx")
-                               ,overwrite = TRUE)
-      }
+  
+  
+  # Save the .xlsx listings of critical check 8
+
+  for(.ncCheckName in names(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks)){
+    .wb <- openxlsx::createWorkbook()
+    for(.dsName in names(.checksToOutput$nonCriticalChecks)){
+      openxlsx::addWorksheet(.wb
+                             ,sheetName = .dsName)
+      openxlsx::writeData(.wb
+                          ,sheet = .dsName
+                          ,.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing)
     }
+    openxlsx::saveWorkbook(.wb
+                           ,file = glue::glue("{.listingUrl}/{.ncCheckName} {.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkShortDescription}.xlsx")
+                           ,overwrite = TRUE)
+  }
+
+  
+  
+  # # Save the .xlsx listings of all the codebook noncritical checks
+  # for(.dsName in names(.checksToOutput$nonCriticalChecks)){
+  #   for(.ncCheckName in names(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks)){
+  #     if(nrow(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing) > 0){
+  #       .wb <- openxlsx::createWorkbook()
+  #       openxlsx::addWorksheet(.wb
+  #                              ,sheetName = .dsName)
+  #       openxlsx::writeData(.wb
+  #                           ,sheet = .dsName
+  #                           ,.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing)
+  #       openxlsx::saveWorkbook(.wb
+  #                              ,file = glue::glue("{.listingUrl}/{.dsName} {.ncCheckName} {.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkShortDescription}.xlsx")
+  #                              ,overwrite = TRUE)
+  #     }
+  #   }
     
+    # Save the .xlsx listings of all the nPctList manual noncritical checks
+  for(.dsName in names(.checksToOutput$nonCriticalChecks)){
     for(.ncCheckName in names(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList)){
       if(nrow(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing) > 0){
         .wb <- openxlsx::createWorkbook()

@@ -15,6 +15,8 @@ generateCriticalCheckSummary <- function(.criticalChecksToSummarize){
     .newSummaryRow <- c(dsName)
     
     .critCheckList <- .criticalChecksToSummarize[[dsName]]
+    
+    # Loop through the critical checks and store the results of the checks
     for(check in names(.critCheckList)){
       .currCritCheck <- .critCheckList[[check]]
       if(check == "criticalCheck2"){
@@ -27,7 +29,8 @@ generateCriticalCheckSummary <- function(.criticalChecksToSummarize){
         .newSummaryRow = c(.newSummaryRow, setNames(ifelse(.currCritCheck$pass, "Pass", "Fail"),check))
       }
     }
-    # .criticalCheckSummary <- stats::setNames(rbind(.criticalCheckSummary, .newSummaryRow), c("dataset", names(.critCheckList)))
+
+    # Assign column names for output list
     .criticalCheckSummary <- stats::setNames(rbind(.criticalCheckSummary, .newSummaryRow), c("dataset"
                                                                                              ,c("cc1", "cc2", "cc3", "cc4"
                                                                                                 ,"cc5", "cc6", "cc7", "cc8")))
