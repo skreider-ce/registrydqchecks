@@ -9,6 +9,7 @@ copyDatasetsToLocation(
   .prelimDataFolderUrl,
   .prelimDataPullDate,
   .folderToCopyTo,
+  .isR,
   .remove = FALSE
 )
 }
@@ -20,6 +21,8 @@ copyDatasetsToLocation(
 \item{.prelimDataPullDate}{The datapull date of the preliminary files to be copied - the date in the dataset name}
 
 \item{.folderToCopyTo}{Url of the folder to copy the datasets to}
+
+\item{.isR}{Boolean indicating if the dataset being copied is an R file (if TRUE then dataset is R, if FALSE then dataset is .dta)}
 
 \item{.remove}{(default = FALSE) an indicator whether to remove the files in the original location}
 }

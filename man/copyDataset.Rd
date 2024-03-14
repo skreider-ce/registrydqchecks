@@ -7,11 +7,11 @@
 copyDataset(.dataSetToCopy, .folderToCopyTo, .remove = FALSE)
 }
 \arguments{
+\item{.dataSetToCopy}{A text URL to the dataset to copy from the original location to the final location}
+
 \item{.folderToCopyTo}{Url of the folder to copy the datasets to}
 
 \item{.remove}{(default = FALSE) an indicator whether to remove the files in the original location}
-
-\item{.datasetToCopy}{A direct URL to the dataset to copy from the original location to the final location}
 }
 \description{
 copyDataset A function to copy a dataset from one location to another location with an option to remove the dataset from the original location
