@@ -82,4 +82,12 @@
 #                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/store/"
 #                   ,.isR = TRUE)
 # .dsName = "exvisit"
+# 
+# copyDatasetsToLocation(
+#   .datasetsToCopy = c("exvisit", "exlab", "exdrugexp")
+#   ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-02-01/"
+#   ,.prelimDataPullDate = "2024-02-01"
+#   ,.folderToCopyTo = "C:/Users/ScottKreider/Documents/scrap/testCopy/"
+#   ,.remove = FALSE
+# )
 
