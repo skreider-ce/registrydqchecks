@@ -91,6 +91,6 @@
 #   ,.prelimDataFolderUrl = .prelimDataFolderUrl
 #   ,.prelimDataPullDate = .prelimDataPullDate
 #   ,.folderToCopyTo = "C:/Users/ScottKreider/Documents/scrap/testCopy/"
-#   ,.isR = TRUE
-#   ,.remove = TRUE
+#   ,.isR = FALSE
+#   ,.remove = FALSE
 # )
