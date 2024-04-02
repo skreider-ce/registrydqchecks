@@ -28,7 +28,7 @@
 # 
 # 
 # 
-
+#
 
 # ncChecks <- list()
 
@@ -90,7 +90,7 @@
 #   .datasetsToCopy = c("exvisit", "exlab", "exdrugexp")
 #   ,.prelimDataFolderUrl = .prelimDataFolderUrl
 #   ,.prelimDataPullDate = .prelimDataPullDate
-#   ,.folderToCopyTo = "C:/Users/ScottKreider/Documents/scrap/testCopy/"
+#   ,.folderToCopyTo = "C:/Users/ScottKreider/Documents/scrap/lmnopqr/"
 #   ,.isR = TRUE
 #   ,.remove = TRUE
 # )
