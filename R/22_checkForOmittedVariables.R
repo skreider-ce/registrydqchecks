@@ -12,7 +12,7 @@ checkForOmittedVariables <- function(.dsToCheck, .listOfSupposedVars){
   .dsVariables <- names(.dsToCheck)
   
   # Create a list of the variables in supposed vars and not in the dataset
-  .omittedVars <- setdiff(.listOfSupposedVars, .dsVariables)
+  .omittedVars <- setdiff(.dsVariables, .listOfSupposedVars)
   
   # Define output list structure
   .returnOutput <- list(
