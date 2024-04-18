@@ -15,11 +15,11 @@ runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVari
   # Initialize the dataframe that will be returned
   .listOfVarMissingness <- data.frame(
     "varName" = character()
-    ,"nRows" = integer()
     ,"nMissing" = integer()
+    ,"nRows" = integer()
     ,"propMissing" = numeric()
-    ,"nRowsComp" = integer()
     ,"nMissingComp" = integer()
+    ,"nRowsComp" = integer()
     ,"propMissingComp" = numeric()
     ,"acceptableMissingness" = numeric()
     ,"skipLogic" = character()
@@ -80,11 +80,11 @@ runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVari
     # Build the row to add to the dataframe
     .varMissingRow <- data.frame(
       "varName" = .var
-      ,"nRows" = .nRows
       ,"nMissing" = .nMissing
+      ,"nRows" = .nRows
       ,"propMissing" = .propMissing
-      ,"nRowsComp" = .nRowsComp
       ,"nMissingComp" = .nMissingComp
+      ,"nRowsComp" = .nRowsComp
       ,"propMissingComp" = .propMissingComp
       ,"acceptableMissingness" = .currNonessentialVariable$acceptableMissingness
       ,"skipLogic" = .currNonessentialVariable$skipLogic

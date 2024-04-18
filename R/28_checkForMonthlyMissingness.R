@@ -14,11 +14,11 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
   # Initialize the dataframe that will be returned
   .listOfVarMissingness <- data.frame(
     "varName" = character()
-    ,"nRows" = integer()
     ,"nMissing" = integer()
+    ,"nRows" = integer()
     ,"propMissing" = numeric()
-    ,"nRowsComp" = integer()
     ,"nMissingComp" = integer()
+    ,"nRowsComp" = integer()
     ,"propMissingComp" = numeric()
     ,"acceptableMissingness" = numeric()
     ,"nonExtremeMissingness" = numeric()
@@ -81,11 +81,11 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
     # Build the row to add to the dataframe
     .varMissingRow <- data.frame(
       "varName" = .var
-      ,"nRows" = .nRows
       ,"nMissing" = .nMissing
+      ,"nRows" = .nRows
       ,"propMissing" = .propMissing
-      ,"nRowsComp" = .nRowsComp
       ,"nMissingComp" = .nMissingComp
+      ,"nRowsComp" = .nRowsComp
       ,"propMissingComp" = .propMissingComp
       ,"acceptableMissingness" = .currEssentialVariable$acceptableMissingness
       ,"nonExtremeMissingness" = .currEssentialVariable$nonExtremeMissingness

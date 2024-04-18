@@ -15,8 +15,8 @@ runReasonableMissingnessCheck <- function(.dsToCheck, .codebookVariables){
     # Initialize the dataframe that will be returned
     .listOfVarMissingness <- data.frame(
       "varName" = character()
-      ,"nRows" = integer()
       ,"nMissing" = integer()
+      ,"nRows" = integer()
       ,"propMissing" = numeric()
       ,"acceptableMissingness" = numeric()
       ,"missingnessThresholdMultiplier" = numeric()
@@ -56,8 +56,8 @@ runReasonableMissingnessCheck <- function(.dsToCheck, .codebookVariables){
       # Build the row to add to the dataframe
       .varMissingRow <- data.frame(
         "varName" = .var
-        ,"nRows" = .nRows
         ,"nMissing" = .nMissing
+        ,"nRows" = .nRows
         ,"propMissing" = .propMissing
         ,"acceptableMissingness" = .currNonessentialVariable$acceptableMissingness
         ,"missingnessThresholdMultiplier" = .currNonessentialVariable$missingnessThresholdMultiplier
