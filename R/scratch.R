@@ -1,4 +1,3 @@
-# library(registrydqchecksreport)
 # library(registrydqchecksreportdown)
 # library(registrydqchecks)
 # 

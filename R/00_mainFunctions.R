@@ -15,7 +15,6 @@
 #' 
 #' @importFrom glue glue
 #' @importFrom dplyr filter select
-#' @importFrom registrydqchecksreport runApplication
 #' @importFrom registrydqchecksreportdown generateReport
 runRegistryChecks <- function(.registry = "defaultRegistry"
                               ,.prelimDataFolderUrl
@@ -118,9 +117,6 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
     ,.reportOutputUrl = glue::glue("{.outputUrl}{.formattedTimestamp}/")
     ,.fileName = glue::glue("{.prelimDataPullDate}_{.formattedTimestamp}_report")
   )
-  
-  # Run the shiny dashboard of the report
-  registrydqchecksreport::runApplication(glue::glue("{.outputUrl}{.formattedTimestamp}/checks/"))
   
   return(.returnOutput)
 }
