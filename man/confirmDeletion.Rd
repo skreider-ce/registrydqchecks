@@ -4,7 +4,10 @@
 \alias{confirmDeletion}
 \title{confirmDeletion Requires manual typed confirmation of file deletion}
 \usage{
-confirmDeletion()
+confirmDeletion(.dsName)
+}
+\arguments{
+\item{.dsName}{The name of the dataset to be deleted}
 }
 \value{
 Boolean - TRUE if confirmed, FALSE if not

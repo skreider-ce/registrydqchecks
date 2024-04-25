@@ -17,6 +17,8 @@ copyDataset <- function(.dataSetToCopy, .folderToCopyTo, .remove = FALSE){
 
 #' confirmDeletion Requires manual typed confirmation of file deletion
 #' 
+#' @param .dsName The name of the dataset to be deleted
+#'
 #' @return Boolean - TRUE if confirmed, FALSE if not
 confirmDeletion <- function(.dsName){
   cat(glue::glue("This function will delete the following file from the original location. Are you sure you want to perform this action?\n\n{.dsName}\n\nTYPE 'confirm' to continue: "))
