@@ -40,7 +40,7 @@ generateNoncriticalCheckSummary <- function(.nonCriticalChecksToSummarize){
     .numTotalChecks <- length(.newSummaryCol)
     .propFailed <- round(.numFailedChecks / .numTotalChecks, digits = 3)
     .pctFailed <- 100*round(.numFailedChecks / .numTotalChecks, digits = 3)
-    .newSummaryCol <- c(dsName, .numFailedChecks, .numTotalChecks, .propFailed)
+    .newSummaryCol <- c(dsName, .numFailedChecks, .numTotalChecks, .propFailed, .pctFailed)
 
     # Stack the summary row for each dataset being checked on top of each other
     .nonCriticalCheckSummary <- rbind(.nonCriticalCheckSummary, .newSummaryCol)
