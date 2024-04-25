@@ -118,7 +118,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
     ,.fileName = glue::glue("{.prelimDataPullDate}_{.formattedTimestamp}_report")
   )
   
-  return(.returnOutput)
+  return(TRUE)
 }
 
 

@@ -9,7 +9,7 @@
 # .lastMonthDataPullDate = "2024-02-05"
 # .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/documentation/Codebook draft_in progress/ms_codebook.xlsx"
 # .datasetsToCheck = c("ms_dwsub1")
-# .outputUrl = glue::glue("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - DQ Reports/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
+# .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/report/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
 # .isR = FALSE
 # 
 # # .dsName = "ms_dwsub1"
