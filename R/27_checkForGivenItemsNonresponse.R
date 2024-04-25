@@ -16,6 +16,7 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
     ,"nMissing" = integer()
     ,"nRows" = integer()
     ,"propMissing" = numeric()
+    ,"pctMissing" = numeric()
     ,"acceptableMissingness" = numeric()
     ,"nonExtremeMissingness" = numeric()
     ,"missingnessThresholdMultiplier" = numeric()
@@ -58,6 +59,7 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
       ,"nMissing" = .nMissing
       ,"nRows" = .nRows
       ,"propMissing" = .propMissing
+      ,"pctMissing" = 100*propMissing
       ,"acceptableMissingness" = .currEssentialVariable$acceptableMissingness
       ,"nonExtremeMissingness" = .currEssentialVariable$nonExtremeMissingness
       ,"missingnessThresholdMultiplier" = .currEssentialVariable$missingnessThresholdMultiplier

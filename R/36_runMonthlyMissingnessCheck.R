@@ -18,9 +18,11 @@ runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVari
     ,"nMissing" = integer()
     ,"nRows" = integer()
     ,"propMissing" = numeric()
+    ,"pctMissing" = numeric()
     ,"nMissingComp" = integer()
     ,"nRowsComp" = integer()
     ,"propMissingComp" = numeric()
+    ,"pctMissingComp" = numeric()
     ,"acceptableMissingness" = numeric()
     ,"skipLogic" = character()
   )
@@ -83,9 +85,11 @@ runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVari
       ,"nMissing" = .nMissing
       ,"nRows" = .nRows
       ,"propMissing" = .propMissing
+      ,"pctMissing" = 100 * .propMissing
       ,"nMissingComp" = .nMissingComp
       ,"nRowsComp" = .nRowsComp
       ,"propMissingComp" = .propMissingComp
+      ,"pctMissingComp" = 100 * .propMissingComp
       ,"acceptableMissingness" = .currNonessentialVariable$acceptableMissingness
       ,"skipLogic" = .currNonessentialVariable$skipLogic
     )

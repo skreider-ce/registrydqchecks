@@ -13,6 +13,7 @@ generateNoncriticalCheckSummary <- function(.nonCriticalChecksToSummarize){
     ,"nFailed" = integer()
     ,"nTotal" = integer()
     ,"propFailed" = double()
+    ,"pctFailed" = numeric()
   )
   
   # Loop through each of the noncritical checks and store the pass/fail results
@@ -38,6 +39,7 @@ generateNoncriticalCheckSummary <- function(.nonCriticalChecksToSummarize){
     .numFailedChecks <- length(.newSummaryCol) - sum(.newSummaryCol)
     .numTotalChecks <- length(.newSummaryCol)
     .propFailed <- round(.numFailedChecks / .numTotalChecks, digits = 3)
+    .pctFailed <- 100*round(.numFailedChecks / .numTotalChecks, digits = 3)
     .newSummaryCol <- c(dsName, .numFailedChecks, .numTotalChecks, .propFailed)
 
     # Stack the summary row for each dataset being checked on top of each other
@@ -45,7 +47,7 @@ generateNoncriticalCheckSummary <- function(.nonCriticalChecksToSummarize){
   }
 
   # Assign output dataset names  
-  .nonCriticalCheckSummary <- stats::setNames(.nonCriticalCheckSummary, c("dataset", "nFailed", "nTotal", "propFailed"))
+  .nonCriticalCheckSummary <- stats::setNames(.nonCriticalCheckSummary, c("dataset", "nFailed", "nTotal", "propFailed", "pctFailed"))
 
   return(.nonCriticalCheckSummary)
 }
