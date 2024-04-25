@@ -1,3 +1,5 @@
+# remotes::install_github("skreider-ce/registrydqchecksreportdown@pre-v1-feedback")
+# 
 # checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/store/ad/2024/2024-03-06/2024_03_15_14_12_24/checks/2024-03-06_2024_03_15_14_12_24_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
 # 
@@ -13,7 +15,7 @@
 #                   ,.nonCriticalChecks = NULL
 #                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/store/"
 #                   ,.isR = TRUE)
-# 
+
 
 
 
