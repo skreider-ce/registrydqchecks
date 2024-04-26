@@ -5,6 +5,7 @@
 #' @param .listOfEssentialVars A character vector of variables deemed "essential"
 #' @param .listOfSupposedVars A character vector of variables that "should" be in the dataset
 #' @param .uniqueKeys A character vector of variables that uniquely identify rows in the dataset
+#' @param .codebookVariables The codebook variables for the dataset
 #'
 #' @returns A list with the results of the critical checks
 #'
@@ -13,7 +14,8 @@ criticalChecks <- function(.dsToCheck
                             ,.compDsToCheck
                             ,.listOfEssentialVars
                             ,.listOfSupposedVars
-                            ,.uniqueKeys){
+                            ,.uniqueKeys
+                            ,.codebookVariables){
 
   # Runs each of the critical checks and stores the results in a variable
   .critCheckResults1 <- checkForDuplicateUniqueIds(.dsToCheck,.uniqueKeys)
@@ -32,6 +34,8 @@ criticalChecks <- function(.dsToCheck
     .critCheckResults8 <- NULL
   }
   
+  .critCheckResults9 <- checkForVariableTypes(.dsToCheck,.codebookVariables)
+  
   
   # Returns a list with each element being one of the check results
   return(list(
@@ -43,6 +47,7 @@ criticalChecks <- function(.dsToCheck
     ,criticalCheck6 = .critCheckResults6
     ,criticalCheck7 = .critCheckResults7
     ,criticalCheck8 = .critCheckResults8
+    ,criticalCheck9 = .critCheckResults9
     )
   )
 }
