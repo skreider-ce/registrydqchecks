@@ -91,8 +91,8 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
       ,"nRowsLastMonth" = .nRowsComp
       ,"propMissingLastMonth" = .propMissingComp
       ,"pctMissingLastMonth" = 100 * .propMissingComp
-      ,"acceptableMissingness" = .currEssentialVariable$acceptableMissingness
-      ,"nonExtremeMissingness" = .currEssentialVariable$nonExtremeMissingness
+      ,"acceptableMissingness" = 100 * .currEssentialVariable$acceptableMissingness
+      ,"nonExtremeMissingness" = 100 * .currEssentialVariable$nonExtremeMissingness
       ,"missingnessThresholdMultiplier" = .currEssentialVariable$missingnessThresholdMultiplier
       ,"skipLogic" = .currEssentialVariable$skipLogic
       )

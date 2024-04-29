@@ -90,7 +90,7 @@ runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVari
       ,"nRowsLastMonth" = .nRowsComp
       ,"propMissingLastMonth" = .propMissingComp
       ,"pctMissingLastMonth" = 100 * .propMissingComp
-      ,"acceptableMissingness" = .currNonessentialVariable$acceptableMissingness
+      ,"acceptableMissingness" = 100 * .currNonessentialVariable$acceptableMissingness
       ,"skipLogic" = .currNonessentialVariable$skipLogic
     )
     

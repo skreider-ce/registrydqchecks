@@ -60,8 +60,8 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
       ,"nRowsThisMonth" = .nRows
       ,"propMissingThisMonth" = .propMissing
       ,"pctMissingThisMonth" = 100*.propMissing
-      ,"acceptableMissingness" = .currEssentialVariable$acceptableMissingness
-      ,"nonExtremeMissingness" = .currEssentialVariable$nonExtremeMissingness
+      ,"acceptableMissingness" = 100 * .currEssentialVariable$acceptableMissingness
+      ,"nonExtremeMissingness" = 100 * .currEssentialVariable$nonExtremeMissingness
       ,"missingnessThresholdMultiplier" = .currEssentialVariable$missingnessThresholdMultiplier
       ,"skipLogic" = .currEssentialVariable$skipLogic
       )

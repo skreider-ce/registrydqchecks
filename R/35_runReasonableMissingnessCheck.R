@@ -61,7 +61,7 @@ runReasonableMissingnessCheck <- function(.dsToCheck, .codebookVariables){
         ,"nRowsThisMonth" = .nRows
         ,"propMissingThisMonth" = .propMissing
         ,"pctMissingThisMonth" = 100 * .propMissing
-        ,"acceptableMissingness" = .currNonessentialVariable$acceptableMissingness
+        ,"acceptableMissingness" = 100 * .currNonessentialVariable$acceptableMissingness
         ,"missingnessThresholdMultiplier" = .currNonessentialVariable$missingnessThresholdMultiplier
         ,"skipLogic" = .currNonessentialVariable$skipLogic
       )
