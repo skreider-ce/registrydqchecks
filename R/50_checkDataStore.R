@@ -19,7 +19,7 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.r
   createDataStoreFolder(glue::glue("{.dataStoreUrl}{.timestamp}/listing"))
 
   # Assign the dataset name to store
-  .resultsCheckName <- glue::glue("{.dsPullDate}_{.timestamp}_checks")
+  .resultsCheckName <- glue::glue("{.registry}_{.dsPullDate}_{.timestamp}_checks")
 
   # Generate runner summary information to output with the checks
   .runnerSummary <- list(
