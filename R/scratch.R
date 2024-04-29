@@ -1,4 +1,46 @@
-# library(registrydqchecksreport)
+# remotes::install_github("skreider-ce/registrydqchecksreportdown@pre-v1-feedback")
+# 
+# checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/store/ad/2024/2024-03-06/2024_03_15_14_12_24/checks/2024-03-06_2024_03_15_14_12_24_checks.rds")
+# manualNcChecks <- checks$nonCriticalChecks
+# 
+# library(registrydqchecksreportdown)
+# library(registrydqchecks)
+# runRegistryChecks(.registry = "ad"
+#                   ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-04-02/"
+#                   ,.prelimDataPullDate = "2024-04-02"
+#                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-03-06/"
+#                   ,.lastMonthDataPullDate = "2024-03-06"
+#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Data Dictionary Codebook Specifications/AD_codebook_example.xlsx"
+#                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
+#                   ,.nonCriticalChecks = NULL
+#                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/store/"
+#                   ,.isR = TRUE)
+
+# ad_codebook <- registrydqchecks::pullCodebookFromExcelFile("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Data Dictionary Codebook Specifications/AD_codebook_example.xlsx"
+#                           ,"exvisit")
+# 
+# ad_dataset <- registrydqchecks::pullData("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/archive/2024-04-02/exvisit_2024-04-02"
+#                            ,.isR = TRUE)
+# ms_dataset <- registrydqchecks::pullData("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-04-05/final/ms_dwsub1_2024-04-05"
+#                                          ,.isR = FALSE)
+# 
+# toCheck <- c("double", "haven_labelled")
+# 
+# dataset <- ad_dataset
+# .dsToCheck <- ad_dataset
+# .codebookVariables <- ad_codebook |>
+#   dplyr::select(varName, essential, acceptableMissingness, missingnessThresholdMultiplier, skipLogic, catValues, numRange)
+# for(varName in names(dataset)){
+#   #print(glue::glue("{varName}: {all(toCheck %in% class(dataset[[varName]]))}"))
+#   #print(glue::glue("{varName}: {match(c('double'),class(dataset[[varName]]))}"))
+#   print(glue::glue("{varName}: {class(dataset[[varName]])}"))
+# }
+# 
+# typeof(dataset$female_male)
+
+
+
+
 # library(registrydqchecksreportdown)
 # library(registrydqchecks)
 # 
@@ -10,7 +52,7 @@
 # .lastMonthDataPullDate = "2024-02-05"
 # .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/documentation/Codebook draft_in progress/ms_codebook.xlsx"
 # .datasetsToCheck = c("ms_dwsub1")
-# .outputUrl = glue::glue("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - DQ Reports/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
+# .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/report/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
 # .isR = FALSE
 # 
 # # .dsName = "ms_dwsub1"
@@ -63,25 +105,8 @@
 #   }
 # }
 
-# checks <- readRDS("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - DQ Reports/ad/2024/2024-02-01/2024_02_28_10_17_36/checks/2024-02-01_2024_02_28_10_17_36_checks.rds")
-# manualNcChecks <- checks$nonCriticalChecks
-# 
-# 
-# 
-# library(registrydqchecksreport)
-# library(registrydqchecksreportdown)
-# library(registrydqchecks)
-# runRegistryChecks(.registry = "ad"
-#                   ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-02-01/"
-#                   ,.prelimDataPullDate = "2024-02-01"
-#                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-01-04/"
-#                   ,.lastMonthDataPullDate = "2024-01-04"
-#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Data Dictionary Codebook Specifications/AD_codebook_example.xlsx"
-#                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
-#                   ,.nonCriticalChecks = NULL
-#                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/store/"
-#                   ,.isR = TRUE)
-# .dsName = "exvisit"
+
+.dsName = "exvisit"
 # 
 # .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-02-01/"
 # .prelimDataPullDate = "2024-02-01"

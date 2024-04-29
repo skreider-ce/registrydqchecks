@@ -13,9 +13,10 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
   # Initialize the dataframe that will be returned
   .listOfVarMissingness <- data.frame(
     "varName" = character()
-    ,"nRows" = integer()
-    ,"nMissing" = integer()
-    ,"propMissing" = numeric()
+    ,"nMissingThisMonth" = integer()
+    ,"nRowsThisMonth" = integer()
+    ,"propMissingThisMonth" = numeric()
+    ,"pctMissingThisMonth" = numeric()
     ,"acceptableMissingness" = numeric()
     ,"nonExtremeMissingness" = numeric()
     ,"missingnessThresholdMultiplier" = numeric()
@@ -55,11 +56,12 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
     # Build the row to add to the dataframe
     .varMissingRow <- data.frame(
       "varName" = .var
-      ,"nRows" = .nRows
-      ,"nMissing" = .nMissing
-      ,"propMissing" = .propMissing
-      ,"acceptableMissingness" = .currEssentialVariable$acceptableMissingness
-      ,"nonExtremeMissingness" = .currEssentialVariable$nonExtremeMissingness
+      ,"nMissingThisMonth" = .nMissing
+      ,"nRowsThisMonth" = .nRows
+      ,"propMissingThisMonth" = .propMissing
+      ,"pctMissingThisMonth" = 100*.propMissing
+      ,"acceptableMissingness" = 100 * .currEssentialVariable$acceptableMissingness
+      ,"nonExtremeMissingness" = 100 * .currEssentialVariable$nonExtremeMissingness
       ,"missingnessThresholdMultiplier" = .currEssentialVariable$missingnessThresholdMultiplier
       ,"skipLogic" = .currEssentialVariable$skipLogic
       )
@@ -69,9 +71,9 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
   
   # Reorder the listing output to be sorted in descending order by amount of missingness
   .listOfVarMissingness <- .listOfVarMissingness |>
-    dplyr::arrange(dplyr::desc(propMissing)) |>
+    dplyr::arrange(dplyr::desc(propMissingThisMonth)) |>
     dplyr::mutate(
-      passMissing = ifelse(propMissing < nonExtremeMissingness, TRUE, FALSE)
+      passMissing = ifelse(propMissingThisMonth < nonExtremeMissingness, TRUE, FALSE)
     ) |>
     dplyr::filter(passMissing == FALSE)
   

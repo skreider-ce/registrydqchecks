@@ -105,8 +105,22 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
                          ,overwrite = TRUE)
   
   
+  # Save the .xlsx listings of critical check 9
+  .wb <- openxlsx::createWorkbook()
+  for(.dsName in names(.checksToOutput$criticalChecks)){
+    openxlsx::addWorksheet(.wb
+                           ,sheetName = .dsName)
+    openxlsx::writeData(.wb
+                        ,sheet = .dsName
+                        ,.checksToOutput$criticalChecks[[.dsName]]$criticalCheck9$listOfVarsWithUnexpectedType)
+  }
+  openxlsx::saveWorkbook(.wb
+                         ,file = glue::glue("{.listingUrl}/cc9 variables of unexpected type.xlsx")
+                         ,overwrite = TRUE)
   
-  # Save the .xlsx listings of critical check 8
+  
+  
+  # Save the .xlsx listings of codebook checks
 
   for(.ncCheckName in names(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks)){
     .wb <- openxlsx::createWorkbook()

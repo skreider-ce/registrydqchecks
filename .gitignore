@@ -54,3 +54,6 @@ po/*~
 # Image and data files
 /data
 /figs
+
+# Scratch file
+scratch.R

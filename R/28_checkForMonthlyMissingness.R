@@ -14,12 +14,14 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
   # Initialize the dataframe that will be returned
   .listOfVarMissingness <- data.frame(
     "varName" = character()
-    ,"nRows" = integer()
-    ,"nMissing" = integer()
-    ,"propMissing" = numeric()
-    ,"nRowsComp" = integer()
-    ,"nMissingComp" = integer()
-    ,"propMissingComp" = numeric()
+    ,"nMissingThisMonth" = integer()
+    ,"nRowsThisMonth" = integer()
+    ,"propMissingThisMonth" = numeric()
+    ,"pctMissingThisMonth" = numeric()
+    ,"nMissingLastMonth" = integer()
+    ,"nRowsLastMonth" = integer()
+    ,"propMissingLastMonth" = numeric()
+    ,"pctMissingLastMonth" = numeric()
     ,"acceptableMissingness" = numeric()
     ,"nonExtremeMissingness" = numeric()
     ,"missingnessThresholdMultiplier" = numeric()
@@ -81,14 +83,16 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
     # Build the row to add to the dataframe
     .varMissingRow <- data.frame(
       "varName" = .var
-      ,"nRows" = .nRows
-      ,"nMissing" = .nMissing
-      ,"propMissing" = .propMissing
-      ,"nRowsComp" = .nRowsComp
-      ,"nMissingComp" = .nMissingComp
-      ,"propMissingComp" = .propMissingComp
-      ,"acceptableMissingness" = .currEssentialVariable$acceptableMissingness
-      ,"nonExtremeMissingness" = .currEssentialVariable$nonExtremeMissingness
+      ,"nMissingThisMonth" = .nMissing
+      ,"nRowsThisMonth" = .nRows
+      ,"propMissingThisMonth" = .propMissing
+      ,"pctMissingThisMonth" = 100 * .propMissing
+      ,"nMissingLastMonth" = .nMissingComp
+      ,"nRowsLastMonth" = .nRowsComp
+      ,"propMissingLastMonth" = .propMissingComp
+      ,"pctMissingLastMonth" = 100 * .propMissingComp
+      ,"acceptableMissingness" = 100 * .currEssentialVariable$acceptableMissingness
+      ,"nonExtremeMissingness" = 100 * .currEssentialVariable$nonExtremeMissingness
       ,"missingnessThresholdMultiplier" = .currEssentialVariable$missingnessThresholdMultiplier
       ,"skipLogic" = .currEssentialVariable$skipLogic
       )
@@ -98,9 +102,9 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
   
   # Reorder the listing output to be sorted in descending order by amount of missingness
   .listOfVarMissingness <- .listOfVarMissingness |>
-    dplyr::arrange(dplyr::desc(propMissing)) |>
+    dplyr::arrange(dplyr::desc(propMissingThisMonth)) |>
     dplyr::mutate(
-      passMissing = ifelse(abs(propMissing - propMissingComp) <= (acceptableMissingness * missingnessThresholdMultiplier), TRUE, FALSE)
+      passMissing = ifelse(abs(propMissingThisMonth - propMissingLastMonth) <= (acceptableMissingness * missingnessThresholdMultiplier), TRUE, FALSE)
     ) |>
     dplyr::filter(passMissing == FALSE)
   

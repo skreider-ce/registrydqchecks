@@ -15,12 +15,14 @@ runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVari
   # Initialize the dataframe that will be returned
   .listOfVarMissingness <- data.frame(
     "varName" = character()
-    ,"nRows" = integer()
-    ,"nMissing" = integer()
-    ,"propMissing" = numeric()
-    ,"nRowsComp" = integer()
-    ,"nMissingComp" = integer()
-    ,"propMissingComp" = numeric()
+    ,"nMissingThisMonth" = integer()
+    ,"nRowsThisMonth" = integer()
+    ,"propMissingThisMonth" = numeric()
+    ,"pctMissingThisMonth" = numeric()
+    ,"nMissingLastMonth" = integer()
+    ,"nRowsLastMonth" = integer()
+    ,"propMissingLastMonth" = numeric()
+    ,"pctMissingLastMonth" = numeric()
     ,"acceptableMissingness" = numeric()
     ,"skipLogic" = character()
   )
@@ -80,13 +82,15 @@ runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVari
     # Build the row to add to the dataframe
     .varMissingRow <- data.frame(
       "varName" = .var
-      ,"nRows" = .nRows
-      ,"nMissing" = .nMissing
-      ,"propMissing" = .propMissing
-      ,"nRowsComp" = .nRowsComp
-      ,"nMissingComp" = .nMissingComp
-      ,"propMissingComp" = .propMissingComp
-      ,"acceptableMissingness" = .currNonessentialVariable$acceptableMissingness
+      ,"nMissingThisMonth" = .nMissing
+      ,"nRowsThisMonth" = .nRows
+      ,"propMissingThisMonth" = .propMissing
+      ,"pctMissingThisMonth" = 100 * .propMissing
+      ,"nMissingLastMonth" = .nMissingComp
+      ,"nRowsLastMonth" = .nRowsComp
+      ,"propMissingLastMonth" = .propMissingComp
+      ,"pctMissingLastMonth" = 100 * .propMissingComp
+      ,"acceptableMissingness" = 100 * .currNonessentialVariable$acceptableMissingness
       ,"skipLogic" = .currNonessentialVariable$skipLogic
     )
     
@@ -95,9 +99,9 @@ runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVari
   
   # Reorder the listing output to be sorted in descending order by amount of missingness
   .listOfVarMissingness <- .listOfVarMissingness |>
-    dplyr::arrange(dplyr::desc(propMissing)) |>
+    dplyr::arrange(dplyr::desc(propMissingThisMonth)) |>
     dplyr::mutate(
-      passMissing = ifelse(abs(propMissing - propMissingComp) <= (acceptableMissingness * 3), TRUE, FALSE)
+      passMissing = ifelse(abs(propMissingThisMonth - propMissingLastMonth) <= (acceptableMissingness * 3), TRUE, FALSE)
     ) |>
     dplyr::filter(passMissing == FALSE)
   

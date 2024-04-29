@@ -15,7 +15,6 @@
 #' 
 #' @importFrom glue glue
 #' @importFrom dplyr filter select
-#' @importFrom registrydqchecksreport runApplication
 #' @importFrom registrydqchecksreportdown generateReport
 runRegistryChecks <- function(.registry = "defaultRegistry"
                               ,.prelimDataFolderUrl
@@ -70,6 +69,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                                                   ,.listOfEssentialVars = .essentialVariables[[.dsName]]
                                                   ,.listOfSupposedVars = names(.dataToCompare[[.dsName]])
                                                   ,.uniqueKeys = .uniqueKeys[[.dsName]]$varName
+                                                  ,.codebookVariables = .codebookVariables[[.dsName]]
                                                   )
     
     # Run the codebook noncritical checks on the specific dataset with information pulled from the codebook
@@ -101,28 +101,25 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   )
   
   # Define timestamp of this specific datapull
-  .timestamp <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
+  .timestamp <- format(Sys.time(), "%Y-%m-%d_%H%M")
   .formattedTimestamp <- gsub('[^A-Za-z0-9_]', '_', .timestamp)
-  
+
   # Submit check results to datastore - including a .rds and Excel files
   submitToDataStore(.registry = .registry
                     ,.dsPullDate = .prelimDataPullDate
-                    ,.timestamp = .formattedTimestamp
+                    ,.timestamp = .timestamp
                     ,.dataStoreUrl = .outputUrl
                     ,.resultsOfChecks = .checkOutput
                     )
   
   # Generate the html report
   registrydqchecksreportdown::generateReport(
-    .inputDatasetUrl = glue::glue("{.outputUrl}{.formattedTimestamp}/checks/{.prelimDataPullDate}_{.formattedTimestamp}_checks.rds")
-    ,.reportOutputUrl = glue::glue("{.outputUrl}{.formattedTimestamp}/")
-    ,.fileName = glue::glue("{.prelimDataPullDate}_{.formattedTimestamp}_report")
+    .inputDatasetUrl = glue::glue("{.outputUrl}{.timestamp}/checks/{.registry}_{.prelimDataPullDate}_{.timestamp}_checks.rds")
+    ,.reportOutputUrl = glue::glue("{.outputUrl}{.timestamp}/")
+    ,.fileName = glue::glue("{.registry}_{.prelimDataPullDate}_{.timestamp}_report")
   )
   
-  # Run the shiny dashboard of the report
-  registrydqchecksreport::runApplication(glue::glue("{.outputUrl}{.formattedTimestamp}/checks/"))
-  
-  return(.returnOutput)
+  return(TRUE)
 }
 
 

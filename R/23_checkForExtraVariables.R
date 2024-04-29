@@ -12,7 +12,7 @@ checkForExtraVariables <- function(.dsToCheck, .listOfSupposedVars){
   .dsVariables <- names(.dsToCheck)
   
   # Create a list of the variables in supposed vars and not in the dataset
-  .extraVars <- setdiff(.dsVariables, .listOfSupposedVars)
+  .extraVars <- setdiff(.listOfSupposedVars, .dsVariables)
   
   # Define output list structure
   .returnOutput <- list(

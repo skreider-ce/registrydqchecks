@@ -9,7 +9,8 @@ criticalChecks(
   .compDsToCheck,
   .listOfEssentialVars,
   .listOfSupposedVars,
-  .uniqueKeys
+  .uniqueKeys,
+  .codebookVariables
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ criticalChecks(
 \item{.listOfSupposedVars}{A character vector of variables that "should" be in the dataset}
 
 \item{.uniqueKeys}{A character vector of variables that uniquely identify rows in the dataset}
+
+\item{.codebookVariables}{The codebook variables for the dataset}
 }
 \value{
 A list with the results of the critical checks
