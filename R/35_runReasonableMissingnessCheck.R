@@ -71,9 +71,9 @@ runReasonableMissingnessCheck <- function(.dsToCheck, .codebookVariables){
     
     # Reorder the listing output to be sorted in descending order by amount of missingness
     .listOfVarMissingness <- .listOfVarMissingness |>
-      dplyr::arrange(dplyr::desc(propMissing)) |>
+      dplyr::arrange(dplyr::desc(propMissingThisMonth)) |>
       dplyr::mutate(
-        passMissing = ifelse(propMissing <= acceptableMissingness, TRUE, FALSE)
+        passMissing = ifelse(propMissingThisMonth <= acceptableMissingness, TRUE, FALSE)
       ) |>
       dplyr::filter(passMissing == FALSE)
     

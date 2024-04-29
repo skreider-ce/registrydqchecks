@@ -99,9 +99,9 @@ runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVari
   
   # Reorder the listing output to be sorted in descending order by amount of missingness
   .listOfVarMissingness <- .listOfVarMissingness |>
-    dplyr::arrange(dplyr::desc(propMissing)) |>
+    dplyr::arrange(dplyr::desc(propMissingThisMonth)) |>
     dplyr::mutate(
-      passMissing = ifelse(abs(propMissing - propMissingComp) <= (acceptableMissingness * 3), TRUE, FALSE)
+      passMissing = ifelse(abs(propMissingThisMonth - propMissingLastMonth) <= (acceptableMissingness * 3), TRUE, FALSE)
     ) |>
     dplyr::filter(passMissing == FALSE)
   
