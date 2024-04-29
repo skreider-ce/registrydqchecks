@@ -15,10 +15,10 @@ runReasonableMissingnessCheck <- function(.dsToCheck, .codebookVariables){
     # Initialize the dataframe that will be returned
     .listOfVarMissingness <- data.frame(
       "varName" = character()
-      ,"nMissing" = integer()
-      ,"nRows" = integer()
-      ,"propMissing" = numeric()
-      ,"pctMissing" = numeric()
+      ,"nMissingThisMonth" = integer()
+      ,"nRowsThisMonth" = integer()
+      ,"propMissingThisMonth" = numeric()
+      ,"pctMissingThisMonth" = numeric()
       ,"acceptableMissingness" = numeric()
       ,"missingnessThresholdMultiplier" = numeric()
       ,"skipLogic" = character()
@@ -57,10 +57,10 @@ runReasonableMissingnessCheck <- function(.dsToCheck, .codebookVariables){
       # Build the row to add to the dataframe
       .varMissingRow <- data.frame(
         "varName" = .var
-        ,"nMissing" = .nMissing
-        ,"nRows" = .nRows
-        ,"propMissing" = .propMissing
-        ,"pctMissing" = 100 * .propMissing
+        ,"nMissingThisMonth" = .nMissing
+        ,"nRowsThisMonth" = .nRows
+        ,"propMissingThisMonth" = .propMissing
+        ,"pctMissingThisMonth" = 100 * .propMissing
         ,"acceptableMissingness" = .currNonessentialVariable$acceptableMissingness
         ,"missingnessThresholdMultiplier" = .currNonessentialVariable$missingnessThresholdMultiplier
         ,"skipLogic" = .currNonessentialVariable$skipLogic

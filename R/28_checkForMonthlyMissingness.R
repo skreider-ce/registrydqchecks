@@ -14,14 +14,14 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
   # Initialize the dataframe that will be returned
   .listOfVarMissingness <- data.frame(
     "varName" = character()
-    ,"nMissing" = integer()
-    ,"nRows" = integer()
-    ,"propMissing" = numeric()
-    ,"pctMissing" = numeric()
-    ,"nMissingComp" = integer()
-    ,"nRowsComp" = integer()
-    ,"propMissingComp" = numeric()
-    ,"pctMissingComp" = numeric()
+    ,"nMissingThisMonth" = integer()
+    ,"nRowsThisMonth" = integer()
+    ,"propMissingThisMonth" = numeric()
+    ,"pctMissingThisMonth" = numeric()
+    ,"nMissingLastMonth" = integer()
+    ,"nRowsLastMonth" = integer()
+    ,"propMissingLastMonth" = numeric()
+    ,"pctMissingLastMonth" = numeric()
     ,"acceptableMissingness" = numeric()
     ,"nonExtremeMissingness" = numeric()
     ,"missingnessThresholdMultiplier" = numeric()
@@ -83,14 +83,14 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
     # Build the row to add to the dataframe
     .varMissingRow <- data.frame(
       "varName" = .var
-      ,"nMissing" = .nMissing
-      ,"nRows" = .nRows
-      ,"propMissing" = .propMissing
-      ,"pctMissing" = 100 * .propMissing
-      ,"nMissingComp" = .nMissingComp
-      ,"nRowsComp" = .nRowsComp
-      ,"propMissingComp" = .propMissingComp
-      ,"pctMissingComp" = 100 * .propMissingComp
+      ,"nMissingThisMonth" = .nMissing
+      ,"nRowsThisMonth" = .nRows
+      ,"propMissingThisMonth" = .propMissing
+      ,"pctMissingThisMonth" = 100 * .propMissing
+      ,"nMissingLastMonth" = .nMissingComp
+      ,"nRowsLastMonth" = .nRowsComp
+      ,"propMissingLastMonth" = .propMissingComp
+      ,"pctMissingLastMonth" = 100 * .propMissingComp
       ,"acceptableMissingness" = .currEssentialVariable$acceptableMissingness
       ,"nonExtremeMissingness" = .currEssentialVariable$nonExtremeMissingness
       ,"missingnessThresholdMultiplier" = .currEssentialVariable$missingnessThresholdMultiplier

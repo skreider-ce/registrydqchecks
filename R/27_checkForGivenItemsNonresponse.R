@@ -13,10 +13,10 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
   # Initialize the dataframe that will be returned
   .listOfVarMissingness <- data.frame(
     "varName" = character()
-    ,"nMissing" = integer()
-    ,"nRows" = integer()
-    ,"propMissing" = numeric()
-    ,"pctMissing" = numeric()
+    ,"nMissingThisMonth" = integer()
+    ,"nRowsThisMonth" = integer()
+    ,"propMissingThisMonth" = numeric()
+    ,"pctMissingThisMonth" = numeric()
     ,"acceptableMissingness" = numeric()
     ,"nonExtremeMissingness" = numeric()
     ,"missingnessThresholdMultiplier" = numeric()
@@ -56,10 +56,10 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
     # Build the row to add to the dataframe
     .varMissingRow <- data.frame(
       "varName" = .var
-      ,"nMissing" = .nMissing
-      ,"nRows" = .nRows
-      ,"propMissing" = .propMissing
-      ,"pctMissing" = 100*.propMissing
+      ,"nMissingThisMonth" = .nMissing
+      ,"nRowsThisMonth" = .nRows
+      ,"propMissingThisMonth" = .propMissing
+      ,"pctMissingThisMonth" = 100*.propMissing
       ,"acceptableMissingness" = .currEssentialVariable$acceptableMissingness
       ,"nonExtremeMissingness" = .currEssentialVariable$nonExtremeMissingness
       ,"missingnessThresholdMultiplier" = .currEssentialVariable$missingnessThresholdMultiplier
