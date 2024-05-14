@@ -12,7 +12,7 @@ checkForOmittedVariables <- function(.dsToCheck, .listOfSupposedVars){
   .dsVariables <- names(.dsToCheck)
   
   # Create a list of the variables in supposed vars and not in the dataset
-  .omittedVars <- setdiff(.dsVariables, .listOfSupposedVars)
+  .extraVars <- setdiff(.dsVariables, .listOfSupposedVars)
   
   # Define output list structure
   .returnOutput <- list(
@@ -20,9 +20,9 @@ checkForOmittedVariables <- function(.dsToCheck, .listOfSupposedVars){
     ,"checkTitle" = "Added variables"
     ,"checkDescription" = "For each analytic file, check which variables were added from last month."
     ,"checkShortDescription" = "newly added variables"
-    ,"pass" = ifelse(length(.omittedVars) == 0, TRUE, FALSE)
-    ,"nOmittedVars" = length(.omittedVars)
-    ,"omittedVars" = .omittedVars
+    ,"pass" = ifelse(length(.extraVars) == 0, TRUE, FALSE)
+    ,"nExtraVars" = length(.extraVars)
+    ,"extraVars" = .extraVars
   )
   
   return(.returnOutput)
