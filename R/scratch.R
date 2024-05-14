@@ -1,6 +1,6 @@
-# remotes::install_github("skreider-ce/registrydqchecksreportdown@pre-v1-feedback")
+# remotes::install_github("skreider-ce/registrydqchecksreportdown@v1.0.2")
 # 
-# checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/store/ad/2024/2024-03-06/2024_03_15_14_12_24/checks/2024-03-06_2024_03_15_14_12_24_checks.rds")
+# checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad_2024-05-03_2024-05-07_1022_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
 # 
 # library(registrydqchecksreportdown)
@@ -12,8 +12,8 @@
 #                   ,.lastMonthDataPullDate = "2024-03-06"
 #                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Data Dictionary Codebook Specifications/AD_codebook_example.xlsx"
 #                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
-#                   ,.nonCriticalChecks = NULL
-#                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/store/"
+#                   ,.nonCriticalChecks = manualNcChecks
+#                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/"
 #                   ,.isR = TRUE)
 
 # ad_codebook <- registrydqchecks::pullCodebookFromExcelFile("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Data Dictionary Codebook Specifications/AD_codebook_example.xlsx"
