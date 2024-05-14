@@ -119,7 +119,12 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
                          ,overwrite = TRUE)
   
   
+  # Initialize long listing file
+  .wbLong <- openxlsx::createWorkbook()
+  openxlsx::addWorksheet(.wbLong, "qualityChecks")
+  currentRow <- 1
   
+
   # Save the .xlsx listings of codebook checks
 
   for(.ncCheckName in names(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks)){
@@ -130,6 +135,10 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
       openxlsx::writeData(.wb
                           ,sheet = .dsName
                           ,.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing)
+      
+      openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing, startCol = 1, startRow = currentRow)
+      currentRow <- currentRow + nrow(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing) + 2
+      
     }
     openxlsx::saveWorkbook(.wb
                            ,file = glue::glue("{.listingUrl}/{.ncCheckName} {.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkShortDescription}.xlsx")
@@ -137,23 +146,6 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
   }
 
   
-  
-  # # Save the .xlsx listings of all the codebook noncritical checks
-  # for(.dsName in names(.checksToOutput$nonCriticalChecks)){
-  #   for(.ncCheckName in names(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks)){
-  #     if(nrow(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing) > 0){
-  #       .wb <- openxlsx::createWorkbook()
-  #       openxlsx::addWorksheet(.wb
-  #                              ,sheetName = .dsName)
-  #       openxlsx::writeData(.wb
-  #                           ,sheet = .dsName
-  #                           ,.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing)
-  #       openxlsx::saveWorkbook(.wb
-  #                              ,file = glue::glue("{.listingUrl}/{.dsName} {.ncCheckName} {.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkShortDescription}.xlsx")
-  #                              ,overwrite = TRUE)
-  #     }
-  #   }
-    
     # Save the .xlsx listings of all the nPctList manual noncritical checks
   for(.dsName in names(.checksToOutput$nonCriticalChecks)){
     for(.ncCheckName in names(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList)){
@@ -164,12 +156,20 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
         openxlsx::writeData(.wb
                             ,sheet = .dsName
                             ,.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing)
+        
+        openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing, startCol = 1, startRow = currentRow)
+        currentRow <- currentRow + nrow(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing) + 2
+        
         openxlsx::saveWorkbook(.wb
                                ,file = glue::glue("{.listingUrl}/{.dsName} {.ncCheckName} {.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkShortDescription}.xlsx")
                                ,overwrite = TRUE)
       }
     }
   }
+  
+  openxlsx::saveWorkbook(.wbLong
+                         ,file = glue::glue("{.listingUrl}/allChecks.xlsx")
+                         ,overwrite = TRUE)
 }
 
 

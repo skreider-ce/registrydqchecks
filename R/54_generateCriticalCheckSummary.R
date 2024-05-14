@@ -20,9 +20,9 @@ generateCriticalCheckSummary <- function(.criticalChecksToSummarize){
     for(check in names(.critCheckList)){
       .currCritCheck <- .critCheckList[[check]]
       if(check == "criticalCheck2"){
-        .newSummaryRow = c(.newSummaryRow, setNames(.currCritCheck$nOmittedVars,check))
-      } else if(check == "criticalCheck3") {
         .newSummaryRow = c(.newSummaryRow, setNames(.currCritCheck$nExtraVars,check))
+      } else if(check == "criticalCheck3") {
+        .newSummaryRow = c(.newSummaryRow, setNames(.currCritCheck$nOmittedVars,check))
       } else if(is.null(.currCritCheck)){
         .newSummaryRow = c(.newSummaryRow, setNames(NA, check))
       } else {
