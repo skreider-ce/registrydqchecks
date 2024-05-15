@@ -2,7 +2,7 @@
 % Please edit documentation in R/00_mainFunctions.R
 \name{updatePackages}
 \alias{updatePackages}
-\title{updatePackages}
+\title{updatePackages Update rdc packages to the most recent version}
 \usage{
 updatePackages(snapshot = TRUE)
 }
@@ -10,5 +10,5 @@ updatePackages(snapshot = TRUE)
 \item{snapshot}{Boolean (default = TRUE) to automatically run renv::snapshot}
 }
 \description{
-updatePackages
+updatePackages Update rdc packages to the most recent version
 }
