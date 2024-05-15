@@ -153,7 +153,7 @@ copyDatasetsToLocation <- function(.datasetsToCopy
 
 
 
-#' updatePackages
+#' updatePackages Update rdc packages to the most recent version
 #'
 #' @param snapshot Boolean (default = TRUE) to automatically run renv::snapshot
 #'
