@@ -4,9 +4,11 @@
 \alias{outputListings}
 \title{Output specified listings in xlsx format for further review}
 \usage{
-outputListings(.listingUrl, .timestamp, .checksToOutput)
+outputListings(.registry, .listingUrl, .timestamp, .checksToOutput)
 }
 \arguments{
+\item{.registry}{Name of the registry being checked}
+
 \item{.listingUrl}{Url to where the listing output will live}
 
 \item{.timestamp}{Timestamp of the current run}

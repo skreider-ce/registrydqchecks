@@ -42,7 +42,8 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.r
   )
   
   # Save the listings as Excel files
-  outputListings(.listingUrl = glue::glue("{.dataStoreUrl}{.timestamp}/listing")
+  outputListings(.registry = .registry
+                  ,.listingUrl = glue::glue("{.dataStoreUrl}{.timestamp}/listing")
                   ,.timestamp = .timestamp
                   ,.checksToOutput = .outputToSave
                  )

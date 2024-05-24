@@ -1,13 +1,14 @@
 #' Output specified listings in xlsx format for further review
 #'
+#' @param .registry Name of the registry being checked
 #' @param .listingUrl Url to where the listing output will live
 #' @param .timestamp Timestamp of the current run
 #' @param .checksToOutput Registry DQ checks to output in list form with criticalChecks and nonCriticalChecks entries
 #'
 #' @export
-
+#'
 #' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
-outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
+outputListings <- function(.registry, .listingUrl, .timestamp, .checksToOutput){
   
   # Create new workbook objects and then print information out to them
   #   For critical checks and non critical checks
@@ -159,7 +160,7 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
                             ,sheet = .dsName
                             ,.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing)
         
-        openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkTitle, startCol = 1, startRow = currentRow)
+        openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkTitle, startCol = 1, startRow = currentRow)
         currentRow <- currentRow + 1
         openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing, startCol = 1, startRow = currentRow)
         currentRow <- currentRow + nrow(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing) + 2
@@ -172,7 +173,7 @@ outputListings <- function(.listingUrl, .timestamp, .checksToOutput){
   }
   
   openxlsx::saveWorkbook(.wbLong
-                         ,file = glue::glue("{.listingUrl}/allChecks.xlsx")
+                         ,file = glue::glue("{.listingUrl}/{.registry}_{.timestamp}_allChecks.xlsx")
                          ,overwrite = TRUE)
 }
 
