@@ -22,6 +22,7 @@ checkForDuplicateUniqueIds <- function(.dsToCheck,.uniqueKey){
     ,"checkTitle" = "Zero duplicates"
     ,"checkDescription" = "For each analytic file, confirm that a specified set of variables uniquely identifies a row. "
     ,"checkShortDescription" = "duplicate unique keys"
+    ,"sendCheckToRom" = FALSE
     ,"pass" = ifelse(nrow(.duplicateUniqueIds) == 0,TRUE,FALSE)
     ,"nDuplicateRows" = nrow(.duplicateUniqueIds)
     ,"listOfDuplicateRows" = .duplicateUniqueIds

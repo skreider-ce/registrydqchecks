@@ -83,6 +83,7 @@ checkForGivenItemsNonresponse <- function(.dsToCheck, .listOfEssentialVars){
     ,"checkTitle" = "Item nonresponse for essential variables is not extreme"
     ,"checkDescription" = "Confirm that item nonresponse for essential variables is below a specified threshold."
     ,"checkShortDescription" = "item missingness"
+    ,"sendCheckToRom" = FALSE
     ,"pass" = ifelse(nrow(.listOfVarMissingness) > 0, FALSE, TRUE)
     ,"essentialVariablesMissingness" = .listOfVarMissingness
   )
