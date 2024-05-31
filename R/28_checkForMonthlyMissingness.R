@@ -114,6 +114,7 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
     ,"checkTitle" = "MoM (month over month) change in item nonresponse is reasonable for a subset of variables called essential."
     ,"checkDescription" = "Confirm that jump in item nonresponse from prior month to current month for essential variables is below a specified threshold for reasonable item nonresponse."
     ,"checkShortDescription" = "month to month missingness"
+    ,"sendCheckToRom" = FALSE
     ,"pass" = ifelse(nrow(.listOfVarMissingness) > 0, FALSE, TRUE)
     ,"essentialVariablesMissingness" = .listOfVarMissingness
   )

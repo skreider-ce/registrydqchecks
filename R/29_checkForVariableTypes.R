@@ -64,6 +64,7 @@ checkForVariableTypes <- function(.dsToCheck
     ,"checkTitle" = "Variables are of unexpected 'type'"
     ,"checkDescription" = "For each analytic file, confirm that variables with labels are double/label and variables with ranges are numeric."
     ,"checkShortDescription" = "variables of unexpected type"
+    ,"sendCheckToRom" = FALSE
     ,"pass" = ifelse(nrow(.mismatchedVariableTypes) == 0,TRUE,FALSE)
     ,"nVariablesUnexpectedType" = nrow(.mismatchedVariableTypes)
     ,"listOfVarsWithUnexpectedType" = .mismatchedVariableTypes
