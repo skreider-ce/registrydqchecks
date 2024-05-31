@@ -41,13 +41,13 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.r
     ,"nonCriticalChecks" = .resultsOfChecks$nonCriticalCheckOutput
   )
   
+  # Save the .rds with results of the checks
+  saveRDS(.outputToSave,glue::glue("{.dataStoreUrl}{.timestamp}/checks/{.resultsCheckName}.rds"))
+  
   # Save the listings as Excel files
   outputListings(.registry = .registry
                   ,.listingUrl = glue::glue("{.dataStoreUrl}{.timestamp}/listing")
                   ,.timestamp = .timestamp
                   ,.checksToOutput = .outputToSave
                  )
-  
-  # Save the .rds with results of the checks
-  saveRDS(.outputToSave,glue::glue("{.dataStoreUrl}{.timestamp}/checks/{.resultsCheckName}.rds"))
 }
