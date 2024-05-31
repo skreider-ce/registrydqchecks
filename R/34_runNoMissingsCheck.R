@@ -7,6 +7,7 @@ runNoMissingsCheck <- function(){
     "checkTitle" = "There arent any missing values for identified variables."
     ,"checkDescription" = "Confirm that there arent any missing values for these specific variables."
     ,"checkShortDescription" = "confirmation of zero missings"
+    ,"sendCheckToRom" = FALSE
     ,"pass" = NULL
     ,"values" = list(
       "n" = 0

@@ -24,6 +24,7 @@ checkForMissingVariableLabels <- function(.dsToCheck){
     ,"checkTitle" = "Zero unlabeled variables"
     ,"checkDescription" = "For each analytic file, confirm that all variables are labeled."
     ,"checkShortDescription" = "unlabeled variables"
+    ,"sendCheckToRom" = FALSE
     ,"pass" = ifelse(sum(.variablesWithMissingLabels) == 0,TRUE,FALSE)
     ,"nMissingVariableLabels" = sum(.variablesWithMissingLabels)
     ,"listOfVarsWithMissingLabels" = names(.variableLabels)[.variablesWithMissingLabels]

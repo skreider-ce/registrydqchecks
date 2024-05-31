@@ -20,6 +20,7 @@ checkForExtraVariables <- function(.dsToCheck, .listOfSupposedVars){
     ,"checkTitle" = "Removed variables"
     ,"checkDescription" = "For each analytic file, see which variables were removed from last month."
     ,"checkShortDescription" = "removed variables"
+    ,"sendCheckToRom" = FALSE
     ,"pass" = ifelse(length(.omittedVars) == 0, TRUE, FALSE)
     ,"nOmittedVars" = length(.omittedVars)
     ,"omittedVars" = .omittedVars
