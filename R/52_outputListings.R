@@ -181,8 +181,6 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .timesta
   }
   
   
-  .monthYearTimestamp <- format(as.Date(.prelimDataPullDate), "%Y-%m")
-  
   .columnTitles <- as.data.frame(t(c("Investigator", "Date Investigated", "Resolution", "Date Resolved", "Notes")))
   .gray_style <- openxlsx::createStyle(fgFill = "gray")
   openxlsx::writeData(.wbLong, sheet = "qualityChecks", x = .columnTitles, startCol = 15, colNames = FALSE)
