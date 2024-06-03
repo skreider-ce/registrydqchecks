@@ -92,6 +92,8 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
       }
     }
   }
+  
+  rm(.dataToCheck, .dataToCompare)
 
   
   # Create a list of the critical check and the noncritical check output to be saved to a location  
@@ -99,7 +101,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
     "criticalCheckOutput" = .critCheckOutput
     ,"nonCriticalCheckOutput" = .ncChecks
   )
-  
+
   # Define timestamp of this specific datapull
   .timestamp <- format(Sys.time(), "%Y-%m-%d_%H%M")
   .formattedTimestamp <- gsub('[^A-Za-z0-9_]', '_', .timestamp)
