@@ -4,12 +4,20 @@
 \alias{outputListings}
 \title{Output specified listings in xlsx format for further review}
 \usage{
-outputListings(.registry, .listingUrl, .timestamp, .checksToOutput)
+outputListings(
+  .registry,
+  .listingUrl,
+  .yearMonthTimestamp,
+  .timestamp,
+  .checksToOutput
+)
 }
 \arguments{
 \item{.registry}{Name of the registry being checked}
 
 \item{.listingUrl}{Url to where the listing output will live}
+
+\item{.yearMonthTimestamp}{The year and month of the current datapull}
 
 \item{.timestamp}{Timestamp of the current run}
 

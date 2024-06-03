@@ -4,11 +4,12 @@
 #' @param .listingUrl Url to where the listing output will live
 #' @param .timestamp Timestamp of the current run
 #' @param .checksToOutput Registry DQ checks to output in list form with criticalChecks and nonCriticalChecks entries
+#' @param .yearMonthTimestamp The year and month of the current datapull
 #'
 #' @export
 #'
 #' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
-outputListings <- function(.registry, .listingUrl, .timestamp, .checksToOutput){
+outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .timestamp, .checksToOutput){
   
   # Create new workbook objects and then print information out to them
   #   For critical checks and non critical checks
@@ -179,8 +180,16 @@ outputListings <- function(.registry, .listingUrl, .timestamp, .checksToOutput){
     }
   }
   
+  
+  .monthYearTimestamp <- format(as.Date(.prelimDataPullDate), "%Y-%m")
+  
+  .columnTitles <- as.data.frame(t(c("Investigator", "Date Investigated", "Resolution", "Date Resolved", "Notes")))
+  .gray_style <- openxlsx::createStyle(fgFill = "gray")
+  openxlsx::writeData(.wbLong, sheet = "qualityChecks", x = .columnTitles, startCol = 15, colNames = FALSE)
+  openxlsx::addStyle(.wbLong, sheet = "qualityChecks", style = .gray_style, cols = 14, rows = 1:currentRow)
+  
   openxlsx::saveWorkbook(.wbLong
-                         ,file = glue::glue("{.listingUrl}/{.registry}_{.timestamp}_allChecks.xlsx")
+                         ,file = glue::glue("{.listingUrl}/{.registry}_{.yearMonthTimestamp}_allChecks.xlsx")
                          ,overwrite = TRUE)
 }
 
