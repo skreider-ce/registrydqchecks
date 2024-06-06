@@ -14,6 +14,7 @@ runRegistryChecks(
   .datasetsToCheck,
   .nonCriticalChecks = NULL,
   .outputUrl,
+  .subset = TRUE,
   .isR
 )
 }
@@ -35,6 +36,8 @@ runRegistryChecks(
 \item{.nonCriticalChecks}{A list of the manually generated non-critical checks in the CE DQ specified format (see additional documentation)}
 
 \item{.outputUrl}{A url string to the location of the output datasets - NOTE: A subfolder will be created here called /checks that will house the results of the checks and will be the location called by the check report}
+
+\item{.subset}{(default = TRUE) Whether to subset the data based on visitdate OR visitdate0}
 
 \item{.isR}{A boolean indicating if the datasets being checked are in R or Stata format (e.g. if R then .isR = TRUE; if Stata then .isR = FALSE)}
 }
