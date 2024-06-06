@@ -26,8 +26,8 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                               ,.datasetsToCheck
                               ,.nonCriticalChecks = NULL
                               ,.outputUrl
-                              ,.subset = TRUE
-                              ,.isR){
+                              ,.isR
+                              ,.subset = TRUE){
   
   ############################
   # Initialize variable lists to house information on specific datasets being checked
@@ -49,19 +49,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
     
     # Pull data to check and data from last month to compare it to
     .dataToCheck[[.dsName]] <- pullData(glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}"), .isR)
-      # subsetDatasetToLastYear(
-      #                           .dataset = pullData(glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}"), .isR)
-      #                           ,.timeVar1 = "visitdate"
-      #                           ,.timeVar2 = "visitdate0"
-      #                           ,.dataPullDate = .prelimDataPullDate
-      #                           )
     .dataToCompare[[.dsName]] <- pullData(glue::glue("{.lastMonthDataFolderUrl}{.dsName}_{.lastMonthDataPullDate}"), .isR)
-      # subsetDatasetToLastYear(
-      #                             .dataset = pullData(glue::glue("{.lastMonthDataFolderUrl}{.dsName}_{.lastMonthDataPullDate}"), .isR)
-      #                             ,.timeVar1 = "visitdate"
-      #                             ,.timeVar2 = "visitdate0"
-      #                             ,.dataPullDate = .prelimDataPullDate
-      #                            )
     
     # Pull the unique keys for the specific dataset from the codebook
     .uniqueKeys[[.dsName]] <- .codebooks[[.dsName]] |>
