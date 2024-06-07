@@ -11,7 +11,7 @@
 #                   ,.prelimDataPullDate = "2024-04-02"
 #                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-03-06/"
 #                   ,.lastMonthDataPullDate = "2024-03-06"
-#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Data Dictionary Codebook Specifications/AD_codebook_example.xlsx"
+#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/DQ checks/Documentation/AD_codebook_2024-06-06.xlsx"
 #                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
 #                   ,.nonCriticalChecks = manualNcChecks
 #                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/"

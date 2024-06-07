@@ -76,22 +76,8 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
     
     # Run the codebook noncritical checks on the specific dataset with information pulled from the codebook
     .codebookNcOutput[[.dsName]] <- codebookNcChecks(.dsName = .dsName
-                                                     ,.dsToCheck = data.frame(
-                                                       subsetDatasetToLastYear(.dataset = .dataToCheck[[.dsName]]
-                                                                               ,.timeVar1 = "visitdate"
-                                                                               ,.timeVar2 = "visitdate0"
-                                                                               ,.dataPullDate = .prelimDataPullDate
-                                                       )
-                                                     )
-                                                     # ,.dsToCheck = data.frame(.dataToCheck[[.dsName]])
-                                                     ,.compDsToCheck = data.frame(
-                                                       subsetDatasetToLastYear(.dataset = .dataToCompare[[.dsName]]
-                                                                               ,.timeVar1 = "visitdate"
-                                                                               ,.timeVar2 = "visitdate0"
-                                                                               ,.dataPullDate = .prelimDataPullDate
-                                                       )
-                                                     )
-                                                     # ,.compDsToCheck = data.frame(.dataToCompare[[.dsName]])
+                                                     ,.dsToCheck = data.frame(.dataToCheck[[.dsName]])
+                                                     ,.compDsToCheck = data.frame(.dataToCompare[[.dsName]])
                                                      ,.codebookVariables = .codebookVariables[[.dsName]]
                                                      ,.uniqueKeys = .uniqueKeys[[.dsName]]$varName
                                                      )
