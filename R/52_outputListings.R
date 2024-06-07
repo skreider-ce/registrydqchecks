@@ -5,11 +5,12 @@
 #' @param .timestamp Timestamp of the current run
 #' @param .checksToOutput Registry DQ checks to output in list form with criticalChecks and nonCriticalChecks entries
 #' @param .yearMonthTimestamp The year and month of the current datapull
+#' @param .dataPullDate The YYYY-MM-DD of the current datapull
 #'
 #' @export
 #'
 #' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
-outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .timestamp, .checksToOutput){
+outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPullDate, .timestamp, .checksToOutput){
   
   # Create new workbook objects and then print information out to them
   #   For critical checks and non critical checks
@@ -139,11 +140,20 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .timesta
                           ,.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing)
       
       if(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$sendCheckToRom){
-        if(nrow(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing) > 0){
+        
+        # .subsetTimeDataset <- subsetDatasetToLastYear(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing
+        #                                               ,"visitdate"
+        #                                               ,"visitdate0"
+        #                                               ,.dataPullDate)
+        
+        .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing
+
+        if(nrow(.subsetTimeDataset) > 0){
+
           openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkTitle, startCol = 1, startRow = currentRow)
           currentRow <- currentRow + 1
-          openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing, startCol = 1, startRow = currentRow)
-          currentRow <- currentRow + nrow(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing) + 2                  
+          openxlsx::writeData(.wbLong, "qualityChecks", .subsetTimeDataset, startCol = 1, startRow = currentRow)
+          currentRow <- currentRow + nrow(.subsetTimeDataset) + 2                  
         }
       }
     }
@@ -165,11 +175,19 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .timesta
                             ,.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing)
         
         if(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$sendCheckToRom){
-          if(nrow(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing) > 0){
+          
+          # .subsetTimeDataset <- subsetDatasetToLastYear(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing
+          #                                               ,"visitdate"
+          #                                               ,"visitdate0"
+          #                                               ,.dataPullDate)
+          
+          .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing
+          
+          if(nrow(.subsetTimeDataset) > 0){
             openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkTitle, startCol = 1, startRow = currentRow)
             currentRow <- currentRow + 1
-            openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing, startCol = 1, startRow = currentRow)
-            currentRow <- currentRow + nrow(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing) + 2
+            openxlsx::writeData(.wbLong, "qualityChecks", .subsetTimeDataset, startCol = 1, startRow = currentRow)
+            currentRow <- currentRow + nrow(.subsetTimeDataset) + 2
           }
         }
 
