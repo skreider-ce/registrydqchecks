@@ -14,7 +14,8 @@ runRegistryChecks(
   .datasetsToCheck,
   .nonCriticalChecks = NULL,
   .outputUrl,
-  .isR
+  .isR,
+  .subset = TRUE
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ runRegistryChecks(
 \item{.outputUrl}{A url string to the location of the output datasets - NOTE: A subfolder will be created here called /checks that will house the results of the checks and will be the location called by the check report}
 
 \item{.isR}{A boolean indicating if the datasets being checked are in R or Stata format (e.g. if R then .isR = TRUE; if Stata then .isR = FALSE)}
+
+\item{.subset}{(default = TRUE) Whether to subset the data based on visitdate OR visitdate0}
 }
 \description{
 The main function call to run the CorEvitas Registry DQ Checks and the Report

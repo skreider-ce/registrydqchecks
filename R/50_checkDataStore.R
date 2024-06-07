@@ -48,6 +48,7 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.r
   outputListings(.registry = .registry
                   ,.listingUrl = glue::glue("{.dataStoreUrl}{.timestamp}/listing")
                   ,.yearMonthTimestamp = format(as.Date(.dsPullDate), "%Y-%m")
+                  ,.dataPullDate = .dsPullDate
                   ,.timestamp = .timestamp
                   ,.checksToOutput = .outputToSave
                  )

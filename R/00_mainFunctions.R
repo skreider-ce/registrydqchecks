@@ -9,6 +9,7 @@
 #' @param .datasetsToCheck A string vector with the names of the datasets to be checked (e.g. c("exvisit", "exlab", "exdrugexp")) - NOTE: These must perfectly match both the tab names in the codebook AND the names of the datasets being checked
 #' @param .nonCriticalChecks A list of the manually generated non-critical checks in the CE DQ specified format (see additional documentation)
 #' @param .outputUrl A url string to the location of the output datasets - NOTE: A subfolder will be created here called /checks that will house the results of the checks and will be the location called by the check report
+#' @param .subset (default = TRUE) Whether to subset the data based on visitdate OR visitdate0
 #' @param .isR A boolean indicating if the datasets being checked are in R or Stata format (e.g. if R then .isR = TRUE; if Stata then .isR = FALSE)
 #'
 #' @export
@@ -25,7 +26,8 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                               ,.datasetsToCheck
                               ,.nonCriticalChecks = NULL
                               ,.outputUrl
-                              ,.isR){
+                              ,.isR
+                              ,.subset = TRUE){
   
   ############################
   # Initialize variable lists to house information on specific datasets being checked
@@ -166,5 +168,39 @@ updatePackages <- function(snapshot = TRUE){
   
   if(snapshot){
     renv::snapshot()
+  }
+}
+
+
+
+#' subsetDatasetToLastYear Function to subset datasetA based on the existence of variables
+#'
+#' @param .dataset The dataset to subset
+#' @param .timeVar1 The primary time variable to check for
+#' @param .timeVar2 The secondary variable to check for
+#' @param .dataPullDate The date of the current datapull
+#'
+#' @importFrom lubridate %m-%
+#'
+#' @return The subset dataset
+#' @export
+subsetDatasetToLastYear <- function(.dataset, .timeVar1, .timeVar2, .dataPullDate) {
+  .comparisonDate <- as.Date(.dataPullDate) %m-% lubridate::years(1)
+  message(.comparisonDate, " is the comparison date")
+  
+  if (.timeVar1 %in% colnames(.dataset)) {
+    # Use variable1 to subset datasetA if it exists
+    subset <- .dataset[as.Date(.dataset[[.timeVar1]]) > .comparisonDate, ]
+    message("Using ", .timeVar1, " to subset the dataset")
+    return(subset)
+  } else if (.timeVar2 %in% colnames(.dataset)) {
+    # Use variable2 to subset datasetA if variable1 does not exist but variable2 exists
+    subset <- .dataset[as.Date(.dataset[[.timeVar2]]) > .comparisonDate, ]
+    message("Using ", .timeVar2, " to subset the dataset")
+    return(subset)
+  } else {
+    # Log an error if neither variable1 nor variable2 exist in datasetA
+    message("Error: neither ", .timeVar1, " nor ", .timeVar2, " exist in this dataset")
+    return(.dataset)  # Return the original dataset without subsetting
   }
 }

@@ -31,6 +31,13 @@ pullCodebookFromExcelFile <- function(.fileUrl,.sheetName){
     dplyr::rename(
       varName = `Analytic Variable name`
       ,varLabel = `Analytic Variable label`
+    ) |>
+    dplyr::mutate(
+      acceptableMissingness = as.numeric(acceptableMissingness, na.rm = TRUE)
+      ,uniqueKey = as.numeric(uniqueKey, na.rm = TRUE)
+      ,essential = as.numeric(essential, na.rm = TRUE)
+      ,nonExtremeMissingness = as.numeric(nonExtremeMissingness, na.rm = TRUE)
+      ,missingnessThresholdMultiplier = as.numeric(missingnessThresholdMultiplier, na.rm = TRUE)
     )
 
   return(.pulledVars[.colNames])

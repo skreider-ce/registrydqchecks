@@ -8,6 +8,7 @@ outputListings(
   .registry,
   .listingUrl,
   .yearMonthTimestamp,
+  .dataPullDate,
   .timestamp,
   .checksToOutput
 )
@@ -18,6 +19,8 @@ outputListings(
 \item{.listingUrl}{Url to where the listing output will live}
 
 \item{.yearMonthTimestamp}{The year and month of the current datapull}
+
+\item{.dataPullDate}{The YYYY-MM-DD of the current datapull}
 
 \item{.timestamp}{Timestamp of the current run}
 
