@@ -24,25 +24,37 @@ runNumericRangeChecks <- function(.dsName
   
   # Loop through each numeric variable and perform the range checks
   for(.varName1 in .varsToCheck$varName){
-    .currentCheckVar <- .varsToCheck |>
-      dplyr::filter(varName == {{.varName1}})
-
-    .subsetDsToCheck <- .dsToCheck |>
-      dplyr::select(dplyr::all_of(.uniqueKeys), !!.varName1) |>
-      dplyr::filter(!is.na(get(.varName1))) |>
-      dplyr::filter(get(.varName1) < .currentCheckVar$numRangeLower | get(.varName1) > .currentCheckVar$numRangeUpper) |>
-      dplyr::mutate(
-        dataset = .dsName
-        ,variableName = .varName1
-        ,expectedUpper = .currentCheckVar$numRangeUpper
-        ,expectedLower = .currentCheckVar$numRangeLower
-        ,numValue = as.numeric(get(.varName1))
-      ) |>
-      dplyr::select(
-        dplyr::all_of(.uniqueKeys), dataset, numValue, variableName, expectedLower, expectedUpper
-      )
+    tryCatch({
+      .currentCheckVar <- .varsToCheck |>
+        dplyr::filter(varName == {{.varName1}})
+      
+      .subsetDsToCheck <- .dsToCheck |>
+        dplyr::select(dplyr::all_of(.uniqueKeys), !!.varName1) |>
+        dplyr::filter(!is.na(get(.varName1))) |>
+        dplyr::filter(get(.varName1) < .currentCheckVar$numRangeLower | get(.varName1) > .currentCheckVar$numRangeUpper) |>
+        dplyr::mutate(
+          dataset = .dsName
+          ,variableName = .varName1
+          ,expectedUpper = .currentCheckVar$numRangeUpper
+          ,expectedLower = .currentCheckVar$numRangeLower
+          ,numValue = as.numeric(get(.varName1))
+        ) |>
+        dplyr::select(
+          dplyr::all_of(.uniqueKeys), dataset, numValue, variableName, expectedLower, expectedUpper
+        )
+      
+      .numericRangeChecks <- dplyr::bind_rows(.numericRangeChecks, .subsetDsToCheck)
+    }
+    ,warning = function(w){
+      print(paste("Warning caught:", conditionMessage(w)))
+      print(paste("VarName:", .varName1))
+    }
+    ,error = function(e){
+      print(paste("Error caught:", conditionMessage(e)))
+      print(paste("VarName:", .varName1))
+    }
+    )
     
-    .numericRangeChecks <- dplyr::bind_rows(.numericRangeChecks, .subsetDsToCheck)
   }
 
   return(.numericRangeChecks)
