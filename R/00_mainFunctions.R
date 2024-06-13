@@ -115,7 +115,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                     ,.dataStoreUrl = .outputUrl
                     ,.resultsOfChecks = .checkOutput
                     )
-  
+  rm(.checkOutput)
   # Generate the html report
   registrydqchecksreportdown::generateReport(
     .inputDatasetUrl = glue::glue("{.outputUrl}{.timestamp}/checks/{.registry}_{.prelimDataPullDate}_{.timestamp}_checks.rds")
