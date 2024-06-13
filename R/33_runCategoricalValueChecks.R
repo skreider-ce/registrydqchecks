@@ -65,11 +65,11 @@ runCategoricalValueChecks <- function(.dsName
     }
     ,warning = function(w){
       print(paste("Warning caught:", conditionMessage(w)))
-      print(paste("VarName:", .varName1))
+      print(paste("Variable is in codebook but not in dataset:", .varName1))
     }
     ,error = function(e){
       print(paste("Error caught:", conditionMessage(e)))
-      print(paste("VarName:", .varName1))
+      print(paste("Variable is in codebook but not in dataset:", .varName1))
     }
     )
   }
