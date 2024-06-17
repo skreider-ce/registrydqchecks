@@ -115,7 +115,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                     ,.dataStoreUrl = .outputUrl
                     ,.resultsOfChecks = .checkOutput
                     )
-  
+  rm(.checkOutput)
   # Generate the html report
   registrydqchecksreportdown::generateReport(
     .inputDatasetUrl = glue::glue("{.outputUrl}{.timestamp}/checks/{.registry}_{.prelimDataPullDate}_{.timestamp}_checks.rds")
@@ -200,7 +200,7 @@ subsetDatasetToLastYear <- function(.dataset, .timeVar1, .timeVar2, .dataPullDat
     return(subset)
   } else {
     # Log an error if neither variable1 nor variable2 exist in datasetA
-    message("Error: neither ", .timeVar1, " nor ", .timeVar2, " exist in this dataset")
+    message("Error: neither ", .timeVar1, " nor ", .timeVar2, " exist in this dataset. No subsetting was done on the dataset")
     return(.dataset)  # Return the original dataset without subsetting
   }
 }

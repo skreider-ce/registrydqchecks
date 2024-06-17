@@ -41,22 +41,25 @@
 
 
 
-
+# remotes::install_github("skreider-ce/registrydqchecksreportdown")
+# remotes::install_github("skreider-ce/registrydqchecks")
+#
 # library(registrydqchecksreportdown)
 # library(registrydqchecks)
 # 
 # .registry = "ms"
-# .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-03-05/final/"
-# .prelimDataPullDate = "2024-03-05"
+# .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-06-05/final/"
+# .prelimDataPullDate = "2024-06-05"
 # .dataPullYear = "2024"
-# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-02-05/final/"
-# .lastMonthDataPullDate = "2024-02-05"
+# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-05-05/final/"
+# .lastMonthDataPullDate = "2024-05-05"
 # .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/documentation/Codebook draft_in progress/ms_codebook.xlsx"
-# .datasetsToCheck = c("ms_dwsub1")
+# .datasetsToCheck = c("ms_dwsub1", "ms_drugexp")
 # .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/report/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
 # .isR = FALSE
 # 
-# # .dsName = "ms_dwsub1"
+# checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ms_2024-06-05_2024-06-13_1007_checks.rds")
+# manualNcChecks <- checks$nonCriticalChecks
 # 
 # runRegistryChecks(.registry = .registry
 #                   ,.prelimDataFolderUrl = .prelimDataFolderUrl
@@ -65,13 +68,13 @@
 #                   ,.lastMonthDataPullDate = .lastMonthDataPullDate
 #                   ,.codebookUrl = .codebookUrl
 #                   ,.datasetsToCheck = .datasetsToCheck
-#                   ,.nonCriticalChecks = NULL
+#                   ,.nonCriticalChecks = manualNcChecks
 #                   ,.outputUrl = .outputUrl
 #                   ,.isR = FALSE)
-# 
-# 
-# 
-#
+
+
+
+
 
 # ncChecks <- list()
 
@@ -107,7 +110,7 @@
 # }
 
 
-.dsName = "exvisit"
+# .dsName = "exvisit"
 # 
 # .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-02-01/"
 # .prelimDataPullDate = "2024-02-01"
