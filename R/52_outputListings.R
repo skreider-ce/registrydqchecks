@@ -125,7 +125,7 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
   # Initialize long listing file
   .wbLong <- openxlsx::createWorkbook()
   openxlsx::addWorksheet(.wbLong, "qualityChecks")
-  currentRow <- 1
+  currentRow <- 2
   
 
   # Save the .xlsx listings of codebook checks
@@ -141,12 +141,12 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
       
       if(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$sendCheckToRom){
         
-        # .subsetTimeDataset <- subsetDatasetToLastYear(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing
-        #                                               ,"visitdate"
-        #                                               ,"visitdate0"
-        #                                               ,.dataPullDate)
+        .subsetTimeDataset <- subsetDatasetToLastYear(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing
+                                                      ,"visitdate"
+                                                      ,"visitdate0"
+                                                      ,.dataPullDate)
         
-        .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing
+        # .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing
 
         if(nrow(.subsetTimeDataset) > 0){
 
@@ -176,12 +176,12 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
         
         if(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$sendCheckToRom){
           
-          # .subsetTimeDataset <- subsetDatasetToLastYear(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing
-          #                                               ,"visitdate"
-          #                                               ,"visitdate0"
-          #                                               ,.dataPullDate)
+          .subsetTimeDataset <- subsetDatasetToLastYear(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing
+                                                        ,"visitdate"
+                                                        ,"visitdate0"
+                                                        ,.dataPullDate)
           
-          .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing
+          # .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing
           
           if(nrow(.subsetTimeDataset) > 0){
             openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkTitle, startCol = 1, startRow = currentRow)
@@ -203,6 +203,7 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
   .gray_style <- openxlsx::createStyle(fgFill = "gray")
   openxlsx::writeData(.wbLong, sheet = "qualityChecks", x = .columnTitles, startCol = 15, colNames = FALSE)
   openxlsx::addStyle(.wbLong, sheet = "qualityChecks", style = .gray_style, cols = 14, rows = 1:currentRow)
+  openxlsx::freezePane(.wbLong, sheet = "qualityChecks", firstActiveRow = 2)
   
   openxlsx::saveWorkbook(.wbLong
                          ,file = glue::glue("{.listingUrl}/{.registry}_{.yearMonthTimestamp}_allChecks.xlsx")
