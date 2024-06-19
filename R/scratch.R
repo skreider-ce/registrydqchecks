@@ -1,6 +1,10 @@
 # remotes::install_github("skreider-ce/registrydqchecksreportdown")
 # remotes::install_github("skreider-ce/registrydqchecks")
 # #
+# 
+# validateCodebook(codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/DQ checks/Documentation/AD_codebook_2024-06-06.xlsx"
+#                   ,datasetNames = c("exvisit", "exlab", "exdrugexp"))
+# 
 # checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad_2024-05-03_2024-05-31_0950_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
 # #
