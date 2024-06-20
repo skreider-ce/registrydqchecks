@@ -35,7 +35,7 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
                            ,sheetName = .dsName)
     openxlsx::writeData(.wb
                         ,sheet = .dsName
-                        ,.checksToOutput$criticalChecks[[.dsName]]$criticalCheck2$omittedVars)
+                        ,.checksToOutput$criticalChecks[[.dsName]]$criticalCheck2$extraVars)
   }
   openxlsx::saveWorkbook(.wb
                          ,file = glue::glue("{.listingUrl}/cc2 newly added variables.xlsx")
@@ -48,7 +48,7 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
                            ,sheetName = .dsName)
     openxlsx::writeData(.wb
                         ,sheet = .dsName
-                        ,.checksToOutput$criticalChecks[[.dsName]]$criticalCheck3$extraVars)
+                        ,.checksToOutput$criticalChecks[[.dsName]]$criticalCheck3$omittedVars)
   }
   openxlsx::saveWorkbook(.wb
                          ,file = glue::glue("{.listingUrl}/cc3 removed variables.xlsx")
