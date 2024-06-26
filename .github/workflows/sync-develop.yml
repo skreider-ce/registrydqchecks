@@ -1,5 +1,8 @@
 name: Sync develop with main
 
+permissions:
+  contents: write  # Ensure the workflow has write permissions to the repository
+
 on:
   push:
     branches:
