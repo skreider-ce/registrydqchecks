@@ -58,13 +58,15 @@
 # .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-05-05/final/"
 # .lastMonthDataPullDate = "2024-05-05"
 # .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/documentation/Codebook draft_in progress/ms_codebook.xlsx"
-# .datasetsToCheck = c("ms_dwsub1", "ms_drugexp")
+# .datasetsToCheck = c("ms_dwsub1", "ms_drugexp", "ms_dmlabimg")
 # .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/report/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
 # .isR = FALSE
 # 
 # checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ms_2024-06-05_2024-06-13_1007_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
 # 
+# # library(profvis)
+# # profvis::profvis(
 # runRegistryChecks(.registry = .registry
 #                   ,.prelimDataFolderUrl = .prelimDataFolderUrl
 #                   ,.prelimDataPullDate = .prelimDataPullDate
@@ -72,9 +74,10 @@
 #                   ,.lastMonthDataPullDate = .lastMonthDataPullDate
 #                   ,.codebookUrl = .codebookUrl
 #                   ,.datasetsToCheck = .datasetsToCheck
-#                   ,.nonCriticalChecks = manualNcChecks
+#                   ,.nonCriticalChecks = NULL
 #                   ,.outputUrl = .outputUrl
 #                   ,.isR = FALSE)
+# # )
 
 
 
