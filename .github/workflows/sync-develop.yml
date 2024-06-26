@@ -22,10 +22,11 @@ jobs:
       - name: Fetch all branches
         run: git fetch --all
 
+      - name: Checkout develop
+        run: git checkout develop
+
       - name: Merge main into develop
-        run: |
-          git checkout develop
-          git merge main
+        run: git merge main --allow-unrelated-histories
 
       - name: Push changes
         run: git push origin develop
