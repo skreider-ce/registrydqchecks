@@ -140,7 +140,7 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
                           ,.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing)
       
       if(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$sendCheckToRom){
-        
+        print(glue::glue("{.dsName} - {.ncCheckName}"))
         .subsetTimeDataset <- subsetDatasetToLastYear(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing
                                                       ,"visitdate"
                                                       ,"visitdate0"
@@ -175,7 +175,7 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
                             ,.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing)
         
         if(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$sendCheckToRom){
-          
+          print(glue::glue("{.dsName} - {.ncCheckName}"))
           .subsetTimeDataset <- subsetDatasetToLastYear(.checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing
                                                         ,"visitdate"
                                                         ,"visitdate0"

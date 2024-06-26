@@ -47,14 +47,16 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
     # Pull dataset specific codebook
     .codebooks[[.dsName]] <- pullCodebookFromExcelFile(.codebookUrl, .dsName)
     
-    # Pull data to check and data from last month to compare it to
-    .dataToCheck[[.dsName]] <- pullData(glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}"), .isR)
-    .dataToCompare[[.dsName]] <- pullData(glue::glue("{.lastMonthDataFolderUrl}{.dsName}_{.lastMonthDataPullDate}"), .isR)
-    
     # Pull the unique keys for the specific dataset from the codebook
     .uniqueKeys[[.dsName]] <- .codebooks[[.dsName]] |>
       dplyr::filter(uniqueKey == 1) |>
       dplyr::select(varName)
+    
+    # Pull data to check and data from last month to compare it to
+    .dataToCheck[[.dsName]] <- pullData(glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}"), .isR) |>
+      cleanUniqueKeyClasses(uniqueKeyVars = .uniqueKeys[[.dsName]])
+    .dataToCompare[[.dsName]] <- pullData(glue::glue("{.lastMonthDataFolderUrl}{.dsName}_{.lastMonthDataPullDate}"), .isR) |>
+      cleanUniqueKeyClasses(uniqueKeyVars = .uniqueKeys[[.dsName]])
     
     # Pull the list of essential variables for the specific dataset from the codebook
     .essentialVariables[[.dsName]] <- .codebooks[[.dsName]] |>
@@ -124,83 +126,4 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   )
   
   return(TRUE)
-}
-
-
-#' copyDatasetsToLocation A function to copy the preliminary analytic datasets to a final output location with an option to remove the files from the original location
-#'
-#' @param .datasetsToCopy A character list of the dataset prefixes to copy from the original location to the final location
-#' @param .folderToCopyTo Url of the folder to copy the datasets to
-#' @param .remove (default = FALSE) an indicator whether to remove the files in the original location
-#' @param .prelimDataFolderUrl A text URL to the location of the datasets to be copied over
-#' @param .prelimDataPullDate The datapull date of the preliminary files to be copied - the date in the dataset name
-#' @param .isR Boolean indicating if the dataset being copied is an R file (if TRUE then dataset is R, if FALSE then dataset is .dta)
-#'
-#' @export
-copyDatasetsToLocation <- function(.datasetsToCopy
-                                   ,.prelimDataFolderUrl
-                                   ,.prelimDataPullDate
-                                   ,.folderToCopyTo
-                                   ,.isR
-                                   ,.remove = FALSE){
-  for(.dsName in .datasetsToCopy){
-    if(.isR == TRUE){
-      .dsToCopy = glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}.rds")
-    } else if(.isR == FALSE){
-      .dsToCopy = glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}.dta")
-    }
-    copyDataset(.dataSetToCopy = .dsToCopy
-                ,.folderToCopyTo = .folderToCopyTo
-                ,.remove = .remove)
-  }
-}
-
-
-
-#' updatePackages Update rdc packages to the most recent version
-#'
-#' @param snapshot Boolean (default = TRUE) to automatically run renv::snapshot
-#'
-#' @export
-updatePackages <- function(snapshot = TRUE){
-  remotes::install_github("skreider-ce/registrydqchecksreportdown", dependencies = TRUE) # Most up to date static package release
-  remotes::install_github("skreider-ce/registrydqchecks", dependencies = TRUE) # Most up to date static package release
-  
-  if(snapshot){
-    renv::snapshot()
-  }
-}
-
-
-
-#' subsetDatasetToLastYear Function to subset datasetA based on the existence of variables
-#'
-#' @param .dataset The dataset to subset
-#' @param .timeVar1 The primary time variable to check for
-#' @param .timeVar2 The secondary variable to check for
-#' @param .dataPullDate The date of the current datapull
-#'
-#' @importFrom lubridate %m-%
-#'
-#' @return The subset dataset
-#' @export
-subsetDatasetToLastYear <- function(.dataset, .timeVar1, .timeVar2, .dataPullDate) {
-  .comparisonDate <- as.Date(.dataPullDate) %m-% lubridate::years(1)
-  message(.comparisonDate, " is the comparison date")
-  
-  if (.timeVar1 %in% colnames(.dataset)) {
-    # Use variable1 to subset datasetA if it exists
-    subset <- .dataset[as.Date(.dataset[[.timeVar1]]) > .comparisonDate, ]
-    message("Using ", .timeVar1, " to subset the dataset")
-    return(subset)
-  } else if (.timeVar2 %in% colnames(.dataset)) {
-    # Use variable2 to subset datasetA if variable1 does not exist but variable2 exists
-    subset <- .dataset[as.Date(.dataset[[.timeVar2]]) > .comparisonDate, ]
-    message("Using ", .timeVar2, " to subset the dataset")
-    return(subset)
-  } else {
-    # Log an error if neither variable1 nor variable2 exist in datasetA
-    message("Error: neither ", .timeVar1, " nor ", .timeVar2, " exist in this dataset. No subsetting was done on the dataset")
-    return(.dataset)  # Return the original dataset without subsetting
-  }
 }
