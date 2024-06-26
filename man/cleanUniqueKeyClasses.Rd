@@ -7,7 +7,9 @@
 cleanUniqueKeyClasses(datasetToCheck, uniqueKeyVars)
 }
 \arguments{
-\item{data}{The dataset to remove vctrs_vctr and haven_labelled from the classes of uniqueKey variables}
+\item{datasetToCheck}{The data to remove the classes from}
+
+\item{uniqueKeyVars}{The uniqueKey variables}
 }
 \value{
 the dataset with vctrs_vctr and haven_labelled removed from the classes of the uniqueKey variables
