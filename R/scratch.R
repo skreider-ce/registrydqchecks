@@ -81,6 +81,41 @@
 
 
 
+# remotes::install_github("skreider-ce/registrydqchecksreportdown")
+# remotes::install_github("skreider-ce/registrydqchecks")
+# 
+# library(registrydqchecksreportdown)
+# library(registrydqchecks)
+# 
+# .registry = "ibd"
+# .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - IBD/monthly/2024/2024-07-01/Analytic Data/"
+# .prelimDataPullDate = "2024-07-01"
+# .dataPullYear = "2024"
+# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - IBD/monthly/2024/2024-06-01/Analytic Data/"
+# .lastMonthDataPullDate = "2024-06-01"
+# .codebookUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/ibdtest/IBD_codebook_2024-07-01.xlsx"
+# .datasetsToCheck = c("IBD_Analytic_file")
+# .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ibdtest/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
+# .isR = TRUE
+# 
+# checks <- NULL
+# manualNcChecks <- NULL
+# 
+# # library(profvis)
+# # profvis::profvis(
+# runRegistryChecks(.registry = .registry
+#                   ,.prelimDataFolderUrl = .prelimDataFolderUrl
+#                   ,.prelimDataPullDate = .prelimDataPullDate
+#                   ,.lastMonthDataFolderUrl = .lastMonthDataFolderUrl
+#                   ,.lastMonthDataPullDate = .lastMonthDataPullDate
+#                   ,.codebookUrl = .codebookUrl
+#                   ,.datasetsToCheck = .datasetsToCheck
+#                   ,.nonCriticalChecks = NULL
+#                   ,.outputUrl = .outputUrl
+#                   ,.isR = FALSE)
+# # )
+
+
 
 
 # ncChecks <- list()
