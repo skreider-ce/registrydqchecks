@@ -12,6 +12,8 @@
 #' @param .subset (default = TRUE) Whether to subset the data based on visitdate OR visitdate0
 #' @param .isR A boolean indicating if the datasets being checked are in R or Stata format (e.g. if R then .isR = TRUE; if Stata then .isR = FALSE)
 #'
+#' @returns A personalized URL to the location of the report
+#'
 #' @export
 #' 
 #' @importFrom glue glue
@@ -109,6 +111,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   # Define timestamp of this specific datapull
   .timestamp <- format(Sys.time(), "%Y-%m-%d_%H%M")
   .formattedTimestamp <- gsub('[^A-Za-z0-9_]', '_', .timestamp)
+  .reportOutputUrl = glue::glue("{.outputUrl}{.timestamp}/")
 
   # Submit check results to datastore - including a .rds and Excel files
   submitToDataStore(.registry = .registry
@@ -121,9 +124,10 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   # Generate the html report
   registrydqchecksreportdown::generateReport(
     .inputDatasetUrl = glue::glue("{.outputUrl}{.timestamp}/checks/{.registry}_{.prelimDataPullDate}_{.timestamp}_checks.rds")
-    ,.reportOutputUrl = glue::glue("{.outputUrl}{.timestamp}/")
+    ,.reportOutputUrl = .reportOutputUrl
     ,.fileName = glue::glue("{.registry}_DQReport_{.timestamp}_report")
   )
   
-  return(TRUE)
+  print(glue::glue("Report Output Url: {.reportOutputUrl}"))
+  return(.reportOutputUrl)
 }

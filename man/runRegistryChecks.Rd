@@ -41,6 +41,9 @@ runRegistryChecks(
 
 \item{.subset}{(default = TRUE) Whether to subset the data based on visitdate OR visitdate0}
 }
+\value{
+A personalized URL to the location of the report
+}
 \description{
 The main function call to run the CorEvitas Registry DQ Checks and the Report
 }
