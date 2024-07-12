@@ -15,7 +15,8 @@ criticalChecks <- function(.dsToCheck
                             ,.listOfEssentialVars
                             ,.listOfSupposedVars
                             ,.uniqueKeys
-                            ,.codebookVariables){
+                            ,.codebookVariables
+                            ,.dsName){
 
   # Runs each of the critical checks and stores the results in a variable
   .critCheckResults1 <- checkForDuplicateUniqueIds(.dsToCheck,.uniqueKeys)
@@ -35,6 +36,7 @@ criticalChecks <- function(.dsToCheck
   }
   
   .critCheckResults9 <- checkForVariableTypes(.dsToCheck,.codebookVariables)
+  .critCheckResults10 <- checkForValidAgeAtEnrollment(.dsName,.dsToCheck,.codebookVariables,.uniqueKeys)
   
   
   # Returns a list with each element being one of the check results
@@ -48,6 +50,7 @@ criticalChecks <- function(.dsToCheck
     ,criticalCheck7 = .critCheckResults7
     ,criticalCheck8 = .critCheckResults8
     ,criticalCheck9 = .critCheckResults9
+    ,criticalCheck10 = .critCheckResults10
     )
   )
 }

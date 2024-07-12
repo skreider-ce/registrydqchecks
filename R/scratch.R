@@ -5,12 +5,16 @@
 # validateCodebook(codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/DQ checks/Documentation/AD_codebook_2024-06-06.xlsx"
 #                   ,datasetNames = c("exvisit", "exlab", "exdrugexp"))
 # 
+# 
+# tempLogFile <- tempfile(fileext = ".txt")
+# sink(tempLogFile, type = "output")
+# 
 # checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad_2024-06-10_2024-06-17_1039_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
 # #
 # library(registrydqchecksreportdown)
 # library(registrydqchecks)
-# runRegistryChecks(.registry = "ad"
+# outputUrl <- runRegistryChecks(.registry = "ad"
 #                   ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-06-10/"
 #                   ,.prelimDataPullDate = "2024-06-10"
 #                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-05-24/"
@@ -20,6 +24,13 @@
 #                   ,.nonCriticalChecks = manualNcChecks
 #                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/"
 #                   ,.isR = TRUE)
+# copyRomListingToFolder(.reportOutputUrl = outputUrl
+#                        ,.romReportUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/")
+# sink()
+# # Copy the log from the temporary location to the outputUrl
+# file.copy(tempLogFile, outputUrl)
+# # Cleanup: remove the temporary log file
+# file.remove(tempLogFile)
 
 # ad_codebook <- registrydqchecks::pullCodebookFromExcelFile("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Data Dictionary Codebook Specifications/AD_codebook_example.xlsx"
 #                           ,"exvisit")
