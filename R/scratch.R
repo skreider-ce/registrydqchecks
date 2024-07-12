@@ -8,7 +8,7 @@
 # 
 # tempLogFile <- tempfile(fileext = ".txt")
 # sink(tempLogFile, type = "output")
-
+# 
 # checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad_2024-06-10_2024-06-17_1039_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
 # #

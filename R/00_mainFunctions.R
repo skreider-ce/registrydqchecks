@@ -76,6 +76,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                                                   ,.listOfSupposedVars = names(.dataToCompare[[.dsName]])
                                                   ,.uniqueKeys = .uniqueKeys[[.dsName]]$varName
                                                   ,.codebookVariables = .codebookVariables[[.dsName]]
+                                                  ,.dsName = .dsName
                                                   )
     
     # Run the codebook noncritical checks on the specific dataset with information pulled from the codebook
