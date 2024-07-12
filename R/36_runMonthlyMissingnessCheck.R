@@ -31,7 +31,7 @@ runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVari
   for(.var in .nonEssentialVariables$varName){
     
     .currNonessentialVariable <- .nonEssentialVariables |>
-      filter(varName == .var)
+      dplyr::filter(varName == .var)
     
     tryCatch({
       

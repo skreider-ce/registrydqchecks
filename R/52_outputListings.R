@@ -122,6 +122,20 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
                          ,overwrite = TRUE)
   
   
+  # Save the .xlsx listings of critical check 10
+  .wb <- openxlsx::createWorkbook()
+  for(.dsName in names(.checksToOutput$criticalChecks)){
+    openxlsx::addWorksheet(.wb
+                           ,sheetName = .dsName)
+    openxlsx::writeData(.wb
+                        ,sheet = .dsName
+                        ,.checksToOutput$criticalChecks[[.dsName]]$criticalCheck10$listing)
+  }
+  openxlsx::saveWorkbook(.wb
+                         ,file = glue::glue("{.listingUrl}/cc10 valid age at enrollment.xlsx")
+                         ,overwrite = TRUE)
+  
+  
   # Initialize long listing file
   .wbLong <- openxlsx::createWorkbook()
   openxlsx::addWorksheet(.wbLong, "qualityChecks")
