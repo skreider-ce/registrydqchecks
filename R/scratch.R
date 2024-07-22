@@ -32,27 +32,6 @@
 # # Cleanup: remove the temporary log file
 # file.remove(tempLogFile)
 
-# ad_codebook <- registrydqchecks::pullCodebookFromExcelFile("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Data Dictionary Codebook Specifications/AD_codebook_example.xlsx"
-#                           ,"exvisit")
-# 
-# ad_dataset <- registrydqchecks::pullData("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/archive/2024-04-02/exvisit_2024-04-02"
-#                            ,.isR = TRUE)
-# ms_dataset <- registrydqchecks::pullData("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-04-05/final/ms_dwsub1_2024-04-05"
-#                                          ,.isR = FALSE)
-# 
-# toCheck <- c("double", "haven_labelled")
-# 
-# dataset <- ad_dataset
-# .dsToCheck <- ad_dataset
-# .codebookVariables <- ad_codebook |>
-#   dplyr::select(varName, essential, acceptableMissingness, missingnessThresholdMultiplier, skipLogic, catValues, numRange)
-# for(varName in names(dataset)){
-#   #print(glue::glue("{varName}: {all(toCheck %in% class(dataset[[varName]]))}"))
-#   #print(glue::glue("{varName}: {match(c('double'),class(dataset[[varName]]))}"))
-#   print(glue::glue("{varName}: {class(dataset[[varName]])}"))
-# }
-# 
-# typeof(dataset$female_male)
 
 
 
@@ -72,6 +51,9 @@
 # .datasetsToCheck = c("ms_dwsub1", "ms_drugexp", "ms_dmlabimg")
 # .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/report/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
 # .isR = FALSE
+# 
+# validateCodebook(codebookUrl = .codebookUrl
+#                   ,datasetNames = c("ms_dwsub1", "ms_drugexp", "ms_dmlabimg"))
 # 
 # checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ms_2024-06-05_2024-06-13_1007_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
@@ -108,6 +90,9 @@
 # .datasetsToCheck = c("IBD_Analytic_file")
 # .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ibdtest/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
 # .isR = TRUE
+# 
+# validateCodebook(codebookUrl = .codebookUrl
+#                   ,datasetNames = c("IBD_Analytic_file"))
 # 
 # checks <- NULL
 # manualNcChecks <- NULL
