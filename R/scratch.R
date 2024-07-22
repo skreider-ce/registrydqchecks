@@ -24,8 +24,10 @@
 #                   ,.nonCriticalChecks = manualNcChecks
 #                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/"
 #                   ,.isR = TRUE)
+# 
+# romOutputFolder <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Biostat Registry Data Quality Reports/"
 # copyRomListingToFolder(.reportOutputUrl = outputUrl
-#                        ,.romReportUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/")
+#                        ,.romReportUrl = glue::glue("{romOutputFolder}ad/2024/2024-06/"))
 # sink()
 # # Copy the log from the temporary location to the outputUrl
 # file.copy(tempLogFile, outputUrl)
