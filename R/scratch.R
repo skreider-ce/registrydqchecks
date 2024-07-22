@@ -24,35 +24,16 @@
 #                   ,.nonCriticalChecks = manualNcChecks
 #                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/"
 #                   ,.isR = TRUE)
+# 
+# romOutputFolder <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Biostat Registry Data Quality Reports/"
 # copyRomListingToFolder(.reportOutputUrl = outputUrl
-#                        ,.romReportUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/")
+#                        ,.romReportUrl = glue::glue("{romOutputFolder}ad/2024/2024-06/"))
 # sink()
 # # Copy the log from the temporary location to the outputUrl
 # file.copy(tempLogFile, outputUrl)
 # # Cleanup: remove the temporary log file
 # file.remove(tempLogFile)
 
-# ad_codebook <- registrydqchecks::pullCodebookFromExcelFile("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Data Dictionary Codebook Specifications/AD_codebook_example.xlsx"
-#                           ,"exvisit")
-# 
-# ad_dataset <- registrydqchecks::pullData("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/archive/2024-04-02/exvisit_2024-04-02"
-#                            ,.isR = TRUE)
-# ms_dataset <- registrydqchecks::pullData("C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-04-05/final/ms_dwsub1_2024-04-05"
-#                                          ,.isR = FALSE)
-# 
-# toCheck <- c("double", "haven_labelled")
-# 
-# dataset <- ad_dataset
-# .dsToCheck <- ad_dataset
-# .codebookVariables <- ad_codebook |>
-#   dplyr::select(varName, essential, acceptableMissingness, missingnessThresholdMultiplier, skipLogic, catValues, numRange)
-# for(varName in names(dataset)){
-#   #print(glue::glue("{varName}: {all(toCheck %in% class(dataset[[varName]]))}"))
-#   #print(glue::glue("{varName}: {match(c('double'),class(dataset[[varName]]))}"))
-#   print(glue::glue("{varName}: {class(dataset[[varName]])}"))
-# }
-# 
-# typeof(dataset$female_male)
 
 
 
@@ -68,10 +49,13 @@
 # .dataPullYear = "2024"
 # .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-05-05/final/"
 # .lastMonthDataPullDate = "2024-05-05"
-# .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/documentation/Codebook draft_in progress/ms_codebook.xlsx"
+# .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/documentation/Codebook/ms_codebook.xlsx"
 # .datasetsToCheck = c("ms_dwsub1", "ms_drugexp", "ms_dmlabimg")
 # .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/report/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
 # .isR = FALSE
+# 
+# validateCodebook(codebookUrl = .codebookUrl
+#                   ,datasetNames = c("ms_dwsub1", "ms_drugexp", "ms_dmlabimg"))
 # 
 # checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ms_2024-06-05_2024-06-13_1007_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
@@ -109,6 +93,9 @@
 # .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ibdtest/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
 # .isR = TRUE
 # 
+# validateCodebook(codebookUrl = .codebookUrl
+#                   ,datasetNames = c("IBD_Analytic_file"))
+# 
 # checks <- NULL
 # manualNcChecks <- NULL
 # 
@@ -126,6 +113,41 @@
 #                   ,.isR = FALSE)
 # # )
 
+
+
+# remotes::install_github("skreider-ce/registrydqchecksreportdown")
+# remotes::install_github("skreider-ce/registrydqchecks")
+# 
+# library(registrydqchecksreportdown)
+# library(registrydqchecks)
+# 
+# .registry = "pso"
+# .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - PsO/monthly/2024/2024-07-10/"
+# .prelimDataPullDate = "2024-07-11"
+# .dataPullYear = "2024"
+# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - PsO/monthly/2024/2024-06-10/"
+# .lastMonthDataPullDate = "2024-06-10"
+# .codebookUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/psotest/PsO Codebook_visits2.xlsx"
+# .datasetsToCheck = c("EN")
+# .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/store/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
+# .isR = FALSE
+# 
+# checks <- NULL
+# manualNcChecks <- NULL
+# 
+# validateCodebook(codebookUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/psotest/PsO Codebook_visits2.xlsx"
+#                   ,datasetNames = c("EN"))
+# 
+# runRegistryChecks(.registry = .registry
+#                   ,.prelimDataFolderUrl = .prelimDataFolderUrl
+#                   ,.prelimDataPullDate = .prelimDataPullDate
+#                   ,.lastMonthDataFolderUrl = .lastMonthDataFolderUrl
+#                   ,.lastMonthDataPullDate = .lastMonthDataPullDate
+#                   ,.codebookUrl = .codebookUrl
+#                   ,.datasetsToCheck = .datasetsToCheck
+#                   ,.nonCriticalChecks = NULL
+#                   ,.outputUrl = .outputUrl
+#                   ,.isR = FALSE)
 
 
 

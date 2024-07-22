@@ -47,7 +47,8 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   # Loop through each dataset and perform the checks
   for(.dsName in .datasetsToCheck){
     # Pull dataset specific codebook
-    .codebooks[[.dsName]] <- pullCodebookFromExcelFile(.codebookUrl, .dsName)
+    .codebooks[[.dsName]] <- pullCodebookFromExcelFile(.fileUrl = .codebookUrl
+                                                       ,.sheetName = .dsName)
     
     # Pull the unique keys for the specific dataset from the codebook
     .uniqueKeys[[.dsName]] <- .codebooks[[.dsName]] |>
@@ -55,9 +56,11 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
       dplyr::select(varName)
     
     # Pull data to check and data from last month to compare it to
-    .dataToCheck[[.dsName]] <- pullData(glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}"), .isR) |>
+    .dataToCheck[[.dsName]] <- pullData(.datasetUrl = glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}")
+                                        ,.isR) |>
       cleanUniqueKeyClasses(uniqueKeyVars = .uniqueKeys[[.dsName]])
-    .dataToCompare[[.dsName]] <- pullData(glue::glue("{.lastMonthDataFolderUrl}{.dsName}_{.lastMonthDataPullDate}"), .isR) |>
+    .dataToCompare[[.dsName]] <- pullData(.datasetUrl = glue::glue("{.lastMonthDataFolderUrl}{.dsName}_{.lastMonthDataPullDate}")
+                                          ,.isR) |>
       cleanUniqueKeyClasses(uniqueKeyVars = .uniqueKeys[[.dsName]])
     
     # Pull the list of essential variables for the specific dataset from the codebook
