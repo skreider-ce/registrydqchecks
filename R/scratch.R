@@ -68,7 +68,7 @@
 # .dataPullYear = "2024"
 # .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-05-05/final/"
 # .lastMonthDataPullDate = "2024-05-05"
-# .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/documentation/Codebook draft_in progress/ms_codebook.xlsx"
+# .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/documentation/Codebook/ms_codebook.xlsx"
 # .datasetsToCheck = c("ms_dwsub1", "ms_drugexp", "ms_dmlabimg")
 # .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/report/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
 # .isR = FALSE
@@ -126,6 +126,41 @@
 #                   ,.isR = FALSE)
 # # )
 
+
+
+# remotes::install_github("skreider-ce/registrydqchecksreportdown")
+# remotes::install_github("skreider-ce/registrydqchecks")
+# 
+# library(registrydqchecksreportdown)
+# library(registrydqchecks)
+# 
+# .registry = "pso"
+# .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - PsO/monthly/2024/2024-07-10/"
+# .prelimDataPullDate = "2024-07-11"
+# .dataPullYear = "2024"
+# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - PsO/monthly/2024/2024-06-10/"
+# .lastMonthDataPullDate = "2024-06-10"
+# .codebookUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/psotest/PsO Codebook_visits2.xlsx"
+# .datasetsToCheck = c("EN")
+# .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/store/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
+# .isR = FALSE
+# 
+# checks <- NULL
+# manualNcChecks <- NULL
+# 
+# validateCodebook(codebookUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/psotest/PsO Codebook_visits2.xlsx"
+#                   ,datasetNames = c("EN"))
+# 
+# runRegistryChecks(.registry = .registry
+#                   ,.prelimDataFolderUrl = .prelimDataFolderUrl
+#                   ,.prelimDataPullDate = .prelimDataPullDate
+#                   ,.lastMonthDataFolderUrl = .lastMonthDataFolderUrl
+#                   ,.lastMonthDataPullDate = .lastMonthDataPullDate
+#                   ,.codebookUrl = .codebookUrl
+#                   ,.datasetsToCheck = .datasetsToCheck
+#                   ,.nonCriticalChecks = NULL
+#                   ,.outputUrl = .outputUrl
+#                   ,.isR = FALSE)
 
 
 

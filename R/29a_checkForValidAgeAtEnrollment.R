@@ -3,6 +3,7 @@
 #' @param .dsToCheck The dataset to check
 #' @param .codebookVariables The codebook variables for the dataset
 #' @param .uniqueKeys The list of unique keys
+#' @param .dsName The name of the dataset being checked
 #'
 #' @return The results of the check
 checkForValidAgeAtEnrollment <- function(.dsName
