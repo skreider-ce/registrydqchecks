@@ -6,6 +6,7 @@
 #' @param .listOfSupposedVars A character vector of variables that "should" be in the dataset
 #' @param .uniqueKeys A character vector of variables that uniquely identify rows in the dataset
 #' @param .codebookVariables The codebook variables for the dataset
+#' @param .dsName The name of the dataset being checked
 #'
 #' @returns A list with the results of the critical checks
 #'

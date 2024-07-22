@@ -10,6 +10,7 @@ copyRomListingToFolder <- function(.reportOutputUrl, .romReportUrl){
   .files <- list.files(.folderUrl, full.names = TRUE)
   .targetFile <- grep("allChecks", .files, ignore.case = TRUE, value = TRUE)
   cat("Full URL to target file:", .targetFile)
+  createDataStoreFolder(.romReportUrl)
   file.copy(.targetFile,.romReportUrl)
   return(.targetFile)
 }

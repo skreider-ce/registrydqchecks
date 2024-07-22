@@ -10,7 +10,8 @@ criticalChecks(
   .listOfEssentialVars,
   .listOfSupposedVars,
   .uniqueKeys,
-  .codebookVariables
+  .codebookVariables,
+  .dsName
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ criticalChecks(
 \item{.uniqueKeys}{A character vector of variables that uniquely identify rows in the dataset}
 
 \item{.codebookVariables}{The codebook variables for the dataset}
+
+\item{.dsName}{The name of the dataset being checked}
 }
 \value{
 A list with the results of the critical checks

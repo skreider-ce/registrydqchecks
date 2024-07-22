@@ -149,16 +149,20 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
     for(.dsName in names(.checksToOutput$nonCriticalChecks)){
       openxlsx::addWorksheet(.wb
                              ,sheetName = .dsName)
+      .dsToPrint <- .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing |>
+        dplyr::mutate(across(where(is.list),as.character))
+      
       openxlsx::writeData(.wb
                           ,sheet = .dsName
-                          ,.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing)
+                          ,.dsToPrint)
       
       if(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$sendCheckToRom){
         print(glue::glue("{.dsName} - {.ncCheckName}"))
         .subsetTimeDataset <- subsetDatasetToLastYear(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing
                                                       ,"visitdate"
                                                       ,"visitdate0"
-                                                      ,.dataPullDate)
+                                                      ,.dataPullDate) |>
+          dplyr::mutate(across(where(is.list),as.character))
         
         # .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing
 
