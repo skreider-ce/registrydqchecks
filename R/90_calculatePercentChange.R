@@ -4,8 +4,8 @@
 #'
 #' @return The gtsummary object with an added column showing % change
 #' @export
-calculatePercentChange <- function(.data) {
-  .data <- .data %>%
+calculatePercentChange <- function(data) {
+  data <- data %>%
     mutate(
       percent_change = case_when(
         # Handle NA values: return a blank value
@@ -27,5 +27,5 @@ calculatePercentChange <- function(.data) {
         TRUE ~ ""
       )
     )
-  return(.data)
+  return(data)
 }
