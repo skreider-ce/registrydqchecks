@@ -6,8 +6,6 @@
 #                   ,datasetNames = c("exvisit", "exlab", "exdrugexp"))
 # 
 # 
-# tempLogFile <- tempfile(fileext = ".txt")
-# sink(tempLogFile, type = "output")
 # 
 # checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad_2024-06-10_2024-06-17_1039_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
@@ -28,11 +26,7 @@
 # romOutputFolder <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Biostat Registry Data Quality Reports/"
 # copyRomListingToFolder(.reportOutputUrl = outputUrl
 #                        ,.romReportUrl = glue::glue("{romOutputFolder}ad/2024/2024-06/"))
-# sink()
-# # Copy the log from the temporary location to the outputUrl
-# file.copy(tempLogFile, outputUrl)
-# # Cleanup: remove the temporary log file
-# file.remove(tempLogFile)
+
 
 
 
