@@ -28,10 +28,8 @@ pullCodebookFromExcelFile <- function(.fileUrl,.sheetName){
                                    ,sheet = .sheetName)
   
   .pulledVars <- .pulledVars |>
-    dplyr::rename(
-      varName = `Analytic Variable name`
-      ,varLabel = `Analytic Variable label`
-    ) |>
+    dplyr::rename_with(~ "varName", matches("(?i)analytic variable name")) |>
+    dplyr::rename_with(~ "varLabel", matches("(?i)analytic variable label")) |>
     dplyr::mutate(
       acceptableMissingness = as.numeric(acceptableMissingness, na.rm = TRUE)
       ,uniqueKey = as.numeric(uniqueKey, na.rm = TRUE)

@@ -22,9 +22,11 @@ checkForVariableTypes <- function(.dsToCheck
   .numericVarsToCheck <- .codebookVariables |>
     dplyr::filter(!is.na(numRange)) |>
     dplyr::select(varName)
-  .expectedNumericTypes <- c("numeric")
+  
+  .expectedNumericTypes <- c("numeric", "integer")
+  
   for(varName in unlist(.numericVarsToCheck)){
-    if(!all(.expectedNumericTypes %in% class(.dsToCheck[[varName]]))){
+    if(!any(.expectedNumericTypes %in% class(.dsToCheck[[varName]]))){
       .newRow <- tibble::tibble(
         varName = varName
         ,varType = paste(class(.dsToCheck[[varName]]), collapse = " ")
@@ -43,9 +45,9 @@ checkForVariableTypes <- function(.dsToCheck
   .categoricalVarsToCheck <- .codebookVariables |>
     dplyr::filter(!is.na(catValues)) |>
     dplyr::select(varName)
-  .expectedCategoricalTypes <- c("haven_labelled", "double")
+  .expectedCategoricalTypes <- c("haven_labelled", "double", "integer")
   for(varName in unlist(.categoricalVarsToCheck)){
-    if(!all(.expectedCategoricalTypes %in% class(.dsToCheck[[varName]]))){
+    if(!any(.expectedCategoricalTypes %in% class(.dsToCheck[[varName]]))){
       .newRow <- tibble::tibble(
         varName = varName
         ,varType = paste(class(.dsToCheck[[varName]]), collapse = " ")
