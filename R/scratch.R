@@ -70,6 +70,37 @@
 
 
 
+# .registry = "raj"
+# .prelimDataFolderUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/rajtest/2024-07-05/"
+# .prelimDataPullDate = "2024-07-05"
+# .dataPullYear = "2024"
+# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/rajtest/2024-06-05/"
+# .lastMonthDataPullDate = "2024-06-05"
+# .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - RA Japan/monthly/2024/2024-07-05/Analytic_Data/RA_Japan_Codebook_2024-07-05.xlsx"
+# .datasetsToCheck = c("RA_Japan_analytic_file")
+# .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/store/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
+# .isR = TRUE
+# 
+# validateCodebook(codebookUrl = .codebookUrl
+#                   ,datasetNames = c("RA_Japan_analytic_file"))
+# 
+# checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/raj_2024-07-05_2024-07-18_1107_checks.rds")
+# manualNcChecks <- checks$nonCriticalChecks
+# 
+# 
+# outputUrl <- runRegistryChecks(.registry = .registry
+#                   ,.prelimDataFolderUrl = .prelimDataFolderUrl
+#                   ,.prelimDataPullDate = .prelimDataPullDate
+#                   ,.lastMonthDataFolderUrl = .lastMonthDataFolderUrl
+#                   ,.lastMonthDataPullDate = .lastMonthDataPullDate
+#                   ,.codebookUrl = .codebookUrl
+#                   ,.datasetsToCheck = .datasetsToCheck
+#                   ,.nonCriticalChecks = manualNcChecks
+#                   ,.outputUrl = .outputUrl
+#                   ,.isR = .isR)
+
+
+
 # remotes::install_github("skreider-ce/registrydqchecksreportdown")
 # remotes::install_github("skreider-ce/registrydqchecks")
 # 
