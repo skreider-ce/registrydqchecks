@@ -4,10 +4,10 @@
 \alias{calculatePercentChange}
 \title{calculatePercentChange Function to add a \% change column to a gtsummary object for NC24}
 \usage{
-calculatePercentChange(.data)
+calculatePercentChange(data)
 }
 \arguments{
-\item{.data}{A gtsummary object with 2 levels of a by variable}
+\item{data}{A gtsummary object with 2 levels of a by variable}
 }
 \value{
 The gtsummary object with an added column showing \% change
