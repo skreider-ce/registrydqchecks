@@ -1,4 +1,4 @@
-#' subsetDatasetToLastYear Function to subset datasetA based on the existence of variables
+#' subsetDatasetToLastYear Function to subset dataset to last year for given date variables
 #'
 #' @param .dataset The dataset to subset
 #' @param .timeVar1 The primary time variable to check for
@@ -14,12 +14,12 @@ subsetDatasetToLastYear <- function(.dataset, .timeVar1, .timeVar2, .dataPullDat
   message(.comparisonDate, " is the comparison date")
   
   if (.timeVar1 %in% colnames(.dataset)) {
-    # Use variable1 to subset datasetA if it exists
+    # Use variable1 to subset dataset if it exists
     subset <- .dataset[as.Date(.dataset[[.timeVar1]]) > .comparisonDate, ]
     message("Using ", .timeVar1, " to subset the dataset")
     return(subset)
   } else if (.timeVar2 %in% colnames(.dataset)) {
-    # Use variable2 to subset datasetA if variable1 does not exist but variable2 exists
+    # Use variable2 to subset dataset if variable1 does not exist but variable2 exists
     subset <- .dataset[as.Date(.dataset[[.timeVar2]]) > .comparisonDate, ]
     message("Using ", .timeVar2, " to subset the dataset")
     return(subset)
