@@ -7,7 +7,7 @@
 #'
 #' @return The subset dataset
 #' @export
-subsetDatasetToLastYear <- function(.dataset, .siteVar1, .siteVar2, .activeSites) {
+subsetDatasetToActiveSites <- function(.dataset, .siteVar1, .siteVar2, .activeSites) {
   if (.siteVar1 %in% colnames(.dataset)) {
     # Use variable1 to subset dataset if it exists
     subset <- .dataset

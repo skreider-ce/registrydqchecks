@@ -164,14 +164,21 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
                                                       ,.dataPullDate) |>
           dplyr::mutate(across(where(is.list),as.character))
         
+        .subsetSiteDataset <- subsetDatasetToActiveSites(
+          .subsetTimeDataset
+          ,"site_id"
+          ,"siteid"
+          ,NULL
+        )
+        
         # .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing
 
-        if(nrow(.subsetTimeDataset) > 0){
+        if(nrow(.subsetSiteDataset) > 0){
 
           openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkTitle, startCol = 1, startRow = currentRow)
           currentRow <- currentRow + 1
-          openxlsx::writeData(.wbLong, "qualityChecks", .subsetTimeDataset, startCol = 1, startRow = currentRow)
-          currentRow <- currentRow + nrow(.subsetTimeDataset) + 2                  
+          openxlsx::writeData(.wbLong, "qualityChecks", .subsetSiteDataset, startCol = 1, startRow = currentRow)
+          currentRow <- currentRow + nrow(.subsetSiteDataset) + 2                  
         }
       }
     }
@@ -199,13 +206,19 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
                                                         ,"visitdate0"
                                                         ,.dataPullDate)
           
+          .subsetSiteDataset <- subsetDatasetToActiveSites(
+            .subsetTimeDataset
+            ,"site_id"
+            ,"siteid"
+            ,NULL
+          )
           # .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing
           
-          if(nrow(.subsetTimeDataset) > 0){
+          if(nrow(.subsetSiteDataset) > 0){
             openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkTitle, startCol = 1, startRow = currentRow)
             currentRow <- currentRow + 1
-            openxlsx::writeData(.wbLong, "qualityChecks", .subsetTimeDataset, startCol = 1, startRow = currentRow)
-            currentRow <- currentRow + nrow(.subsetTimeDataset) + 2
+            openxlsx::writeData(.wbLong, "qualityChecks", .subsetSiteDataset, startCol = 1, startRow = currentRow)
+            currentRow <- currentRow + nrow(.subsetSiteDataset) + 2
           }
         }
 
