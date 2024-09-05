@@ -5,11 +5,12 @@
 #' @param .dataStoreUrl A text url of the location where the check results will be stored
 #' @param .resultsOfChecks A list with the results of the data checks
 #' @param .timestamp Timestamp that the checks were run
+#' @param .activeSiteInfo Information on the list of active sites for this registry
 #'
 #' @export
 #' 
 #' @importFrom glue glue
-submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.resultsOfChecks){
+submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.resultsOfChecks, .activeSites){
 
   staticDataStoreUrl <- .dataStoreUrl
   
@@ -51,5 +52,6 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.r
                   ,.dataPullDate = .dsPullDate
                   ,.timestamp = .timestamp
                   ,.checksToOutput = .outputToSave
+                  ,.activeSites = .activeSites
                  )
 }

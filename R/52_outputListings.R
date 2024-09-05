@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
-outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPullDate, .timestamp, .checksToOutput){
+outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPullDate, .timestamp, .checksToOutput, .activeSites){
   
   # Create new workbook objects and then print information out to them
   #   For critical checks and non critical checks
@@ -168,7 +168,7 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
           .subsetTimeDataset
           ,"site_id"
           ,"siteid"
-          ,NULL
+          ,.activeSiteInfo
         )
         
         # .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing
@@ -207,10 +207,10 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
                                                         ,.dataPullDate)
           
           .subsetSiteDataset <- subsetDatasetToActiveSites(
-            .subsetTimeDataset
-            ,"site_id"
-            ,"siteid"
-            ,NULL
+            .dataset = .subsetTimeDataset
+            ,.siteVar1 = "site_id"
+            ,.siteVar2 = "siteid"
+            ,.activeSites = .activeSites
           )
           # .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing
           

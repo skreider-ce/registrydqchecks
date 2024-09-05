@@ -9,13 +9,29 @@
 #' @export
 subsetDatasetToActiveSites <- function(.dataset, .siteVar1, .siteVar2, .activeSites) {
   if (.siteVar1 %in% colnames(.dataset)) {
+    names(.activeSites)[1] = .siteVar1
+    .dataset <- .dataset |>
+      dplyr::mutate(.siteVar1 = as.character(.siteVar1))
+    
     # Use variable1 to subset dataset if it exists
-    subset <- .dataset
+    subset <- dplyr::inner_join(
+      .activeSites
+      ,.dataset
+      ,by = .siteVar1
+    )
     message("Using ", .siteVar1, " to subset the dataset")
     return(subset)
   } else if (.siteVar2 %in% colnames(.dataset)) {
+    names(.activeSites)[1] = .siteVar2
+    .dataset <- .dataset |>
+      dplyr::mutate(.siteVar1 = as.character(.siteVar2))
+    
     # Use variable2 to subset dataset if variable1 does not exist but variable2 exists
-    subset <- .dataset
+    subset <- dplyr::inner_join(
+      .activeSites
+      ,.dataset
+      ,by = .siteVar2
+    )
     message("Using ", .siteVar2, " to subset the dataset")
     return(subset)
   } else {

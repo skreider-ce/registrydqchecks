@@ -32,13 +32,15 @@ pullSiteInfoFromExcelFile <- function(.fileUrl,.registry){
     dplyr::mutate(
       status = tolower(status)
       ,registry = tolower(registry)
+      ,site_id = as.character(site_id)
     ) |>
     dplyr::filter(
       registry == .registryFilter
     ) |>
     dplyr::select(
       site_id
-    )
+    ) |>
+    dplyr::distinct()
 
   return(.activeSites)
 }

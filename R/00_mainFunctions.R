@@ -46,7 +46,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   .nonCritCheckOutput <- list()
   .ncChecks <- list()
   
-  .siteInfo <- pullSiteInfoFromExcelFile(.fileUrl = .siteInfoUrl
+  .activeSites <- pullSiteInfoFromExcelFile(.fileUrl = .siteInfoUrl
                                          ,.registry = .registry)
   
   # Loop through each dataset and perform the checks
@@ -128,6 +128,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                     ,.timestamp = .timestamp
                     ,.dataStoreUrl = .outputUrl
                     ,.resultsOfChecks = .checkOutput
+                    ,.activeSites = .activeSites
                     )
   rm(.checkOutput)
   # Generate the html report
