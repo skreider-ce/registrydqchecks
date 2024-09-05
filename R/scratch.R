@@ -7,21 +7,32 @@
 # 
 # 
 # 
-checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad_2024-08-02_2024-08-21_1144_checks.rds")
-manualNcChecks <- checks$nonCriticalChecks
-#
-library(registrydqchecksreportdown)
-library(registrydqchecks)
-outputUrl <- runRegistryChecks(.registry = "ad"
-                  ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-08-02/"
-                  ,.prelimDataPullDate = "2024-08-02"
-                  ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-07-03/"
-                  ,.lastMonthDataPullDate = "2024-07-03"
-                  ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-08-02/AD_codebook_2024-08-02.xlsx"
-                  ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
-                  ,.nonCriticalChecks = manualNcChecks
-                  ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/"
-                  ,.isR = TRUE)
+# checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad_2024-08-02_2024-08-21_1144_checks.rds")
+# manualNcChecks <- checks$nonCriticalChecks
+
+
+
+# MUST SYNC THIS FOLDER
+#   ADD THIS URL TO config.R files
+#   DIRECT URL TO site_data_clean.xlsx EXCEL FILE
+# baseSiteInfoUrl <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - Site and Provider Data/data/site_data_clean.xlsx"
+
+
+
+# #
+# library(registrydqchecksreportdown)
+# library(registrydqchecks)
+# outputUrl <- runRegistryChecks(.registry = "ad"
+#                   ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-08-02/"
+#                   ,.prelimDataPullDate = "2024-08-02"
+#                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-07-03/"
+#                   ,.lastMonthDataPullDate = "2024-07-03"
+#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-08-02/AD_codebook_2024-08-02.xlsx"
+#                   ,.siteInfoUrl = baseSiteInfoUrl
+#                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
+#                   ,.nonCriticalChecks = manualNcChecks
+#                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/"
+#                   ,.isR = TRUE)
 # 
 # romOutputFolder <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Biostat Registry Data Quality Reports/"
 # copyRomListingToFolder(.reportOutputUrl = outputUrl

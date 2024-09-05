@@ -11,6 +11,7 @@ runRegistryChecks(
   .lastMonthDataFolderUrl,
   .lastMonthDataPullDate,
   .codebookUrl,
+  .siteInfoUrl = NULL,
   .datasetsToCheck,
   .nonCriticalChecks = NULL,
   .outputUrl,
@@ -30,6 +31,8 @@ runRegistryChecks(
 \item{.lastMonthDataPullDate}{A date string of last month's data pull date in the format YYYY-DD-MM (e.g. "2023-12-05")}
 
 \item{.codebookUrl}{(optional) A url string to the registry-specific codebook (if left missing - critical checks 7 and 8 will not be run)}
+
+\item{.siteInfoUrl}{A Url to the base folder for site/provider data}
 
 \item{.datasetsToCheck}{A string vector with the names of the datasets to be checked (e.g. c("exvisit", "exlab", "exdrugexp")) - NOTE: These must perfectly match both the tab names in the codebook AND the names of the datasets being checked}
 
