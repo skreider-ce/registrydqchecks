@@ -15,7 +15,7 @@
 # # MUST SYNC THIS FOLDER
 # #   ADD THIS URL TO config.R files
 # #   DIRECT URL TO site_data_clean.csv CSV FILE
-# baseSiteInfoUrl <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - Site and Provider Data/data/site_data_clean.csv"
+# .configSiteInfoUrl <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - Site and Provider Data/data/site_data_clean.csv"
 # 
 # 
 # library(registrydqchecksreportdown)
