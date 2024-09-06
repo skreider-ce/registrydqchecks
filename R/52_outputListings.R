@@ -166,10 +166,10 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
           dplyr::mutate(across(where(is.list),as.character))
         
         .subsetSiteDataset <- subsetDatasetToActiveSites(
-          .subsetTimeDataset
-          ,"site_id"
-          ,"siteid"
-          ,.activeSiteInfo
+          .dataset = .subsetTimeDataset
+          ,.siteVar1 = "site_id"
+          ,.siteVar2 = "siteid"
+          ,.activeSites = .activeSites
         )
         
         # .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing
