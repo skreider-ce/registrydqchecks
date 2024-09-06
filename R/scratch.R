@@ -26,7 +26,7 @@
 #                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-07-03/"
 #                   ,.lastMonthDataPullDate = "2024-07-03"
 #                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-08-02/AD_codebook_2024-08-02.xlsx"
-#                   ,.siteInfoUrl = baseSiteInfoUrl
+#                   ,.siteInfoUrl = .configSiteInfoUrl
 #                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
 #                   ,.nonCriticalChecks = manualNcChecks
 #                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/"

@@ -6,18 +6,19 @@
 #' @param .resultsOfChecks A list with the results of the data checks
 #' @param .activeSites Information on the list of active sites for this registry
 #' @param .timestamp Timestamp that the checks were run
+#' @param .folderName Name for the folder where results will be output
 #'
 #' @export
 #' 
 #' @importFrom glue glue
-submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.resultsOfChecks, .activeSites){
+submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .folderName, .dataStoreUrl,.resultsOfChecks, .activeSites){
 
   staticDataStoreUrl <- .dataStoreUrl
   
   # Create the folders if they do not exist
-  createDataStoreFolder(glue::glue("{.dataStoreUrl}{.timestamp}"))
-  createDataStoreFolder(glue::glue("{.dataStoreUrl}{.timestamp}/checks"))
-  createDataStoreFolder(glue::glue("{.dataStoreUrl}{.timestamp}/listing"))
+  createDataStoreFolder(glue::glue("{.dataStoreUrl}{.folderName}"))
+  createDataStoreFolder(glue::glue("{.dataStoreUrl}{.folderName}/checks"))
+  createDataStoreFolder(glue::glue("{.dataStoreUrl}{.folderName}/listing"))
 
   # Assign the dataset name to store
   .resultsCheckName <- glue::glue("{.registry}_{.dsPullDate}_{.timestamp}_checks")
@@ -43,11 +44,11 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .dataStoreUrl,.r
   )
   
   # Save the .rds with results of the checks
-  saveRDS(.outputToSave,glue::glue("{.dataStoreUrl}{.timestamp}/checks/{.resultsCheckName}.rds"))
+  saveRDS(.outputToSave,glue::glue("{.dataStoreUrl}{.folderName}/checks/{.resultsCheckName}.rds"))
   
   # Save the listings as Excel files
   outputListings(.registry = .registry
-                  ,.listingUrl = glue::glue("{.dataStoreUrl}{.timestamp}/listing")
+                  ,.listingUrl = glue::glue("{.dataStoreUrl}{.folderName}/listing")
                   ,.yearMonthTimestamp = format(as.Date(.dsPullDate), "%Y-%m")
                   ,.dataPullDate = .dsPullDate
                   ,.timestamp = .timestamp
