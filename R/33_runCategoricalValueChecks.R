@@ -11,11 +11,21 @@ runCategoricalValueChecks <- function(.dsName
                                       ,.codebookVariables
                                       ,.uniqueKeys){
 
+  
+  # Initialize a df for the results of the checks
+  .categoricalValueChecks <- data.frame()
+  
   # Subset codebook variables to categorical variables
   # Clean the expected categorical variables
   ### Remove quotes, split at commas, pick off number before =, text after =
   .varsToCheck <- .codebookVariables |>
-    dplyr::filter(!is.na(catValues)) |>
+    dplyr::filter(!is.na(catValues))
+  
+  if(nrow(.varsToCheck) == 0){
+    return(.categoricalValueChecks)
+  }
+    
+  .varsToCheck <- .varsToCheck |>
     dplyr::select(varName, catValues) |>
     dplyr::mutate(split = strsplit(catValues, ",")) |>
     dplyr::mutate(cleanCol = purrr::map(split, removeQuotes)) |>
@@ -24,9 +34,6 @@ runCategoricalValueChecks <- function(.dsName
       ,catValues = purrr::map(cleanCol, extractValueLabels)
     )
 
-  # Initialize a df for the results of the checks
-  .categoricalValueChecks <- data.frame()
-  
   # Loop through each categorical variable in the dataset
   for(.varName1 in .varsToCheck$varName){
 
