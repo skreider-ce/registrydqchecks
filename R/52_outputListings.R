@@ -6,6 +6,7 @@
 #' @param .checksToOutput Registry DQ checks to output in list form with criticalChecks and nonCriticalChecks entries
 #' @param .yearMonthTimestamp The year and month of the current datapull
 #' @param .dataPullDate The YYYY-MM-DD of the current datapull
+#' @param .activeSites Information on the list of active sites for this registry
 #'
 #' @export
 #'

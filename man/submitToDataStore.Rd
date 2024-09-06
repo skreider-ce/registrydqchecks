@@ -9,7 +9,8 @@ submitToDataStore(
   .dsPullDate,
   .timestamp,
   .dataStoreUrl,
-  .resultsOfChecks
+  .resultsOfChecks,
+  .activeSites
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ submitToDataStore(
 \item{.dataStoreUrl}{A text url of the location where the check results will be stored}
 
 \item{.resultsOfChecks}{A list with the results of the data checks}
+
+\item{.activeSites}{Information on the list of active sites for this registry}
 }
 \description{
 (internal function) Submit the results of the data quality checks to a set location
