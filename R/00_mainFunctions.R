@@ -120,7 +120,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   # Define timestamp of this specific datapull
   .timestamp <- format(Sys.time(), "%Y-%m-%d_%H%M")
   .formattedTimestamp <- gsub('[^A-Za-z0-9_]', '_', .timestamp)
-  .reportOutputUrl = glue::glue("{.outputUrl}{.timestamp}/")
+  .reportOutputUrl = glue::glue("{.registry}_{format(as.Date(.prelimDataPullDate), '%Y-%m')}_DQReport_{.timestamp}_report/")
 
   # Submit check results to datastore - including a .rds and Excel files
   submitToDataStore(.registry = .registry
@@ -131,11 +131,12 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                     ,.activeSites = .activeSites
                     )
   rm(.checkOutput)
+  
   # Generate the html report
   registrydqchecksreportdown::generateReport(
     .inputDatasetUrl = glue::glue("{.outputUrl}{.timestamp}/checks/{.registry}_{.prelimDataPullDate}_{.timestamp}_checks.rds")
     ,.reportOutputUrl = .reportOutputUrl
-    ,.fileName = glue::glue("{.registry}_DQReport_{.timestamp}_report")
+    ,.fileName = glue::glue("{.registry}_{format(as.Date(.prelimDataPullDate), '%Y-%m')}_DQReport_{.timestamp}_report")
   )
   
   print(glue::glue("Report Output Url: {.reportOutputUrl}"))
