@@ -6,11 +6,12 @@
 #' @param .checksToOutput Registry DQ checks to output in list form with criticalChecks and nonCriticalChecks entries
 #' @param .yearMonthTimestamp The year and month of the current datapull
 #' @param .dataPullDate The YYYY-MM-DD of the current datapull
+#' @param .activeSites Information on the list of active sites for this registry
 #'
 #' @export
 #'
 #' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
-outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPullDate, .timestamp, .checksToOutput){
+outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPullDate, .timestamp, .checksToOutput, .activeSites){
   
   # Create new workbook objects and then print information out to them
   #   For critical checks and non critical checks
@@ -164,14 +165,21 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
                                                       ,.dataPullDate) |>
           dplyr::mutate(across(where(is.list),as.character))
         
+        .subsetSiteDataset <- subsetDatasetToActiveSites(
+          .subsetTimeDataset
+          ,"site_id"
+          ,"siteid"
+          ,.activeSiteInfo
+        )
+        
         # .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing
 
-        if(nrow(.subsetTimeDataset) > 0){
+        if(nrow(.subsetSiteDataset) > 0){
 
           openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkTitle, startCol = 1, startRow = currentRow)
           currentRow <- currentRow + 1
-          openxlsx::writeData(.wbLong, "qualityChecks", .subsetTimeDataset, startCol = 1, startRow = currentRow)
-          currentRow <- currentRow + nrow(.subsetTimeDataset) + 2                  
+          openxlsx::writeData(.wbLong, "qualityChecks", .subsetSiteDataset, startCol = 1, startRow = currentRow)
+          currentRow <- currentRow + nrow(.subsetSiteDataset) + 2                  
         }
       }
     }
@@ -199,13 +207,19 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
                                                         ,"visitdate0"
                                                         ,.dataPullDate)
           
+          .subsetSiteDataset <- subsetDatasetToActiveSites(
+            .dataset = .subsetTimeDataset
+            ,.siteVar1 = "site_id"
+            ,.siteVar2 = "siteid"
+            ,.activeSites = .activeSites
+          )
           # .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing
           
-          if(nrow(.subsetTimeDataset) > 0){
+          if(nrow(.subsetSiteDataset) > 0){
             openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkTitle, startCol = 1, startRow = currentRow)
             currentRow <- currentRow + 1
-            openxlsx::writeData(.wbLong, "qualityChecks", .subsetTimeDataset, startCol = 1, startRow = currentRow)
-            currentRow <- currentRow + nrow(.subsetTimeDataset) + 2
+            openxlsx::writeData(.wbLong, "qualityChecks", .subsetSiteDataset, startCol = 1, startRow = currentRow)
+            currentRow <- currentRow + nrow(.subsetSiteDataset) + 2
           }
         }
 

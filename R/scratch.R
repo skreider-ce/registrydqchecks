@@ -7,17 +7,26 @@
 # 
 # 
 # 
-# checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad_2024-06-10_2024-06-17_1039_checks.rds")
+
+
+# checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad_2024-08-02_2024-08-21_1144_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
-# #
+# 
+# # MUST SYNC THIS FOLDER
+# #   ADD THIS URL TO config.R files
+# #   DIRECT URL TO site_data_clean.csv CSV FILE
+# .configSiteInfoUrl <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - Site and Provider Data/data/site_data_clean.csv"
+# 
+# 
 # library(registrydqchecksreportdown)
 # library(registrydqchecks)
 # outputUrl <- runRegistryChecks(.registry = "ad"
-#                   ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-06-10/"
-#                   ,.prelimDataPullDate = "2024-06-10"
-#                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-05-24/"
-#                   ,.lastMonthDataPullDate = "2024-05-24"
-#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/DQ checks/Documentation/AD_codebook_2024-06-06.xlsx"
+#                   ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-08-02/"
+#                   ,.prelimDataPullDate = "2024-08-02"
+#                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-07-03/"
+#                   ,.lastMonthDataPullDate = "2024-07-03"
+#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-08-02/AD_codebook_2024-08-02.xlsx"
+#                   ,.siteInfoUrl = .configSiteInfoUrl
 #                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
 #                   ,.nonCriticalChecks = manualNcChecks
 #                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/"
@@ -38,11 +47,11 @@
 # library(registrydqchecks)
 # 
 # .registry = "ms"
-# .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-06-05/final/"
-# .prelimDataPullDate = "2024-06-05"
+# .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-09-05/final/"
+# .prelimDataPullDate = "2024-09-05"
 # .dataPullYear = "2024"
-# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-05-05/final/"
-# .lastMonthDataPullDate = "2024-05-05"
+# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-08-05/final/"
+# .lastMonthDataPullDate = "2024-08-05"
 # .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/documentation/Codebook/ms_codebook.xlsx"
 # .datasetsToCheck = c("ms_dwsub1", "ms_drugexp", "ms_dmlabimg")
 # .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/report/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
@@ -51,8 +60,13 @@
 # validateCodebook(codebookUrl = .codebookUrl
 #                   ,datasetNames = c("ms_dwsub1", "ms_drugexp", "ms_dmlabimg"))
 # 
-# checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ms_2024-06-05_2024-06-13_1007_checks.rds")
+# checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ms_2024-08-05_2024-08-19_1539_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
+# 
+# # MUST SYNC THIS FOLDER
+# #   ADD THIS URL TO config.R files
+# #   DIRECT URL TO site_data_clean.csv CSV FILE
+# baseSiteInfoUrl <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - Site and Provider Data/data/site_data_clean.csv"
 # 
 # # library(profvis)
 # # profvis::profvis(
@@ -62,30 +76,35 @@
 #                   ,.lastMonthDataFolderUrl = .lastMonthDataFolderUrl
 #                   ,.lastMonthDataPullDate = .lastMonthDataPullDate
 #                   ,.codebookUrl = .codebookUrl
+#                   ,.siteInfoUrl = baseSiteInfoUrl
 #                   ,.datasetsToCheck = .datasetsToCheck
 #                   ,.nonCriticalChecks = NULL
 #                   ,.outputUrl = .outputUrl
 #                   ,.isR = FALSE)
-# # )
 
 
-
+# 
 # .registry = "raj"
-# .prelimDataFolderUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/rajtest/2024-07-05/"
-# .prelimDataPullDate = "2024-07-05"
+# .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - RA Japan/monthly/2024/2024-08-05/Analytical_Data/"
+# .prelimDataPullDate = "2024-08-05"
 # .dataPullYear = "2024"
-# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/rajtest/2024-06-05/"
-# .lastMonthDataPullDate = "2024-06-05"
-# .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - RA Japan/monthly/2024/2024-07-05/Analytic_Data/RA_Japan_Codebook_2024-07-05.xlsx"
-# .datasetsToCheck = c("RA_Japan_analytic_file")
+# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - RA Japan/monthly/2024/2024-07-05/Analytical_Data/"
+# .lastMonthDataPullDate = "2024-07-05"
+# .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - RA Japan/monthly/2024/2024-08-05/Analytical_Data/RA_Japan_Codebook_2024-08-05.xlsx"
+# .datasetsToCheck = c("R_RA_Japan_analytic_file")
 # .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/store/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
 # .isR = TRUE
 # 
 # validateCodebook(codebookUrl = .codebookUrl
-#                   ,datasetNames = c("RA_Japan_analytic_file"))
+#                   ,datasetNames = c("R_RA_Japan_analytic_file"))
 # 
-# checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/raj_2024-07-05_2024-07-18_1107_checks.rds")
+# checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/raj_2024-08-05_2024-08-27_1252_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
+# 
+# # MUST SYNC THIS FOLDER
+# #   ADD THIS URL TO config.R files
+# #   DIRECT URL TO site_data_clean.csv CSV FILE
+# baseSiteInfoUrl <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - Site and Provider Data/data/site_data_clean.csv"
 # 
 # 
 # outputUrl <- runRegistryChecks(.registry = .registry
@@ -94,6 +113,7 @@
 #                   ,.lastMonthDataFolderUrl = .lastMonthDataFolderUrl
 #                   ,.lastMonthDataPullDate = .lastMonthDataPullDate
 #                   ,.codebookUrl = .codebookUrl
+#                   ,.siteInfoUrl = baseSiteInfoUrl
 #                   ,.datasetsToCheck = .datasetsToCheck
 #                   ,.nonCriticalChecks = manualNcChecks
 #                   ,.outputUrl = .outputUrl
