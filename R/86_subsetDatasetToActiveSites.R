@@ -11,7 +11,7 @@ subsetDatasetToActiveSites <- function(.dataset, .siteVar1, .siteVar2, .activeSi
   if (.siteVar1 %in% colnames(.dataset)) {
     names(.activeSites)[1] = .siteVar1
     .dataset <- .dataset |>
-      dplyr::mutate(.siteVar1 = as.character(.siteVar1))
+      dplyr::mutate(!!dplyr::sym(.siteVar1) := as.character(!!dplyr::sym(.siteVar1)))
     
     # Use variable1 to subset dataset if it exists
     subset <- dplyr::inner_join(
@@ -24,7 +24,7 @@ subsetDatasetToActiveSites <- function(.dataset, .siteVar1, .siteVar2, .activeSi
   } else if (.siteVar2 %in% colnames(.dataset)) {
     names(.activeSites)[1] = .siteVar2
     .dataset <- .dataset |>
-      dplyr::mutate(.siteVar1 = as.character(.siteVar2))
+      dplyr::mutate(!!dplyr::sym(.siteVar2) := as.character(!!dplyr::sym(.siteVar2)))
     
     # Use variable2 to subset dataset if variable1 does not exist but variable2 exists
     subset <- dplyr::inner_join(
