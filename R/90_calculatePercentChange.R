@@ -21,7 +21,7 @@ calculatePercentChange <- function(data) {
         str_detect(stat_1, "\\d+\\.\\d+%") & str_detect(stat_2, "\\d+\\.\\d+%") ~ {
           perc_1 <- as.numeric(str_extract(stat_1, "\\d+\\.\\d+"))
           perc_2 <- as.numeric(str_extract(stat_2, "\\d+\\.\\d+"))
-          percentChange <- ((perc_2 - perc_1) / abs(perc_1)) * 100
+          percentChange <- (perc_2 - perc_1)
           sprintf("%.1f", percentChange)
         },
         TRUE ~ ""
@@ -33,7 +33,7 @@ calculatePercentChange <- function(data) {
     group_by(variable) |>
     mutate(
       max_percent_change = ifelse(row_type == "label", 
-                                  max(as.numeric(percentChange), na.rm = TRUE), 
+                                  max(abs(as.numeric(percentChange)), na.rm = TRUE), 
                                   NA_real_)
     ) |>
     ungroup() |>
