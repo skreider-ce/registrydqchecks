@@ -22,6 +22,10 @@ runNumericRangeChecks <- function(.dsName
   
   .numericRangeChecks <- data.frame()
   
+  if(nrow(.varsToCheck) == 0){
+    return(NULL)
+  }
+  
   # Loop through each numeric variable and perform the range checks
   for(.varName1 in .varsToCheck$varName){
     tryCatch({

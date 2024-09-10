@@ -22,7 +22,7 @@ runCategoricalValueChecks <- function(.dsName
     dplyr::filter(!is.na(catValues))
   
   if(nrow(.varsToCheck) == 0){
-    return(.categoricalValueChecks)
+    return(NULL)
   }
     
   .varsToCheck <- .varsToCheck |>
