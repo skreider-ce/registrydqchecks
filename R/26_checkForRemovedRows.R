@@ -16,6 +16,8 @@ checkForRemovedRows <- function(.dsToCheck,.compDsToCheck,.uniqueKey){
 
   # Create dataframe of rows in .compDsToCheck and not in .dsToCheck
   .inOldAndNotInNew <- dplyr::anti_join(.compDsToCheck,.dsToCheck,.uniqueKeys)
+  
+  .pctRemoved <- nrow(.inOldAndNotInNew) / nrow(.compDsToCheck)
 
   # Define output list structure
   .returnOutput <- list(
@@ -24,9 +26,9 @@ checkForRemovedRows <- function(.dsToCheck,.compDsToCheck,.uniqueKey){
     ,"checkDescription" = "For each analytic file, confirm that the volume of disappearing rows is below a prespecified threshold. (0)"
     ,"checkShortDescription" = "removed rows"
     ,"sendCheckToRom" = FALSE
-    ,"threshold" = 0
-    ,"pass" = ifelse(nrow(.inOldAndNotInNew) > 0, FALSE, TRUE)
-    ,"nRemovedRows" = nrow(.inOldAndNotInNew)
+    ,"threshold" = sprintf("%.2f%%",2)
+    ,"pass" = ifelse(.pctRemoved > 0.02, FALSE, TRUE)
+    ,"nRemovedRows" = glue::glue("{nrow(.inOldAndNotInNew)} ({sprintf('%.2f%%',.pctRemoved*100)})")
     ,"inOldAndNotInNew" = .inOldAndNotInNew[,.uniqueKeys]
   )
 
