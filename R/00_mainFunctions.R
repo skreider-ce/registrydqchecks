@@ -6,6 +6,7 @@
 #' @param .lastMonthDataFolderUrl A url string to the folder with the last month's datasets
 #' @param .lastMonthDataPullDate A date string of last month's data pull date in the format YYYY-DD-MM (e.g. "2023-12-05")
 #' @param .codebookUrl (optional) A url string to the registry-specific codebook (if left missing - critical checks 7 and 8 will not be run)
+#' @param .siteInfoUrl A Url to the base folder for site/provider data
 #' @param .datasetsToCheck A string vector with the names of the datasets to be checked (e.g. c("exvisit", "exlab", "exdrugexp")) - NOTE: These must perfectly match both the tab names in the codebook AND the names of the datasets being checked
 #' @param .nonCriticalChecks A list of the manually generated non-critical checks in the CE DQ specified format (see additional documentation)
 #' @param .outputUrl A url string to the location of the output datasets - NOTE: A subfolder will be created here called /checks that will house the results of the checks and will be the location called by the check report
@@ -25,6 +26,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                               ,.lastMonthDataFolderUrl
                               ,.lastMonthDataPullDate
                               ,.codebookUrl
+                              ,.siteInfoUrl = NULL
                               ,.datasetsToCheck
                               ,.nonCriticalChecks = NULL
                               ,.outputUrl
@@ -43,6 +45,9 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   .codebookNcOutput <- list()
   .nonCritCheckOutput <- list()
   .ncChecks <- list()
+  
+  .activeSites <- pullSiteInfoFromExcelFile(.fileUrl = .siteInfoUrl
+                                         ,.registry = .registry)
   
   # Loop through each dataset and perform the checks
   for(.dsName in .datasetsToCheck){
@@ -115,21 +120,25 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   # Define timestamp of this specific datapull
   .timestamp <- format(Sys.time(), "%Y-%m-%d_%H%M")
   .formattedTimestamp <- gsub('[^A-Za-z0-9_]', '_', .timestamp)
-  .reportOutputUrl = glue::glue("{.outputUrl}{.timestamp}/")
+  .yearMonthTimestamp = format(as.Date(.prelimDataPullDate), "%Y-%m")
+  .folderName = glue::glue("{.registry}_{.yearMonthTimestamp}_DQReport_{.timestamp}")
+  .reportOutputUrl = glue::glue("{.outputUrl}{.folderName}/")
 
   # Submit check results to datastore - including a .rds and Excel files
   submitToDataStore(.registry = .registry
                     ,.dsPullDate = .prelimDataPullDate
                     ,.timestamp = .timestamp
+                    ,.folderName = .folderName
                     ,.dataStoreUrl = .outputUrl
                     ,.resultsOfChecks = .checkOutput
+                    ,.activeSites = .activeSites
                     )
   rm(.checkOutput)
   # Generate the html report
   registrydqchecksreportdown::generateReport(
-    .inputDatasetUrl = glue::glue("{.outputUrl}{.timestamp}/checks/{.registry}_{.prelimDataPullDate}_{.timestamp}_checks.rds")
+    .inputDatasetUrl = glue::glue("{.outputUrl}{.folderName}/checks/{.registry}_{.prelimDataPullDate}_{.timestamp}_checks.rds")
     ,.reportOutputUrl = .reportOutputUrl
-    ,.fileName = glue::glue("{.registry}_DQReport_{.timestamp}_report")
+    ,.fileName = .folderName
   )
   
   print(glue::glue("Report Output Url: {.reportOutputUrl}"))

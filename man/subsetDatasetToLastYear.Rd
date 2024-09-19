@@ -2,7 +2,7 @@
 % Please edit documentation in R/85_subsetDatasetToLastYear.R
 \name{subsetDatasetToLastYear}
 \alias{subsetDatasetToLastYear}
-\title{subsetDatasetToLastYear Function to subset datasetA based on the existence of variables}
+\title{subsetDatasetToLastYear Function to subset dataset to last year for given date variables}
 \usage{
 subsetDatasetToLastYear(.dataset, .timeVar1, .timeVar2, .dataPullDate)
 }
@@ -19,5 +19,5 @@ subsetDatasetToLastYear(.dataset, .timeVar1, .timeVar2, .dataPullDate)
 The subset dataset
 }
 \description{
-subsetDatasetToLastYear Function to subset datasetA based on the existence of variables
+subsetDatasetToLastYear Function to subset dataset to last year for given date variables
 }

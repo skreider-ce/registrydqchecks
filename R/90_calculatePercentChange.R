@@ -6,25 +6,20 @@
 #' @export
 calculatePercentChange <- function(data) {
   data <- data |>
+    rowwise() %>%
     mutate(
       percentChange = case_when(
-        # Handle NA values: return a blank value
-        is.na(stat_1) | is.na(stat_2) ~ "",
-        # For continuous variables: extract means and calculate % change
-        str_detect(stat_1, "\\d+\\.\\d+") & str_detect(stat_2, "\\d+\\.\\d+") ~ {
-          mean_1 <- as.numeric(str_extract(stat_1, "\\d+\\.\\d+"))
-          mean_2 <- as.numeric(str_extract(stat_2, "\\d+\\.\\d+"))
-          percentChange <- ((mean_2 - mean_1) / abs(mean_1)) * 100
-          sprintf("%.1f", percentChange)
+        str_detect(stat_1, "%") & str_detect(stat_2, "%") ~ {
+          pct_this <- as.numeric(str_extract(stat_1, "[0-9.]+(?=%)"))
+          pct_last <- as.numeric(str_extract(stat_2, "[0-9.]+(?=%)"))
+          round(pct_this - pct_last, 1)
         },
-        # For categorical variables: extract percentages and calculate % change
-        str_detect(stat_1, "\\d+\\.\\d+%") & str_detect(stat_2, "\\d+\\.\\d+%") ~ {
-          perc_1 <- as.numeric(str_extract(stat_1, "\\d+\\.\\d+"))
-          perc_2 <- as.numeric(str_extract(stat_2, "\\d+\\.\\d+"))
-          percentChange <- ((perc_2 - perc_1) / abs(perc_1)) * 100
-          sprintf("%.1f", percentChange)
+        str_detect(stat_1, "\\(") & str_detect(stat_2, "\\(") ~ {
+          mean_this <- as.numeric(str_extract(stat_1, "^[0-9.]+"))
+          mean_last <- as.numeric(str_extract(stat_2, "^[0-9.]+"))
+          round((mean_this - mean_last) / mean_last * 100, 1)
         },
-        TRUE ~ ""
+        TRUE ~ NA_real_
       )
     )
   
@@ -33,7 +28,7 @@ calculatePercentChange <- function(data) {
     group_by(variable) |>
     mutate(
       max_percent_change = ifelse(row_type == "label", 
-                                  max(as.numeric(percentChange), na.rm = TRUE), 
+                                  max(abs(as.numeric(percentChange)), na.rm = TRUE), 
                                   NA_real_)
     ) |>
     ungroup() |>

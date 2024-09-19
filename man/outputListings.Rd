@@ -10,7 +10,8 @@ outputListings(
   .yearMonthTimestamp,
   .dataPullDate,
   .timestamp,
-  .checksToOutput
+  .checksToOutput,
+  .activeSites
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ outputListings(
 \item{.timestamp}{Timestamp of the current run}
 
 \item{.checksToOutput}{Registry DQ checks to output in list form with criticalChecks and nonCriticalChecks entries}
+
+\item{.activeSites}{Information on the list of active sites for this registry}
 }
 \description{
 Output specified listings in xlsx format for further review
