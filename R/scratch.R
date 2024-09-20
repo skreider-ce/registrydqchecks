@@ -66,6 +66,29 @@
 
 
 
+# checks <- NULL
+# manualNcChecks <- NULL
+# 
+# # MUST SYNC THIS FOLDER
+# #   ADD THIS URL TO config.R files
+# #   DIRECT URL TO site_data_clean.csv CSV FILE
+# .configSiteInfoUrl <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - Site and Provider Data/data/site_data_clean.csv"
+# 
+# 
+# library(registrydqchecksreportdown)
+# library(registrydqchecks)
+# outputUrl <- runRegistryChecks(.registry = "nmo"
+#                   ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - NMO/monthly/2024/2024-09-01/Analytic Data/"
+#                   ,.prelimDataPullDate = "2024-09-01"
+#                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - NMO/monthly/2024/2024-08-01/Analytic Data/"
+#                   ,.lastMonthDataPullDate = "2024-08-01"
+#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - NMO/monthly/2024/2024-09-01/Analytic Data/NMO_codebook_2024-09-01.xlsx"
+#                   ,.siteInfoUrl = .configSiteInfoUrl
+#                   ,.datasetsToCheck = c("exlab")
+#                   ,.nonCriticalChecks = NULL
+#                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/nmo/"
+#                   ,.isR = TRUE)
+
 
 
 # remotes::install_github("skreider-ce/registrydqchecksreportdown")
