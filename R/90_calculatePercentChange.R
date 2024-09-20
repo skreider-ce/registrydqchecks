@@ -28,7 +28,7 @@ calculatePercentChange <- function(data) {
     group_by(variable) |>
     mutate(
       max_percent_change = ifelse(row_type == "label", 
-                                  percentChange[which.max(abs(percentChange), na.rm = TRUE)],
+                                  percentChange[which.max(abs(percentChange))],
                                   NA_real_)
     ) |>
     ungroup() |>
