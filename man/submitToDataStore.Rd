@@ -8,6 +8,7 @@ submitToDataStore(
   .registry,
   .dsPullDate,
   .timestamp,
+  .folderName,
   .dataStoreUrl,
   .resultsOfChecks,
   .activeSites
@@ -19,6 +20,8 @@ submitToDataStore(
 \item{.dsPullDate}{A date string of the data pull date in YYYY-MM-DD format (e.g. "2024-01-10")}
 
 \item{.timestamp}{Timestamp that the checks were run}
+
+\item{.folderName}{Name for the folder where results will be output}
 
 \item{.dataStoreUrl}{A text url of the location where the check results will be stored}
 
