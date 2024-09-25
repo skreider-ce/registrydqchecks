@@ -14,6 +14,7 @@ pullCodebookFromExcelFile <- function(.fileUrl,.sheetName){
   .colNames <- c(
     "varName"
     ,"varLabel"
+    ,"calculatedVariable"
     ,"catValues"
     ,"numRange"
     ,"uniqueKey"
@@ -30,10 +31,12 @@ pullCodebookFromExcelFile <- function(.fileUrl,.sheetName){
   .pulledVars <- .pulledVars |>
     dplyr::rename_with(~ "varName", matches("(?i)analytic variable name")) |>
     dplyr::rename_with(~ "varLabel", matches("(?i)analytic variable label")) |>
+    dplyr::rename_with(~ "calculatedVariable", matches("(?i)calculated variable")) |>
     dplyr::mutate(
       acceptableMissingness = as.numeric(acceptableMissingness, na.rm = TRUE)
       ,uniqueKey = as.numeric(uniqueKey, na.rm = TRUE)
       ,essential = as.numeric(essential, na.rm = TRUE)
+      ,calculatedVariable = as.numeric(calculatedVariable, na.rm = TRUE)
       ,nonExtremeMissingness = as.numeric(nonExtremeMissingness, na.rm = TRUE)
       ,missingnessThresholdMultiplier = as.numeric(missingnessThresholdMultiplier, na.rm = TRUE)
     )

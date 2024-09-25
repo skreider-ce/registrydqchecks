@@ -233,8 +233,8 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
   
   .columnTitles <- as.data.frame(t(c("Investigator", "Date Investigated", "Resolution", "Date Resolved", "Notes")))
   .gray_style <- openxlsx::createStyle(fgFill = "gray")
-  openxlsx::writeData(.wbLong, sheet = "qualityChecks", x = .columnTitles, startCol = 15, colNames = FALSE)
-  openxlsx::addStyle(.wbLong, sheet = "qualityChecks", style = .gray_style, cols = 14, rows = 1:currentRow)
+  openxlsx::writeData(.wbLong, sheet = "qualityChecks", x = .columnTitles, startCol = 16, colNames = FALSE)
+  openxlsx::addStyle(.wbLong, sheet = "qualityChecks", style = .gray_style, cols = 15, rows = 1:currentRow)
   openxlsx::freezePane(.wbLong, sheet = "qualityChecks", firstActiveRow = 2)
   
   openxlsx::saveWorkbook(.wbLong
