@@ -172,14 +172,18 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
           ,.activeSites = .activeSites
         )
         
+        .subsetCalculatedVariableDataset <- subsetDatasetToNonCalculatedVariables(
+          .dataset = .subsetSiteDataset
+        )
+        
         # .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing
 
-        if(nrow(.subsetSiteDataset) > 0){
+        if(nrow(.subsetCalculatedVariableDataset) > 0){
 
           openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkTitle, startCol = 1, startRow = currentRow)
           currentRow <- currentRow + 1
-          openxlsx::writeData(.wbLong, "qualityChecks", .subsetSiteDataset, startCol = 1, startRow = currentRow)
-          currentRow <- currentRow + nrow(.subsetSiteDataset) + 2                  
+          openxlsx::writeData(.wbLong, "qualityChecks", .subsetCalculatedVariableDataset, startCol = 1, startRow = currentRow)
+          currentRow <- currentRow + nrow(.subsetCalculatedVariableDataset) + 2                  
         }
       }
     }
@@ -213,6 +217,7 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
             ,.siteVar2 = "siteid"
             ,.activeSites = .activeSites
           )
+
           # .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing
           
           if(nrow(.subsetSiteDataset) > 0){

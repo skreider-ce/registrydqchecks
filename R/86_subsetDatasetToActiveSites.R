@@ -19,7 +19,7 @@ subsetDatasetToActiveSites <- function(.dataset, .siteVar1, .siteVar2, .activeSi
       ,.dataset
       ,by = .siteVar1
     )
-    message("Using ", .siteVar1, " to subset the dataset")
+    message("NOTE: Using ", .siteVar1, " to subset the dataset")
     return(subset)
   } else if (.siteVar2 %in% colnames(.dataset)) {
     names(.activeSites)[1] = .siteVar2
@@ -32,11 +32,11 @@ subsetDatasetToActiveSites <- function(.dataset, .siteVar1, .siteVar2, .activeSi
       ,.dataset
       ,by = .siteVar2
     )
-    message("Using ", .siteVar2, " to subset the dataset")
+    message("NOTE: Using ", .siteVar2, " to subset the dataset")
     return(subset)
   } else {
     # Log an error if neither variable1 nor variable2 exist in datasetA
-    message("Error: neither ", .siteVar1, " nor ", .siteVar2, " exist in this dataset. No subsetting was done on the dataset")
+    message("NOTE: neither ", .siteVar1, " nor ", .siteVar2, " exist in this dataset. No subsetting was done on the dataset")
     return(.dataset)  # Return the original dataset without subsetting
   }
 }
