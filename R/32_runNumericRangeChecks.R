@@ -35,7 +35,7 @@ runNumericRangeChecks <- function(.dsName
       .subsetDsToCheck <- .dsToCheck |>
         dplyr::select(dplyr::all_of(.uniqueKeys), !!.varName1) |>
         dplyr::filter(!is.na(get(.varName1))) |>
-        dplyr::filter(get(.varName1) < .currentCheckVar$numRangeLower | get(.varName1) > .currentCheckVar$numRangeUpper) |>
+        dplyr::filter(get(.varName1) < (.currentCheckVar$numRangeLower - 0.0001) | get(.varName1) > (.currentCheckVar$numRangeUpper + 0.0001)) |>
         dplyr::mutate(
           dataset = .dsName
           ,variableName = .varName1
