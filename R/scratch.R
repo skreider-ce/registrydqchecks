@@ -29,7 +29,7 @@
 #                   ,.siteInfoUrl = .configSiteInfoUrl
 #                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
 #                   ,.nonCriticalChecks = manualNcChecks
-#                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/"
+#                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad/2024/"
 #                   ,.isR = TRUE)
 # 
 # romOutputFolder <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Biostat Registry Data Quality Reports/"
@@ -48,6 +48,8 @@
 # #   DIRECT URL TO site_data_clean.csv CSV FILE
 # .configSiteInfoUrl <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - Site and Provider Data/data/site_data_clean.csv"
 # 
+# validateCodebook(codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AA/monthly/2024/2024-09-05/Analytic Data/AA_codebook_2024-09-05.xlsx"
+#                   ,datasetNames = c("AA_visits", "AA_drugevents", "AA_labimg"))
 # 
 # library(registrydqchecksreportdown)
 # library(registrydqchecks)
@@ -84,16 +86,13 @@
 #                   ,.lastMonthDataPullDate = "2024-08-01"
 #                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - NMO/monthly/2024/2024-09-01/Analytic Data/NMO_codebook_2024-09-01.xlsx"
 #                   ,.siteInfoUrl = .configSiteInfoUrl
-#                   ,.datasetsToCheck = c("exlab")
+#                   ,.datasetsToCheck = c("exvisit")
 #                   ,.nonCriticalChecks = NULL
 #                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/nmo/"
 #                   ,.isR = TRUE)
 
 
 
-# remotes::install_github("skreider-ce/registrydqchecksreportdown")
-# remotes::install_github("skreider-ce/registrydqchecks")
-#
 # library(registrydqchecksreportdown)
 # library(registrydqchecks)
 # 
@@ -105,7 +104,7 @@
 # .lastMonthDataPullDate = "2024-08-05"
 # .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/documentation/Codebook/ms_codebook.xlsx"
 # .datasetsToCheck = c("ms_dwsub1", "ms_drugexp", "ms_dmlabimg")
-# .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/report/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
+# .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/exampleOutput/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
 # .isR = FALSE
 # 
 # validateCodebook(codebookUrl = .codebookUrl
@@ -134,14 +133,14 @@
 #                   ,.isR = FALSE)
 
 
-# 
+
 # .registry = "raj"
-# .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - RA Japan/monthly/2024/2024-08-05/Analytical_Data/"
-# .prelimDataPullDate = "2024-08-05"
+# .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - RA Japan/monthly/2024/2024-09-05/Analytical_Data/"
+# .prelimDataPullDate = "2024-09-05"
 # .dataPullYear = "2024"
-# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - RA Japan/monthly/2024/2024-07-05/Analytical_Data/"
-# .lastMonthDataPullDate = "2024-07-05"
-# .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - RA Japan/monthly/2024/2024-08-05/Analytical_Data/RA_Japan_Codebook_2024-08-05.xlsx"
+# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - RA Japan/monthly/2024/2024-08-05/Analytical_Data/"
+# .lastMonthDataPullDate = "2024-08-05"
+# .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - RA Japan/monthly/2024/2024-09-05/Analytical_Data/RA_Japan_Codebook_2024-09-05.xlsx"
 # .datasetsToCheck = c("R_RA_Japan_analytic_file")
 # .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/store/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
 # .isR = TRUE

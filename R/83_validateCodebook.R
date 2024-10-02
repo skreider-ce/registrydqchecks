@@ -172,6 +172,7 @@ process_dataset <- function(codebookUrl, dataset, expectedVariables) {
     
     # Perform checks
     check_missing_variables(sheet_data, expectedVariables)
+    check_variable_conditions(sheet_data, "'Calculated Variable'", c(1, "", NA), "'Calculated Variable'")
     check_variable_conditions(sheet_data, "essential", c(1, "", NA), "'essential'")
     check_variable_conditions(sheet_data, "uniqueKey", c(1, "", NA), "'uniqueKey'")
     check_numeric_range(sheet_data, "acceptableMissingness", 0, 1, "'acceptableMissingness'")
@@ -197,6 +198,7 @@ validateCodebook <- function(codebookUrl, datasetNames) {
                     ,dataset
                     ,c("Analytic Variable name"
                        ,"Analytic Variable label"
+                       ,"Calculated Variable"
                        ,"catValues"
                        ,"numRange"
                        ,"uniqueKey"

@@ -26,7 +26,7 @@ runCategoricalValueChecks <- function(.dsName
   }
     
   .varsToCheck <- .varsToCheck |>
-    dplyr::select(varName, catValues) |>
+    dplyr::select(varName, calculatedVariable, catValues) |>
     dplyr::mutate(split = strsplit(catValues, ",")) |>
     dplyr::mutate(cleanCol = purrr::map(split, removeQuotes)) |>
     dplyr::mutate(
@@ -57,6 +57,7 @@ runCategoricalValueChecks <- function(.dsName
         dplyr::filter(get(.varName1) %in% notIn) |>
         dplyr::mutate(
           dataset = .dsName
+          ,calculatedVariable = .currentCheckVar$calculatedVariable
           ,numVal = as.character(get(.varName1))
           ,variableName = glue::glue("{.varName1}")
           ,expectedValue = list(.expectedLevels)
@@ -65,7 +66,7 @@ runCategoricalValueChecks <- function(.dsName
         dplyr::rename(
           catValue = numVal
         ) |> dplyr::select(
-          dplyr::all_of(.uniqueKeys), dataset, catValue, variableName, expectedValue, expectedLabels
+          dplyr::all_of(.uniqueKeys), calculatedVariable, dataset, catValue, variableName, expectedValue, expectedLabels
         )
       
       .categoricalValueChecks <- dplyr::bind_rows(.categoricalValueChecks, .outOfRange)
