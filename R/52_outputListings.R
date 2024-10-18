@@ -182,6 +182,8 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
 
           openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkTitle, startCol = 1, startRow = currentRow)
           currentRow <- currentRow + 1
+          openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkDescription, startCol = 1, startRow = currentRow)
+          currentRow <- currentRow + 1
           openxlsx::writeData(.wbLong, "qualityChecks", .subsetCalculatedVariableDataset, startCol = 1, startRow = currentRow)
           currentRow <- currentRow + nrow(.subsetCalculatedVariableDataset) + 2                  
         }
@@ -222,6 +224,8 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
           
           if(nrow(.subsetSiteDataset) > 0){
             openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkTitle, startCol = 1, startRow = currentRow)
+            currentRow <- currentRow + 1
+            openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkDescription, startCol = 1, startRow = currentRow)
             currentRow <- currentRow + 1
             openxlsx::writeData(.wbLong, "qualityChecks", .subsetSiteDataset, startCol = 1, startRow = currentRow)
             currentRow <- currentRow + nrow(.subsetSiteDataset) + 2

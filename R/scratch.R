@@ -9,7 +9,7 @@
 # 
 
 
-# checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad_2024-09-06_2024-09-13_1023_checks.rds")
+# checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad_2024-10-01_2024-10-16_1602_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
 # 
 # # MUST SYNC THIS FOLDER
@@ -18,20 +18,20 @@
 # .configSiteInfoUrl <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - Site and Provider Data/data/site_data_clean.csv"
 # 
 # 
-# library(registrydqchecksreportdown)
-# library(registrydqchecks)
+# # library(registrydqchecksreportdown)
+# # library(registrydqchecks)
 # outputUrl <- runRegistryChecks(.registry = "ad"
-#                   ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-08-02/"
-#                   ,.prelimDataPullDate = "2024-08-02"
-#                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-07-03/"
-#                   ,.lastMonthDataPullDate = "2024-07-03"
-#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-08-02/AD_codebook_2024-08-02.xlsx"
+#                   ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-10-01/"
+#                   ,.prelimDataPullDate = "2024-10-01"
+#                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-09-06/"
+#                   ,.lastMonthDataPullDate = "2024-09-06"
+#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-10-01/AD_codebook_2024-10-01.xlsx"
 #                   ,.siteInfoUrl = .configSiteInfoUrl
 #                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
-#                   ,.nonCriticalChecks = manualNcChecks
+#                   ,.nonCriticalChecks = NULL
 #                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad/2024/"
 #                   ,.isR = TRUE)
-# 
+
 # romOutputFolder <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Biostat Registry Data Quality Reports/"
 # copyRomListingToFolder(.reportOutputUrl = outputUrl
 #                        ,.romReportUrl = glue::glue("{romOutputFolder}ad/2024/2024-06/"))
