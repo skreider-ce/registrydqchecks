@@ -16,16 +16,16 @@ subsetDatasetToLastYear <- function(.dataset, .timeVar1, .timeVar2, .dataPullDat
   if (.timeVar1 %in% colnames(.dataset)) {
     # Use variable1 to subset dataset if it exists
     subset <- .dataset[as.Date(.dataset[[.timeVar1]]) > .comparisonDate, ]
-    message("Using ", .timeVar1, " to subset the dataset")
+    message("NOTE: Using ", .timeVar1, " to subset the dataset")
     return(subset)
   } else if (.timeVar2 %in% colnames(.dataset)) {
     # Use variable2 to subset dataset if variable1 does not exist but variable2 exists
     subset <- .dataset[as.Date(.dataset[[.timeVar2]]) > .comparisonDate, ]
-    message("Using ", .timeVar2, " to subset the dataset")
+    message("NOTE: Using ", .timeVar2, " to subset the dataset")
     return(subset)
   } else {
     # Log an error if neither variable1 nor variable2 exist in datasetA
-    message("Error: neither ", .timeVar1, " nor ", .timeVar2, " exist in this dataset. No subsetting was done on the dataset")
+    message("NOTE: neither ", .timeVar1, " nor ", .timeVar2, " exist in this dataset. No subsetting was done on the dataset")
     return(.dataset)  # Return the original dataset without subsetting
   }
 }

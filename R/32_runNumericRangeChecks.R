@@ -14,7 +14,7 @@ runNumericRangeChecks <- function(.dsName
   # Pull off all the numeric variables indicated with a range in the codebook
   .varsToCheck <- .codebookVariables |>
     dplyr::filter(!is.na(numRange)) |>
-    dplyr::select(varName, numRange) |>
+    dplyr::select(varName, varLabel, calculatedVariable, numRange) |>
     dplyr::mutate(
       numRangeLower = as.numeric(sub("\\[(.*),.*\\]", "\\1", numRange))
       ,numRangeUpper = as.numeric(sub("\\[.*,(.*)\\]", "\\1", numRange))
@@ -35,16 +35,18 @@ runNumericRangeChecks <- function(.dsName
       .subsetDsToCheck <- .dsToCheck |>
         dplyr::select(dplyr::all_of(.uniqueKeys), !!.varName1) |>
         dplyr::filter(!is.na(get(.varName1))) |>
-        dplyr::filter(get(.varName1) < .currentCheckVar$numRangeLower | get(.varName1) > .currentCheckVar$numRangeUpper) |>
+        dplyr::filter(get(.varName1) < (.currentCheckVar$numRangeLower - 0.0001) | get(.varName1) > (.currentCheckVar$numRangeUpper + 0.0001)) |>
         dplyr::mutate(
           dataset = .dsName
           ,variableName = .varName1
+          ,variableLabel = .currentCheckVar$varLabel
+          ,calculatedVariable = .currentCheckVar$calculatedVariable
           ,expectedUpper = .currentCheckVar$numRangeUpper
           ,expectedLower = .currentCheckVar$numRangeLower
           ,numValue = as.numeric(get(.varName1))
         ) |>
         dplyr::select(
-          dplyr::all_of(.uniqueKeys), dataset, numValue, variableName, expectedLower, expectedUpper
+          dplyr::all_of(.uniqueKeys), numValue, variableLabel, variableName, calculatedVariable, expectedLower, expectedUpper
         )
       
       .numericRangeChecks <- dplyr::bind_rows(.numericRangeChecks, .subsetDsToCheck)
