@@ -247,7 +247,7 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
   openxlsx::writeData(.wbLong, sheet = "qualityChecks", x = .columnTitles, startCol = 1, colNames = FALSE)
   openxlsx::addStyle(.wbLong, sheet = "qualityChecks", style = .gray_style, cols = 6, rows = 1:currentRow)
   openxlsx::freezePane(.wbLong, sheet = "qualityChecks", firstActiveRow = 2)
-  openxlsx::setColWidths(.wbLong, sheet = "qualityChecks", cols = 7, widths = 1)
+  openxlsx::setColWidths(.wbLong, sheet = "qualityChecks", cols = 7, widths = 0)
 
   openxlsx::saveWorkbook(.wbLong
                          ,file = glue::glue("{.listingUrl}/{.registry}_{.yearMonthTimestamp}_allChecks.xlsx")
