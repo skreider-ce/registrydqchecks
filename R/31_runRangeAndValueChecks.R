@@ -21,7 +21,8 @@ runRangeAndValueChecks <- function(.dsName
                                             ,.uniqueKeys = .uniqueKeys)
   
   .ncCheck1Output <- dplyr::bind_rows(.ncCheck1Num, .ncCheck1Cat) |>
-    dplyr::arrange(variableName)
+    dplyr::arrange(variableName) |>
+    addCheckId(glue::glue("nc1_{.dsName}"))
     
   
   .checkOutput <- list(

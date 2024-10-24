@@ -11,7 +11,7 @@
 
 # checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad_2024-10-01_2024-10-16_1602_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
-# 
+
 # # MUST SYNC THIS FOLDER
 # #   ADD THIS URL TO config.R files
 # #   DIRECT URL TO site_data_clean.csv CSV FILE
