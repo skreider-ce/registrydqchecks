@@ -21,8 +21,10 @@ runRangeAndValueChecks <- function(.dsName
                                             ,.uniqueKeys = .uniqueKeys)
   
   .ncCheck1Output <- dplyr::bind_rows(.ncCheck1Num, .ncCheck1Cat) |>
-    dplyr::arrange(variableName)
-    
+    dplyr::arrange(variableName) |>
+    dplyr::relocate("calculatedVariable", .after = dplyr::last_col())
+
+  .ncCheck1Output <- replaceNullWithNa(.ncCheck1Output)
   
   .checkOutput <- list(
     "checkId" = "nc1"
@@ -42,3 +44,16 @@ runRangeAndValueChecks <- function(.dsName
   return(.checkOutput)
 }
 
+
+
+#' replace_null_with_na Replace NULLs in dataset with NAs
+#'
+#' @param df the dataset to transform
+#'
+#' @return the dataframe with NULLs transformed to NA
+replaceNullWithNa <- function(df) {
+  df[] <- lapply(df, function(x) {
+    ifelse(sapply(x, is.null), NA, x)
+  })
+  return(df)
+}
