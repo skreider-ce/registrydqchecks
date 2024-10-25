@@ -212,26 +212,28 @@
 
 # remotes::install_github("skreider-ce/registrydqchecksreportdown")
 # remotes::install_github("skreider-ce/registrydqchecks")
-# 
+
 # library(registrydqchecksreportdown)
 # library(registrydqchecks)
 # 
+# .configSiteInfoUrl <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - Site and Provider Data/data/site_data_clean.csv"
+# 
 # .registry = "pso"
-# .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - PsO/monthly/2024/2024-07-10/"
-# .prelimDataPullDate = "2024-07-11"
+# .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - PsO/monthly/2024/2024-10-10/"
+# .prelimDataPullDate = "2024-10-10"
 # .dataPullYear = "2024"
-# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - PsO/monthly/2024/2024-06-10/"
-# .lastMonthDataPullDate = "2024-06-10"
-# .codebookUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/psotest/PsO Codebook_visits2.xlsx"
-# .datasetsToCheck = c("EN")
+# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - PsO/monthly/2024/2024-09-10/"
+# .lastMonthDataPullDate = "2024-09-10"
+# .codebookUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/psotest/PsO Codebook_visits.xlsx"
+# .datasetsToCheck = c("exdrugexp")
 # .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/store/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
 # .isR = FALSE
 # 
 # checks <- NULL
 # manualNcChecks <- NULL
 # 
-# validateCodebook(codebookUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/psotest/PsO Codebook_visits2.xlsx"
-#                   ,datasetNames = c("EN"))
+# validateCodebook(codebookUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/psotest/PsO Codebook_visits.xlsx"
+#                   ,datasetNames = c("exdrugexp"))
 # 
 # runRegistryChecks(.registry = .registry
 #                   ,.prelimDataFolderUrl = .prelimDataFolderUrl
@@ -239,11 +241,11 @@
 #                   ,.lastMonthDataFolderUrl = .lastMonthDataFolderUrl
 #                   ,.lastMonthDataPullDate = .lastMonthDataPullDate
 #                   ,.codebookUrl = .codebookUrl
+#                   ,.siteInfoUrl = .configSiteInfoUrl
 #                   ,.datasetsToCheck = .datasetsToCheck
 #                   ,.nonCriticalChecks = NULL
 #                   ,.outputUrl = .outputUrl
 #                   ,.isR = FALSE)
-
 
 
 # ncChecks <- list()
