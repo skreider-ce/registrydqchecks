@@ -104,7 +104,7 @@ removeQuotes <- function(vec){
 #' 
 #' @importFrom stringr str_extract
 extractValueNumbers <- function(vec){
-  numVector <- stringr::str_extract(vec, "\\b-?\\d+\\b") |> as.double()
+  numVector <- stringr::str_extract(vec, "-?\\d+(\\.\\d+)?(?==)") |> as.double()
 
   return(unlist(numVector))
 }
