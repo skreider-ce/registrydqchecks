@@ -25,7 +25,8 @@ runRangeAndValueChecks <- function(.dsName
     addCheckId(glue::glue("nc1_{.dsName}")) |>
     dplyr::relocate("calculatedVariable", .after = dplyr::last_col())
 
-  .ncCheck1Output <- replaceNullWithNa(.ncCheck1Output)
+  .columnsToReplace <- c("expectedValue", "expectedLabels")
+  .ncCheck1Output <- replaceNullWithNa(.ncCheck1Output, .columnsToReplace)
   
   .checkOutput <- list(
     "checkId" = "nc1"
@@ -47,14 +48,17 @@ runRangeAndValueChecks <- function(.dsName
 
 
 
-#' replace_null_with_na Replace NULLs in dataset with NAs
+#' replaceNullWithNa Replace NULL values with NA in specified columns of a dataframe
 #'
-#' @param df the dataset to transform
+#' @param df A dataframe in which to replace NULL values
+#' @param columns A vector of column names or indices where NULL values should be replaced with NA
 #'
-#' @return the dataframe with NULLs transformed to NA
-replaceNullWithNa <- function(df) {
-  df[] <- lapply(df, function(x) {
-    ifelse(sapply(x, is.null), NA, x)
+#' @return The dataframe with NULL values replaced with NA in the specified columns
+#' 
+#' @importFrom dplyr mutate_at
+replaceNullWithNa <- function(df, columns) {
+  df <- dplyr::mutate_at(df, columns, function(x) {
+    sapply(x, function(y) if (is.null(y)) NA else y)
   })
   return(df)
 }
