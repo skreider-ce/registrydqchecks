@@ -67,7 +67,7 @@ runCategoricalValueChecks <- function(.dsName
         dplyr::rename(
           catValue = numVal
         ) |> dplyr::select(
-          dplyr::all_of(.uniqueKeys), calculatedVariable, catValue, variableLabel, variableName, expectedValue, expectedLabels
+          dplyr::all_of(.uniqueKeys), variableLabel, variableName, catValue, expectedValue, expectedLabels, calculatedVariable
         )
       
       .categoricalValueChecks <- dplyr::bind_rows(.categoricalValueChecks, .outOfRange)
@@ -104,7 +104,7 @@ removeQuotes <- function(vec){
 #' 
 #' @importFrom stringr str_extract
 extractValueNumbers <- function(vec){
-  numVector <- stringr::str_extract(vec, "\\b\\d+\\b") |> as.double()
+  numVector <- stringr::str_extract(vec, "-?\\d+(\\.\\d+)?(?==)") |> as.double()
 
   return(unlist(numVector))
 }

@@ -46,10 +46,11 @@ runNumericRangeChecks <- function(.dsName
           ,numValue = as.numeric(get(.varName1))
         ) |>
         dplyr::select(
-          dplyr::all_of(.uniqueKeys), numValue, variableLabel, variableName, calculatedVariable, expectedLower, expectedUpper
+          dplyr::all_of(.uniqueKeys), variableLabel, variableName, numValue, expectedLower, expectedUpper, calculatedVariable
         )
       
       .numericRangeChecks <- dplyr::bind_rows(.numericRangeChecks, .subsetDsToCheck)
+
     }
     ,warning = function(w){
       print(paste("Warning caught:", conditionMessage(w)))
