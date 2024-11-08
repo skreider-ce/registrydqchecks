@@ -21,11 +21,11 @@
 # # library(registrydqchecksreportdown)
 # # library(registrydqchecks)
 # outputUrl <- runRegistryChecks(.registry = "ad"
-#                   ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-10-01/"
-#                   ,.prelimDataPullDate = "2024-10-01"
-#                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-09-06/"
-#                   ,.lastMonthDataPullDate = "2024-09-06"
-#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-10-01/AD_codebook_2024-10-01.xlsx"
+#                   ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-11-05/"
+#                   ,.prelimDataPullDate = "2024-11-05"
+#                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-10-01/"
+#                   ,.lastMonthDataPullDate = "2024-10-01"
+#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-11-05/AD_codebook_2024-11-05.xlsx"
 #                   ,.siteInfoUrl = .configSiteInfoUrl
 #                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
 #                   ,.nonCriticalChecks = NULL
@@ -97,11 +97,11 @@
 # library(registrydqchecks)
 # 
 # .registry = "ms"
-# .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-09-05/final/"
-# .prelimDataPullDate = "2024-09-05"
+# .prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-11-05/final/"
+# .prelimDataPullDate = "2024-11-05"
 # .dataPullYear = "2024"
-# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-08-05/final/"
-# .lastMonthDataPullDate = "2024-08-05"
+# .lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/monthly/2024/2024-10-05/final/"
+# .lastMonthDataPullDate = "2024-10-05"
 # .codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - MS/documentation/Codebook/ms_codebook.xlsx"
 # .datasetsToCheck = c("ms_dwsub1", "ms_drugexp", "ms_dmlabimg")
 # .outputUrl = glue::glue("C:/Users/ScottKreider/Documents/scrap/exampleOutput/{.registry}/{.dataPullYear}/{.prelimDataPullDate}/")
