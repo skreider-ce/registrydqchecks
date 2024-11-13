@@ -2,16 +2,18 @@
 % Please edit documentation in R/31_runRangeAndValueChecks.R
 \name{replaceNullWithNa}
 \alias{replaceNullWithNa}
-\title{replace_null_with_na Replace NULLs in dataset with NAs}
+\title{replaceNullWithNa Replace NULL values with NA in specified columns of a dataframe}
 \usage{
-replaceNullWithNa(df)
+replaceNullWithNa(df, columns)
 }
 \arguments{
-\item{df}{the dataset to transform}
+\item{df}{A dataframe in which to replace NULL values}
+
+\item{columns}{A vector of column names or indices where NULL values should be replaced with NA}
 }
 \value{
-the dataframe with NULLs transformed to NA
+The dataframe with NULL values replaced with NA in the specified columns
 }
 \description{
-replace_null_with_na Replace NULLs in dataset with NAs
+replaceNullWithNa Replace NULL values with NA in specified columns of a dataframe
 }
