@@ -22,7 +22,7 @@ runRangeAndValueChecks <- function(.dsName
   
   .ncCheck1Output <- dplyr::bind_rows(.ncCheck1Num, .ncCheck1Cat) |>
     dplyr::arrange(variableName) |>
-    # addCheckId(glue::glue("nc1_{.dsName}")) |>
+    addCheckId(glue::glue("nc1_{.dsName}")) |>
     dplyr::relocate("calculatedVariable", .after = dplyr::last_col())
 
   .columnsToReplace <- c("expectedValue", "expectedLabels")

@@ -16,25 +16,28 @@
 #   ADD THIS URL TO config.R files
 #   DIRECT URL TO site_data_clean.csv CSV FILE
 # .configSiteInfoUrl <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - Site and Provider Data/data/site_data_clean.csv"
-# 
+# romOutputFolder <- "C:/Users/ScottKreider/Documents/scrap/exampleRomOutputFolder/"
 # 
 # # library(registrydqchecksreportdown)
 # # library(registrydqchecks)
 # outputUrl <- runRegistryChecks(.registry = "ad"
-#                   ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-11-05/"
-#                   ,.prelimDataPullDate = "2024-11-05"
-#                   ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-10-01/"
-#                   ,.lastMonthDataPullDate = "2024-10-01"
-#                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-11-05/AD_codebook_2024-11-05.xlsx"
-#                   ,.siteInfoUrl = .configSiteInfoUrl
-#                   ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
-#                   ,.nonCriticalChecks = NULL
-#                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad/2024/"
-#                   ,.isR = TRUE)
-
-# romOutputFolder <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat and Epi Team Site - Biostat Registry Data Quality Reports/"
+#                                ,.prelimDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-11-05/"
+#                                ,.prelimDataPullDate = "2024-11-05"
+#                                ,.lastMonthDataFolderUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-10-01/"
+#                                ,.lastMonthDataPullDate = "2024-10-01"
+#                                ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-11-05/AD_codebook_2024-11-05.xlsx"
+#                                ,.siteInfoUrl = .configSiteInfoUrl
+#                                ,.cdmRomReportUrl = romOutputFolder
+#                               ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
+#                               ,.nonCriticalChecks = NULL
+#                               ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad/2024/"
+#                               ,.isR = TRUE)
+# 
 # copyRomListingToFolder(.reportOutputUrl = outputUrl
-#                        ,.romReportUrl = glue::glue("{romOutputFolder}ad/2024/2024-06/"))
+#                        ,.romReportUrl = romOutputFolder
+#                        ,.registry = "ad"
+#                        ,.dataPullDate = "2024-11-05"
+#                        )
 
 
 

@@ -65,19 +65,24 @@ submitToDataStore <- function(.registry
                                           ,.activeSites = .activeSites
                                          )
   
+  # Create YM timestamp for last month
   .lastYearMonthTimestamp = format(as.Date(.lastMonthDataPullDate), "%Y-%m")
   .lastYear = format(as.Date(.lastMonthDataPullDate), "%Y")
+  
+  # Create allDqChecks Excel file URL to feed into checkPerpetuation
   lastMonthExcelUrl <- glue::glue("{.cdmRomReportUrl}/{.registry}/{.lastYear}/{.lastYearMonthTimestamp}/{.registry}_{.lastYearMonthTimestamp}_allDqChecks.xlsx")
 
   
-  if(file.exists(glue::glue("{.lastMonthCheckExcelFileUrl}"))){
+  # Check if allDqChecks file exists from last month
+  ### IF Exists - perpetuate comments
+  if(file.exists(glue::glue("{lastMonthExcelUrl}"))){
     suppressWarnings({
       perpetuateExcelComments(
-        .lastMonthCheckExcelFileUrl = 
+        .lastMonthCheckExcelFileUrl = lastMonthExcelUrl
           ,.thisMonthCheckExcelFileUrl = thisMonthRomReportUrl
       )
     })
   } else{
-    warning("There is no allCheck Excel file from last month - no comments were carried over")
+    message("NOTE: There is no allDqChecks Excel file from last month - no comments were carried over")
   }
 }

@@ -4,12 +4,21 @@
 \alias{copyRomListingToFolder}
 \title{copyRomListingToFolder Copy the CDM/ROM listing to the appropriate folder upon request}
 \usage{
-copyRomListingToFolder(.reportOutputUrl, .romReportUrl)
+copyRomListingToFolder(
+  .reportOutputUrl,
+  .romReportUrl,
+  .registry,
+  .dataPullDate
+)
 }
 \arguments{
 \item{.reportOutputUrl}{The url to the base report folder where the DQ report has been output}
 
 \item{.romReportUrl}{The url to the location for ROM/CDM to view the listing}
+
+\item{.registry}{A text string with the initials of the specific registry ("ad", "ms", "raj", "aa", "pso", "ibd", "nmo")}
+
+\item{.dataPullDate}{A date string of the data pull date in the format YYYY-DD-MM (e.g. "2024-01-10")}
 }
 \value{
 The URL

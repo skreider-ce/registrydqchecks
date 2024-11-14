@@ -75,24 +75,31 @@ perpetuateExcelComments <- function(.lastMonthCheckExcelFileUrl
           janitor::clean_names() |>
           dplyr::select(-dplyr::starts_with("na"))
         
+        joinVars <- intersect(names(thisMonthCheckDs), names(lastMonthCheckDs))
+        
         lastMonthFullDs[[check]] <- dplyr::bind_cols(lastMonthCheckDs, lastMonthInvestigatorDs)
         
         thisMonthFullDs[[check]] <- dplyr::bind_cols(thisMonthCheckDs)
         
-        finalDs[[check]] <- dplyr::left_join(
-          thisMonthFullDs[[check]]
-          ,lastMonthFullDs[[check]]
-          ,by = names(thisMonthCheckDs)
-        )
-        
-        toPrint <- finalDs[[check]][c("Investigator", "Date Investigated", "Resolution", "Date Resolved", "Notes")]
-        
-        
-        wb = openxlsx::loadWorkbook(glue::glue("{.thisMonthCheckExcelFileUrl}"))
-        
-        openxlsx::writeData(wb, sheet = "qualityChecks", x = toPrint, startCol = 1, startRow = thisMonthCheckLocMin + 1, colNames = FALSE)
-        
-        openxlsx::saveWorkbook(wb, glue::glue("{.thisMonthCheckExcelFileUrl}"), overwrite = TRUE)
+        if (length(joinVars) > 0) {
+          finalDs[[check]] <- dplyr::left_join(
+            thisMonthFullDs[[check]]
+            ,lastMonthFullDs[[check]]
+            ,by = joinVars
+          )
+          
+          toPrint <- finalDs[[check]][c("Investigator", "Date Investigated", "Resolution", "Date Resolved", "Notes")]
+          
+          
+          wb = openxlsx::loadWorkbook(glue::glue("{.thisMonthCheckExcelFileUrl}"))
+          
+          openxlsx::writeData(wb, sheet = "qualityChecks", x = toPrint, startCol = 1, startRow = thisMonthCheckLocMin + 1, colNames = FALSE)
+          
+          openxlsx::saveWorkbook(wb, glue::glue("{.thisMonthCheckExcelFileUrl}"), overwrite = TRUE)
+        } else {
+          print("No common variables to join on.")
+        }
+
       }
     }
 }
