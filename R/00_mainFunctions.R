@@ -135,7 +135,10 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                     ,.dataStoreUrl = .outputUrl
                     ,.resultsOfChecks = .checkOutput
                     ,.activeSites = .activeSites
+                    ,.cdmRomReportUrl = .cdmRomReportUrl
+                    ,.lastMonthDataPullDate = .lastMonthDataPullDate
                     )
+  
   rm(.checkOutput)
   # Generate the html report
   registrydqchecksreportdown::generateReport(

@@ -7,6 +7,8 @@
 #' @param .yearMonthTimestamp The year and month of the current datapull
 #' @param .dataPullDate The YYYY-MM-DD of the current datapull
 #' @param .activeSites Information on the list of active sites for this registry
+#' 
+#' @return A text string with the URL to the CDM/ROM Excel listing
 #'
 #' @export
 #'
@@ -250,8 +252,10 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
   openxlsx::setColWidths(.wbLong, sheet = "qualityChecks", cols = 7, widths = 0)
 
   openxlsx::saveWorkbook(.wbLong
-                         ,file = glue::glue("{.listingUrl}/{.registry}_{.yearMonthTimestamp}_allChecks.xlsx")
+                         ,file = glue::glue("{.listingUrl}/{.registry}_{.yearMonthTimestamp}_allDqChecks.xlsx")
                          ,overwrite = TRUE)
+  
+  return(glue::glue("{.listingUrl}/{.registry}_{.yearMonthTimestamp}_allDqChecks.xlsx"))
 }
 
 
