@@ -7,9 +7,8 @@
 #'
 #' @export
 #' 
-#' @importFrom dplyr filter
-#' @importFrom dplyr mutate
-#' @importFrom dplyr select
+#' @importFrom dplyr filter mutate select distinct
+#' @importFrom utils read.csv
 pullSiteInfoFromExcelFile <- function(.fileUrl,.registry){
   print(glue::glue("Location of site information: {.fileUrl}"))
   
@@ -27,7 +26,7 @@ pullSiteInfoFromExcelFile <- function(.fileUrl,.registry){
     .registryFilter = "psa/spa"
   }
   
-  .activeSites <- read.csv(.fileUrl)[.colNames] |>
+  .activeSites <- utils::read.csv(.fileUrl)[.colNames] |>
     dplyr::filter(status %in% "Approved / Active") |>
     dplyr::mutate(
       status = tolower(status)

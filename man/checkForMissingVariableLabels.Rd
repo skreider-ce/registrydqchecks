@@ -2,7 +2,7 @@
 % Please edit documentation in R/24_checkForMissingVariableLabels.R
 \name{checkForMissingVariableLabels}
 \alias{checkForMissingVariableLabels}
-\title{(internal function) Check if any variables have missing labels}
+\title{Check if any variables have missing labels}
 \usage{
 checkForMissingVariableLabels(.dsToCheck)
 }
@@ -13,5 +13,5 @@ checkForMissingVariableLabels(.dsToCheck)
 A list with pass/fail, the number of variables with missing labels, and a list of the variables with missing labels
 }
 \description{
-(internal function) Check if any variables have missing labels
+Check if any variables have missing labels
 }

@@ -5,6 +5,8 @@
 #' @param .codebookVariables The codebook-specific variables needed for this check
 #'
 #' @return Results of the check
+#' 
+#' @importFrom dplyr filter select bind_rows arrange mutate
 runMonthlyMissingnessCheck <- function(.dsToCheck, .compDsToCheck, .codebookVariables){
   
   .nonEssentialVariables <- .codebookVariables |>

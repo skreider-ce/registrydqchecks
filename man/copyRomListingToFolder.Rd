@@ -21,7 +21,7 @@ copyRomListingToFolder(
 \item{.dataPullDate}{A date string of the data pull date in the format YYYY-DD-MM (e.g. "2024-01-10")}
 }
 \value{
-The URL
+The full string URL to the location of the Excel file in the new location
 }
 \description{
 copyRomListingToFolder Copy the CDM/ROM listing to the appropriate folder upon request

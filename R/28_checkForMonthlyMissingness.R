@@ -1,14 +1,12 @@
-#' (internal function) Check the month-to-month missingness for the given items
+#' Check the month-to-month missingness for the given items
 #'
 #' @param .dsToCheck A dataframe to check
 #' @param .compDsToCheck A dataframe to check from last month
 #' @param .listOfEssentialVars A character vector with the variables deemed "essential"
 #'
 #' @returns A list with pass/fail, and a dataframe with the information on the missingness for those variables between the two datasets
-#'
-#' @export
 #' 
-#' @importFrom dplyr bind_rows
+#' @importFrom dplyr bind_rows filter arrange mutate desc
 checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssentialVars){
   
   # Initialize the dataframe that will be returned
@@ -32,7 +30,7 @@ checkForMonthlyMissingness <- function(.dsToCheck, .compDsToCheck, .listOfEssent
   for(.var in .listOfEssentialVars$varName){
     
     .currEssentialVariable <- .listOfEssentialVars |>
-      filter(varName == .var)
+      dplyr::filter(varName == .var)
 
     tryCatch({
       

@@ -10,9 +10,9 @@
 #' 
 #' @return A text string with the URL to the CDM/ROM Excel listing
 #'
-#' @export
-#'
-#' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
+#' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook addStyle freezePane setColWidths createStyle
+#' @importFrom glue glue
+#' @importFrom dplyr mutate across
 outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPullDate, .timestamp, .checksToOutput, .activeSites){
   
   # Create new workbook objects and then print information out to them
@@ -153,7 +153,7 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
       openxlsx::addWorksheet(.wb
                              ,sheetName = .dsName)
       .dsToPrint <- .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing |>
-        dplyr::mutate(across(where(is.list),as.character))
+        dplyr::mutate(dplyr::across(where(is.list),as.character))
       
       openxlsx::writeData(.wb
                           ,sheet = .dsName
@@ -165,7 +165,7 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
                                                       ,"visitdate"
                                                       ,"visitdate0"
                                                       ,.dataPullDate) |>
-          dplyr::mutate(across(where(is.list),as.character))
+          dplyr::mutate(dplyr::across(where(is.list),as.character))
         
         .subsetSiteDataset <- subsetDatasetToActiveSites(
           .dataset = .subsetTimeDataset

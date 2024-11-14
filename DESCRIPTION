@@ -24,5 +24,4 @@ Imports:
     ,stats
     ,stringr
     ,tibble
-    ,remotes
-    ,renv
+    ,utils

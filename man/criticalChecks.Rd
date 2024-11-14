@@ -2,7 +2,7 @@
 % Please edit documentation in R/20_criticalChecks.R
 \name{criticalChecks}
 \alias{criticalChecks}
-\title{(internal function) Run the critical checks on the specified files}
+\title{Run the critical checks on the specified files}
 \usage{
 criticalChecks(
   .dsToCheck,
@@ -33,5 +33,5 @@ criticalChecks(
 A list with the results of the critical checks
 }
 \description{
-(internal function) Run the critical checks on the specified files
+Run the critical checks on the specified files
 }

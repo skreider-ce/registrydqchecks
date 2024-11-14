@@ -1,15 +1,11 @@
-#' (internal function) Check if any variables have unexpected types
+#' Check if any variables have unexpected types
 #'
 #' @param .dsToCheck A dataframe to check
 #' @param .codebookVariables The codebook variables for this specific check 
 #' 
 #' @returns A list with pass/fail, the number of variables with unexpected types, and a list of the variables with unexpected types
-#'
-#' @export
 #' 
-#' @importFrom dplyr filter
-#' @importFrom dplyr select
-#' @importFrom dplyr bind_rows
+#' @importFrom dplyr filter select bind_rows
 #' @importFrom tibble tibble
 checkForVariableTypes <- function(.dsToCheck
                                   ,.codebookVariables){

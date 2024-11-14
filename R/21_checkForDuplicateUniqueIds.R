@@ -1,11 +1,9 @@
-#' (internal function) Check for duplicate unique IDs in a given dataset
+#' Check for duplicate unique IDs in a given dataset
 #'
 #' @param .dsToCheck A dataframe of the dataset to check
 #' @param .uniqueKey A character vector that contains the names of the unique keys
 #'
 #' @returns A list with pass/fail, number of duplicate rows, and a list of ids that are duplicates
-#'
-#' @export
 #' 
 #' @importFrom dplyr count syms filter n
 checkForDuplicateUniqueIds <- function(.dsToCheck,.uniqueKey){
@@ -14,7 +12,7 @@ checkForDuplicateUniqueIds <- function(.dsToCheck,.uniqueKey){
   .duplicateUniqueIds <-
     .dsToCheck |>
       dplyr::count(!!!dplyr::syms(.uniqueKey)) |>
-    dplyr::filter(n > 1)
+    dplyr::filter(dplyr::n > 1)
 
   # Define output list structure
   .returnOutput <- list(

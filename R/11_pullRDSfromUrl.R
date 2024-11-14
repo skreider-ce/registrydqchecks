@@ -7,8 +7,12 @@
 #' @export
 pullRDSfromUrl <- function(.datasetUrl){
   
+  # Print url where the dataset is pulled from
   print(.datasetUrl)
+  
+  # Read in the R dataset file
   .ds <- readRDS(.datasetUrl)
   
+  # Return the file
   return(.ds)
 }

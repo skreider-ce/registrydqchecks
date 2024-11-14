@@ -6,6 +6,9 @@
 #' @param .uniqueKeys The unique keys for the dataset being checked
 #'
 #' @return The results of the numeric range and categorical value checks
+#' 
+#' @importFrom dplyr bind_rows arrange relocate last_col
+#' @importFrom glue glue
 runRangeAndValueChecks <- function(.dsName
                                    ,.dsToCheck
                                    ,.codebookVariables
