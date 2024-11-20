@@ -11,10 +11,10 @@
 
 # checks <- readRDS("C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad_2024-10-01_2024-10-16_1602_checks.rds")
 # manualNcChecks <- checks$nonCriticalChecks
-
-# MUST SYNC THIS FOLDER
-#   ADD THIS URL TO config.R files
-#   DIRECT URL TO site_data_clean.csv CSV FILE
+# 
+# # MUST SYNC THIS FOLDER
+# #   ADD THIS URL TO config.R files
+# #   DIRECT URL TO site_data_clean.csv CSV FILE
 # .configSiteInfoUrl <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - Site and Provider Data/data/site_data_clean.csv"
 # romOutputFolder <- "C:/Users/ScottKreider/Documents/scrap/exampleRomOutputFolder/"
 # 
@@ -50,6 +50,7 @@
 # #   ADD THIS URL TO config.R files
 # #   DIRECT URL TO site_data_clean.csv CSV FILE
 # .configSiteInfoUrl <- "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - Site and Provider Data/data/site_data_clean.csv"
+# romOutputFolder <- "C:/Users/ScottKreider/Documents/scrap/exampleRomOutputFolder/"
 # 
 # validateCodebook(codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AA/monthly/2024/2024-09-05/Analytic Data/AA_codebook_2024-09-05.xlsx"
 #                   ,datasetNames = c("AA_visits", "AA_drugevents", "AA_labimg"))
@@ -63,8 +64,9 @@
 #                   ,.lastMonthDataPullDate = "2024-08-05"
 #                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AA/monthly/2024/2024-09-05/Analytic Data/AA_codebook_2024-09-05.xlsx"
 #                   ,.siteInfoUrl = .configSiteInfoUrl
+#                   ,.cdmRomReportUrl = romOutputFolder
 #                   ,.datasetsToCheck = c("AA_visits", "AA_drugevents", "AA_labimg")
-#                   ,.nonCriticalChecks = manualNcChecks
+#                   ,.nonCriticalChecks = NULL
 #                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/aa/"
 #                   ,.isR = TRUE)
 
@@ -89,6 +91,7 @@
 #                   ,.lastMonthDataPullDate = "2024-08-01"
 #                   ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - NMO/monthly/2024/2024-09-01/Analytic Data/NMO_codebook_2024-09-01.xlsx"
 #                   ,.siteInfoUrl = .configSiteInfoUrl
+#                   ,.cdmRomReportUrl = romOutputFolder
 #                   ,.datasetsToCheck = c("exvisit")
 #                   ,.nonCriticalChecks = NULL
 #                   ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/nmo/"

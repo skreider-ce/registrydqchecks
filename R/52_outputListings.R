@@ -15,6 +15,10 @@
 #' @importFrom dplyr mutate across
 outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPullDate, .timestamp, .checksToOutput, .activeSites){
   
+  # Define top and bottom borders to delimit check sections of output
+  topBorderStyle <- openxlsx::createStyle(border = "top", borderStyle = "thick", borderColour = "black")
+  bottomBorderStyle <- openxlsx::createStyle(border = "bottom", borderStyle = "thick", borderColour = "black")
+  
   # Create new workbook objects and then print information out to them
   #   For critical checks and non critical checks
   
@@ -182,11 +186,15 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
 
         if(nrow(.subsetCalculatedVariableDataset) > 0){
 
+          openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkId, startCol = 7, startRow = currentRow)
+          currentRow <- currentRow + 1
           openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkTitle, startCol = 7, startRow = currentRow)
           currentRow <- currentRow + 1
           openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkDescription, startCol = 7, startRow = currentRow)
           currentRow <- currentRow + 1
+          openxlsx::addStyle(.wbLong, "qualityChecks", style = topBorderStyle, rows = currentRow, cols = 1:30)
           openxlsx::writeData(.wbLong, "qualityChecks", .subsetCalculatedVariableDataset, startCol = 7, startRow = currentRow)
+          openxlsx::addStyle(.wbLong, "qualityChecks", style = bottomBorderStyle, rows = currentRow + nrow(.subsetCalculatedVariableDataset), cols = 1:30)
           currentRow <- currentRow + nrow(.subsetCalculatedVariableDataset) + 2                  
         }
       }
@@ -225,11 +233,15 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
           # .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing
           
           if(nrow(.subsetSiteDataset) > 0){
+            openxlsx::writeData(.wbLong, "qualityChecks", .ncCheckName, startCol = 7, startRow = currentRow)
+            currentRow <- currentRow + 1
             openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkTitle, startCol = 7, startRow = currentRow)
             currentRow <- currentRow + 1
             openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkDescription, startCol = 7, startRow = currentRow)
             currentRow <- currentRow + 1
+            openxlsx::addStyle(.wbLong, "qualityChecks", style = topBorderStyle, rows = currentRow, cols = 1:30)
             openxlsx::writeData(.wbLong, "qualityChecks", .subsetSiteDataset, startCol = 7, startRow = currentRow)
+            openxlsx::addStyle(.wbLong, "qualityChecks", style = bottomBorderStyle, rows = currentRow + nrow(.subsetSiteDataset), cols = 1:30)
             currentRow <- currentRow + nrow(.subsetSiteDataset) + 2
           }
         }
