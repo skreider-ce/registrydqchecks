@@ -12,7 +12,7 @@ checkForDuplicateUniqueIds <- function(.dsToCheck,.uniqueKey){
   .duplicateUniqueIds <-
     .dsToCheck |>
       dplyr::count(!!!dplyr::syms(.uniqueKey)) |>
-    dplyr::filter(dplyr::n > 1)
+    dplyr::filter(n > 1)
 
   # Define output list structure
   .returnOutput <- list(

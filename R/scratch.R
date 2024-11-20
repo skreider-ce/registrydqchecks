@@ -28,10 +28,10 @@
 #                                ,.codebookUrl = "C:/Users/ScottKreider/OneD - Corrona LLC/Corrona LLC/Biostat Data Files - AD/monthly/2024/2024-11-05/AD_codebook_2024-11-05.xlsx"
 #                                ,.siteInfoUrl = .configSiteInfoUrl
 #                                ,.cdmRomReportUrl = romOutputFolder
-#                               ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
-#                               ,.nonCriticalChecks = NULL
-#                               ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad/2024/"
-#                               ,.isR = TRUE)
+#                                ,.datasetsToCheck = c("exvisit", "exlab", "exdrugexp")
+#                                ,.nonCriticalChecks = NULL
+#                                ,.outputUrl = "C:/Users/ScottKreider/Documents/scrap/exampleOutput/ad/2024/"
+#                                ,.isR = TRUE)
 # 
 # copyRomListingToFolder(.reportOutputUrl = outputUrl
 #                        ,.romReportUrl = romOutputFolder

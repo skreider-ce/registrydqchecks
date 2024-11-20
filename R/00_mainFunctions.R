@@ -48,6 +48,9 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   .nonCritCheckOutput <- list()
   .ncChecks <- list()
   
+  validateCodebook(codebookUrl = .codebookUrl
+                    ,datasetNames = .datasetsToCheck)
+  
   .activeSites <- pullSiteInfoFromExcelFile(.fileUrl = .siteInfoUrl
                                          ,.registry = .registry)
   
