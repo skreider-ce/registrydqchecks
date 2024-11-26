@@ -15,7 +15,7 @@ checkForRemovedRows <- function(.dsToCheck,.compDsToCheck,.uniqueKey){
   .uniqueKeys <- .uniqueKey
 
   # Create dataframe of rows in .compDsToCheck and not in .dsToCheck
-  .inOldAndNotInNew <- dplyr::anti_join(.compDsToCheck,.dsToCheck,.uniqueKeys)
+  .inOldAndNotInNew <- as.data.frame(dplyr::anti_join(.compDsToCheck,.dsToCheck,.uniqueKeys))
   
   .pctRemoved <- nrow(.inOldAndNotInNew) / nrow(.compDsToCheck)
 
