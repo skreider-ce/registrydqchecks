@@ -15,7 +15,7 @@ checkForRemovedRows <- function(.dsToCheck,.compDsToCheck,.uniqueKey){
   .uniqueKeys <- .uniqueKey
 
   # Create dataframe of rows in .compDsToCheck and not in .dsToCheck
-  .inOldAndNotInNew <- dplyr::anti_join(.compDsToCheck,.dsToCheck,.uniqueKeys)
+  .inOldAndNotInNew <- as.data.frame(dplyr::anti_join(.compDsToCheck,.dsToCheck,.uniqueKeys))
   
   .pctRemoved <- nrow(.inOldAndNotInNew) / nrow(.compDsToCheck)
 
@@ -29,7 +29,7 @@ checkForRemovedRows <- function(.dsToCheck,.compDsToCheck,.uniqueKey){
     ,"threshold" = sprintf("%.2f%%",2)
     ,"pass" = ifelse(.pctRemoved > 0.02, FALSE, TRUE)
     ,"nRemovedRows" = glue::glue("{nrow(.inOldAndNotInNew)} ({sprintf('%.2f%%',.pctRemoved*100)})")
-    ,"inOldAndNotInNew" = .inOldAndNotInNew[,.uniqueKeys]
+    ,"inOldAndNotInNew" = as.data.frame(.inOldAndNotInNew[,.uniqueKeys])
   )
 
   return(.returnOutput)
