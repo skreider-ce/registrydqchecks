@@ -57,3 +57,6 @@ po/*~
 
 # Scratch file
 scrap.R
+
+# Config file
+config.R

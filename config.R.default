@@ -1,0 +1,116 @@
+###
+# Configuration file
+#
+# Create a copy of config.R.default in your BASE project folder
+# Rename it to config.R
+#     (which will be .gitignored - but will still be pulled into the R script for your personal use)
+# Update the links below to your personalized URL routing for Sharepoint to the BASE registry folder
+# NOTE: Ensure that you include a "/" at the end of each URL
+
+.testDataFolderUrl <- list()
+.testLastMonthDataFolderUrl <- list()
+.testDataSetsToCheck <- list()
+.testCodebookUrl <- list()
+.testIsR <- list()
+
+# (if helpful/necessary) Set working directory to BASE project folder
+# setwd("")
+
+.aaUrl <- "/"
+print(glue::glue("AA Folder Url: {.aaUrl}"))
+.testDataFolderUrl[["aa"]] <- glue::glue("{.aaUrl}monthly/{.dataPullYear}/{.dataPullFolderDate}/Analytic Data/")
+.testLastMonthDataFolderUrl[["aa"]] <- glue::glue("{.aaUrl}monthly/{.lastMonthDataPullYear}/{.lastMonthDataPullFolderDate}/Analytic Data/")
+.testDataSetsToCheck[["aa"]] <- c("AA_visits", "AA_drugevents", "AA_labimg")
+.testCodebookUrl[["aa"]] <- glue::glue("{.testDataFolderUrl[['aa']]}AA_codebook_{.dataPullDate}.xlsx")
+.testIsR[["aa"]] <- TRUE
+
+
+.adUrl <- "/"
+print(glue::glue("AD Folder Url: {.adUrl}"))
+.testDataFolderUrl[["ad"]] <- glue::glue("{.adUrl}monthly/{.dataPullYear}/{.dataPullFolderDate}/")
+.testLastMonthDataFolderUrl[["ad"]] <- glue::glue("{.adUrl}monthly/{.lastMonthDataPullYear}/{.lastMonthDataPullFolderDate}/")
+.testDataSetsToCheck[["ad"]] <- c("exvisit", "exlab", "exdrugexp")
+.testCodebookUrl[["ad"]] <- glue::glue("{.testDataFolderUrl[['ad']]}AD_codebook_{.dataPullDate}.xlsx")
+.testIsR[["ad"]] <- TRUE
+
+
+.gppUrl <- "/"
+print(glue::glue("GPP Folder Url: {.gppUrl}"))
+.testDataFolderUrl[["gpp"]] <- glue::glue("")
+.testLastMonthDataFolderUrl[["gpp"]] <- glue::glue("")
+.testDataSetsToCheck[["gpp"]] <- c("")
+.testCodebookUrl[["gpp"]] <- glue::glue("")
+.testIsR[["gpp"]] <- TRUE
+
+
+.ibdUrl <- "/"
+print(glue::glue("IBD Folder Url: {.ibdUrl}"))
+.testDataFolderUrl[["ibd"]] <- glue::glue("{.ibdUrl}monthly/{.dataPullYear}/{.dataPullFolderDate}/Analytic Data/")
+.testLastMonthDataFolderUrl[["ibd"]] <- glue::glue("{.ibdUrl}monthly/{.lastMonthDataPullYear}/{.lastMonthDataPullFolderDate}/Analytic Data/")
+.testDataSetsToCheck[["ibd"]] <- c("IBD_Analytic_file")
+.testCodebookUrl[["ibd"]] <- glue::glue("{.testDataFolderUrl[['ibd']]}IBD_codebook_{.dataPullDate}.xlsx")
+.testIsR[["ibd"]] <- TRUE
+
+
+.msUrl <- "/"
+print(glue::glue("MS Folder Url: {.msUrl}"))
+.testDataFolderUrl[["ms"]] <- glue::glue("{.msUrl}monthly/{.dataPullYear}/{.dataPullFolderDate}/final/")
+.testLastMonthDataFolderUrl[["ms"]] <- glue::glue("{.msUrl}monthly/{.lastMonthDataPullYear}/{.lastMonthDataPullFolderDate}/final/")
+.testDataSetsToCheck[["ms"]] <- c("ms_dwsub1")
+.testCodebookUrl[["ms"]] <- glue::glue("{.msUrl}Documentation/Codebook/ms_codebook.xlsx")
+.testIsR[["ms"]] <- FALSE
+
+
+.nmoUrl <- "/"
+print(glue::glue("NMO Folder Url: {.nmoUrl}"))
+.testDataFolderUrl[["nmo"]] <- glue::glue("{.nmoUrl}monthly/{.dataPullYear}/{.dataPullFolderDate}/Analytic Data/")
+.testLastMonthDataFolderUrl[["nmo"]] <- glue::glue("{.nmoUrl}monthly/{.lastMonthDataPullYear}/{.lastMonthDataPullFolderDate}/Analytic Data/")
+.testDataSetsToCheck[["nmo"]] <- c("exvisit", "exlab", "exdrugexp")
+.testCodebookUrl[["nmo"]] <- glue::glue("{.testDataFolderUrl[['nmo']]}NMO_codebook_{.dataPullDate}.xlsx")
+.testIsR[["nmo"]] <- TRUE
+
+
+.psaUrl <- "/"
+print(glue::glue("PsA Folder Url: {.psaUrl}"))
+.testDataFolderUrl[["psa"]] <- glue::glue("")
+.testLastMonthDataFolderUrl[["psa"]] <- glue::glue("")
+.testDataSetsToCheck[["psa"]] <- c("")
+.testCodebookUrl[["psa"]] <- glue::glue("")
+.testIsR[["psa"]] <- TRUE
+
+
+.psoUrl <- "/"
+print(glue::glue("PsO Folder Url: {.psoUrl}"))
+.testDataFolderUrl[["pso"]] <- glue::glue("{.psoUrl}monthly/{.dataPullYear}/{.dataPullFolderDate}/")
+.testLastMonthDataFolderUrl[["pso"]] <- glue::glue("{.psoUrl}monthly/{.lastMonthDataPullYear}/{.lastMonthDataPullFolderDate}/")
+.testDataSetsToCheck[["pso"]] <- c("EN", "exvisit", "LABS", "exinstances", "exdrugexp")
+.testCodebookUrl[["pso"]] <- glue::glue("{.psoUrl}documentation/Codebook_in_progress/PsO Codebook_visits.xlsx")
+.testIsR[["pso"]] <- FALSE
+
+
+.raUrl <- "/"
+print(glue::glue("RA Folder Url: {.raUrl}"))
+.testDataFolderUrl[["ra"]] <- glue::glue("{.raUrl}monthly/{.dataPullYear}/{.dataPullFolderDate}/")
+.testLastMonthDataFolderUrl[["ra"]] <- glue::glue("{.raUrl}monthly/{.lastMonthDataPullYear}/{.lastMonthDataPullFolderDate}/")
+.testDataSetsToCheck[["ra"]] <- c("2_3_keyvisitvars", "2_1_drugexpdetails")
+.testCodebookUrl[["ra"]] <- glue::glue("{.testDataFolderUrl[['ra']]}RA_codebook_{.dataPullDate}.xlsx")
+.testIsR[["ra"]] <- FALSE
+
+
+.rajUrl <- "/"
+print(glue::glue("RAJ Folder Url: {.rajUrl}"))
+.testDataFolderUrl[["raj"]] <- glue::glue("{.rajUrl}monthly/{.dataPullYear}/{.dataPullFolderDate}/Analytical_Data/")
+.testLastMonthDataFolderUrl[["raj"]] <- glue::glue("{.rajUrl}monthly/{.lastMonthDataPullYear}/{.lastMonthDataPullFolderDate}/Analytical_Data/")
+.testDataSetsToCheck[["raj"]] <- c("R_RA_Japan_analytic_file")
+.testCodebookUrl[["raj"]] <- glue::glue("{.testDataFolderUrl[['raj']]}RA_Japan_codebook_{.dataPullDate}.xlsx")
+.testIsR[["raj"]] <- TRUE
+
+
+.reportOutputUrl <- "/"
+print(glue::glue("Report Output Url: {.reportOutputUrl}"))
+
+.configSiteInfoUrl <- "/"
+print(glue::glue("Site Info Url: {.configSiteInfoUrl}"))
+
+.exampleRomOutputFolder <- "/"
+print(glue::glue("ROM Output Folder: {.exampleRomOutputFolder}"))
