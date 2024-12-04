@@ -60,13 +60,15 @@ check_missing_variables <- function(sheet_data, expectedVariables) {
 #' @param var_name The variable name to check
 #' @param valid_values The valid values of the given variable
 #' @param condition_desc Description of the condition to print to the log
+#' 
+#' @importFrom stats complete.cases
 check_variable_conditions <- function(sheet_data, var_name, valid_values, condition_desc) {
   
   if (var_name %in% colnames(sheet_data) && "Analytic Variable name" %in% colnames(sheet_data)) {
     
     invalid_values <- sheet_data[!(sheet_data[[var_name]] %in% valid_values), 
                                  c("Analytic Variable name", var_name)]
-    invalid_values <- invalid_values[complete.cases(invalid_values), ] # Remove NA rows
+    invalid_values <- invalid_values[stats::complete.cases(invalid_values), ] # Remove NA rows
     
     if (nrow(invalid_values) > 0) {
       cat("  Invalid", condition_desc, "values found for:\n")
@@ -84,6 +86,8 @@ check_variable_conditions <- function(sheet_data, var_name, valid_values, condit
 #' @param min_val Minimum value of that variable
 #' @param max_val Maximum value of that variable
 #' @param condition_desc Description to print to the log if check does not pass
+#' 
+#' @importFrom stats complete.cases
 check_numeric_range <- function(sheet_data, var_name, min_val, max_val, condition_desc) {
   
   if (var_name %in% colnames(sheet_data) && "Analytic Variable name" %in% colnames(sheet_data)) {
@@ -91,7 +95,7 @@ check_numeric_range <- function(sheet_data, var_name, min_val, max_val, conditio
     invalid_values <- sheet_data[!(is.na(sheet_data[[var_name]]) |
                                      (sheet_data[[var_name]] >= min_val & sheet_data[[var_name]] <= max_val)), 
                                  c("Analytic Variable name", var_name)]
-    invalid_values <- invalid_values[complete.cases(invalid_values), ] # Remove NA rows
+    invalid_values <- invalid_values[stats::complete.cases(invalid_values), ] # Remove NA rows
     
     if (nrow(invalid_values) > 0) {
       cat("  Invalid", condition_desc, "values found for:\n")
@@ -105,6 +109,8 @@ check_numeric_range <- function(sheet_data, var_name, min_val, max_val, conditio
 #' check_missingness_threshold_multiplier Check that missingnessThresholdMultiplier is a non-negative number (or missing)
 #'
 #' @param sheet_data Data from the specific sheet in the codebook 
+#' 
+#' @importFrom stats complete.cases
 check_missingness_threshold_multiplier <- function(sheet_data) {
   
   if ("missingnessThresholdMultiplier" %in% colnames(sheet_data) && "Analytic Variable name" %in% colnames(sheet_data)) {
@@ -112,7 +118,7 @@ check_missingness_threshold_multiplier <- function(sheet_data) {
     invalid_values <- sheet_data[!(is.na(sheet_data$missingnessThresholdMultiplier) |
                                      sheet_data$missingnessThresholdMultiplier > 0), 
                                  c("Analytic Variable name", "missingnessThresholdMultiplier")]
-    invalid_values <- invalid_values[complete.cases(invalid_values), ] # Remove NA rows
+    invalid_values <- invalid_values[stats::complete.cases(invalid_values), ] # Remove NA rows
     
     if (nrow(invalid_values) > 0) {
       cat("  Invalid 'missingnessThresholdMultiplier' values found for:\n")
@@ -126,6 +132,8 @@ check_missingness_threshold_multiplier <- function(sheet_data) {
 #' check_numRange Check the format and validity of numRange
 #'
 #' @param sheet_data Data from the specific sheet in the codebook
+#' 
+#' @importFrom stats complete.cases
 check_numRange <- function(sheet_data) {
   
   if ("numRange" %in% colnames(sheet_data) && "Analytic Variable name" %in% colnames(sheet_data)) {
@@ -134,7 +142,7 @@ check_numRange <- function(sheet_data) {
     invalid_numRange <- sheet_data[!(numRange == "" |
                                        grepl("^\\[\\s*\\d+(\\.\\d+)?\\s*,\\s*\\d+(\\.\\d+)?\\s*\\]$", numRange)), 
                                    c("Analytic Variable name", "numRange")]
-    invalid_numRange <- invalid_numRange[complete.cases(invalid_numRange), ] # Remove NA rows
+    invalid_numRange <- invalid_numRange[stats::complete.cases(invalid_numRange), ] # Remove NA rows
     
     if (nrow(invalid_numRange) > 0) {
       cat("  Invalid 'numRange' values found for:\n")
