@@ -10,7 +10,7 @@
 #' @importFrom glue glue
 #' 
 #' @export
-copyRomListingToFolder <- function(.reportOutputUrl, .romReportUrl, .registry, .dataPullDate){
+copyRomListingToFolder <- function(.reportOutputUrl, .romReportUrl, .registry, .dataPullDate, .overwrite = FALSE){
   
   # Define URL string to location of Excel listing for this month
   .folderUrl <- glue::glue("{.reportOutputUrl}listing/")
@@ -29,7 +29,12 @@ copyRomListingToFolder <- function(.reportOutputUrl, .romReportUrl, .registry, .
   createDataStoreFolder(.fileLocation)
   
   # Copy the file to the folder
-  file.copy(.targetFile,.fileLocation)
+  if(!.overwrite){
+    message("\nFile was not overwritten. If you would like to overwrite the file - change the .overwrite parameter to TRUE")
+  } else{
+    message("\nFile was overwritten.")
+  }
+  file.copy(.targetFile,.fileLocation, overwrite = .overwrite)
   
   # Return the full string URL to the file
   return(.targetFile)

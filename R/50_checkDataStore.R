@@ -79,7 +79,7 @@ submitToDataStore <- function(.registry
     suppressWarnings({
       perpetuateExcelComments(
         .lastMonthCheckExcelFileUrl = lastMonthExcelUrl
-          ,.thisMonthCheckExcelFileUrl = thisMonthRomReportUrl
+        ,.thisMonthCheckExcelFileUrl = thisMonthRomReportUrl
       )
     })
   } else{
