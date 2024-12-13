@@ -25,17 +25,26 @@ copyRomListingToFolder <- function(.reportOutputUrl, .romReportUrl, .registry, .
   
   # Define URL string to location of where to copy the Excel listing to
   .fileLocation <- glue::glue("{.romReportUrl}/{.registry}/{format(as.Date(.dataPullDate), '%Y')}/{format(as.Date(.dataPullDate), '%Y-%m')}/")
-  
+  .locFiles <- list.files(.fileLocation)
+  .existingFile <- length(grep("allDqChecks", .locFiles, ignore.case = TRUE, value = TRUE))
+
   # Create folder if it does not alread exist
   createDataStoreFolder(.fileLocation)
   
   # Copy the file to the folder
-  if(!.overwrite){
-    message("\nFile was not overwritten. If you would like to overwrite the file - change the .overwrite parameter to TRUE")
+  if(.existingFile == 0){
+    file.copy(.targetFile,.fileLocation, overwrite = .overwrite)
+    message("\nFile copied successfully.")
   } else{
-    message("\nFile was overwritten.")
+    if(!.overwrite){
+      message("\nFile was not overwritten. If you would like to overwrite the file - change the .overwrite parameter to TRUE")
+    } else{
+      message("\nFile was overwritten.")
+    }
+    file.copy(.targetFile,.fileLocation, overwrite = .overwrite)
   }
-  file.copy(.targetFile,.fileLocation, overwrite = .overwrite)
+
+
   
   # Return the full string URL to the file
   return(.targetFile)
