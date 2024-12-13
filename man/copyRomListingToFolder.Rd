@@ -8,7 +8,8 @@ copyRomListingToFolder(
   .reportOutputUrl,
   .romReportUrl,
   .registry,
-  .dataPullDate
+  .dataPullDate,
+  .overwrite = FALSE
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ copyRomListingToFolder(
 \item{.registry}{A text string with the initials of the specific registry ("ad", "ms", "raj", "aa", "pso", "ibd", "nmo")}
 
 \item{.dataPullDate}{A date string of the data pull date in the format YYYY-DD-MM (e.g. "2024-01-10")}
+
+\item{.overwrite}{Whether or not to overwrite the currently existing report in the CDM/ROM folder (DEFAULT = FALSE)}
 }
 \value{
 The full string URL to the location of the Excel file in the new location
