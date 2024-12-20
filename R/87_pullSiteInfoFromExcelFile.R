@@ -7,7 +7,7 @@
 #'
 #' @export
 #' 
-#' @importFrom dplyr filter mutate select
+#' @importFrom dplyr filter mutate select distinct
 #' @importFrom utils read.csv
 pullSiteInfoFromExcelFile <- function(.fileUrl,.registry){
   print(glue::glue("Location of site information: {.fileUrl}"))

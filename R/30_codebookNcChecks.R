@@ -13,8 +13,6 @@ codebookNcChecks <- function(.dsName
                              ,.codebookVariables
                              ,.uniqueKeys){
 
-  # varName, essential, acceptableMissingness, missingnessThresholdMultiplier, skipLogic, catValues, numRange
-  
   .ncCheck1 <- runRangeAndValueChecks(.dsName = .dsName
                                       ,.dsToCheck = .dsToCheck
                                       ,.codebookVariables = .codebookVariables

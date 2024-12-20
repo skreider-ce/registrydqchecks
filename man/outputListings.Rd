@@ -29,6 +29,9 @@ outputListings(
 
 \item{.activeSites}{Information on the list of active sites for this registry}
 }
+\value{
+A text string with the URL to the CDM/ROM Excel listing
+}
 \description{
 Output specified listings in xlsx format for further review
 }

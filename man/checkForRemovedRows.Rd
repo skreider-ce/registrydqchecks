@@ -2,7 +2,7 @@
 % Please edit documentation in R/26_checkForRemovedRows.R
 \name{checkForRemovedRows}
 \alias{checkForRemovedRows}
-\title{(internal function) Check for rows that were in last months dataset but are not in this month}
+\title{Check for rows that were in last months dataset but are not in this month}
 \usage{
 checkForRemovedRows(.dsToCheck, .compDsToCheck, .uniqueKey)
 }
@@ -17,5 +17,5 @@ checkForRemovedRows(.dsToCheck, .compDsToCheck, .uniqueKey)
 A list with pass/fail, number of removed rows, and a listing of unique keys that were removed
 }
 \description{
-(internal function) Check for rows that were in last months dataset but are not in this month
+Check for rows that were in last months dataset but are not in this month
 }

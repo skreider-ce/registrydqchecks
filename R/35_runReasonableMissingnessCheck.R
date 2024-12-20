@@ -4,6 +4,8 @@
 #' @param .codebookVariables The codebook variables needed to run this specific check
 #'
 #' @return Results of the check
+#' 
+#' @importFrom dplyr filter select
 runReasonableMissingnessCheck <- function(.dsToCheck, .codebookVariables){
   
   # Subset codebook variables to nonessential variables

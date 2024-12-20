@@ -1,18 +1,18 @@
-#' (internal function) Check that there are no extra variables compared to the variables that should be there
+#' Check that there are no extra variables compared to the variables that should be there
 #'
 #' @param .dsToCheck A dataframe of the dataset to check
 #' @param .listOfSupposedVars A character vector with the names of the variables that should be in the dataset
 #'
 #' @returns A list with pass/fail, the number of extra variables, and a list of the extra variables
 #'
-#' @export
+#' @importFrom dplyr setdiff
 checkForExtraVariables <- function(.dsToCheck, .listOfSupposedVars){
   
   # Get variables names from the dataset to check
   .dsVariables <- names(.dsToCheck)
   
   # Create a list of the variables in supposed vars and not in the dataset
-  .omittedVars <- setdiff(.listOfSupposedVars, .dsVariables)
+  .omittedVars <- dplyr::setdiff(.listOfSupposedVars, .dsVariables)
   
   # Define output list structure
   .returnOutput <- list(

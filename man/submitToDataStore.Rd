@@ -11,7 +11,9 @@ submitToDataStore(
   .folderName,
   .dataStoreUrl,
   .resultsOfChecks,
-  .activeSites
+  .activeSites,
+  .cdmRomReportUrl,
+  .lastMonthDataPullDate
 )
 }
 \arguments{
@@ -28,6 +30,10 @@ submitToDataStore(
 \item{.resultsOfChecks}{A list with the results of the data checks}
 
 \item{.activeSites}{Information on the list of active sites for this registry}
+
+\item{.cdmRomReportUrl}{(FOLDER URL) A url string to the location of the base CDM/ROM Report folder}
+
+\item{.lastMonthDataPullDate}{A date string of last month's data pull date in the format YYYY-DD-MM (e.g. "2023-12-05")}
 }
 \description{
 (internal function) Submit the results of the data quality checks to a set location

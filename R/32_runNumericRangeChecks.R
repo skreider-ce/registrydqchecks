@@ -6,6 +6,8 @@
 #' @param .uniqueKeys The unique keys for the dataset being checked
 #'
 #' @return Results of the check
+#' 
+#' @importFrom dplyr filter select mutate all_of bind_rows
 runNumericRangeChecks <- function(.dsName
                                   ,.dsToCheck
                                   ,.codebookVariables

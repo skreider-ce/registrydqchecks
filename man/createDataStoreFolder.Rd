@@ -2,7 +2,7 @@
 % Please edit documentation in R/51_createDataStoreFolder.R
 \name{createDataStoreFolder}
 \alias{createDataStoreFolder}
-\title{(internal function) Create a new folder at the specified location if it doesn't already exist}
+\title{Create a new folder at the specified location if it doesn't already exist}
 \usage{
 createDataStoreFolder(.urlToCreate)
 }
@@ -10,5 +10,5 @@ createDataStoreFolder(.urlToCreate)
 \item{.urlToCreate}{A url string to the folder to be created}
 }
 \description{
-(internal function) Create a new folder at the specified location if it doesn't already exist
+Create a new folder at the specified location if it doesn't already exist
 }

@@ -1,10 +1,10 @@
 #' generateCriticalCheckSummary
 #'
 #' @param .criticalChecksToSummarize The critical checks to be summarized in the appropriate CE DQ format
-#' 
-#' @importFrom stats setNames
 #'
 #' @return Dataframe with a summary of the critical checks for the datasets
+#' 
+#' @importFrom stats setNames
 generateCriticalCheckSummary <- function(.criticalChecksToSummarize){
   
   # Initialize the dataframe to store results of the critical check summary
@@ -20,13 +20,13 @@ generateCriticalCheckSummary <- function(.criticalChecksToSummarize){
     for(check in names(.critCheckList)){
       .currCritCheck <- .critCheckList[[check]]
       if(check == "criticalCheck2"){
-        .newSummaryRow = c(.newSummaryRow, setNames(.currCritCheck$nExtraVars,check))
+        .newSummaryRow = c(.newSummaryRow, stats::setNames(.currCritCheck$nExtraVars,check))
       } else if(check == "criticalCheck3") {
-        .newSummaryRow = c(.newSummaryRow, setNames(.currCritCheck$nOmittedVars,check))
+        .newSummaryRow = c(.newSummaryRow, stats::setNames(.currCritCheck$nOmittedVars,check))
       } else if(is.null(.currCritCheck)){
-        .newSummaryRow = c(.newSummaryRow, setNames(NA, check))
+        .newSummaryRow = c(.newSummaryRow, stats::setNames(NA, check))
       } else {
-        .newSummaryRow = c(.newSummaryRow, setNames(ifelse(.currCritCheck$pass, "Pass", "Fail"),check))
+        .newSummaryRow = c(.newSummaryRow, stats::setNames(ifelse(.currCritCheck$pass, "Pass", "Fail"),check))
       }
     }
 

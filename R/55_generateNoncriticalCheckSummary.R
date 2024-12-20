@@ -2,9 +2,9 @@
 #'
 #' @param .nonCriticalChecksToSummarize The noncritical checks to be summarized in the appropriate CE DQ format
 #'
-#' @importFrom stats setNames
-#'
 #' @return Dataframe with a summary of the critical checks for the datasets
+#'
+#' @importFrom stats setNames
 generateNoncriticalCheckSummary <- function(.nonCriticalChecksToSummarize){
   
   # Initialize the dataframe to store results of the noncritical check summary

@@ -8,6 +8,7 @@
 #' @export
 #' 
 #' @importFrom janitor clean_names
+#' @importFrom glue glue
 pullData <- function(.datasetUrl,.isR = TRUE){
   
   # Check if .isR is TRUE or FALSE and call the appropriate function accordingly
@@ -18,8 +19,5 @@ pullData <- function(.datasetUrl,.isR = TRUE){
     .pulledDataset <- pullDTAfromUrl(.datasetUrl = glue::glue("{.datasetUrl}.dta"))
   }
 
-  # Clean the variable names in the dataset for use in upcoming steps
-  # .pulledDataset <- janitor::clean_names(.pulledDataset)
-  
   return(.pulledDataset);
 }

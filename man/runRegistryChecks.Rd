@@ -12,6 +12,7 @@ runRegistryChecks(
   .lastMonthDataPullDate,
   .codebookUrl,
   .siteInfoUrl = NULL,
+  .cdmRomReportUrl,
   .datasetsToCheck,
   .nonCriticalChecks = NULL,
   .outputUrl,
@@ -32,6 +33,8 @@ runRegistryChecks(
 \item{.codebookUrl}{(FILE URL - .XLSX) A url string to the registry-specific codebook FILE (MUST BE DIRECTLY TO THE .XLSX FILE)}
 
 \item{.siteInfoUrl}{(FILE URL - .CSV) A Url to the FILE for site/provider data (MUST BE DIRECTLY TO THE site_data_clean.csv FILE)}
+
+\item{.cdmRomReportUrl}{(FOLDER URL) A url string to the location of the base CDM/ROM Report folder}
 
 \item{.datasetsToCheck}{A string vector with the names of the datasets to be checked (e.g. c("exvisit", "exlab", "exdrugexp")) - NOTE: These must perfectly match both the tab names in the codebook AND the names of the datasets being checked}
 

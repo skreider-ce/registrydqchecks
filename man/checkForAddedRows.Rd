@@ -2,7 +2,7 @@
 % Please edit documentation in R/25_checkForAddedRows.R
 \name{checkForAddedRows}
 \alias{checkForAddedRows}
-\title{(internal function) Check for how many rows were added to the dataset compared to last month}
+\title{Check for how many rows were added to the dataset compared to last month}
 \usage{
 checkForAddedRows(.dsToCheck, .compDsToCheck)
 }
@@ -15,5 +15,5 @@ checkForAddedRows(.dsToCheck, .compDsToCheck)
 A list with pass/fail, number of rows added, number of old rows, and the proportion increase in rows
 }
 \description{
-(internal function) Check for how many rows were added to the dataset compared to last month
+Check for how many rows were added to the dataset compared to last month
 }

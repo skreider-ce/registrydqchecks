@@ -2,7 +2,7 @@
 % Please edit documentation in R/27_checkForGivenItemsNonresponse.R
 \name{checkForGivenItemsNonresponse}
 \alias{checkForGivenItemsNonresponse}
-\title{(internal function) Check the missingness for the given items}
+\title{Check the missingness for the given items}
 \usage{
 checkForGivenItemsNonresponse(.dsToCheck, .listOfEssentialVars)
 }
@@ -15,5 +15,5 @@ checkForGivenItemsNonresponse(.dsToCheck, .listOfEssentialVars)
 A list with pass/fail, and a dataframe with the information on the missingness for those variables
 }
 \description{
-(internal function) Check the missingness for the given items
+Check the missingness for the given items
 }

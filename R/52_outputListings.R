@@ -7,11 +7,17 @@
 #' @param .yearMonthTimestamp The year and month of the current datapull
 #' @param .dataPullDate The YYYY-MM-DD of the current datapull
 #' @param .activeSites Information on the list of active sites for this registry
+#' 
+#' @return A text string with the URL to the CDM/ROM Excel listing
 #'
-#' @export
-#'
-#' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
+#' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook addStyle freezePane setColWidths createStyle
+#' @importFrom glue glue
+#' @importFrom dplyr mutate across
 outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPullDate, .timestamp, .checksToOutput, .activeSites){
+  
+  # Define top and bottom borders to delimit check sections of output
+  topBorderStyle <- openxlsx::createStyle(border = "top", borderStyle = "thick", borderColour = "black")
+  bottomBorderStyle <- openxlsx::createStyle(border = "bottom", borderStyle = "thick", borderColour = "black")
   
   # Create new workbook objects and then print information out to them
   #   For critical checks and non critical checks
@@ -151,7 +157,7 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
       openxlsx::addWorksheet(.wb
                              ,sheetName = .dsName)
       .dsToPrint <- .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing |>
-        dplyr::mutate(across(where(is.list),as.character))
+        dplyr::mutate(dplyr::across(where(is.list),as.character))
       
       openxlsx::writeData(.wb
                           ,sheet = .dsName
@@ -163,7 +169,7 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
                                                       ,"visitdate"
                                                       ,"visitdate0"
                                                       ,.dataPullDate) |>
-          dplyr::mutate(across(where(is.list),as.character))
+          dplyr::mutate(dplyr::across(where(is.list),as.character))
         
         .subsetSiteDataset <- subsetDatasetToActiveSites(
           .dataset = .subsetTimeDataset
@@ -180,11 +186,18 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
 
         if(nrow(.subsetCalculatedVariableDataset) > 0){
 
-          openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkTitle, startCol = 1, startRow = currentRow)
+          .checkName = .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkId
+          .checkDsName = glue::glue("{.checkName}_{.dsName}")
+          openxlsx::writeData(.wbLong, "qualityChecks", c(.checkDsName), startCol = 8, startRow = currentRow)
           currentRow <- currentRow + 1
-          openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkDescription, startCol = 1, startRow = currentRow)
+          openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkTitle, startCol = 8, startRow = currentRow)
           currentRow <- currentRow + 1
-          openxlsx::writeData(.wbLong, "qualityChecks", .subsetCalculatedVariableDataset, startCol = 1, startRow = currentRow)
+          openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$checkDescription, startCol = 8, startRow = currentRow)
+          currentRow <- currentRow + 1
+          openxlsx::addStyle(.wbLong, "qualityChecks", style = topBorderStyle, rows = currentRow, cols = 1:30)
+          openxlsx::writeData(.wbLong, "qualityChecks", .subsetCalculatedVariableDataset, startCol = 7, startRow = currentRow)
+          currentRow <- currentRow + 1
+          openxlsx::addStyle(.wbLong, "qualityChecks", style = bottomBorderStyle, rows = currentRow + nrow(.subsetCalculatedVariableDataset), cols = 1:30)
           currentRow <- currentRow + nrow(.subsetCalculatedVariableDataset) + 2                  
         }
       }
@@ -223,11 +236,16 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
           # .subsetTimeDataset <- .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$listing
           
           if(nrow(.subsetSiteDataset) > 0){
-            openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkTitle, startCol = 1, startRow = currentRow)
+            openxlsx::writeData(.wbLong, "qualityChecks", .ncCheckName, startCol = 8, startRow = currentRow)
             currentRow <- currentRow + 1
-            openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkDescription, startCol = 1, startRow = currentRow)
+            openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkTitle, startCol = 8, startRow = currentRow)
             currentRow <- currentRow + 1
-            openxlsx::writeData(.wbLong, "qualityChecks", .subsetSiteDataset, startCol = 1, startRow = currentRow)
+            openxlsx::writeData(.wbLong, "qualityChecks", .checksToOutput$nonCriticalChecks[[.dsName]]$nPctList[[.ncCheckName]]$checkDescription, startCol = 8, startRow = currentRow)
+            currentRow <- currentRow + 1
+            openxlsx::addStyle(.wbLong, "qualityChecks", style = topBorderStyle, rows = currentRow, cols = 1:30)
+            openxlsx::writeData(.wbLong, "qualityChecks", .subsetSiteDataset, startCol = 7, startRow = currentRow)
+            currentRow <- currentRow + 1
+            openxlsx::addStyle(.wbLong, "qualityChecks", style = bottomBorderStyle, rows = currentRow + nrow(.subsetSiteDataset), cols = 1:30)
             currentRow <- currentRow + nrow(.subsetSiteDataset) + 2
           }
         }
@@ -240,15 +258,20 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
   }
   
   
+  
   .columnTitles <- as.data.frame(t(c("Investigator", "Date Investigated", "Resolution", "Date Resolved", "Notes")))
   .gray_style <- openxlsx::createStyle(fgFill = "gray")
-  openxlsx::writeData(.wbLong, sheet = "qualityChecks", x = .columnTitles, startCol = 16, colNames = FALSE)
-  openxlsx::addStyle(.wbLong, sheet = "qualityChecks", style = .gray_style, cols = 15, rows = 1:currentRow)
+  .locked_style <- openxlsx::createStyle(locked = TRUE)
+  openxlsx::writeData(.wbLong, sheet = "qualityChecks", x = .columnTitles, startCol = 1, colNames = FALSE)
+  openxlsx::addStyle(.wbLong, sheet = "qualityChecks", style = .gray_style, cols = 6, rows = 1:currentRow)
   openxlsx::freezePane(.wbLong, sheet = "qualityChecks", firstActiveRow = 2)
-  
+  openxlsx::setColWidths(.wbLong, sheet = "qualityChecks", cols = 7, widths = 0)
+
   openxlsx::saveWorkbook(.wbLong
-                         ,file = glue::glue("{.listingUrl}/{.registry}_{.yearMonthTimestamp}_allChecks.xlsx")
+                         ,file = glue::glue("{.listingUrl}/{.registry}_{.yearMonthTimestamp}_allDqChecks.xlsx")
                          ,overwrite = TRUE)
+  
+  return(glue::glue("{.listingUrl}/{.registry}_{.yearMonthTimestamp}_allDqChecks.xlsx"))
 }
 
 
