@@ -5,7 +5,9 @@
 #' @param .uniqueKeys The list of unique keys
 #' @param .dsName The name of the dataset being checked
 #'
-#' @return The results of the check
+#' @returns The results of the check
+#' 
+#' @importFrom dplyr bind_rows
 checkForValidAgeAtEnrollment <- function(.dsName
                                          ,.dsToCheck
                                          ,.codebookVariables

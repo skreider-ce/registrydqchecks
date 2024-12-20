@@ -2,7 +2,7 @@
 % Please edit documentation in R/29_checkForVariableTypes.R
 \name{checkForVariableTypes}
 \alias{checkForVariableTypes}
-\title{(internal function) Check if any variables have unexpected types}
+\title{Check if any variables have unexpected types}
 \usage{
 checkForVariableTypes(.dsToCheck, .codebookVariables)
 }
@@ -15,5 +15,5 @@ checkForVariableTypes(.dsToCheck, .codebookVariables)
 A list with pass/fail, the number of variables with unexpected types, and a list of the variables with unexpected types
 }
 \description{
-(internal function) Check if any variables have unexpected types
+Check if any variables have unexpected types
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/21_checkForDuplicateUniqueIds.R
 \name{checkForDuplicateUniqueIds}
 \alias{checkForDuplicateUniqueIds}
-\title{(internal function) Check for duplicate unique IDs in a given dataset}
+\title{Check for duplicate unique IDs in a given dataset}
 \usage{
 checkForDuplicateUniqueIds(.dsToCheck, .uniqueKey)
 }
@@ -15,5 +15,5 @@ checkForDuplicateUniqueIds(.dsToCheck, .uniqueKey)
 A list with pass/fail, number of duplicate rows, and a list of ids that are duplicates
 }
 \description{
-(internal function) Check for duplicate unique IDs in a given dataset
+Check for duplicate unique IDs in a given dataset
 }

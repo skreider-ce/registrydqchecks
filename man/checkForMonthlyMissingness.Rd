@@ -2,7 +2,7 @@
 % Please edit documentation in R/28_checkForMonthlyMissingness.R
 \name{checkForMonthlyMissingness}
 \alias{checkForMonthlyMissingness}
-\title{(internal function) Check the month-to-month missingness for the given items}
+\title{Check the month-to-month missingness for the given items}
 \usage{
 checkForMonthlyMissingness(.dsToCheck, .compDsToCheck, .listOfEssentialVars)
 }
@@ -17,5 +17,5 @@ checkForMonthlyMissingness(.dsToCheck, .compDsToCheck, .listOfEssentialVars)
 A list with pass/fail, and a dataframe with the information on the missingness for those variables between the two datasets
 }
 \description{
-(internal function) Check the month-to-month missingness for the given items
+Check the month-to-month missingness for the given items
 }

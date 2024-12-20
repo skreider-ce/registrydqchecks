@@ -1,4 +1,4 @@
-#' (internal function) Run the critical checks on the specified files
+#' Run the critical checks on the specified files
 #'
 #' @param .dsToCheck A dataframe of the dataset to run the checks on
 #' @param .compDsToCheck A dataframe of the dataset to compare the above dataset to
@@ -9,8 +9,6 @@
 #' @param .dsName The name of the dataset being checked
 #'
 #' @returns A list with the results of the critical checks
-#'
-#' @export
 criticalChecks <- function(.dsToCheck
                             ,.compDsToCheck
                             ,.listOfEssentialVars
@@ -26,7 +24,7 @@ criticalChecks <- function(.dsToCheck
   .critCheckResults4 <- checkForMissingVariableLabels(.dsToCheck)
   .critCheckResults5 <- checkForAddedRows(.dsToCheck,.compDsToCheck)
   .critCheckResults6 <- checkForRemovedRows(.dsToCheck,.compDsToCheck,.uniqueKeys)
-  
+
   # Checks if a codebook exists and if not then does not run CC 7 and 8
   if(length(.listOfEssentialVars) > 0){
     .critCheckResults7 <- checkForGivenItemsNonresponse(.dsToCheck,.listOfEssentialVars)

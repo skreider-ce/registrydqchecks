@@ -7,11 +7,20 @@
 #' @param .activeSites Information on the list of active sites for this registry
 #' @param .timestamp Timestamp that the checks were run
 #' @param .folderName Name for the folder where results will be output
-#'
-#' @export
+#' @param .cdmRomReportUrl (FOLDER URL) A url string to the location of the base CDM/ROM Report folder
+#' @param .lastMonthDataPullDate A date string of last month's data pull date in the format YYYY-DD-MM (e.g. "2023-12-05")
 #' 
 #' @importFrom glue glue
-submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .folderName, .dataStoreUrl,.resultsOfChecks, .activeSites){
+submitToDataStore <- function(.registry
+                              ,.dsPullDate
+                              ,.timestamp
+                              ,.folderName
+                              ,.dataStoreUrl
+                              ,.resultsOfChecks
+                              ,.activeSites
+                              ,.cdmRomReportUrl
+                              ,.lastMonthDataPullDate
+                              ){
 
   staticDataStoreUrl <- .dataStoreUrl
   
@@ -47,12 +56,33 @@ submitToDataStore <- function(.registry,.dsPullDate,.timestamp, .folderName, .da
   saveRDS(.outputToSave,glue::glue("{.dataStoreUrl}{.folderName}/checks/{.resultsCheckName}.rds"))
   
   # Save the listings as Excel files
-  outputListings(.registry = .registry
-                  ,.listingUrl = glue::glue("{.dataStoreUrl}{.folderName}/listing")
-                  ,.yearMonthTimestamp = format(as.Date(.dsPullDate), "%Y-%m")
-                  ,.dataPullDate = .dsPullDate
-                  ,.timestamp = .timestamp
-                  ,.checksToOutput = .outputToSave
-                  ,.activeSites = .activeSites
-                 )
+  thisMonthRomReportUrl = outputListings(.registry = .registry
+                                          ,.listingUrl = glue::glue("{.dataStoreUrl}{.folderName}/listing")
+                                          ,.yearMonthTimestamp = format(as.Date(.dsPullDate), "%Y-%m")
+                                          ,.dataPullDate = .dsPullDate
+                                          ,.timestamp = .timestamp
+                                          ,.checksToOutput = .outputToSave
+                                          ,.activeSites = .activeSites
+                                         )
+  
+  # Create YM timestamp for last month
+  .lastYearMonthTimestamp = format(as.Date(.lastMonthDataPullDate), "%Y-%m")
+  .lastYear = format(as.Date(.lastMonthDataPullDate), "%Y")
+  
+  # Create allDqChecks Excel file URL to feed into checkPerpetuation
+  lastMonthExcelUrl <- glue::glue("{.cdmRomReportUrl}/{.registry}/{.lastYear}/{.lastYearMonthTimestamp}/{.registry}_{.lastYearMonthTimestamp}_allDqChecks.xlsx")
+
+  
+  # Check if allDqChecks file exists from last month
+  ### IF Exists - perpetuate comments
+  if(file.exists(glue::glue("{lastMonthExcelUrl}"))){
+    suppressWarnings({
+      perpetuateExcelComments(
+        .lastMonthCheckExcelFileUrl = lastMonthExcelUrl
+        ,.thisMonthCheckExcelFileUrl = thisMonthRomReportUrl
+      )
+    })
+  } else{
+    message("NOTE: There is no allDqChecks Excel file from last month - no comments were carried over")
+  }
 }

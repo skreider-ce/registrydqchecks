@@ -2,7 +2,7 @@
 % Please edit documentation in R/23_checkForExtraVariables.R
 \name{checkForExtraVariables}
 \alias{checkForExtraVariables}
-\title{(internal function) Check that there are no extra variables compared to the variables that should be there}
+\title{Check that there are no extra variables compared to the variables that should be there}
 \usage{
 checkForExtraVariables(.dsToCheck, .listOfSupposedVars)
 }
@@ -15,5 +15,5 @@ checkForExtraVariables(.dsToCheck, .listOfSupposedVars)
 A list with pass/fail, the number of extra variables, and a list of the extra variables
 }
 \description{
-(internal function) Check that there are no extra variables compared to the variables that should be there
+Check that there are no extra variables compared to the variables that should be there
 }

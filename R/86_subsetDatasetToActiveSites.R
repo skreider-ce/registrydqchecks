@@ -19,6 +19,12 @@ subsetDatasetToActiveSites <- function(.dataset, .siteVar1, .siteVar2, .activeSi
       ,.dataset
       ,by = .siteVar1
     )
+    
+    if("checkId" %in% names(subset)){
+      subset <- subset |>
+        dplyr::relocate(checkId, .before = 1)
+    }
+    
     message("NOTE: Using ", .siteVar1, " to subset the dataset")
     return(subset)
   } else if (.siteVar2 %in% colnames(.dataset)) {
@@ -32,6 +38,12 @@ subsetDatasetToActiveSites <- function(.dataset, .siteVar1, .siteVar2, .activeSi
       ,.dataset
       ,by = .siteVar2
     )
+    
+    if("checkId" %in% names(subset)){
+      subset <- subset |>
+        dplyr::relocate(checkId, .before = 1)
+    }
+    
     message("NOTE: Using ", .siteVar2, " to subset the dataset")
     return(subset)
   } else {

@@ -2,7 +2,7 @@
 % Please edit documentation in R/22_checkForOmittedVariables.R
 \name{checkForOmittedVariables}
 \alias{checkForOmittedVariables}
-\title{(internal function) Check for variables that have been left out of the comparator list}
+\title{Check for variables that have been left out of the comparator list}
 \usage{
 checkForOmittedVariables(.dsToCheck, .listOfSupposedVars)
 }
@@ -15,5 +15,5 @@ checkForOmittedVariables(.dsToCheck, .listOfSupposedVars)
 A list with pass/fail, the number of omitted variables, and a list of the omitted variables
 }
 \description{
-(internal function) Check for variables that have been left out of the comparator list
+Check for variables that have been left out of the comparator list
 }

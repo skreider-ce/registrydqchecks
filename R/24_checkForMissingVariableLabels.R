@@ -1,10 +1,8 @@
-#' (internal function) Check if any variables have missing labels
+#' Check if any variables have missing labels
 #'
 #' @param .dsToCheck A dataframe to check
 #' 
 #' @returns A list with pass/fail, the number of variables with missing labels, and a list of the variables with missing labels
-#'
-#' @export
 #' 
 #' @importFrom labelled var_label
 #' @importFrom purrr map_lgl

@@ -11,6 +11,7 @@
 #' @param .nonCriticalChecks A list of the manually generated non-critical checks in the CE DQ specified format (see additional documentation)
 #' @param .outputUrl (FOLDER URL) A url string to the location of the output datasets - NOTE: A subfolder will be created here called /checks that will house the results of the checks and will be the location called by the check report
 #' @param .isR A boolean indicating if the datasets being checked are in R or Stata format (e.g. if R then .isR = TRUE; if Stata then .isR = FALSE)
+#' @param .cdmRomReportUrl (FOLDER URL) A url string to the location of the base CDM/ROM Report folder
 #'
 #' @returns A personalized URL to the location of the report
 #'
@@ -28,6 +29,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                               ,.lastMonthDataPullDate
                               ,.codebookUrl
                               ,.siteInfoUrl = NULL
+                              ,.cdmRomReportUrl
                               ,.datasetsToCheck
                               ,.nonCriticalChecks = NULL
                               ,.outputUrl
@@ -45,6 +47,9 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   .codebookNcOutput <- list()
   .nonCritCheckOutput <- list()
   .ncChecks <- list()
+  
+  validateCodebook(codebookUrl = .codebookUrl
+                    ,datasetNames = .datasetsToCheck)
   
   .activeSites <- pullSiteInfoFromExcelFile(.fileUrl = .siteInfoUrl
                                          ,.registry = .registry)
@@ -133,7 +138,10 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                     ,.dataStoreUrl = .outputUrl
                     ,.resultsOfChecks = .checkOutput
                     ,.activeSites = .activeSites
+                    ,.cdmRomReportUrl = .cdmRomReportUrl
+                    ,.lastMonthDataPullDate = .lastMonthDataPullDate
                     )
+  
   rm(.checkOutput)
   # Generate the html report
   registrydqchecksreportdown::generateReport(

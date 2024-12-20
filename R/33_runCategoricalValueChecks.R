@@ -6,6 +6,10 @@
 #' @param .uniqueKeys The unique keys for the dataset
 #'
 #' @return Results of the check
+#' 
+#' @importFrom dplyr filter select mutate all_of bind_rows rename
+#' @importFrom purrr map
+#' @importFrom glue glue
 runCategoricalValueChecks <- function(.dsName
                                       ,.dsToCheck
                                       ,.codebookVariables
