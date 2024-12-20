@@ -35,17 +35,24 @@ copyRomListingToFolder <- function(.reportOutputUrl, .romReportUrl, .registry, .
   if(.existingFile == 0){
     file.copy(.targetFile,.fileLocation, overwrite = .overwrite)
     message("\nFile copied successfully.")
+    cat("Full URL to destination folder:", .fileLocation)
   } else{
     if(!.overwrite){
       message("\nFile was not overwritten. If you would like to overwrite the file - change the .overwrite parameter to TRUE")
     } else{
+      file.copy(.targetFile,.fileLocation, overwrite = .overwrite)
       message("\nFile was overwritten.")
+      cat("Full URL to destination folder:", .fileLocation)
     }
-    file.copy(.targetFile,.fileLocation, overwrite = .overwrite)
   }
 
 
   
-  # Return the full string URL to the file
-  return(.targetFile)
+  # Return the full string URL to the .targetFile and the destination folder
+  invisible(
+    list(
+      "targetFile" = .targetFile
+      ,"destinationFolder" = .fileLocation
+    )
+  )
 }
