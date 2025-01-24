@@ -148,7 +148,11 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
   openxlsx::addWorksheet(.wbLong, "qualityChecks")
   currentRow <- 2
   
-
+  openxlsx::addWorksheet(.wbLong, "supporting_details")
+  dropdown_values <- data.frame(Status = c("Open", "Closed - action taken", "Closed - no action taken"))
+  openxlsx::writeData(.wbLong, "supporting_details", dropdown_values, colNames = FALSE)
+  openxlsx::protectWorksheet(.wbLong, sheet = "supporting_details", protect = TRUE, lockFormattingCells = TRUE)
+  
   # Save the .xlsx listings of codebook checks
 
   for(.ncCheckName in names(.checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks)){
@@ -257,16 +261,52 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
     }
   }
   
-  
+  # Add dropdown menu for Resolution column
+  openxlsx::dataValidation(
+    .wbLong, 
+    sheet = "qualityChecks", 
+    cols = 3, # Column number of "Resolution Status"
+    rows = 2:currentRow, # Rows to apply the dropdown (header row excluded)
+    type = "list", 
+    value = "'supporting_details'!$A$1:$A$3" # Reference the range in the dropdown sheet
+  )
+
+  # Define the valid date range as Date objects
+  start_date <- as.Date("2025-01-01")
+  end_date <- as.Date("2030-12-31")
+  openxlsx::dataValidation(
+    .wbLong, 
+    sheet = "qualityChecks", 
+    cols = c(2, 4), # Column number of "Due Date"
+    rows = 2:currentRow, # Rows to apply the validation (header excluded)
+    type = "date", 
+    operator = "between", # Restrict dates within a range
+    value = c(start_date, end_date), # Date range for validation
+    allowBlank = TRUE
+  )
+  date_style <- openxlsx::createStyle(numFmt = "yyyy-mm-dd") # Set format to YYYY-MM-DD
+  openxlsx::addStyle(
+    .wbLong, 
+    sheet = "qualityChecks", 
+    style = date_style, 
+    cols = c(2, 4), 
+    rows = 2:currentRow, 
+    gridExpand = TRUE,
+    stack = TRUE
+  ) 
+
   
   .columnTitles <- as.data.frame(t(c("Investigator", "Date Investigated", "Resolution", "Date Resolved", "Notes")))
   .gray_style <- openxlsx::createStyle(fgFill = "gray")
   .locked_style <- openxlsx::createStyle(locked = TRUE)
   openxlsx::writeData(.wbLong, sheet = "qualityChecks", x = .columnTitles, startCol = 1, colNames = FALSE)
-  openxlsx::addStyle(.wbLong, sheet = "qualityChecks", style = .gray_style, cols = 6, rows = 1:currentRow)
+  openxlsx::addStyle(.wbLong, sheet = "qualityChecks", style = .gray_style, cols = 6, rows = 1:currentRow, stack = TRUE)
   openxlsx::freezePane(.wbLong, sheet = "qualityChecks", firstActiveRow = 2)
   openxlsx::setColWidths(.wbLong, sheet = "qualityChecks", cols = 7, widths = 0)
 
+
+  
+  
   openxlsx::saveWorkbook(.wbLong
                          ,file = glue::glue("{.listingUrl}/{.registry}_{.yearMonthTimestamp}_allDqChecks.xlsx")
                          ,overwrite = TRUE)
