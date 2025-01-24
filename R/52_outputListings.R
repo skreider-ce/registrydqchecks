@@ -12,7 +12,7 @@
 #'
 #' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook addStyle freezePane setColWidths createStyle
 #' @importFrom glue glue
-#' @importFrom dplyr mutate across
+#' @importFrom dplyr mutate across where
 outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPullDate, .timestamp, .checksToOutput, .activeSites){
   
   # Define top and bottom borders to delimit check sections of output
@@ -161,7 +161,7 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
       openxlsx::addWorksheet(.wb
                              ,sheetName = .dsName)
       .dsToPrint <- .checksToOutput$nonCriticalChecks[[.dsName]]$codebookChecks[[.ncCheckName]]$listing |>
-        dplyr::mutate(dplyr::across(where(is.list),as.character))
+        dplyr::mutate(dplyr::across(dplyr::where(is.list),as.character))
       
       openxlsx::writeData(.wb
                           ,sheet = .dsName
