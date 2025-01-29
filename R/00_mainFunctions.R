@@ -37,15 +37,6 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   
   ############################
   # Initialize variable lists to house information on specific datasets being checked
-  # .codebooks <- list()
-  # .dataToCheck <- list()
-  # .dataToCompare <- list()
-  # .essentialVariables <- list()
-  # .codebookVariables <- list()
-  # .uniqueKeys <- list()
-  
-  
-  
   .critCheckOutput <- list()
   .codebookNcOutput <- list()
   .nonCritCheckOutput <- list()
