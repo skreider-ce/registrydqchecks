@@ -4,7 +4,7 @@
 #' @param .romReportUrl The url to the location for ROM/CDM to view the listing
 #' @param .registry A text string with the initials of the specific registry ("ad", "ms", "raj", "aa", "pso", "ibd", "nmo")
 #' @param .dataPullDate A date string of the data pull date in the format YYYY-DD-MM (e.g. "2024-01-10")
-#' @param .overwrite Whether or not to overwrite the currently existing report in the CDM/ROM folder (DEFAULT = FALSE)
+#' @param .overwrite (OBSOLETE) Whether or not to overwrite the currently existing report in the CDM/ROM folder (DEFAULT = FALSE)
 #'
 #' @return The full string URL to the location of the Excel file in the new location
 #' 
@@ -33,17 +33,14 @@ copyRomListingToFolder <- function(.reportOutputUrl, .romReportUrl, .registry, .
   
   # Copy the file to the folder
   if(.existingFile == 0){
-    file.copy(.targetFile,.fileLocation, overwrite = .overwrite)
+    file.copy(.targetFile,.fileLocation, overwrite = FALSE)
     message("\nFile copied successfully.")
     cat("Full URL to destination folder:", .fileLocation)
   } else{
-    if(!.overwrite){
-      message("\nFile was not overwritten. If you would like to overwrite the file - change the .overwrite parameter to TRUE")
-    } else{
-      file.copy(.targetFile,.fileLocation, overwrite = .overwrite)
-      message("\nFile was overwritten.")
-      cat("Full URL to destination folder:", .fileLocation)
-    }
+    message("\nFile was NOT overwritten.")
+    message("The functionality to automatically OVERWRITE the existing file has been removed.")
+    message("You must review the existing report in the .exampleRomOutputFolder and manually delete it if you wish to re-output and copy over.")
+    message("Do NOT delete or remove an Excel report that has been filled out by members of the CDM/ROM team.")
   }
 
 
