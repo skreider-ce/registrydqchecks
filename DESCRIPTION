@@ -9,7 +9,7 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Remotes:
-    github::skreider-ce/registrydqchecksreportdown
+    github::Corrona-IT/registrydqchecksreportdown
 Imports:
     glue
     ,labelled
