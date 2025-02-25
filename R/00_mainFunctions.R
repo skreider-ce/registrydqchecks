@@ -67,12 +67,12 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
     
     # Pull data to check and data from last month to compare it to
     .dataToCheck[[.dsName]] <- pullData(.datasetUrl = glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}")
-                                        ,.isR) |>
-      cleanUniqueKeyClasses(uniqueKeyVars = .uniqueKeys[[.dsName]])
+                                        ,.isR)
+    # |> cleanUniqueKeyClasses(uniqueKeyVars = .uniqueKeys[[.dsName]])
     
     .dataToCompare[[.dsName]] <- pullData(.datasetUrl = glue::glue("{.lastMonthDataFolderUrl}{.dsName}_{.lastMonthDataPullDate}")
-                                          ,.isR) |>
-      cleanUniqueKeyClasses(uniqueKeyVars = .uniqueKeys[[.dsName]])
+                                          ,.isR)
+    # |> cleanUniqueKeyClasses(uniqueKeyVars = .uniqueKeys[[.dsName]])
     
     # Pull the list of essential variables for the specific dataset from the codebook
     .essentialVariables[[.dsName]] <- .codebooks[[.dsName]] |>
