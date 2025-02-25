@@ -1,13 +1,13 @@
 # # Choose from aa, ad, gpp, ibd, ms, nmo, psa, pso, ra, raj
-# .registryAbbreviation <- "raj"
+# .registryAbbreviation <- "ra"
 # 
-# .dataPullYear <- "2024"
-# .dataPullFolderDate <- "2024-12-05"
-# .dataPullDate <- "2024-12-05"
+# .dataPullYear <- "2025"
+# .dataPullFolderDate <- "2025-02-01"
+# .dataPullDate <- "2025-02-01"
 # 
-# .lastMonthDataPullYear <- "2024"
-# .lastMonthDataPullFolderDate <- "2024-11-05"
-# .lastMonthDataPullDate <- "2024-11-05"
+# .lastMonthDataPullYear <- "2025"
+# .lastMonthDataPullFolderDate <- "2025-01-01"
+# .lastMonthDataPullDate <- "2025-01-01"
 # 
 # source("config.R")
 # 
