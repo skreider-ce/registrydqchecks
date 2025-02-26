@@ -12,7 +12,8 @@ checkForDuplicateUniqueIds <- function(.dsToCheck,.uniqueKey){
   .duplicateUniqueIds <-
     .dsToCheck |>
       dplyr::count(!!!dplyr::syms(.uniqueKey)) |>
-    dplyr::filter(n > 1)
+    dplyr::filter(n > 1) |>
+    cleanUniqueKeyClasses(uniqueKeyVars = list(.uniqueKey))
 
   # Define output list structure
   .returnOutput <- list(

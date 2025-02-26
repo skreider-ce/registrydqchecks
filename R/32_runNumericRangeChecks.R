@@ -51,7 +51,8 @@ runNumericRangeChecks <- function(.dsName
           dplyr::all_of(.uniqueKeys), variableLabel, variableName, numValue, expectedLower, expectedUpper, calculatedVariable
         )
       
-      .numericRangeChecks <- dplyr::bind_rows(.numericRangeChecks, .subsetDsToCheck)
+      .numericRangeChecks <- dplyr::bind_rows(.numericRangeChecks, .subsetDsToCheck) |>
+        cleanUniqueKeyClasses(uniqueKeyVars = list(.uniqueKeys))
 
     }
     ,warning = function(w){

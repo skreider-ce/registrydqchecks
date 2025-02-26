@@ -60,13 +60,12 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
       dplyr::select(varName)
     
     # Pull data to check and data from last month to compare it to
-    .dataToCheck <- pullData(.datasetUrl = glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}")
-                                        ,.isR) |>
-      cleanUniqueKeyClasses(uniqueKeyVars = .uniqueKeys)
+    .dataToCheck[[.dsName]] <- pullData(.datasetUrl = glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}")
+                                        ,.isR)
     
-    .dataToCompare <- pullData(.datasetUrl = glue::glue("{.lastMonthDataFolderUrl}{.dsName}_{.lastMonthDataPullDate}")
-                                          ,.isR) |>
-      cleanUniqueKeyClasses(uniqueKeyVars = .uniqueKeys)
+    .dataToCompare[[.dsName]] <- pullData(.datasetUrl = glue::glue("{.lastMonthDataFolderUrl}{.dsName}_{.lastMonthDataPullDate}")
+                                          ,.isR)
+
     
     # Pull the list of essential variables for the specific dataset from the codebook
     .essentialVariables <- .codebooks |>
