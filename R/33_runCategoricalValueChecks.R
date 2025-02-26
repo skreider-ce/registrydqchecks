@@ -74,7 +74,8 @@ runCategoricalValueChecks <- function(.dsName
           dplyr::all_of(.uniqueKeys), variableLabel, variableName, catValue, expectedValue, expectedLabels, calculatedVariable
         )
       
-      .categoricalValueChecks <- dplyr::bind_rows(.categoricalValueChecks, .outOfRange)
+      .categoricalValueChecks <- dplyr::bind_rows(.categoricalValueChecks, .outOfRange) |>
+        cleanUniqueKeyClasses(uniqueKeyVars = list(.uniqueKeys))
     }
     ,warning = function(w){
       print(paste("Warning caught:", conditionMessage(w)))

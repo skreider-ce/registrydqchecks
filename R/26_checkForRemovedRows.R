@@ -12,9 +12,16 @@ checkForRemovedRows <- function(.dsToCheck,.compDsToCheck,.uniqueKey){
   
   # Make (...) parameters into a character vector for use in anti_join
   .uniqueKeys <- .uniqueKey
+  
+  .tempDsToCheck <- .dsToCheck |>
+    cleanUniqueKeyClasses(uniqueKeyVars = list(.uniqueKeys))
+  .tempCompDsToCheck <- .dsToCheck |>
+    cleanUniqueKeyClasses(uniqueKeyVars = list(.uniqueKeys))
 
   # Create dataframe of rows in .compDsToCheck and not in .dsToCheck
-  .inOldAndNotInNew <- as.data.frame(dplyr::anti_join(.compDsToCheck,.dsToCheck,.uniqueKeys))
+  .inOldAndNotInNew <- as.data.frame(dplyr::anti_join(.tempCompDsToCheck,.tempDsToCheck,.uniqueKeys))
+  
+  rm(.tempDsToCheck, .tempCompDsToCheck)
   
   .pctRemoved <- nrow(.inOldAndNotInNew) / nrow(.compDsToCheck)
 
