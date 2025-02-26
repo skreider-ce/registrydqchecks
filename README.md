@@ -1,4 +1,5 @@
-As of: 2024-09-30
+As of: 2025-01-29
 
-![registrydqchecks_systemmap_2024-09](https://github.com/user-attachments/assets/babf2539-ab9e-487a-8172-d7f2ab49ef96)
+![registrydqchecks_systemmap drawio_2025_01_29](https://github.com/user-attachments/assets/065f7e85-79ee-40c3-8f52-124f2be4ef94)
+
 

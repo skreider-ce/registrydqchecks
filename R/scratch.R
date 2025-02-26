@@ -2,12 +2,12 @@
 # .registryAbbreviation <- "ra"
 # 
 # .dataPullYear <- "2025"
-# .dataPullFolderDate <- "2025-01-01"
-# .dataPullDate <- "2025-01-01"
+# .dataPullFolderDate <- "2025-02-01"
+# .dataPullDate <- "2025-02-01"
 # 
-# .lastMonthDataPullYear <- "2024"
-# .lastMonthDataPullFolderDate <- "2024-12-01"
-# .lastMonthDataPullDate <- "2024-12-01"
+# .lastMonthDataPullYear <- "2025"
+# .lastMonthDataPullFolderDate <- "2025-01-01"
+# .lastMonthDataPullDate <- "2025-01-01"
 # 
 # source("config.R")
 # 
