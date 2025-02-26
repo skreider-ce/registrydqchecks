@@ -37,12 +37,6 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   
   ############################
   # Initialize variable lists to house information on specific datasets being checked
-  .codebooks <- list()
-  .dataToCheck <- list()
-  .dataToCompare <- list()
-  .essentialVariables <- list()
-  .codebookVariables <- list()
-  .uniqueKeys <- list()
   .critCheckOutput <- list()
   .codebookNcOutput <- list()
   .nonCritCheckOutput <- list()
@@ -57,48 +51,47 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
   # Loop through each dataset and perform the checks
   for(.dsName in .datasetsToCheck){
     # Pull dataset specific codebook
-    .codebooks[[.dsName]] <- pullCodebookFromExcelFile(.fileUrl = .codebookUrl
+    .codebooks <- pullCodebookFromExcelFile(.fileUrl = .codebookUrl
                                                        ,.sheetName = .dsName)
     
     # Pull the unique keys for the specific dataset from the codebook
-    .uniqueKeys[[.dsName]] <- .codebooks[[.dsName]] |>
+    .uniqueKeys <- .codebooks |>
       dplyr::filter(uniqueKey == 1) |>
       dplyr::select(varName)
     
     # Pull data to check and data from last month to compare it to
-    .dataToCheck[[.dsName]] <- pullData(.datasetUrl = glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}")
+    .dataToCheck <- pullData(.datasetUrl = glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}")
                                         ,.isR)
-    # |> cleanUniqueKeyClasses(uniqueKeyVars = .uniqueKeys[[.dsName]])
     
-    .dataToCompare[[.dsName]] <- pullData(.datasetUrl = glue::glue("{.lastMonthDataFolderUrl}{.dsName}_{.lastMonthDataPullDate}")
+    .dataToCompare <- pullData(.datasetUrl = glue::glue("{.lastMonthDataFolderUrl}{.dsName}_{.lastMonthDataPullDate}")
                                           ,.isR)
-    # |> cleanUniqueKeyClasses(uniqueKeyVars = .uniqueKeys[[.dsName]])
+
     
     # Pull the list of essential variables for the specific dataset from the codebook
-    .essentialVariables[[.dsName]] <- .codebooks[[.dsName]] |>
+    .essentialVariables <- .codebooks |>
       dplyr::filter(essential == 1) |>
       dplyr::select(varName, acceptableMissingness, nonExtremeMissingness, missingnessThresholdMultiplier, skipLogic)
     
     # Pull the codebook noncritical check variables for the specific dataset from the codebook
-    .codebookVariables[[.dsName]] <- .codebooks[[.dsName]] |>
+    .codebookVariables <- .codebooks |>
       dplyr::select(varName, varLabel, essential, calculatedVariable, acceptableMissingness, missingnessThresholdMultiplier, skipLogic, catValues, numRange)
     
     # Run the critical checks on the specific dataset with information pulled from the codebook
-    .critCheckOutput[[.dsName]] <- criticalChecks(.dsToCheck = data.frame(.dataToCheck[[.dsName]])
-                                                  ,.compDsToCheck = data.frame(.dataToCompare[[.dsName]])
-                                                  ,.listOfEssentialVars = .essentialVariables[[.dsName]]
-                                                  ,.listOfSupposedVars = names(.dataToCompare[[.dsName]])
-                                                  ,.uniqueKeys = .uniqueKeys[[.dsName]]$varName
-                                                  ,.codebookVariables = .codebookVariables[[.dsName]]
+    .critCheckOutput[[.dsName]] <- criticalChecks(.dsToCheck = data.frame(.dataToCheck)
+                                                  ,.compDsToCheck = data.frame(.dataToCompare)
+                                                  ,.listOfEssentialVars = .essentialVariables
+                                                  ,.listOfSupposedVars = names(.dataToCompare)
+                                                  ,.uniqueKeys = .uniqueKeys$varName
+                                                  ,.codebookVariables = .codebookVariables
                                                   ,.dsName = .dsName
                                                   )
     
     # Run the codebook noncritical checks on the specific dataset with information pulled from the codebook
     .codebookNcOutput[[.dsName]] <- codebookNcChecks(.dsName = .dsName
-                                                     ,.dsToCheck = data.frame(.dataToCheck[[.dsName]])
-                                                     ,.compDsToCheck = data.frame(.dataToCompare[[.dsName]])
-                                                     ,.codebookVariables = .codebookVariables[[.dsName]]
-                                                     ,.uniqueKeys = .uniqueKeys[[.dsName]]$varName
+                                                     ,.dsToCheck = data.frame(.dataToCheck)
+                                                     ,.compDsToCheck = data.frame(.dataToCompare)
+                                                     ,.codebookVariables = .codebookVariables
+                                                     ,.uniqueKeys = .uniqueKeys$varName
                                                      )
     
     # Add codebook noncritical checks to the noncritical check output
@@ -114,7 +107,7 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
     }
   }
   
-  rm(.dataToCheck, .dataToCompare)
+  rm(.codebooks, .essentialVariables, .codebookVariables, .dataToCheck, .uniqueKeys, .dataToCompare)
 
   
   # Create a list of the critical check and the noncritical check output to be saved to a location  
