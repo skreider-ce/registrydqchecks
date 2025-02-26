@@ -4,19 +4,22 @@
 #'
 #' @return The gtsummary object with an added column showing % change
 #' @export
+#' 
+#' @importFrom dplyr rowwise mutate case_when ungroup group_by select
+#' @importFrom stringr str_detect str_extract
 calculatePercentChange <- function(data) {
   data <- data |>
-    rowwise() %>%
-    mutate(
-      percentChange = case_when(
-        str_detect(stat_1, "%") & str_detect(stat_2, "%") ~ {
+    dplyr::rowwise() %>%
+    dplyr::mutate(
+      percentChange = dplyr::case_when(
+        stringr::str_detect(stat_1, "%") & stringr::str_detect(stat_2, "%") ~ {
           pct_this <- as.numeric(str_extract(stat_1, "[0-9.]+(?=%)"))
           pct_last <- as.numeric(str_extract(stat_2, "[0-9.]+(?=%)"))
           round(pct_this - pct_last, 1)
         },
-        str_detect(stat_1, "\\(") & str_detect(stat_2, "\\(") ~ {
-          mean_this <- as.numeric(str_extract(stat_1, "^[0-9.]+"))
-          mean_last <- as.numeric(str_extract(stat_2, "^[0-9.]+"))
+        stringr::str_detect(stat_1, "\\(") & stringr::str_detect(stat_2, "\\(") ~ {
+          mean_this <- as.numeric(stringr::str_extract(stat_1, "^[0-9.]+"))
+          mean_last <- as.numeric(stringr::str_extract(stat_2, "^[0-9.]+"))
           round((mean_this - mean_last) / mean_last * 100, 1)
         },
         TRUE ~ NA_real_
@@ -25,19 +28,19 @@ calculatePercentChange <- function(data) {
   
   # Find max percent change for each variable and add it to the label row
   data <- data |>
-    group_by(variable) |>
-    mutate(
+    dplyr::group_by(variable) |>
+    dplyr::mutate(
       max_percent_change = ifelse(row_type == "label", 
                                   percentChange[which.max(abs(percentChange))],
                                   NA_real_)
     ) |>
-    ungroup() |>
-    mutate(
+    dplyr::ungroup() |>
+    dplyr::mutate(
       percentChange = ifelse(row_type == "label", 
                              sprintf("%.1f", max_percent_change), 
                              percentChange)
     ) |>
-    select(-max_percent_change)
+    dplyr::select(-max_percent_change)
   
   return(data)
 }
@@ -51,9 +54,11 @@ calculatePercentChange <- function(data) {
 #'
 #' @return The filtered dataset
 #' @export
+#' 
+#' @importFrom dplyr filter
 filterPercentChange <- function(data) {
   data <- data |>
-    filter(
+    dplyr::filter(
       !is.na(as.numeric(percentChange)) & abs(as.numeric(percentChange)) > 5
     )
   

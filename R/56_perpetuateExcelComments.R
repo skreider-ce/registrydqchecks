@@ -65,9 +65,9 @@ perpetuateExcelComments <- function(.lastMonthCheckExcelFileUrl
           dplyr::select("Investigator",	"Date Investigated",	"Resolution",	"Date Resolved",	"Notes") |>
           dplyr::mutate(
             `Investigator` = as.character(`Investigator`)
-            ,`Date Investigated` = as.character(`Date Investigated`)
+            ,`Date Investigated` = as.Date(`Date Investigated`, tryFormats = c("%Y-%m-%d", "%Y/%m/%d"), optional = TRUE)
             ,`Resolution` = as.character(`Resolution`)
-            ,`Date Resolved` = as.character(`Date Resolved`)
+            ,`Date Resolved` = as.Date(`Date Resolved`, tryFormats = c("%Y-%m-%d", "%Y/%m/%d"), optional = TRUE)
             ,`Notes` = as.character(`Notes`)
           )
         
