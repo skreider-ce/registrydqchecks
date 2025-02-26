@@ -272,48 +272,48 @@ outputListings <- function(.registry, .listingUrl, .yearMonthTimestamp, .dataPul
   )
 
   # Define the valid date range as Date objects
-  start_date <- as.Date("2025-01-01")
-  end_date <- as.Date("2030-12-31")
-  openxlsx::dataValidation(
-    .wbLong,
-    sheet = "qualityChecks",
-    cols = 2, # Column number of "Due Date"
-    rows = 2:currentRow, # Rows to apply the validation (header excluded)
-    type = "date",
-    operator = "between", # Restrict dates within a range
-    value = c(start_date, end_date), # Date range for validation
-    allowBlank = TRUE
-  )
-  openxlsx::dataValidation(
-    .wbLong,
-    sheet = "qualityChecks",
-    cols = 4, # Column number of "Resolution Date"
-    rows = 2:currentRow, # Rows to apply the validation (header excluded)
-    type = "date",
-    operator = "between", # Restrict dates within a range
-    value = c(start_date, end_date), # Date range for validation
-    allowBlank = TRUE
-  )
-  
-  date_style <- openxlsx::createStyle(numFmt = "yyyy/mm/dd") # Set format to YYYY/MM/DD
-  openxlsx::addStyle(
-    .wbLong,
-    sheet = "qualityChecks",
-    style = date_style,
-    cols = 2,
-    rows = 2:currentRow,
-    gridExpand = TRUE,
-    stack = TRUE
-  )
-  openxlsx::addStyle(
-    .wbLong,
-    sheet = "qualityChecks",
-    style = date_style,
-    cols = 4,
-    rows = 2:currentRow,
-    gridExpand = TRUE,
-    stack = TRUE
-  )
+  # start_date <- as.Date("2025-01-01")
+  # end_date <- as.Date("2030-12-31")
+  # openxlsx::dataValidation(
+  #   .wbLong,
+  #   sheet = "qualityChecks",
+  #   cols = 2, # Column number of "Due Date"
+  #   rows = 2:currentRow, # Rows to apply the validation (header excluded)
+  #   type = "date",
+  #   operator = "between", # Restrict dates within a range
+  #   value = c(start_date, end_date), # Date range for validation
+  #   allowBlank = TRUE
+  # )
+  # openxlsx::dataValidation(
+  #   .wbLong,
+  #   sheet = "qualityChecks",
+  #   cols = 4, # Column number of "Resolution Date"
+  #   rows = 2:currentRow, # Rows to apply the validation (header excluded)
+  #   type = "date",
+  #   operator = "between", # Restrict dates within a range
+  #   value = c(start_date, end_date), # Date range for validation
+  #   allowBlank = TRUE
+  # )
+  # 
+  # date_style <- openxlsx::createStyle(numFmt = "yyyy/mm/dd") # Set format to YYYY/MM/DD
+  # openxlsx::addStyle(
+  #   .wbLong,
+  #   sheet = "qualityChecks",
+  #   style = date_style,
+  #   cols = 2,
+  #   rows = 2:currentRow,
+  #   gridExpand = TRUE,
+  #   stack = TRUE
+  # )
+  # openxlsx::addStyle(
+  #   .wbLong,
+  #   sheet = "qualityChecks",
+  #   style = date_style,
+  #   cols = 4,
+  #   rows = 2:currentRow,
+  #   gridExpand = TRUE,
+  #   stack = TRUE
+  # )
   
 
   
