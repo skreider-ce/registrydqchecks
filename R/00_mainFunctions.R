@@ -60,10 +60,10 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
       dplyr::select(varName)
     
     # Pull data to check and data from last month to compare it to
-    .dataToCheck[[.dsName]] <- pullData(.datasetUrl = glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}")
+    .dataToCheck <- pullData(.datasetUrl = glue::glue("{.prelimDataFolderUrl}{.dsName}_{.prelimDataPullDate}")
                                         ,.isR)
     
-    .dataToCompare[[.dsName]] <- pullData(.datasetUrl = glue::glue("{.lastMonthDataFolderUrl}{.dsName}_{.lastMonthDataPullDate}")
+    .dataToCompare <- pullData(.datasetUrl = glue::glue("{.lastMonthDataFolderUrl}{.dsName}_{.lastMonthDataPullDate}")
                                           ,.isR)
 
     
