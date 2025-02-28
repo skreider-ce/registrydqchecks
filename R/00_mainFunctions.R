@@ -131,6 +131,8 @@ runRegistryChecks <- function(.registry = "defaultRegistry"
                     ,.dataStoreUrl = .outputUrl
                     ,.resultsOfChecks = .checkOutput
                     ,.activeSites = .activeSites
+                    ,.dataFolderUrl = .prelimDataFolderUrl
+                    ,.lastMonthDataFolderUrl = .lastMonthDataFolderUrl
                     ,.cdmRomReportUrl = .cdmRomReportUrl
                     ,.lastMonthDataPullDate = .lastMonthDataPullDate
                     )
